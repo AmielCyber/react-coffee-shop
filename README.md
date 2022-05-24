@@ -24,3 +24,5 @@
 ## To Do
 
 - [ ] Create accounts (Authentication)
+- [ ] Reciept after checkout
+- [ ] Hover on picture shows you the source or link to the original source.
