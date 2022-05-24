@@ -1,0 +1,53 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.form button {
+  font: inherit;
+  cursor: pointer;
+  background-color: var(--button-color);
+  border: 1px solid var(--complementary-darkest);
+  color: white;
+  padding: 0.25rem 2rem;
+  border-radius: 20px;
+  font-weight: bold;
+}
+.form button:hover,
+.form button:active {
+  background-color: var(--button-color-active);
+}
+.amount {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.amount label {
+  font-weight: bold;
+  margin-right: 1rem;
+}
+.amount select{
+  width: 3rem;
+  border-radius: 8px;
+  border: 1px solid var(--complementary-darkest);
+  font: inherit;
+  padding-left: 0.5rem;
+}
+@media only screen and (max-width: 540px) {
+  .form {
+    flex-direction: column;
+    margin-top: 0.5rem;
+  }
+  .amount {
+    align-self: center;
+  }
+  .form button {
+    width: 80vw;
+    padding: 0.5rem 2rem;
+  }
+  .amount select{
+    text-align: center;
+    width: 4rem;
+    height: 2.5rem;
+  }
+}
+

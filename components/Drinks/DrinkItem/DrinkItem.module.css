@@ -1,0 +1,62 @@
+.drink {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--complementary-light);
+}
+
+.itemImage {
+  width: 100%;
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+  max-width: 150px;
+  overflow: hidden; 
+}
+
+.itemDescription {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 6;
+  flex-shrink: 6;
+  margin: 0 0.5rem;
+}
+.itemDescription h3 {
+  margin: 0 0 0.25rem 0;
+  color: var(--coffee-name-color);
+  font-weight: 800;
+}
+.description {
+  margin-top: 0.2rem;
+  margin-right: 1rem;
+  font-family: 'Karla', sans-serif;
+}
+.price {
+  margin-top: 0.25rem;
+  font-weight: 800;
+  color: var(--price-color);
+  font-size: 1.3rem;
+}
+
+.form {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 5;
+  flex-shrink: 5;
+}
+
+@media only screen and (max-width: 540px) {
+  .drink {
+    flex-direction: column;
+    align-items: center;
+    justify-content: baseline;
+  }
+  .itemDescription {
+    align-items: center;
+    text-align: center;
+  }
+}

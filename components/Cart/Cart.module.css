@@ -1,0 +1,41 @@
+.message {
+  text-align: center;
+}
+.actions {
+  text-align: right;
+}
+.actions button {
+  font: inherit;
+  cursor: pointer;
+  background-color: var(--button-color);
+  color: #FFF;
+  border: 1px solid var(--complementary-darkest);
+  padding: 0.5rem 2rem;
+  border-radius: 25px;
+  margin-left: 1rem;
+}
+.actions button:hover,
+.actions button:active {
+  background-color: var(--complementary-darkest);
+  border-color: var(--complementary-darkest);
+  color: white;
+}
+
+.isSubmitting {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.errorMessage {
+  text-align: center;
+  color: var(--error-color);
+}
+

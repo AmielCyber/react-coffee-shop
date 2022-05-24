@@ -1,0 +1,8 @@
+.drinkList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,43 @@
+.button {
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background-color: var(--cart-button-color);
+  color: #FFF;
+  padding: 0.75rem 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 30px;
+  font-weight: bold;
+  box-shadow: 0 2px 2px var(--primary-darkest);
+}
+.button:hover,
+.button:active {
+  background-color: var(--cart-button-highlight-color);
+}
+.button:hover .badge,
+.button:active .badge {
+  background-color: var(--primary-color);
+}
+
+/* Badge circle where the cart displays the number of items */
+.badge {
+  background-color: var(--cart-badge-color);
+  padding: 0.25rem 1rem;
+  border-radius: 25px;
+  margin-left: 1rem;
+  font-weight: bolder;
+  font-family: sans-serif;
+}
+
+/* Cart Icon settings */
+.cartIcon {
+  width: 1.35rem;
+  height: 1.35rem;
+  margin-right: 0.5rem;
+  transition: .3s ease-in;
+}
+.button:hover .cartIcon{
+  transform: scale(1.5);
+}

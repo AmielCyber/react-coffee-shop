@@ -1,0 +1,29 @@
+.summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+  width: 60%;
+  margin: 1rem auto;
+  position: relative;
+  background-color: var(--background-color);
+  color: white;
+  border-radius: 20px;
+  box-shadow: 5px 10px 5px 5px rgba(0, 0, 0, 0.55);
+  opacity: 70%;
+  z-index: 1;
+}
+
+.summary h2 {
+  font-size: 2rem;
+  margin-top: 0.5rem;
+}
+
+@media only screen and (max-width: 540px) {
+  .summary {
+    width: 90%;
+  }
+  .summary h2{
+    font-size: 1.5rem;
+  }
+}

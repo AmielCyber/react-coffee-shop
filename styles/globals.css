@@ -1,11 +1,46 @@
-html,
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
+:root {
+  /* Tropical Rain Forest */
+  --primary-color: #00755E; 
+  --primary-light: #009174;
+  --primary-dark: #1D584C;
+  --primary-darkest: #00221B;
+  /* Blue Green Color Wheel */
+  --secondary-color: #064E40;
+  /* MSU Green */
+  --name-color: #053E32;
+  /* Burgandy */
+  --complementary-color: #750017;
+  --complementary-light: #9B0027;
+  --complementary-dark: #520014;
+  --complementary-darkest: #240009;
+  /* Specific component/html objects color */
+  --background-color: #3B3B2F;
+  --error-color: #ED003B;
+  --error-input: #FFEFF3;
+  --price-color: var(--complementary-color);
+  --button-color: var(--complementary-color);
+  --button-color-active: var(--complementary-light);
+  --button-opaque: #F1F1F1;
+  --coffee-name-color: var(--primary-dark);
+  /* Navigation colors */
+  --header-color: #00755E;
+  --nav-highlight-color: #00C9A1;
+  --nav-highlight-color2: #75003F;
+  --cart-button-color: #004b3c;
+  --cart-button-highlight-color: #003127; 
+  --cart-badge-color: var(--primary-light);
+}
+html {
+/*   font-family: 'Open Sans', sans-serif; */
+  font-family: 'Libre Franklin', sans-serif;
+}
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: var(--background-color);
 }
-
 a {
   color: inherit;
   text-decoration: none;
@@ -13,4 +48,12 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+h1 {
+  color: white;
+}
+
+body, html {
+  height: 100%;
 }

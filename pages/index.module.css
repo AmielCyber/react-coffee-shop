@@ -1,0 +1,57 @@
+/* Background Image */
+.homeImage {
+  position:fixed;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* Welcome message section */
+.pageOverlay {
+  margin-top: 5rem;
+  position: relative;
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}
+.message h2 {
+  font-size: 4rem;
+}
+.message p {
+  font-size: 2rem;
+}
+.message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+  max-width: 60%;
+  text-align: center;
+  text-shadow: 5px 5px 5px var(--primary-dark);
+  z-index: 1;
+}
+.message a:hover{
+  text-shadow: 5px 5px 5px var(--nav-highlight-color);
+}
+/* Mobile changes */
+@media only screen and (max-width: 540px) {
+  .pageOverlay {
+    margin-top: 10rem;
+  }
+  .message {
+    margin-bottom: 8rem;
+    max-width: 75%;
+  }
+  .message h2 {
+    font-size: 2rem;
+  }
+  .message p {
+    font-size: 1.5rem;
+  }
+}

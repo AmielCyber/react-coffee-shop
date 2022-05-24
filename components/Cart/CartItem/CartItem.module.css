@@ -1,0 +1,109 @@
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--complementary-color);
+  padding: 1rem 0;
+  margin: 1rem 0;
+}
+/* Item description */ 
+.description h2 {
+  margin: 0 0 0.5rem 0;
+  color: var(--name-color);
+}
+.summary {
+  width: 10rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.price {
+  font-size: 1.3rem;
+  color: var(--price-color);
+}
+.amount {
+  font-weight: bold;
+  border: 1px solid #ccc;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  color: var(--complementary-darkest);
+}
+/* Item buttons */
+.actions {
+  display: flex;
+  margin-right: 1rem;
+}
+.actions button {
+  font: inherit;
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: var(--complementary-dark);
+  border: 1px solid var(--complementary-darkest);
+  width: 3rem;
+  text-align: center;
+  border-radius: 6px;
+  background-color: transparent;
+  cursor: pointer;
+  margin: 0.25rem;
+}
+.actions button:hover,
+.actions button:active {
+  background-color: var(--button-color-active);
+  color: white;
+}
+.iconContainer {
+  padding: 0.3rem 0;
+  display: block;
+}
+/* Mobile changes */
+@media only screen and (max-width: 540px) {
+  .actions {
+    flex-direction: column;
+  }
+}
+/* Trash Icon CSS */
+.gg-trash{
+  margin: auto auto;
+}
+ /* from https://css.gg/trash.css  */
+.gg-trash {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs,1));
+  width: 10px;
+  height: 12px;
+  border: 2px solid transparent;
+  box-shadow:
+  0 0 0 2px,
+  inset -2px 0 0,
+  inset 2px 0 0;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+  margin-top: 4px;
+ }
+ .gg-trash::after,
+ .gg-trash::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute
+ }
+ .gg-trash::after {
+  background: currentColor;
+  border-radius: 3px;
+  width: 16px;
+  height: 2px;
+  top: -4px;
+  left: -5px
+ }
+ .gg-trash::before {
+  width: 10px;
+  height: 4px;
+  border: 2px solid;
+  border-bottom: transparent;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  top: -7px;
+  left: -2px
+ } 

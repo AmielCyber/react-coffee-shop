@@ -1,0 +1,10 @@
+/* All pages will be below the Header. */
+.main {
+  margin:  5rem auto;
+}
+/* Mobile changes */
+@media only screen and (max-width: 540px) {
+  .main {
+    margin: 10rem auto;
+  }
+}
