@@ -77,6 +77,7 @@ export const cartItemAnimation = {
     opacity: 0,
   },
 };
+
 export const drinkItemListAnimation = {
   // Drink starts with opacity of zero
   in: {
@@ -95,6 +96,7 @@ export const drinkItemListAnimation = {
     },
   },
 };
+
 export const drinkItemAnimation = {
   in: { opacity: 0, x: 100 },
   animate: { opacity: 1, x: 0 },
