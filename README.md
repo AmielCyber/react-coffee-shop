@@ -27,4 +27,5 @@
 
 - [ ] Create accounts (Authentication)
 - [ ] Reciept after checkout
+- [ ] Order History
 - [ ] Hover on picture shows you the source or link to the original source.
