@@ -1,5 +1,5 @@
-import React from 'react';
 import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/react';
 // My imports.
 import HeaderCartButton from './HeaderCartButton';
 import CompanyIcon from '../Icons/CompanyIcon';
