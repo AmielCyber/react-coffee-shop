@@ -1,7 +1,7 @@
+import React from 'react';
 import { useRouter } from 'next/router';
-import { Provider } from 'react-redux'; // Redux states.
-import { SessionProvider } from 'next-auth/react'; // Next authentication.
-import { AnimatePresence } from 'framer-motion'; // Animation library.
+import { Provider } from 'react-redux';
+import { AnimatePresence } from 'framer-motion';
 // My imports.
 import store from '../store/index';
 import Layout from '../components/Layout/Layout';
@@ -14,14 +14,12 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
-      <SessionProvider session={pageProps.session}>
-        <Layout>
-          <Meta />
-          <AnimatePresence initial={false}>
-            <Component {...pageProps} key={route.asPath} />
-          </AnimatePresence>
-        </Layout>
-      </SessionProvider>
+      <Layout>
+        <Meta />
+        <AnimatePresence initial={false}>
+          <Component {...pageProps} key={route.asPath} />
+        </AnimatePresence>
+      </Layout>
     </Provider>
   );
 }
