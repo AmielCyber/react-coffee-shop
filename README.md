@@ -1,5 +1,7 @@
 ## Website Deployment Demo
+
 [Coffee Shop Website](https://react-coffee-shop.vercel.app)
+
 ## Features
 
 - [x] Ported to NextJs
@@ -25,7 +27,7 @@
 
 ## To Do
 
-- [ ] Create accounts (Authentication)
+- [x] Create accounts (Authentication)
 - [ ] Reciept after checkout
 - [ ] Order History
-- [ ] Hover on picture shows you the source or link to the original source.
+- [x] Hover on picture shows you the source or link to the original source.

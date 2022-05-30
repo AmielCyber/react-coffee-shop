@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Head from 'next/head';
 // My imports.
-import { motion } from 'framer-motion';
 import { menuPageAnimation } from '../../utils/animations/animation';
 import drinksImage from '../../assets/coffee-drinks.jpg';
 import DrinksSummary from '../../components/Drinks/DrinksSummary';

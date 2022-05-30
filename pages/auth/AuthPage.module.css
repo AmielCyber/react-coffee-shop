@@ -1,0 +1,10 @@
+.container {
+  text-align: center;
+  margin: 8rem auto;
+  max-width: 60rem;
+  width: 30%;
+  opacity: 90%;
+  box-shadow: 5px 10px 5px 5px rgba(0, 0, 0, 0.60);
+  border-radius: 10px;
+  background-color: var(--secondary-color);
+}

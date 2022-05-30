@@ -7,7 +7,7 @@ import { MongoClient } from 'mongodb';
  * @param {string} uri
  * @returns MongoDB client
  */
-export async function connectDataBase(uri) {
+export async function connectToDatabase(uri) {
   // Connect to the database.
   const client = await MongoClient.connect(uri);
   return client;
@@ -22,10 +22,26 @@ export async function connectDataBase(uri) {
 export async function insertAndReplaceDocument(client, collectionName, document) {
   // Get a hold of the database.
   const db = client.db();
-  // Get access to the collection of drinks.
+  // Get access to the collection.
   const collection = db.collection(collectionName);
   // Replace first document({}).
   const result = await collection.replaceOne({}, document, { upsert: true });
+  return result;
+}
+/**
+ * Inserts a document in the collection.
+ * @param {string} client
+ * @param {string} collectionName
+ * @param {Document} document
+ * @returns MongoDB status result. { acknowledged:boolean, modifiedCount:Number, upsertedId:Object, upsertedCount:Number, matchedCount:Number}
+ */
+export async function insertADocument(client, collectionName, document) {
+  // Get a hold of the database.
+  const db = client.db();
+  // Get access to the collection.
+  const collection = db.collection(collectionName);
+  // Insert the document
+  const result = await collection.insertOne(document);
   return result;
 }
 /**

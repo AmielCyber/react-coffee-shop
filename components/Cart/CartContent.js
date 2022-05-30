@@ -28,7 +28,7 @@ export default function CartContent(props) {
     };
     // Send the order data form to our server.
     try {
-      const response = await fetch('/api/order', {
+      const response = await fetch('/api/order/order', {
         method: 'POST',
         body: JSON.stringify(orderData),
         headers: {

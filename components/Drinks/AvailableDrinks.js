@@ -19,7 +19,7 @@ async function fetcher(url) {
 }
 
 export default function AvailableDrinks() {
-  const { data, error } = useSWR('/api/drinks', fetcher);
+  const { data, error } = useSWR('/api/menu/drinks', fetcher);
 
   if (error) {
     // Display server error.

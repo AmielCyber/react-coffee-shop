@@ -1,5 +1,5 @@
-import { connectDataBase, insertAndReplaceDocument } from '../../utils/db/db-util';
-import { getDrinksFromServer, userDataIsValid } from '../../utils/db/db-drinks-util';
+import { connectToDatabase, insertAndReplaceDocument } from '../../../utils/db/db-util';
+import { getDrinksFromServer, userDataIsValid } from '../../../utils/db/db-drinks-util';
 
 // URI address to connect to the MongoDB client.
 const uri = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@${process.env.CLUSTER_NAME}.hsycr.mongodb.net/${process.env.COFFEE_DB}?${process.env.OPTIONS}`;
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     }
     // Reciept.
     const reciept = {
-      user: user.firstName + ' ' + user.lastName,
+      name: user.firstName + ' ' + user.lastName,
       email: user.email,
       items: [],
       totalItems: 0,
@@ -63,7 +63,7 @@ export default async function handler(req, res) {
     // Connect to the order database.
     let client;
     try {
-      client = await connectDataBase(uri);
+      client = await connectToDatabase(uri);
     } catch (error) {
       res.status(500).json({ message: 'Failed to connect to the order database!' });
       return;

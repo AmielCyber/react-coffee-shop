@@ -18,7 +18,7 @@ export const fetchCartData = () => {
 
     // Call our api route.
     const fetchData = async () => {
-      const response = await fetch('/api/cart', {
+      const response = await fetch('/api/cart/cart', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ export const sendCartData = (cart) => {
 
     // Connect to the server via api route.
     const sendRequest = async () => {
-      const response = await fetch('/api/cart', {
+      const response = await fetch('/api/cart/cart', {
         method: 'POST',
         body: JSON.stringify(cart),
         headers: {

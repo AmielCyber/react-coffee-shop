@@ -1,0 +1,11 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem auto;
+  text-align: center;
+  background-color: var(--secondary-color);
+}
+
+.profile h1 {
+  font-size: 5rem;
+}

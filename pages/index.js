@@ -3,13 +3,19 @@ import Head from 'next/head';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getSession } from 'next-auth/react';
 // My Imports.
 import { homePageAnimation } from '../utils/animations/animation';
 import coffeeShopImage from '../assets/coffee-shop.jpg';
 // CSS styles.
 import styles from './index.module.css';
 
-export default function Home() {
+export default function Home(props) {
+  let displayName = props.userName;
+
+  if (displayName !== '') {
+    displayName = `back ${displayName},`;
+  }
   return (
     <Fragment>
       <Head>
@@ -37,7 +43,7 @@ export default function Home() {
         </div>
         <motion.div className={styles.pageOverlay} exit={{ display: 'none' }} transition={homePageAnimation.transition}>
           <section className={styles.message}>
-            <h2>Welcome to React Coffee!</h2>
+            <h2>{`Welcome ${displayName} to React Coffee!`}</h2>
             <p>
               <Link href='/menu' passHref>
                 <a>Order now to get fresh tasting coffee.</a>
@@ -48,4 +54,20 @@ export default function Home() {
       </motion.div>
     </Fragment>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession({ req: context.req });
+  if (!session) {
+    return {
+      props: {
+        userName: '',
+      },
+    };
+  }
+  return {
+    props: {
+      userName: session.user.name,
+    },
+  };
 }

@@ -1,4 +1,4 @@
-import { connectDataBase, getAllDocuments } from './db-util';
+import { connectToDatabase, getAllDocuments } from './db-util';
 
 // URI address to connect to the MongoDB client
 const uri = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@${process.env.CLUSTER_NAME}.hsycr.mongodb.net/${process.env.DRINK_DB}?${process.env.OPTIONS}`;
@@ -46,7 +46,7 @@ export async function getDrinksFromServer() {
   // Connect to the drinks database.
   let client;
   try {
-    client = await connectDataBase(uri);
+    client = await connectToDatabase(uri);
   } catch (error) {
     drinkData.errorMessage = 'Connecting to the database failed';
     return drinkData;
