@@ -3,9 +3,10 @@
         "id": "espresso",
         "name": "Espresso Shot",
         "ounces": 1,
-        "description": "An espresso shot dialed to perfection.",
+        "description": "For the coffee connoisseur.",
         "price": 3.5,
-        "imgSrc": "/drinkImages/espresso.jpg"
+        "imgSrc": "/drinkImages/espresso.jpg",
+        "originalSource": "Image from unslpash by @nate_dumlao"
     },
     {
         "id": "americano",
@@ -13,7 +14,8 @@
         "ounces": 6,
         "description": "For those who want a plain coffee drink but with the taste of espresso. Made of 2 ounces of espresso and 4 ounces of hot water.",
         "price": 4,
-        "imgSrc": "/drinkImages/americano.jpg"
+        "imgSrc": "/drinkImages/americano.jpg",
+        "originalSource": "Image from unslpash by @cdib925"
     },
     {
         "id": "cortado",
@@ -21,7 +23,8 @@
         "ounces": 3,
         "description": "For those that want to taste the espresso with just the right amount of milk. Made of 1 ounce of espresso, 2 ounces of milk, and a thin layer of foam on the top.",
         "price": 3.75,
-        "imgSrc": "/drinkImages/cortado.jpg"
+        "imgSrc": "/drinkImages/cortado.jpg",
+        "originalSource": "Image from unslpash by @relentlessjpg"
     },
     {
         "id": "macchiato",
@@ -29,7 +32,8 @@
         "ounces": 3,
         "description": "For those that want to taste our espresso with a whip of cream. Made of 2 ounces of espresso and 1 ounce of milk foam.",
         "price": 3.75,
-        "imgSrc": "/drinkImages/macchiato.jpg"
+        "imgSrc": "/drinkImages/macchiato.jpg",
+        "originalSource": "Image from unslpash by @13on"
     },
     {
         "id": "flatWhite",
@@ -37,7 +41,8 @@
         "ounces": 6,
         "description": "For those who wished the latte had more of an espresso taste. Made of 2 ounces of espresso and 4 ounces of steam milk.",
         "price": 4.5,
-        "imgSrc": "/drinkImages/flatWhite.jpg"
+        "imgSrc": "/drinkImages/flatWhite.jpg",
+        "originalSource": "Image from unslpash by @hoanvokim"
     },
     {
         "id": "cappuccino",
@@ -45,7 +50,8 @@
         "ounces": 6,
         "description": "For those that prefer more of the milk foam texture. Made of 2 ounces of espresso, 2 ounces of milk foam, and 2 ounces of steamed milk.",
         "price": 4.5,
-        "imgSrc": "/drinkImages/cappuccino.jpg"
+        "imgSrc": "/drinkImages/cappuccino.jpg",
+        "originalSource": "Image from unslpash by @nadyeldems"
     },
     {
         "id": "latte",
@@ -53,7 +59,8 @@
         "ounces": 10,
         "description": "The most popular espresso drink. For those that love milk in their drinks. Made of 2 ounces of espresso and 8 ounces of steamed milk.",
         "price": 5,
-        "imgSrc": "/drinkImages/latte.jpg"
+        "imgSrc": "/drinkImages/latte.jpg",
+        "originalSource": "Image from unslpash by @taisiia_shestopal"
     },
     {
         "id": "dripCoffee",
@@ -61,7 +68,8 @@
         "ounces": 8,
         "description": "For those that just want a cup of hot coffee!",
         "price": 3,
-        "imgSrc": "/drinkImages/dripCoffee.jpg"
+        "imgSrc": "/drinkImages/dripCoffee.jpg",
+        "originalSource": "Image from unslpash by @andrewtneel"
     },
     {
         "id": "nitroBrew",
@@ -69,7 +77,8 @@
         "ounces": 8,
         "description": "Cold brew infused with Nitro giving it a creamy texture.",
         "price": 4.5,
-        "imgSrc": "/drinkImages/nitroBrew.jpg"
+        "imgSrc": "/drinkImages/nitroBrew.jpg",
+        "originalSource": "Image from unslpash by @schimiggy"
     },
     {
         "id": "coldBrew",
@@ -77,7 +86,8 @@
         "ounces": 8,
         "description": "Coffee steeped in cold water giving it a less acidic signature and more caffeine.",
         "price": 4,
-        "imgSrc": "/drinkImages/coldBrew.jpg"
+        "imgSrc": "/drinkImages/coldBrew.jpg",
+        "originalSource": "Image from unslpash by @pariwatt"
     },
     {
         "id": "icedLatte",
@@ -85,6 +95,7 @@
         "ounces": 10,
         "description": "Hot espresso drinks may not be for everyone. For everyone else there is always an Iced Latte!",
         "price": 5,
-        "imgSrc": "/drinkImages/icedLatte.jpg"
+        "imgSrc": "/drinkImages/icedLatte.jpg",
+        "originalSource": "Image from unslpash by @pariwatt"
     }
 ]

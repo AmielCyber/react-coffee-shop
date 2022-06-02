@@ -28,6 +28,11 @@
 ## To Do
 
 - [x] Create accounts (Authentication)
+- [x] Orders created from guests or sessions
+- [x] API routes protected (unauthorized users)
+- [x] Hover on picture shows you the source or link to the original source
+- [x] User is asked to checkout as guest/login if they are not already signed in
 - [ ] Reciept after checkout
-- [ ] Order History
-- [x] Hover on picture shows you the source or link to the original source.
+- [ ] Order History from the profile page
+- [ ] Cart sessions from user sessions or local storage if user is a guest
+- [ ] MongoDB Vercel optimization

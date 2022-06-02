@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { cartActions } from '../../store/cart/cart-slice';
 import CartItemList from './CartItem/CartItemList';
 import Checkout from './Checkout/Checkout';
+import ClearCart from '../Layout/Icons/ClearCart';
 // CSS import.
 import styles from './CartContent.module.css';
-import ClearCart from '../Layout/Icons/ClearCart';
 
 export default function CartContent(props) {
   // React state hook.
@@ -27,6 +27,7 @@ export default function CartContent(props) {
       cart: cart,
     };
     // Send the order data form to our server.
+    let result;
     try {
       const response = await fetch('/api/order/order', {
         method: 'POST',
@@ -35,12 +36,11 @@ export default function CartContent(props) {
           'Content-Type': 'application/json',
         },
       });
-      await response.json().then((status) => console.log(status));
-      props.setDidSubmit(true);
+      result = await response.json();
+      props.setDidSubmit(response.ok, result.message);
     } catch (error) {
       // Let the user know that their order was not submitted.
-      console.log(error);
-      props.setDidSubmit(false);
+      props.setDidSubmit(false, 'Something went wrong...');
     }
     // Database is done recieving the order form.
     props.setIsSubmitting(false);
@@ -80,7 +80,14 @@ export default function CartContent(props) {
         <span>Total Amount</span>
         <span className={styles.price}>{totalPriceFormatted}</span>
       </div>
-      {isCheckout && <Checkout onClose={props.onClose} onCancel={cancelHandler} onConfirm={submitHandler} />}
+      {isCheckout && (
+        <Checkout
+          onToLogin={props.onToLogin}
+          onClose={props.onClose}
+          onCancel={cancelHandler}
+          onConfirm={submitHandler}
+        />
+      )}
       {!isCheckout && (
         <div className={styles.actions}>
           <button className={styles.clearCart} title='Remove all items' onClick={clearCartHandler}>

@@ -8,7 +8,7 @@ import drinksImage from '../../assets/coffee-drinks.jpg';
 import DrinksSummary from '../../components/Drinks/DrinksSummary';
 import AvailableDrinks from '../../components/Drinks/AvailableDrinks';
 // CSS styles.
-import styles from './index.module.css';
+import styles from './menu.module.css';
 
 export default function Menu() {
   return (

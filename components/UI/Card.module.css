@@ -4,3 +4,30 @@
   border-radius: 50px;
   background-color: #FFF;
 }
+.container {
+  position: relative;
+  padding: 0.5rem 1rem;
+  background-color:transparent;
+  width: 70%;
+  margin: 5rem 15%;
+  z-index: 1;
+}
+.slim {
+  position: relative;
+  padding: 5% 1rem;
+  background-color:transparent;
+  margin-top: 5rem;
+  z-index: 1;
+}
+
+/* Mobile changes */
+@media only screen and (max-width: 595px) {
+  .container {
+    width: 95%;
+    margin: var(--mobile-margin) 2.5%;
+  }
+  .slim {
+    width: 98%;
+    margin: var(--mobile-margin) 1%;
+  }
+}

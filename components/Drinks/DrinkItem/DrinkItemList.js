@@ -1,8 +1,8 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 // My imports.
 import { drinkItemListAnimation, drinkItemAnimation } from '../../../utils/animations/animation';
 import DrinkItem from './DrinkItem';
-import { motion } from 'framer-motion';
 // CSS import.
 import styles from './DrinkItemList.module.css';
 
@@ -16,6 +16,7 @@ function DrinkItemList(props) {
       description={drink.description}
       price={drink.price}
       imgSrc={drink.imgSrc}
+      title={drink.originalSource}
       variants={drinkItemAnimation}
     />
   ));

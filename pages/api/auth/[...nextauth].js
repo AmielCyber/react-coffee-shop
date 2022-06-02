@@ -15,7 +15,6 @@ export default NextAuth({
     CredentialsProvider({
       // Use when loginIn is called.
       async authorize(credentials) {
-        // TRY CATCHES
         let client;
         let usersCollection;
         let user;

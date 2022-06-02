@@ -1,94 +1,54 @@
-import React, { useRef, useState } from 'react';
-import CartCheck from '../../Layout/Icons/CartCheck';
+import React, { useState } from 'react';
+import { useSession } from 'next-auth/react';
+// My import.
+import GuestCheckout from './GuestCheckout';
+import RegisteredCheckout from './RegisteredCheckout';
 // CSS import.
 import styles from './Checkout.module.css';
 
-// Front-end validation constants.
-const isNotEmpty = (value) => value.trim() !== '';
-const isEmail = (value) => value.includes('@');
-
 export default function Checkout(props) {
-  const [formInuptValid, setFormInputValid] = useState({
-    firstName: true,
-    lastName: true,
-    email: true,
-  });
+  const [guestInitial, setGuestInitial] = useState(true);
+  const { data: session } = useSession();
 
-  const firstNameInputRef = useRef();
-  const lastNameInputRef = useRef();
-  const emailInputRef = useRef();
+  if (session) {
+    // If there is a register user about to checkout.
+    const fullName = session.user.name;
+    const nameDividerPos = fullName.indexOf(' ');
 
-  const confirmHandler = (event) => {
-    event.preventDefault();
+    const firstName = fullName.slice(0, nameDividerPos);
+    const lastName = fullName.slice(nameDividerPos);
+    const email = session.user.email;
 
-    // Get user inputs.
-    const enteredFirstName = firstNameInputRef.current.value;
-    const enteredLastName = lastNameInputRef.current.value;
-    const enteredEmail = emailInputRef.current.value;
+    return (
+      <RegisteredCheckout
+        firstName={firstName}
+        lastName={lastName}
+        email={email}
+        onCancel={props.onCancel}
+        onClose={props.onClose}
+        onConfirm={props.onConfirm}
+      />
+    );
+  }
 
-    // Validate user inputs.
-    const enteredFirstNameIsValid = isNotEmpty(enteredFirstName);
-    const enteredLastNameIsValid = isNotEmpty(enteredLastName);
-    const enteredEmailIsValid = isNotEmpty(enteredEmail) && isEmail;
-
-    // Save validation for user validation feedback.
-    setFormInputValid({
-      firstName: enteredFirstNameIsValid,
-      lastName: enteredLastNameIsValid,
-      email: enteredEmailIsValid,
-    });
-    const formIsValid = enteredFirstNameIsValid && enteredLastNameIsValid && enteredEmailIsValid;
-    if (!formIsValid) {
-      // Do not submit form if inputs are invalid.
-      return;
-    }
-
-    // Save user info data to send to database.
-    const userInfo = {
-      email: enteredEmail,
-      firstName: enteredFirstName,
-      lastName: enteredLastName,
-    };
-
-    props.onConfirm(userInfo);
+  const handleContinueAsGuest = () => {
+    // User agreed to continue as guest.
+    setGuestInitial(false);
   };
 
-  // Get the input classes depending on the input validity.
-  const firstNameClasses = `${styles.control} ${formInuptValid.firstName ? '' : styles.invalid}`;
-  const lastNameClasses = `${styles.control} ${formInuptValid.lastName ? '' : styles.invalid}`;
-  const emailClasses = `${styles.control} ${formInuptValid.email ? '' : styles.invalid}`;
+  if (guestInitial) {
+    // Prompt if a guest user wants to continue as guest.
+    return (
+      <div className={styles.guestPrompt}>
+        <h2>Continue as guest?</h2>
+        <div className={styles.actions}>
+          <button onClick={handleContinueAsGuest}>Yes</button>
+          <button onClick={props.onToLogin}>Login/Signup</button>
+        </div>
+      </div>
+    );
+  }
 
-  return (
-    <form className={styles.form} onSubmit={confirmHandler}>
-      <div className={firstNameClasses}>
-        <label htmlFor='firstName'>First Name</label>
-        <input type='text' id='firstName' ref={firstNameInputRef} />
-        {!formInuptValid.firstName && <p>Please enter a valid first name</p>}
-      </div>
-      <div className={lastNameClasses}>
-        <label htmlFor='lastName'>Last Name</label>
-        <input type='text' id='lastName' ref={lastNameInputRef} />
-        {!formInuptValid.lastName && <p>Please enter a valid last name</p>}
-      </div>
-      <div className={emailClasses}>
-        <label htmlFor='email'>Email</label>
-        <input type='email' id='email' ref={emailInputRef} />
-        {!formInuptValid.email && <p>Please enter a valid email</p>}
-      </div>
-      <div className={styles.actions}>
-        <button className={styles.close} type='button' onClick={props.onClose}>
-          Close
-        </button>
-        <button className={styles.cancel} type='button' onClick={props.onCancel}>
-          Cancel
-        </button>
-        <button className={styles.submit}>
-          <span>
-            <CartCheck />
-          </span>{' '}
-          Confirm
-        </button>
-      </div>
-    </form>
-  );
+  // Guest user agreed to continue as guest.
+  return <GuestCheckout onCancel={props.onCancel} onClose={props.onClose} onConfirm={props.onConfirm} />;
 }

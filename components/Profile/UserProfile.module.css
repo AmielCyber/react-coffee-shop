@@ -3,9 +3,21 @@
   flex-direction: column;
   margin: 3rem auto;
   text-align: center;
-  background-color: var(--secondary-color);
+  color: var(--name-color);
+  background-color: white;
+  box-shadow: 0 0 7px 7px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  color: var(--name-color);
 }
 
 .profile h1 {
   font-size: 5rem;
+  color: inherit;
+  margin-bottom: 1.5rem;
+}
+/* Mobile changes */
+@media only screen and (max-width: 595px) {
+  .profile h1 {
+    font-size: 2.5rem;
+  }
 }

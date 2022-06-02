@@ -23,6 +23,7 @@ export default async function handler(req, res) {
       client.close();
       return;
     }
+    // Transform the list fetch from our database to an array we will used to display the available drinks.
     const drinksListTransformed = [];
     for (const key in drinks) {
       drinksListTransformed.push({
@@ -32,6 +33,7 @@ export default async function handler(req, res) {
         description: drinks[key].description,
         price: drinks[key].price,
         imgSrc: drinks[key].imgSrc,
+        originalSource: drinks[key].originalSource,
       });
     }
     res.status(200).json(drinksListTransformed);

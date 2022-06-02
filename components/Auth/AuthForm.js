@@ -8,24 +8,29 @@ import styles from './AuthForm.module.css';
 export default function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
   const [newUserCreated, setNewUserCreated] = useState(false);
+  const [serverMessage, setServerMessage] = useState('');
 
-  const switchAuthModeHandler = (isNewUser) => {
+  // Toggle Sign/Signup
+  const switchAuthModeHandler = (isNewUser, message) => {
     if (isNewUser) {
       setNewUserCreated(true);
+      setServerMessage(message);
     }
     setIsLogin((prevState) => !prevState);
   };
 
   return (
-    <section className={styles.auth}>
+    <div className={styles.auth}>
       {newUserCreated && (
-        <p>
-          New User Created!
-          <br />
-          Please login using your newly created credentials.
-        </p>
+        <span className={styles.newUserMessage}>
+          <p>
+            {serverMessage}
+            <br />
+            Please login using your newly created credentials.
+          </p>
+        </span>
       )}
       {isLogin ? <SignIn switchToSignUp={switchAuthModeHandler} /> : <SignUp switchToSignIn={switchAuthModeHandler} />}
-    </section>
+    </div>
   );
 }

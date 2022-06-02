@@ -21,8 +21,8 @@ async function fetcher(url) {
 export default function AvailableDrinks() {
   const { data, error } = useSWR('/api/menu/drinks', fetcher);
 
+  // Display server error.
   if (error) {
-    // Display server error.
     return (
       <section className={styles.drinksError}>
         <Card>
@@ -31,8 +31,8 @@ export default function AvailableDrinks() {
       </section>
     );
   }
+  // Display loading content since we do not have our data yet.
   if (!data) {
-    // Display loading content since we do not have our data yet.
     return (
       <section className={styles.drinksLoading}>
         <Card>

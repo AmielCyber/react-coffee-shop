@@ -31,6 +31,8 @@
   --cart-button-color: #004b3c;
   --cart-button-highlight-color: #003127; 
   --cart-badge-color: var(--primary-light);
+  /* Mobile margin */
+  --mobile-margin: 16rem;
 }
 html {
 /*   font-family: 'Open Sans', sans-serif; */
@@ -39,7 +41,8 @@ html {
 body {
   padding: 0;
   margin: 0;
-  background-color: var(--background-color);
+  /*   background-color: var(--background-color); */
+
 }
 a {
   color: inherit;

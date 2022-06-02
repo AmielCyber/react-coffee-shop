@@ -37,7 +37,7 @@ function DrinkItem(props) {
           width={250}
           height={250}
           quality={80}
-          title='cool'
+          title={props.title}
         />
       </div>
       <div className={styles.itemDescription}>

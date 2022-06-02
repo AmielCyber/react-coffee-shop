@@ -4,9 +4,10 @@ const ESPRESSO = {
   id: 'espresso',
   name: 'Espresso Shot',
   ounces: 1,
-  description: 'An espresso shot dialed to perfection.',
+  description: 'For the coffee connoisseur.',
   price: 3.50,
   imgSrc: '/drinkImages/espresso.jpg',
+  originalSource: 'Image from unslpash by @nate_dumlao',
 }
 const AMERICANO = {
   id: 'americano',
@@ -15,6 +16,7 @@ const AMERICANO = {
   description: 'For those who want a plain coffee drink but with the taste of espresso. Made of 2 ounces of espresso and 4 ounces of hot water.',
   price: 4,
   imgSrc: '/drinkImages/americano.jpg',
+  originalSource: 'Image from unslpash by @cdib925',
 }
 const CORTADO = {
   id: 'cortado',
@@ -23,6 +25,7 @@ const CORTADO = {
   description: 'For those that want to taste the espresso with just the right amount of milk. Made of 1 ounce of espresso, 2 ounces of milk, and a thin layer of foam on the top.',
   price: 3.75,
   imgSrc: '/drinkImages/cortado.jpg',
+  originalSource: 'Image from unslpash by @relentlessjpg',
 }
 const MACCHIATO = {
   id: 'macchiato',
@@ -31,6 +34,7 @@ const MACCHIATO = {
   description: 'For those that want to taste our espresso with a whip of cream. Made of 2 ounces of espresso and 1 ounce of milk foam.',
   price: 3.75,
   imgSrc: '/drinkImages/macchiato.jpg',
+  originalSource: 'Image from unslpash by @13on',
 }
 const FLAT_WHITE = {
   id: 'flatWhite',
@@ -39,6 +43,7 @@ const FLAT_WHITE = {
   description: 'For those who wished the latte had more of an espresso taste. Made of 2 ounces of espresso and 4 ounces of steam milk.',
   price: 4.50,
   imgSrc: '/drinkImages/flatWhite.jpg',
+  originalSource: 'Image from unslpash by @hoanvokim',
 }
 const CAPPUCCINO = {
   id: 'cappuccino',
@@ -47,6 +52,7 @@ const CAPPUCCINO = {
   description: 'For those that prefer more of the milk foam texture. Made of 2 ounces of espresso, 2 ounces of milk foam, and 2 ounces of steamed milk.',
   price: 4.50,
   imgSrc: '/drinkImages/cappuccino.jpg',
+  originalSource: 'Image from unslpash by @nadyeldems',
 }
 const LATTE = {
   id: 'latte',
@@ -55,6 +61,7 @@ const LATTE = {
   description: 'The most popular espresso drink. For those that love milk in their drinks. Made of 2 ounces of espresso and 8 ounces of steamed milk.',
   price: 5,
   imgSrc: '/drinkImages/latte.jpg',
+  originalSource: 'Image from unslpash by @taisiia_shestopal',
 }
 const DRIP_COFFEE = {
   id: 'dripCoffee',
@@ -63,6 +70,7 @@ const DRIP_COFFEE = {
   description: 'For those that just want a cup of hot coffee!',
   price: 3,
   imgSrc: '/drinkImages/dripCoffee.jpg',
+  originalSource: 'Image from unslpash by @andrewtneel',
 }
 const NITRO_BREW = {
   id: 'nitroBrew',
@@ -71,6 +79,7 @@ const NITRO_BREW = {
   description: 'Cold brew infused with Nitro giving it a creamy texture.',
   price: 4.5,
   imgSrc: '/drinkImages/nitroBrew.jpg',
+  originalSource: 'Image from unslpash by @schimiggy',
 }
 const COLD_BREW = {
   id: 'coldBrew',
@@ -79,6 +88,7 @@ const COLD_BREW = {
   description: 'Coffee steeped in cold water giving it a less acidic signature and more caffeine.',
   price: 4.0,
   imgSrc: '/drinkImages/coldBrew.jpg',
+  originalSource: 'Image from unslpash by @pariwatt',
 }
 const ICED_LATTE = {
   id: 'icedLatte',
@@ -87,6 +97,7 @@ const ICED_LATTE = {
   description: 'Hot espresso drinks may not be for everyone. For everyone else there is always an Iced Latte!',
   price: 5.0,
   imgSrc: '/drinkImages/icedLatte.jpg',
+  originalSource: 'Image from unslpash by @pariwatt',
 }
 
 const drinks = [

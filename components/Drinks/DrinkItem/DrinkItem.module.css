@@ -49,7 +49,7 @@
   flex-shrink: 5;
 }
 
-@media only screen and (max-width: 540px) {
+@media only screen and (max-width: 595px) {
   .drink {
     flex-direction: column;
     align-items: center;

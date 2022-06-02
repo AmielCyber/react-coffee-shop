@@ -15,15 +15,14 @@ import styles from './MainNavigation.module.css';
  * @returns string name of the css style for the current path navigaion list.
  */
 function activeLinkStyle(currentPath, linkPath, style) {
-  console.log('curr', currentPath, linkPath, 'style:', style);
   return currentPath === linkPath ? `${style} ${styles.active}` : style;
 }
 
 export default function MainNavigation(props) {
   const { data: session, status } = useSession();
-  console.log('session', session);
 
   const logoutHandler = () => {
+    // Logsout user and removing the session cookie using next-auth
     signOut();
   };
 
@@ -31,7 +30,7 @@ export default function MainNavigation(props) {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <ul>
-          <li className={activeLinkStyle(props.currentPath, '/', styles.icon)}>
+          <li className={activeLinkStyle(props.currentPath, '/', '')}>
             <Link href={'/'} passHref>
               <a>
                 <CompanyIcon width={30} height={30} fill={'#FFF'} />
@@ -42,7 +41,7 @@ export default function MainNavigation(props) {
             <Link href='/menu'>Menu</Link>
           </li>
           {!session && status !== 'loading' && (
-            <li className={activeLinkStyle(props.currentPath, '/auth', styles.login)}>
+            <li className={activeLinkStyle(props.currentPath, '/auth', '')}>
               <span className={styles.seperator}>
                 <Link href='/auth'>Login</Link>
               </span>
@@ -50,8 +49,8 @@ export default function MainNavigation(props) {
           )}
           {session && (
             <Fragment>
-              <li>
-                <Link href='/profile'>Profile</Link>
+              <li className={activeLinkStyle(props.currentPath, '/account', '')}>
+                <Link href='/account'>Account</Link>
               </li>
               <li>
                 <a onClick={logoutHandler}>Logout</a>

@@ -41,13 +41,14 @@
 }
 
 /* Make the navigation bar vertical for mobile viewing */
-@media only screen and (max-width: 540px) {
+@media only screen and (max-width: 595px) {
   .header {
     height: 16rem;
   }
   .nav ul {
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     padding: 0;
   }
   .nav li {
@@ -56,9 +57,6 @@
   .nav a:hover {
     color: #FFF;
     border-bottom: none;
-  }
-  .icon {
-    margin-left: 0.4rem;
   }
   .menu {
     margin-right: 2rem !important;

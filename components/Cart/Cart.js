@@ -9,17 +9,19 @@ export default function Cart(props) {
   // Cart state hooks for the status of the form submission..
   const [isSubmitting, setIsSubmitting] = useState(false); // Form is being submitted.
   const [didSubmit, setDidSubmit] = useState(false); // Form was submitted.
-  const [error, setError] = useState(null); // Error sending form to the database.
+  const [error, setError] = useState(false); // Error sending form to the database.
+  const [statusMessage, setStatusMessage] = useState(''); // Database result messsage after attempt for order submission.
 
   // Handlers.
   const submittingHandler = (submitting) => {
     setIsSubmitting(submitting);
   };
-  const didSubmitHandler = (successful) => {
+  const didSubmitHandler = (successful, resultMessage) => {
     if (!successful) {
-      setError('Order failed to send.');
+      setError(true);
     }
     setDidSubmit(true);
+    setStatusMessage(resultMessage);
   };
 
   if (isSubmitting) {
@@ -33,10 +35,11 @@ export default function Cart(props) {
   }
   if (didSubmit) {
     // Form has been submitted and has been accepted/rejected by our database.
-    const statusMessage = error ? error : 'Successfully sent the order';
+    const primaryErrorMessage = 'Error! Order was not sent.';
     const messageStyle = error ? styles.errorMessage : styles.message;
     return (
       <Fragment>
+        {error && <h3 className={styles.errorMessage}>{primaryErrorMessage}</h3>}
         <h3 className={messageStyle}>{statusMessage}</h3>
         <div className={styles.actions}>
           <button className={styles.actions} onClick={props.onClose}>
@@ -47,5 +50,12 @@ export default function Cart(props) {
     );
   }
   // User is looking at items ordered.
-  return <CartContent onClose={props.onClose} setIsSubmitting={submittingHandler} setDidSubmit={didSubmitHandler} />;
+  return (
+    <CartContent
+      onToLogin={props.onToLogin}
+      onClose={props.onClose}
+      setIsSubmitting={submittingHandler}
+      setDidSubmit={didSubmitHandler}
+    />
+  );
 }

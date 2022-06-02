@@ -18,12 +18,13 @@ export async function createUser(userInfo) {
       'Content-Type': 'application/json',
     },
   });
-  const data = await response.json();
+  const responseData = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || 'Something went wrong!');
+    // Something went wrong in our server.
+    throw new Error(responseData.message || 'Something went wrong!');
   }
-  return data;
+  return responseData;
 }
 
 export default function SignUp(props) {
@@ -77,9 +78,8 @@ export default function SignUp(props) {
     };
 
     try {
-      const result = await createUser(userInfo);
-      props.switchToSignIn(true);
-      console.log(result);
+      const result = await createUser(userInfo); // Get reuslt from our database when creating a user.
+      props.switchToSignIn(true, result.message); // Redirect user to sign in with new credentials and let the user know their account was created
     } catch (error) {
       setInvalidCredentials(error.message);
     }
@@ -117,7 +117,7 @@ export default function SignUp(props) {
           <input type='password' id='password' ref={passwordInputRef} required minLength='7' />
         </div>
         <div className={styles.actions}>
-          <button>Create Account</button>
+          <button className={styles.submitButton}>Create Account</button>
           <button type='button' className={styles.toggle} onClick={switchToSignInHandler}>
             Login with existing account
           </button>

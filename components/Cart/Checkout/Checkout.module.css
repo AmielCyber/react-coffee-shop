@@ -4,6 +4,23 @@
   overflow: scroll;
 }
 
+.guestPrompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.guestPrompt .actions {
+  margin-top: 0;
+}
+
+.guestPrompt .actions button{
+  border: 1px solid var(--complementary-darkest);
+  background-color: var(--button-color);
+  color: white;
+}
+
 /* Inputs */
 .control {
   margin-bottom: 0.5rem;
@@ -59,7 +76,17 @@
   color: white;
 }
 
-@media only screen and (max-width: 540px) {
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--primary-dark);
+}
+.user h2 {
+  margin-top: 0;
+}
+
+@media only screen and (max-width: 595px) {
   .actions {
     display: flex;
     flex-direction: column;

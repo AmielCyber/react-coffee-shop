@@ -14,10 +14,11 @@ export default function SignIn(props) {
     password: true,
   });
   const [invalidCredentials, setInvalidCredentials] = useState(null);
-  const router = useRouter();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+  const router = useRouter();
 
+  // Submission handler for signin form.
   const submitHandler = async (event) => {
     event.preventDefault();
 
@@ -50,10 +51,10 @@ export default function SignIn(props) {
     const result = await signIn('credentials', { redirect: false, email: enteredEmail, password: enteredPassword });
     // log user
     if (!result.error) {
-      // set some auth state
-      router.replace('/profile');
+      router.replace('/');
+    } else {
+      setInvalidCredentials(result.error);
     }
-    setInvalidCredentials(result.error);
   };
 
   const switchToSignUpHandler = () => {
@@ -80,7 +81,7 @@ export default function SignIn(props) {
           {!formInuptIsValid.password && <p>Please enter a password</p>}
         </div>
         <div className={styles.actions}>
-          <button>Login</button>
+          <button className={styles.submitButton}>Login</button>
           <button type='button' className={styles.toggle} onClick={switchToSignUpHandler}>
             Create a new account
           </button>

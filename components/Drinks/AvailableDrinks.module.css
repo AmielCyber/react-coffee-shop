@@ -31,7 +31,7 @@
 
 
 /* Mobile Changes */
-@media only screen and (max-width: 540px) {
+@media only screen and (max-width: 595px) {
   .drinks {
     max-width: 60rem;
     width: 95%;

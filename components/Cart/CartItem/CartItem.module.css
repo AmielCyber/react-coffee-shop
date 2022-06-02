@@ -56,7 +56,7 @@
   display: block;
 }
 /* Mobile changes */
-@media only screen and (max-width: 540px) {
+@media only screen and (max-width: 595px) {
   .actions {
     flex-direction: column;
   }

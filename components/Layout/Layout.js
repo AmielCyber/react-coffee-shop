@@ -18,10 +18,11 @@ function disableInitial() {
   isInitial = false;
 }
 
+// The layout of the web page.
 export default function Layout(props) {
   const [cartIsShown, setCartIsShown] = useState(false); // Show Cart overlay.
   const dispatch = useDispatch();
-  const currentPath = useRouter().asPath;
+  const router = useRouter(); // To highlight the current navigation link the navbar.
 
   useEffect(() => {
     // On initial startup, get the cart from previous session if there's one.
@@ -37,20 +38,25 @@ export default function Layout(props) {
     setCartIsShown(false);
   }, [setCartIsShown]);
 
+  const goToLoginHandler = useCallback(() => {
+    setCartIsShown(false);
+    router.replace('/auth');
+  }, [cartIsShown]);
+
   return (
     <Fragment>
       <MainNavigation
         onSelectCart={showCartHandler}
         isInitial={isInitial}
         disableInitial={disableInitial}
-        currentPath={currentPath}
+        currentPath={router.asPath}
       />
       {!isInitial &&
         ReactDOM.createPortal(
           <AnimatePresence>
             {cartIsShown && (
               <Modal onClose={hideCartHandler}>
-                <Cart onClose={hideCartHandler} />
+                <Cart onClose={hideCartHandler} onToLogin={goToLoginHandler} />
               </Modal>
             )}
           </AnimatePresence>,

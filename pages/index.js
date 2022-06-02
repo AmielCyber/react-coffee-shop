@@ -14,7 +14,7 @@ export default function Home(props) {
   let displayName = props.userName;
 
   if (displayName !== '') {
-    displayName = `back ${displayName},`;
+    displayName = `back ${displayName}, `;
   }
   return (
     <Fragment>
@@ -43,7 +43,7 @@ export default function Home(props) {
         </div>
         <motion.div className={styles.pageOverlay} exit={{ display: 'none' }} transition={homePageAnimation.transition}>
           <section className={styles.message}>
-            <h2>{`Welcome ${displayName} to React Coffee!`}</h2>
+            <h2>{`Welcome ${displayName}to React Coffee!`}</h2>
             <p>
               <Link href='/menu' passHref>
                 <a>Order now to get fresh tasting coffee.</a>
