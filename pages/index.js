@@ -8,7 +8,7 @@ import { getSession } from 'next-auth/react';
 import { homePageAnimation } from '../utils/animations/animation';
 import coffeeShopImage from '../assets/coffee-shop.jpg';
 // CSS styles.
-import styles from './index.module.css';
+import styles from './HomePage.module.css';
 
 export default function Home(props) {
   let displayName = props.userName;
