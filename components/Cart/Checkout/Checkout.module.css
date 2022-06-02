@@ -79,11 +79,16 @@
 .user {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  color: var(--primary-dark);
+  align-items: flex-start;
+}
+.user span {
+  color: var(--name-color);
+  margin-right: 1.5rem;
 }
 .user h2 {
+  justify-self:flex-end;
   margin-top: 0;
+  color: var(--complementary-color);
 }
 
 @media only screen and (max-width: 595px) {

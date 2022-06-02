@@ -3,7 +3,7 @@ import { getSession } from 'next-auth/react';
 import Image from 'next/image';
 // My imports.
 import Card from '../../components/UI/Card';
-import coffeeImage from '../../assets/coffeeWhiteBackground.jpg';
+import chillCoffeeImage from '../../assets/chillCoffeeImage.jpg';
 import UserProfile from '../../components/Profile/UserProfile';
 // CSS import.
 import styles from './AccountPage.module.css';
@@ -17,8 +17,9 @@ export default function AccountPage(props) {
     <Fragment>
       <div className={styles.accountPageImage}>
         <Image
-          alt='Latte on top of a white table'
-          src={coffeeImage}
+          alt='Coffee desk looking over a window'
+          src={chillCoffeeImage}
+          title='Image by @krisatomic from Unsplash'
           layout='fill'
           objectFit='cover'
           quality={80}

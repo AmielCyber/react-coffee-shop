@@ -28,6 +28,7 @@ export default function Menu() {
         <div className={styles['main-image']}>
           <Image
             src={drinksImage}
+            title='Image by @c_reel from Unsplash'
             alt='A table full of coffee drinks'
             layout='fill'
             objectFit='cover'

@@ -21,8 +21,14 @@ export default function RegisteredCheckout(props) {
   return (
     <form className={styles.form} onSubmit={confirmHandler}>
       <div className={styles.user}>
-        <h2>{`${props.firstName} ${props.lastName}`}</h2>
-        <h2>{`${props.email}`}</h2>
+        <h2>
+          <span>Name:</span>
+          {`${props.firstName} ${props.lastName}`}
+        </h2>
+        <h2>
+          <span>Email:</span>
+          {`${props.email}`}
+        </h2>
       </div>
       <div className={styles.actions}>
         <button className={styles.close} type='button' onClick={props.onClose}>

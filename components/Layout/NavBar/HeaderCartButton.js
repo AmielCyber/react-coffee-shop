@@ -26,10 +26,10 @@ export default function HeaderCartButton(props) {
           items: cart.items,
           numberOfCartItems: cart.numberOfCartItems,
           totalPrice: cart.totalPrice,
-        }),
+        })
       );
     }
-  }, [cart, props.isInitial]);
+  }, [props, dispatch, cart]);
 
   // Animate cart button if an item was added or removed.
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function HeaderCartButton(props) {
     } else {
       animateButton.start(cartBumpAnimation);
     }
-  }, [cart]);
+  }, [cart, animateButton]);
 
   return (
     <motion.button className={styles.button} onClick={props.onSelectCart} animate={animateButton}>

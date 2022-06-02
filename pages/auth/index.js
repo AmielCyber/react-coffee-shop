@@ -43,6 +43,7 @@ export default function AuthPage() {
       <div className={styles.authPageImage}>
         <Image
           alt='Latte on top of a white table'
+          title='Image by @heftiba from Unsplash'
           src={coffeeImage}
           layout='fill'
           objectFit='cover'

@@ -7,6 +7,8 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "prettier",
         "plugin:@next/next/recommended"
     ],
     "parserOptions": {
@@ -16,10 +18,23 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
+    "settings": {
+        "react": {
+            "version": "latest" // React version. "detect" automatically picks the version you have installed.
+        }
+    },
     "plugins": [
         "react"
     ],
     "rules": {
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
         "react/prop-types": "off"
     }
 }

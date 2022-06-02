@@ -12,7 +12,6 @@ import styles from './HomePage.module.css';
 
 export default function Home(props) {
   let displayName = props.userName;
-
   if (displayName !== '') {
     displayName = `back ${displayName}, `;
   }
@@ -33,6 +32,7 @@ export default function Home(props) {
         <div className={styles.homeImage}>
           <Image
             alt='Coffee Shop Interior'
+            title='Image by @pinchebesu from Unsplash'
             src={coffeeShopImage}
             layout='fill'
             objectFit='cover'
@@ -56,6 +56,7 @@ export default function Home(props) {
   );
 }
 
+// Welcome user if there is a session.
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
   if (!session) {

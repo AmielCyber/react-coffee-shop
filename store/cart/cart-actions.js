@@ -1,3 +1,4 @@
+// My imports.
 import { uiActions } from '../ui/ui-slice';
 import { cartActions } from './cart-slice';
 
@@ -13,7 +14,7 @@ export const fetchCartData = () => {
         status: 'pending',
         title: 'Fetching...',
         message: 'Fetching data from previous session.',
-      }),
+      })
     );
 
     // Call our api route.
@@ -39,7 +40,7 @@ export const fetchCartData = () => {
           items: cartData.items || [],
           totalPrice: cartData.totalPrice || 0,
           numberOfCartItems: cartData.numberOfCartItems || 0,
-        }),
+        })
       );
       // Succeeded a server fetch.
       uiActions.showNotification({
@@ -54,7 +55,7 @@ export const fetchCartData = () => {
           status: 'error',
           title: 'Error!',
           message: error.message,
-        }),
+        })
       );
     }
   };
@@ -72,7 +73,7 @@ export const sendCartData = (cart) => {
         status: 'pending',
         title: 'Sending...',
         message: 'Sending cart data!',
-      }),
+      })
     );
 
     // Connect to the server via api route.
@@ -96,7 +97,7 @@ export const sendCartData = (cart) => {
           status: 'success',
           title: 'Success!',
           message: 'Sent cart data successfully!',
-        }),
+        })
       );
     } catch (error) {
       dispatch(
@@ -104,7 +105,7 @@ export const sendCartData = (cart) => {
           status: 'error',
           title: 'Error!',
           message: error.message,
-        }),
+        })
       );
     }
   };

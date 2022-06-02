@@ -8,6 +8,7 @@ import DrinkItemForm from './DrinkItemForm';
 // CSS import.
 import styles from './DrinkItem.module.css';
 
+// Only re-render if drink id changed.
 function drinksAreSame(prevProps, currProps) {
   return prevProps.id === currProps.id;
 }
@@ -23,7 +24,7 @@ function DrinkItem(props) {
         name: props.name,
         amount: amount,
         price: props.price,
-      }),
+      })
     );
   };
 

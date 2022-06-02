@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-// My import.
+// My imports.
 import LoadingSpinner from '../UI/LoadingSpinner';
 import CartContent from './CartContent';
 // CSS import

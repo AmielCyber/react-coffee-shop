@@ -27,7 +27,7 @@ export default function Layout(props) {
   useEffect(() => {
     // On initial startup, get the cart from previous session if there's one.
     dispatch(fetchCartData());
-  }, []);
+  }, [dispatch]);
 
   // Handlers.
   const showCartHandler = useCallback(() => {
@@ -41,7 +41,7 @@ export default function Layout(props) {
   const goToLoginHandler = useCallback(() => {
     setCartIsShown(false);
     router.replace('/auth');
-  }, [cartIsShown]);
+  }, [setCartIsShown, router]);
 
   return (
     <Fragment>
@@ -60,7 +60,7 @@ export default function Layout(props) {
               </Modal>
             )}
           </AnimatePresence>,
-          document.querySelector('#overlays'),
+          document.querySelector('#overlays')
         )}
       <main className={styles.main}>{props.children}</main>
     </Fragment>
