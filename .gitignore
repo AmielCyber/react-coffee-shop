@@ -20,6 +20,7 @@ package-lock.json
 .DS_Store
 *.pem
 .vscode
+package-lock.json
 
 # debug
 npm-debug.log*
