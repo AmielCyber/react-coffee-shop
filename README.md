@@ -35,4 +35,4 @@
 - [ ] Reciept after checkout
 - [ ] Order History from the profile page
 - [ ] Cart sessions from user sessions or local storage if user is a guest
-- [ ] MongoDB Vercel optimization
+- [x] MongoDB Vercel optimization
