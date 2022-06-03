@@ -3,9 +3,6 @@ import { checkIfUserExists, connectToDatabase } from '../../../utils/db/db-util'
 import { hashPassword } from '../../../utils/auth/auth';
 import { userDataIsValid } from '../../../utils/db/input-validation';
 
-// URI address to connect to the MongoDB client.
-const uri = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@${process.env.CLUSTER_NAME}.hsycr.mongodb.net/${process.env.USER_DB}?${process.env.OPTIONS}`;
-
 export default async function handler(req, res) {
   console.count('SIGNUP API');
   if (req.method === 'POST') {
@@ -30,7 +27,7 @@ export default async function handler(req, res) {
     // Connect to the user database.
     let client;
     try {
-      client = await connectToDatabase(uri);
+      client = await connectToDatabase();
     } catch (error) {
       res.status(500).json({ message: 'Connecting to the cart database failed!' });
       return;
@@ -43,7 +40,6 @@ export default async function handler(req, res) {
     if (userExists) {
       // User found therefore an account already exists.
       res.status(401).json({ message: 'You already have an account. Click below to sign in.' });
-      client.close();
       return;
     }
 
@@ -60,11 +56,9 @@ export default async function handler(req, res) {
 
     if (!result.acknowledged) {
       res.status(500).json({ message: 'Failed to create new user.' });
-      client.close();
       return;
     }
 
     res.status(201).json({ message: 'Created new user!' });
-    client.close();
   }
 }

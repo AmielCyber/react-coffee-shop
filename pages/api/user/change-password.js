@@ -4,9 +4,6 @@ import { passwordIsValid } from '../../../utils/db/input-validation';
 import { hashPassword, verifyPassword } from '../../../utils/auth/auth';
 import { connectToDatabase } from '../../../utils/db/db-util';
 
-// URI address to connect to the MongoDB client.
-const uri = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@${process.env.CLUSTER_NAME}.hsycr.mongodb.net/${process.env.USER_DB}?${process.env.OPTIONS}`;
-
 // Validate if a request is validated or not
 // Protects API routes.
 export default async function handler(req, res) {
@@ -37,7 +34,7 @@ export default async function handler(req, res) {
   // Connect to the user database.
   let client;
   try {
-    client = await connectToDatabase(uri);
+    client = await connectToDatabase();
   } catch (error) {
     res.status(500).json({ message: 'Failed to connect to the order database!' });
     return;
@@ -50,7 +47,6 @@ export default async function handler(req, res) {
   try {
     usersCollection = db.collection(process.env.USER_COLLECTION);
   } catch (error) {
-    client.close();
     res.status(500).json({ message: 'Failed to connect to the order database!' });
     return;
   }
@@ -59,13 +55,11 @@ export default async function handler(req, res) {
   try {
     user = await usersCollection.findOne({ email: userEmail });
   } catch (error) {
-    client.close();
     res.status(500).json({ message: 'Failed to connect to the order database!' });
   }
 
   if (!user) {
     res.status(404).json({ message: 'User not found.' });
-    client.close();
     return;
   }
 
@@ -76,7 +70,6 @@ export default async function handler(req, res) {
   if (!passwordEqual) {
     // User did not entered the correct current password.
     res.status(403).json({ message: 'Invalid current password entered.' }); // Authenticated but not authorized.
-    client.close();
     return;
   }
 
@@ -89,7 +82,5 @@ export default async function handler(req, res) {
   } catch (error) {
     res.status(500).json({ message: 'Could not changed password in the database.' });
   }
-  client.close();
   res.status(200).json({ message: 'Password updated!' });
-  console.log('yay');
 }

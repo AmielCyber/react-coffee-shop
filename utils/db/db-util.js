@@ -1,16 +1,13 @@
-import { MongoClient } from 'mongodb';
-
-// Helper functions to simplyfiy the connection to MongoDB and simply error handling when this functions are called.
-const usersURI = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@${process.env.CLUSTER_NAME}.hsycr.mongodb.net/${process.env.USER_DB}?${process.env.OPTIONS}`;
+const clientPromise = require('./mongodb-client');
 
 /**
  * Connect to the MongoDB.
- * @param {string} uri
  * @returns MongoDB client
  */
-export async function connectToDatabase(uri) {
+export async function connectToDatabase() {
+  // const client promise as recommended from MongoDB
   // Connect to the database.
-  const client = await MongoClient.connect(uri);
+  const client = await clientPromise;
   return client;
 }
 /**
@@ -21,10 +18,8 @@ export async function connectToDatabase(uri) {
  * @returns MongoDB status result. { acknowledged:boolean, modifiedCount:Number, upsertedId:Object, upsertedCount:Number, matchedCount:Number}
  */
 export async function insertAndReplaceDocument(client, collectionName, document) {
-  // Get a hold of the database.
-  const db = client.db();
   // Get access to the collection.
-  const collection = db.collection(collectionName);
+  const collection = client.db().collection(collectionName);
   // Replace first document({}).
   const result = await collection.replaceOne({}, document, { upsert: true });
   return result;
@@ -37,10 +32,8 @@ export async function insertAndReplaceDocument(client, collectionName, document)
  * @returns MongoDB status result. { acknowledged:boolean, modifiedCount:Number, upsertedId:Object, upsertedCount:Number, matchedCount:Number}
  */
 export async function insertADocument(client, collectionName, document) {
-  // Get a hold of the database.
-  const db = client.db();
   // Get access to the collection.
-  const collection = db.collection(collectionName);
+  const collection = client.db().collection(collectionName);
   // Insert the document
   const result = await collection.insertOne(document);
   return result;
@@ -52,10 +45,8 @@ export async function insertADocument(client, collectionName, document) {
  * @returns Document requested.
  */
 export async function getFirstDocument(client, collectionName) {
-  // Get a hold of the database.
-  const db = client.db();
   // Get access of the collection.
-  const collection = db.collection(collectionName);
+  const collection = client.db().collection(collectionName);
   // Get the first document.
   const document = await collection.findOne();
   return document;
@@ -67,10 +58,8 @@ export async function getFirstDocument(client, collectionName) {
  * @returns An array of documents.
  */
 export async function getAllDocuments(client, collectionName) {
-  // Get a hold of the database.
-  const db = client.db();
   // Get access to the collection.
-  const collection = db.collection(collectionName);
+  const collection = client.db().collection(collectionName);
   // Find all the documents in collection and get back an array of documents
   const dataList = await collection.find().toArray();
 
@@ -84,10 +73,8 @@ export async function getAllDocuments(client, collectionName) {
  * @returns An array of documents.
  */
 export async function getAllDocumentsFromEmailUser(client, collectionName, email) {
-  // Get a hold of the database.
-  const db = client.db();
   // Get access to the collection.
-  const collection = db.collection(collectionName);
+  const collection = client.db().collection(collectionName);
   // Find all the documents in collection and get back an array of documents
   const dataList = await collection.find({ email: email }).toArray();
 
@@ -100,10 +87,8 @@ export async function getAllDocumentsFromEmailUser(client, collectionName, email
  * @returns boolean: true->user exists false->no user found
  */
 export async function checkIfUserExists(email) {
-  const client = await connectToDatabase(usersURI);
-  const db = client.db();
-  const existingUser = await db.collection(process.env.USER_COLLECTION).findOne({ email: email });
-  client.close();
+  const client = await connectToDatabase();
+  const existingUser = await client.db().collection(process.env.USER_COLLECTION).findOne({ email: email });
 
   // Only return boolean value since existing user is falsey or truthy.
   return existingUser !== null;

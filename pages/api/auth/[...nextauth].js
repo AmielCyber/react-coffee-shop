@@ -4,8 +4,6 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { verifyPassword } from '../../../utils/auth/auth';
 import { connectToDatabase } from '../../../utils/db/db-util';
 
-// URI address to connect to the MongoDB client.
-const uri = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@${process.env.CLUSTER_NAME}.hsycr.mongodb.net/${process.env.USER_DB}?${process.env.OPTIONS}`;
 // Handles all other auth routes.
 export default NextAuth({
   session: {
@@ -20,7 +18,7 @@ export default NextAuth({
         let user;
         // Connect to the database and fetch credentials.
         try {
-          client = await connectToDatabase(uri);
+          client = await connectToDatabase();
           usersCollection = client.db().collection(process.env.USER_COLLECTION);
           user = await usersCollection.findOne({ email: credentials.email });
         } catch (errror) {
@@ -29,7 +27,6 @@ export default NextAuth({
 
         if (!user) {
           // No user was found in our database.
-          client.close();
           throw new Error('No user found with this email address. Please try again.');
         }
 
@@ -43,12 +40,10 @@ export default NextAuth({
 
         if (!isValid) {
           // User enter invalid credentials.
-          client.close();
           throw new Error('Incorrect password. Please try again.');
         }
 
         // Return user object.
-        client.close();
         return {
           email: user.email,
           name: `${user.firstName} ${user.lastName}`,

@@ -9,9 +9,6 @@ import {
 import { getDrinksFromServer } from '../../../utils/db/db-drinks-util';
 import { userDataIsValid } from '../../../utils/db/input-validation';
 
-// URI address to connect to the MongoDB client.
-const uri = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@${process.env.CLUSTER_NAME}.hsycr.mongodb.net/${process.env.COFFEE_DB}?${process.env.OPTIONS}`;
-
 export default async function handler(req, res) {
   // Get session if there is one.
   const session = await getSession({ req });
@@ -94,7 +91,7 @@ export default async function handler(req, res) {
     // Connect to the order database.
     let client;
     try {
-      client = await connectToDatabase(uri);
+      client = await connectToDatabase();
     } catch (error) {
       res.status(500).json({ message: 'Failed to connect to the order database.' });
       return;
@@ -103,10 +100,8 @@ export default async function handler(req, res) {
     // Add the order to the database.
     try {
       await insertADocument(client, process.env.ORDER_COLLECTION, reciept);
-      client.close();
     } catch (error) {
       res.status(500).json({ message: 'Inserting order data failed.' });
-      client.close();
       return;
     }
     res.status(201).json({ message: 'Your order was created!' });
@@ -121,7 +116,7 @@ export default async function handler(req, res) {
     // Connect to the database
     let client;
     try {
-      client = await connectToDatabase(uri);
+      client = await connectToDatabase();
     } catch (error) {
       res.status(500).json({ message: 'Connecting to the order database failed!' });
       return;
@@ -132,11 +127,9 @@ export default async function handler(req, res) {
       pastOrders = await getAllDocumentsFromEmailUser(client, process.env.ORDER_COLLECTION, email);
     } catch (error) {
       res.status(500).json({ message: 'Fetching order data failed.' });
-      client.close();
       return;
     }
     res.status(200).json(pastOrders);
-    client.close();
   } else {
     res.status(418).json({ message: 'I am a teapot and I refuse to brew coffee with teapot.' });
   }
