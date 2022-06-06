@@ -24,15 +24,16 @@
 - [x] CSS rework
 - [x] Mobile compatible
 - [x] Browser tab icon
-
-## To Do
-
 - [x] Create accounts (Authentication)
 - [x] Orders created from guests or sessions
 - [x] API routes protected (unauthorized users)
 - [x] Hover on picture shows you the source or link to the original source
 - [x] User is asked to checkout as guest/login if they are not already signed in
+- [x] MongoDB Vercel optimization
+- [x] Cart sessions from user sessions stored in the server
+- [x] Cart sessions from guest sessions stored in the browser's storage
+
+## To Do
+
 - [ ] Reciept after checkout
 - [ ] Order History from the profile page
-- [ ] Cart sessions from user sessions or local storage if user is a guest
-- [x] MongoDB Vercel optimization

@@ -25,7 +25,7 @@ export default function Layout(props) {
   const router = useRouter(); // To highlight the current navigation link the navbar.
 
   useEffect(() => {
-    // On initial startup, get the cart from previous session if there's one.
+    // On initial startup/session, get the cart from previous session if there's one.
     dispatch(fetchCartData());
   }, [dispatch]);
 

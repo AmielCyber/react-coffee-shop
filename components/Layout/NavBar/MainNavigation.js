@@ -23,6 +23,7 @@ export default function MainNavigation(props) {
 
   const logoutHandler = () => {
     // Logsout user and removing the session cookie using next-auth
+    // Reloads website to all of its initial state.
     signOut();
   };
 

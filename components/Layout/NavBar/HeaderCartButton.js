@@ -8,7 +8,7 @@ import CartIcon from '../Icons/CartIcon';
 // CSS import.
 import styles from './HeaderCartButton.module.css';
 
-export default function HeaderCartButton(props) {
+function HeaderCartButton({ isInitial, disableInitial, onSelectCart }) {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const animateButton = useAnimation();
@@ -16,11 +16,11 @@ export default function HeaderCartButton(props) {
   // Update cart DB if cart state changed.
   useEffect(() => {
     // If we just started the program ignore sending data since we may be fetching.
-    if (props.isInitial) {
-      props.disableInitial();
+    if (isInitial) {
+      disableInitial();
       return;
     } else {
-      // Send the cart state to the database if cart state changed
+      // Send the cart state to the database if the cart state changed
       dispatch(
         sendCartData({
           items: cart.items,
@@ -29,7 +29,7 @@ export default function HeaderCartButton(props) {
         })
       );
     }
-  }, [props, dispatch, cart]);
+  }, [isInitial, disableInitial, dispatch, cart]);
 
   // Animate cart button if an item was added or removed.
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function HeaderCartButton(props) {
   }, [cart, animateButton]);
 
   return (
-    <motion.button className={styles.button} onClick={props.onSelectCart} animate={animateButton}>
+    <motion.button className={styles.button} onClick={onSelectCart} animate={animateButton}>
       <span className={styles.cartIcon}>
         <CartIcon />
       </span>
@@ -50,3 +50,5 @@ export default function HeaderCartButton(props) {
     </motion.button>
   );
 }
+
+export default React.memo(HeaderCartButton);

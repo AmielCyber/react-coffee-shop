@@ -1,6 +1,10 @@
 import React, { useRef, Fragment, useState } from 'react';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
+import { useDispatch } from 'react-redux';
+// My import
+import { CART_STORAGE_NAME } from '../../store/cart/cart-actions';
+import { sendCartData, fetchCartData } from '../../store/cart/cart-actions';
 // CSS import.
 import styles from './AuthForm.module.css';
 
@@ -16,6 +20,7 @@ export default function SignIn(props) {
   const [invalidCredentials, setInvalidCredentials] = useState(null);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   // Submission handler for signin form.
@@ -49,8 +54,30 @@ export default function SignIn(props) {
     // Pass credential data too for the backend.
     // Result will have an error if there is an error
     const result = await signIn('credentials', { redirect: false, email: enteredEmail, password: enteredPassword });
-    // log user
+
     if (!result.error) {
+      // Successful signIn
+
+      // Check if we have any guest cart session.
+      const guestCartSessionStorage = window.localStorage.getItem(CART_STORAGE_NAME);
+      const cart = guestCartSessionStorage ? JSON.parse(guestCartSessionStorage) : null;
+      if (cart && cart.numberOfCartItems > 0) {
+        // If we had a guest cart session then save that session into our server with the signin user.
+        // Send the cart session to our database if we had items during our guest session.
+        dispatch(
+          sendCartData({
+            items: cart.items,
+            numberOfCartItems: cart.numberOfCartItems,
+            totalPrice: cart.totalPrice,
+          })
+        );
+      } else {
+        // Fetch cart session from our server if there is one.
+        dispatch(fetchCartData());
+      }
+      // clear the local storage from our guest session
+      window.localStorage.removeItem(CART_STORAGE_NAME);
+      // Redirect user to the home page.
       router.replace('/');
     } else {
       setInvalidCredentials(result.error);
