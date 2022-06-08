@@ -18,7 +18,7 @@ export default function Receipt({ items, totalItems, totalPrice, orderDate, show
     <div className={styles.receipt}>
       <div className={styles.date}>
         <h3>Order Date</h3>
-        <span>{orderDate}</span>
+        <span>{localDate}</span>
       </div>
       {showRecieptItems && (
         <div className={styles.receiptItems}>
