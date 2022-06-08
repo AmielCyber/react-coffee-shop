@@ -12,6 +12,7 @@ function getReceiptItems(items, date) {
 
 export default function Receipt({ items, totalItems, totalPrice, orderDate, showRecieptItems }) {
   const formattedTotalPrice = `$${totalPrice.toFixed(2)}`;
+  const localDate = orderDate.toLocaleString();
   const summaryStyles = `${styles.summary} ${showRecieptItems ? styles.divider : ''}`;
   return (
     <div className={styles.receipt}>
@@ -21,7 +22,7 @@ export default function Receipt({ items, totalItems, totalPrice, orderDate, show
       </div>
       {showRecieptItems && (
         <div className={styles.receiptItems}>
-          <ul>{getReceiptItems(items, orderDate)}</ul>
+          <ul>{getReceiptItems(items, localDate)}</ul>
         </div>
       )}
       <div className={summaryStyles}>

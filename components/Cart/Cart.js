@@ -24,7 +24,7 @@ export default function Cart(props) {
         items: cart.items,
         totalItems: cart.numberOfCartItems,
         totalPrice: cart.totalPrice,
-        orderDate: new Date().toLocaleString(),
+        orderDate: new Date(),
       });
     } else {
       setError(true);
