@@ -16,7 +16,6 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     // req.body Expected: user:{fName, lName, email}, cart:{items, numOfItems, totalPrice}
     const { user, cart } = req.body;
-
     // Backend Validation: Validate user input.
     const invalidUserMessage = userDataIsValid(user);
     if (invalidUserMessage !== '') {
