@@ -1,0 +1,38 @@
+.receiptItem {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-right: 0.5rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--complementary-color);
+}
+
+/* Name and quantity */
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.name {
+  color: var(--secondary-color);
+  font-size: 1.3rem;
+  margin: 0.7rem 0.4rem;
+}
+.qty {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.25rem 0.75rem;
+  color: var(--complementary-darkest);
+  margin-left: 0.4rem;
+  font-size: small;
+  margin-bottom: auto;
+}
+
+.receiptItem .price {
+  align-self: flex-end;
+}
+.price {
+  font-size: 1.2rem;
+  color: var(--price-color);
+}

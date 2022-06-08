@@ -32,8 +32,8 @@
 - [x] MongoDB Vercel optimization
 - [x] Cart sessions from user sessions stored in the server
 - [x] Cart sessions from guest sessions stored in the browser's storage
+- [x] Reciept after checkout
 
 ## To Do
 
-- [ ] Reciept after checkout
 - [ ] Order History from the profile page

@@ -37,10 +37,10 @@ export default function CartContent(props) {
         },
       });
       result = await response.json();
-      props.setDidSubmit(response.ok, result.message);
+      props.setDidSubmit(response.ok, result.message, cart);
     } catch (error) {
       // Let the user know that their order was not submitted.
-      props.setDidSubmit(false, 'Something went wrong...');
+      props.setDidSubmit(false, 'Something went wrong...', null);
     }
     // Database is done recieving the order form.
     props.setIsSubmitting(false);

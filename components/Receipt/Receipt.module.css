@@ -1,0 +1,64 @@
+.receipt {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Order date */
+.date {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+.date h3 {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  margin: 0 0;
+}
+.date span {
+  color: var(--complementary-color);
+  font-size: 1.1rem;
+}
+
+/* Cart items ordered */
+.receiptItems {
+  max-height: 45vh;
+  overflow: scroll;
+}
+.receiptItems ul {
+  list-style: none;
+  padding-left: 0.5rem;
+}
+
+/* Total items and total price */
+.summary{
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  padding-right: 0.5rem;
+}
+.summary h3{
+  margin: 0.5rem 0;
+  color: var(--primary-color);
+}
+/* If we are showing the receipt items then show a divider */
+.divider {
+  border-top: 2px solid var(--complementary-color);
+}
+.totalItems, .totalPrice {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.totalItems span {
+  color: var(--complementary-color);
+}
+.price {
+  color: var(--price-color);
+}
+

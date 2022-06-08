@@ -4,6 +4,7 @@ import LoadingSpinner from '../UI/LoadingSpinner';
 import CartContent from './CartContent';
 // CSS import
 import styles from './Cart.module.css';
+import Receipt from '../Receipt/Receipt';
 
 export default function Cart(props) {
   // Cart state hooks for the status of the form submission..
@@ -11,13 +12,21 @@ export default function Cart(props) {
   const [didSubmit, setDidSubmit] = useState(false); // Form was submitted.
   const [error, setError] = useState(false); // Error sending form to the database.
   const [statusMessage, setStatusMessage] = useState(''); // Database result messsage after attempt for order submission.
+  const [orderData, setOrderData] = useState(null);
 
   // Handlers.
   const submittingHandler = (submitting) => {
     setIsSubmitting(submitting);
   };
-  const didSubmitHandler = (successful, resultMessage) => {
-    if (!successful) {
+  const didSubmitHandler = (successful, resultMessage, cart) => {
+    if (successful) {
+      setOrderData({
+        items: cart.items,
+        totalItems: cart.numberOfCartItems,
+        totalPrice: cart.totalPrice,
+        orderDate: new Date().toLocaleString(),
+      });
+    } else {
       setError(true);
     }
     setDidSubmit(true);
@@ -41,6 +50,15 @@ export default function Cart(props) {
       <Fragment>
         {error && <h3 className={styles.errorMessage}>{primaryErrorMessage}</h3>}
         <h3 className={messageStyle}>{statusMessage}</h3>
+        {!error && (
+          <Receipt
+            items={orderData.items}
+            totalItems={orderData.totalItems}
+            totalPrice={orderData.totalPrice}
+            orderDate={orderData.orderDate}
+            showRecieptItems={true}
+          />
+        )}
         <div className={styles.actions}>
           <button className={styles.actions} onClick={props.onClose}>
             Close
