@@ -7,10 +7,10 @@
   margin: 1rem auto;
   position: relative;
   background-color: var(--background-color);
-  color: white;
+  color: var(--name-color);
   border-radius: 20px;
   box-shadow: 5px 10px 5px 5px rgba(0, 0, 0, 0.55);
-  opacity: 70%;
+  opacity: 80%;
   z-index: 1;
 }
 
