@@ -64,8 +64,7 @@ export default function PasswordForm() {
 
   return (
     <Fragment>
-      <h2 className={styles.title}>Change Password</h2>
-      <p className={statusMessageStyle}>{statusMessage}</p>
+      <label className={statusMessageStyle}>{statusMessage}</label>
       <form className={styles.form} onSubmit={submitHandler}>
         <div className={styles.control}>
           <label htmlFor='current-password'>Current Password</label>
@@ -76,7 +75,7 @@ export default function PasswordForm() {
           <input type='password' id='new-password' ref={newPasswordRef} />
         </div>
         <div className={styles.action}>
-          <button>Change Password</button>
+          <button>Submit Password Change</button>
         </div>
       </form>
     </Fragment>
