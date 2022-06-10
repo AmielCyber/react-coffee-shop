@@ -16,7 +16,7 @@
   --complementary-dark: #520014;
   --complementary-darkest: #240009;
   /* Specific component/html objects color */
-  --background-color: #3B3B2F;
+  --background-color: #f9f9f9;
   --error-color: #ED003B;
   --error-input: #FFEFF3;
   --price-color: var(--complementary-color);

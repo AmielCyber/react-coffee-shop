@@ -5,3 +5,23 @@
   overflow: hidden;
   z-index: -1;
 }
+/* Div button to show past orders made */
+.toggleShowOrders {
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.toggleShowOrders:hover {
+  cursor: pointer;
+}
+
+.toggleShowOrders:hover h2{
+  color: var(--button-color-active);
+}
+
+/* Mobile changes */
+@media only screen and (max-width: 595px) {
+  .toggleShowOrders h2{
+    font-size: 1.4rem;
+  }
+}

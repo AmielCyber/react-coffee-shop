@@ -8,7 +8,6 @@ export default async function handler(req, res) {
     try {
       client = await connectToDatabase();
     } catch (error) {
-      console.log(error);
       res.status(500).json({ message: 'Connecting to the menu database failed!' });
       return;
     }

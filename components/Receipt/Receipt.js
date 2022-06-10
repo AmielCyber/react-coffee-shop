@@ -3,6 +3,7 @@ import React from 'react';
 import ReceiptItem from './ReceiptItem';
 // CSS import.
 import styles from './Receipt.module.css';
+
 function getReceiptItems(items, date) {
   const itemList = items.map((item) => {
     return <ReceiptItem key={item.name + ':' + date} name={item.name} price={item.price} qty={item.amount} />;

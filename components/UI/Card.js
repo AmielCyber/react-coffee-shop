@@ -12,6 +12,12 @@ function getCardStyle(cardType) {
     case 'slim':
       styleType = styles.slim;
       break;
+    case 'orderContainer':
+      styleType = styles.orderContainer;
+      break;
+    case 'displayContainer':
+      styleType = styles.displayContainer;
+      break;
     default:
       styleType = styles.card;
   }

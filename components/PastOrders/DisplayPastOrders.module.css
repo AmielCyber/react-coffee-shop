@@ -1,0 +1,28 @@
+/* Button to close the modal window */
+.actions {
+  text-align: right;
+}
+.actions button {
+  font: inherit;
+  cursor: pointer;
+  background-color: var(--button-color);
+  color: #FFF;
+  border: 1px solid var(--complementary-darkest);
+  padding: 0.5rem 2rem;
+  border-radius: 25px;
+  margin-left: 1rem;
+}
+.actions button:hover,
+.actions button:active {
+  background-color: var(--button-color-active);
+  border-color: var(--complementary-dark);
+  color: white;
+}
+/* Mobile changes */
+@media only screen and (max-width: 595px) {
+  .actions button {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+  }
+}

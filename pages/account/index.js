@@ -1,25 +1,28 @@
-import React, { Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { getSession } from 'next-auth/react';
 import Image from 'next/image';
 // My imports.
+import coffeeLove from '../../assets/coffeeLove.jpg';
 import Card from '../../components/UI/Card';
-import chillCoffeeImage from '../../assets/chillCoffeeImage.jpg';
 import UserProfile from '../../components/Profile/UserProfile';
+import PastOrders from '../../components/PastOrders/PastOrders';
 // CSS import.
 import styles from './AccountPage.module.css';
 
-// TO DO:
-// Hello _user
-// Add past orders.
-
 export default function AccountPage(props) {
+  const [showPastOrders, setShowPastOrders] = useState(false);
+
+  const toggleShowPastOrdersHandler = () => {
+    setShowPastOrders((prevState) => !prevState);
+  };
+
   return (
     <Fragment>
       <div className={styles.accountPageImage}>
         <Image
-          alt='Coffee desk looking over a window'
-          src={chillCoffeeImage}
-          title='Image by @krisatomic from Unsplash'
+          alt='A coffee cup in a white background and letters spelling LOVE'
+          src={coffeeLove}
+          title='Image by @inchristalone from Unsplash'
           layout='fill'
           objectFit='cover'
           quality={80}
@@ -30,6 +33,12 @@ export default function AccountPage(props) {
       <Card style='container'>
         <UserProfile session={props.session} />
       </Card>
+      <div className={styles.toggleShowOrders} onClick={toggleShowPastOrdersHandler}>
+        <Card style='displayContainer'>
+          <h2>{showPastOrders ? 'Hide Past Orders' : 'Show Past Orders'}</h2>
+        </Card>
+      </div>
+      {showPastOrders && <PastOrders />}
     </Fragment>
   );
 }

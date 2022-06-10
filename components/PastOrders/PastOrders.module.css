@@ -1,0 +1,4 @@
+/* Order style if fetching order history failed */
+.orderError {
+  color: var(--error-color);
+}

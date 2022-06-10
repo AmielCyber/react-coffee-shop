@@ -4,12 +4,10 @@ import { hashPassword } from '../../../utils/auth/auth';
 import { userDataIsValid } from '../../../utils/db/input-validation';
 
 export default async function handler(req, res) {
-  console.count('SIGNUP API');
   if (req.method === 'POST') {
     const data = req.body;
 
     const { email, password, firstName, lastName } = data; // Get the user input.
-    console.log(firstName, lastName);
 
     // Backend Validation: Validate user input.
     const invalidUserMessage = userDataIsValid({ firstName, lastName, email });
@@ -36,7 +34,6 @@ export default async function handler(req, res) {
 
     // Check if user already exists.
     const userExists = await checkIfUserExists(email);
-    console.log(userExists);
     if (userExists) {
       // User found therefore an account already exists.
       res.status(401).json({ message: 'You already have an account. Click below to sign in.' });

@@ -12,7 +12,6 @@ import { userDataIsValid } from '../../../utils/db/input-validation';
 export default async function handler(req, res) {
   // Get session if there is one.
   const session = await getSession({ req });
-  console.log('session ORDER', session);
   if (req.method === 'POST') {
     // req.body Expected: user:{fName, lName, email}, cart:{items, numOfItems, totalPrice}
     const { user, cart } = req.body;
@@ -110,7 +109,7 @@ export default async function handler(req, res) {
       res.status(401).json({ message: 'User not logged in.' });
       return;
     }
-    const email = session.email;
+    const email = session.user.email;
 
     // Connect to the database
     let client;
@@ -124,6 +123,9 @@ export default async function handler(req, res) {
     let pastOrders;
     try {
       pastOrders = await getAllDocumentsFromEmailUser(client, process.env.ORDER_COLLECTION, email);
+      pastOrders.sort((a, b) => {
+        return new Date(b.orderDate) - new Date(a.orderDate);
+      });
     } catch (error) {
       res.status(500).json({ message: 'Fetching order data failed.' });
       return;

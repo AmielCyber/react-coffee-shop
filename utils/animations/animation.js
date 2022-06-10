@@ -101,3 +101,25 @@ export const drinkItemAnimation = {
   in: { opacity: 0, x: 100 },
   animate: { opacity: 1, x: 0 },
 };
+
+export const pastOrdersAnimationList = {
+  hidden: {
+    opacity: 0,
+    transition: {
+      when: 'afterChildren',
+    },
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+export const pastOrdersAnimationItem = {
+  // Items appear falling into place.
+  hidden: { opacity: 0, y: -100 },
+  visible: { opacity: 1, y: 0 },
+};

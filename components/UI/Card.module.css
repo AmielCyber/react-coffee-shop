@@ -8,10 +8,18 @@
   position: relative;
   padding: 0.5rem 1rem;
   background-color:transparent;
-  width: 70%;
-  margin: 5rem 15%;
+  width: 60%;
+  margin: 0 20%;
   z-index: 1;
 }
+.orderContainer {
+  position: relative;
+  background-color: transparent;
+  width: 50%;
+  margin: 2rem 25%;
+  z-index: 1;
+}
+
 .slim {
   position: relative;
   padding: 5% 1rem;
@@ -19,15 +27,42 @@
   margin-top: 5rem;
   z-index: 1;
 }
+.displayContainer {
+  position: relative;
+  text-align: center;
+  background-color: white;
+  padding: 0.5rem 0;
+  width: 50%;
+  margin: 0rem 25%;
+  border-radius: 20px;
+  box-shadow:  -1px 6px 6px rgba(1, 0, 0, 0.3), 1px -1px 2px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  color: var(--primary-color);
+}
 
 /* Mobile changes */
 @media only screen and (max-width: 595px) {
   .container {
-    width: 95%;
-    margin: var(--mobile-margin) 2.5%;
+    width: 98%;
+    margin-top: var(--mobile-margin);
+    margin-bottom: 0;
+    margin-right: 1%;
+    margin-left: 1%;
+    opacity: 95%;
   }
   .slim {
     width: 98%;
-    margin: var(--mobile-margin) 1%;
+    margin-top: var(--mobile-margin) 1%;
+  }
+  .displayContainer {
+    width: 90%;
+    margin: 0rem 5%;
+    opacity: 95%;
+  }
+
+  .orderContainer {
+    width: 95%;
+    margin: 2rem 2.5%;
+    opacity: 95%;
   }
 }
