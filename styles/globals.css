@@ -32,7 +32,7 @@
   --cart-button-highlight-color: #003127; 
   --cart-badge-color: var(--primary-light);
   /* Mobile margin */
-  --mobile-margin: 16rem;
+  --mobile-margin-top: 16rem;
 }
 html {
 /*   font-family: 'Open Sans', sans-serif; */

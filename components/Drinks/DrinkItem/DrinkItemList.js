@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 // My imports.
-import { drinkItemListAnimation, drinkItemAnimation } from '../../../utils/animations/animation';
 import DrinkItem from './DrinkItem';
+import { drinkItemListAnimation, drinkItemAnimation } from '../../../utils/animations/animation';
 // CSS import.
 import styles from './DrinkItemList.module.css';
 

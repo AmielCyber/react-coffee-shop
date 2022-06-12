@@ -4,18 +4,17 @@ import styles from './DrinkItemForm.module.css';
 
 // Max order items at a time.
 const MAX_INPUT_NUM = 5;
-
 /**
  * Creates a list of number of options.
  * @returns Number of options [1-MAX_INPUT_NUM]
  */
 function getNumberOptions() {
   const numberOptionList = [];
-  for (let i = 1; i <= MAX_INPUT_NUM; i++) {
+  for (let numberOfItems = 1; numberOfItems <= MAX_INPUT_NUM; numberOfItems++) {
     numberOptionList.push(
-      <option key={'amount:' + i} value={i}>
-        {i}
-      </option>,
+      <option key={'amount:' + numberOfItems} value={numberOfItems}>
+        {numberOfItems}
+      </option>
     );
   }
   return numberOptionList;

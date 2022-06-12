@@ -97,7 +97,7 @@ export default function SignUp(props) {
     <Fragment>
       <h1>Sign Up</h1>
       {invalidCredentials && <p className={styles.errorMessage}>{invalidCredentials}</p>}
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} id={props.formId}>
         <div className={firstNameClasses}>
           <label htmlFor='firstName'>Your First Name</label>
           <input type='text' id='firstName' ref={firstNameInputRef} />

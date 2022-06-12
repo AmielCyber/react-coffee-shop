@@ -44,7 +44,7 @@
 @media only screen and (max-width: 595px) {
   .container {
     width: 98%;
-    margin-top: var(--mobile-margin);
+    margin-top: var(--mobile-margin-top);
     margin-bottom: 0;
     margin-right: 1%;
     margin-left: 1%;
@@ -52,7 +52,7 @@
   }
   .slim {
     width: 98%;
-    margin-top: var(--mobile-margin) 1%;
+    margin-top: var(--mobile-margin-top) 1%;
   }
   .displayContainer {
     width: 90%;

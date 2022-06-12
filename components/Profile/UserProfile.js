@@ -15,7 +15,7 @@ export default function UserProfile(props) {
   return (
     <section className={styles.profile}>
       <h1>{userName}</h1>
-      <div onClick={toggleShowPasswordFormHandler} className={styles.changePassword}>
+      <div onClick={toggleShowPasswordFormHandler} className={styles.changePassword} role='button'>
         <h2>{changePassword ? 'Close Password Form' : 'Change Password'}</h2>
       </div>
       {changePassword && <PasswordForm />}

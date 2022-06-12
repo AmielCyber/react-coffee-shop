@@ -96,7 +96,7 @@ export default function SignIn(props) {
     <Fragment>
       <h1>Login</h1>
       {invalidCredentials && <p className={styles.errorMessage}>{invalidCredentials}</p>}
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} id={props.formId}>
         <div className={emailClasses}>
           <label htmlFor='email'>Your Email</label>
           <input type='email' id='email' ref={emailInputRef} />

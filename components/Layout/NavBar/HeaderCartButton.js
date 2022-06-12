@@ -40,6 +40,7 @@ function HeaderCartButton({ isInitial, disableInitial, onSelectCart }) {
     }
   }, [cart, animateButton]);
 
+  console.count('HeaderCartButton');
   return (
     <motion.button className={styles.button} onClick={onSelectCart} animate={animateButton}>
       <span className={styles.cartIcon}>

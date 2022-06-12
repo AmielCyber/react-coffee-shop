@@ -5,6 +5,6 @@
 /* Mobile changes */
 @media only screen and (max-width: 595px) {
   .main {
-    margin: var(--mobile-margin) auto;
+    margin: var(--mobile-margin-top) auto;
   }
 }

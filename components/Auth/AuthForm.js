@@ -10,6 +10,8 @@ export default function AuthForm() {
   const [newUserCreated, setNewUserCreated] = useState(false);
   const [serverMessage, setServerMessage] = useState('');
 
+  const formId = isLogin ? 'signInForm' : 'signUpForm';
+
   // Toggle Sign/Signup
   const switchAuthModeHandler = (isNewUser, message) => {
     if (isNewUser) {
@@ -22,15 +24,17 @@ export default function AuthForm() {
   return (
     <div className={styles.auth}>
       {newUserCreated && (
-        <span className={styles.newUserMessage}>
-          <p>
-            {serverMessage}
-            <br />
-            Please login using your newly created credentials.
-          </p>
-        </span>
+        <label className={styles.newUserMessage} htmlFor={formId}>
+          {serverMessage}
+          <br />
+          Please login using your newly created credentials.
+        </label>
       )}
-      {isLogin ? <SignIn switchToSignUp={switchAuthModeHandler} /> : <SignUp switchToSignIn={switchAuthModeHandler} />}
+      {isLogin ? (
+        <SignIn switchToSignUp={switchAuthModeHandler} formId={formId} />
+      ) : (
+        <SignUp switchToSignIn={switchAuthModeHandler} formId={formId} />
+      )}
     </div>
   );
 }

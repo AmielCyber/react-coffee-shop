@@ -23,6 +23,7 @@ function PastOrderList({ orders, onShowReceipt }) {
         className={styles.orderContainer}
         key={order.orderDate}
         onClick={showDetailedReceipt.bind(null, order)}
+        role='button'
       >
         <Receipt
           items={order.items}

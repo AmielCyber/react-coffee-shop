@@ -33,7 +33,7 @@ export default function AccountPage(props) {
       <Card style='container'>
         <UserProfile session={props.session} />
       </Card>
-      <div className={styles.toggleShowOrders} onClick={toggleShowPastOrdersHandler}>
+      <div className={styles.toggleShowOrders} onClick={toggleShowPastOrdersHandler} role='button'>
         <Card style='displayContainer'>
           <h2>{showPastOrders ? 'Hide Past Orders' : 'Show Past Orders'}</h2>
         </Card>

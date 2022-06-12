@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, Fragment } from 'react';
-import ReactDOM from 'react-dom';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import ReactDOM from 'react-dom';
 import { AnimatePresence } from 'framer-motion';
 // My imports.
 import { fetchCartData } from '../../store/cart/cart-actions';
@@ -43,6 +43,7 @@ export default function Layout(props) {
     router.replace('/auth');
   }, [setCartIsShown, router]);
 
+  console.count('Layout');
   return (
     <Fragment>
       <MainNavigation

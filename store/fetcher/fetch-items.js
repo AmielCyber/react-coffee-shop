@@ -1,4 +1,5 @@
 import useSWR from 'swr';
+
 // Fetcher for the SWR state.
 async function fetcher(url) {
   const response = await fetch(url);
@@ -15,7 +16,7 @@ export default function FetchItems(uri) {
 
   return {
     items: data,
-    isLoading: !error && !data,
+    isLoading: !error && !data, // There is no error and data is still being fetched.
     isError: error,
   };
 }

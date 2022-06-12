@@ -18,7 +18,7 @@ function activeLinkStyle(currentPath, linkPath, style) {
   return currentPath === linkPath ? `${style} ${styles.active}` : style;
 }
 
-export default function MainNavigation(props) {
+export default function MainNavigation({ currentPath, onSelectCart, isInitial, disableInitial }) {
   const { data: session, status } = useSession();
 
   const logoutHandler = () => {
@@ -27,22 +27,23 @@ export default function MainNavigation(props) {
     signOut();
   };
 
+  console.count('Navigation');
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
         <ul>
-          <li className={activeLinkStyle(props.currentPath, '/', '')}>
+          <li className={activeLinkStyle(currentPath, '/', '')}>
             <Link href={'/'} passHref>
               <a>
                 <CompanyIcon width={30} height={30} fill={'#FFF'} />
               </a>
             </Link>
           </li>
-          <li className={activeLinkStyle(props.currentPath, '/menu', styles.menu)}>
+          <li className={activeLinkStyle(currentPath, '/menu', styles.menu)}>
             <Link href='/menu'>Menu</Link>
           </li>
           {!session && status !== 'loading' && (
-            <li className={activeLinkStyle(props.currentPath, '/auth', '')}>
+            <li className={activeLinkStyle(currentPath, '/auth', '')}>
               <span className={styles.seperator}>
                 <Link href='/auth'>Login</Link>
               </span>
@@ -50,7 +51,7 @@ export default function MainNavigation(props) {
           )}
           {session && (
             <Fragment>
-              <li className={activeLinkStyle(props.currentPath, '/account', '')}>
+              <li className={activeLinkStyle(currentPath, '/account', '')}>
                 <Link href='/account'>Account</Link>
               </li>
               <li>
@@ -60,11 +61,7 @@ export default function MainNavigation(props) {
           )}
           <li>
             <span className={styles.cartButton}>
-              <HeaderCartButton
-                onSelectCart={props.onSelectCart}
-                isInitial={props.isInitial}
-                disableInitial={props.disableInitial}
-              />
+              <HeaderCartButton onSelectCart={onSelectCart} isInitial={isInitial} disableInitial={disableInitial} />
             </span>
           </li>
         </ul>

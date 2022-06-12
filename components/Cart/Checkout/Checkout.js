@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 // My import.
-import GuestCheckout from './GuestCheckout';
 import RegisteredCheckout from './RegisteredCheckout';
+import GuestCheckout from './GuestCheckout';
 // CSS import.
 import styles from './Checkout.module.css';
 
