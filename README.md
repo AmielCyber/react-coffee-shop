@@ -33,7 +33,6 @@
 - [x] Cart sessions from user sessions stored in the server
 - [x] Cart sessions from guest sessions stored in the browser's storage
 - [x] Reciept after checkout
+- [x] Past Order History from the profile page
 
 ## To Do
-
-- [ ] Order History from the profile page
