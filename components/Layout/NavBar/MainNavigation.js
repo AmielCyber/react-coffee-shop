@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { useCallback, Fragment } from 'react';
 import { useSession, signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 // My imports.
 import CompanyIcon from '../Icons/CompanyIcon';
@@ -8,7 +9,7 @@ import HeaderCartButton from './HeaderCartButton';
 import styles from './MainNavigation.module.css';
 
 /**
- * Names the link's css style based on the current page.
+ * Returns the link's css styled class based on the current page.
  * @param {string} currentPath url in the page.
  * @param {string} linkPath The navigation list item.
  * @param {string} style The default style.
@@ -18,16 +19,24 @@ function activeLinkStyle(currentPath, linkPath, style) {
   return currentPath === linkPath ? `${style} ${styles.active}` : style;
 }
 
-export default function MainNavigation({ currentPath, onSelectCart, isInitial, disableInitial }) {
-  const { data: session, status } = useSession();
+export default function MainNavigation() {
+  const { data: session, status } = useSession(); // Check if there is an authenticated session.
+  const router = useRouter();
+  const currentPath = router.asPath; // To highlight the current navigation link the navbar.
 
-  const logoutHandler = () => {
-    // Logsout user and removing the session cookie using next-auth
-    // Reloads website to all of its initial state.
+  // Handlers.
+  const logoutHandler = useCallback(() => {
+    // Signsout user and removes the session cookie using next-auth
+    // Reloads website to all of its initial state settings.
     signOut();
-  };
+  }, []);
+  const loginHandler = useCallback(() => {
+    // Redirect user to the login page.
+    router.push('/auth');
+    // Avoid recreating this function.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  console.count('Navigation');
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -61,7 +70,7 @@ export default function MainNavigation({ currentPath, onSelectCart, isInitial, d
           )}
           <li>
             <span className={styles.cartButton}>
-              <HeaderCartButton onSelectCart={onSelectCart} isInitial={isInitial} disableInitial={disableInitial} />
+              <HeaderCartButton onLogin={loginHandler} />
             </span>
           </li>
         </ul>

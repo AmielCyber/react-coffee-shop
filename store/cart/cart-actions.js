@@ -100,6 +100,7 @@ export const fetchCartData = () => {
         })
       );
     }
+    dispatch(uiActions.setFetchedCartCompleted());
   };
 };
 
