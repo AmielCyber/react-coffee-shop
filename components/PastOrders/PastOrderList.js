@@ -1,37 +1,37 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 // My imports.
-import { pastOrdersAnimationList, pastOrdersAnimationItem } from '../../utils/animations/animation';
+import { pastOrdersAnimationItem, pastOrdersAnimationList } from '../../utils/animations/animation';
 import Receipt from '../Receipt/Receipt';
 // CSS import.
 import styles from './PastOrderList.module.css';
 
 function ordersAreTheSame(prevProps, currProps) {
-  // If the orders array are the same do not rerender.
+  // If the orders array are the same, then do not rerender.
   return prevProps.orders === currProps.orders;
 }
 
 function PastOrderList({ orders, onShowReceipt }) {
+  // Handlers.
   const showDetailedReceipt = (order) => {
     onShowReceipt(order);
   };
-
   const pastOrders = orders.map((order) => {
+    // Create new order object.
+    const orderObj = {
+      ...order,
+    };
+    // Overwrite orderDate since when we get it from MongoDB it will be a string instead of Date object.
+    orderObj.orderDate = new Date(order.orderDate);
     return (
       <motion.li
         variants={pastOrdersAnimationItem}
         className={styles.orderContainer}
         key={order.orderDate}
-        onClick={showDetailedReceipt.bind(null, order)}
+        onClick={showDetailedReceipt.bind(null, orderObj)}
         role='button'
       >
-        <Receipt
-          items={order.items}
-          totalItems={order.totalItems}
-          totalPrice={order.totalPrice}
-          orderDate={new Date(order.orderDate)}
-          showRecieptItems={false}
-        />
+        <Receipt {...orderObj} showReceiptItems={false} />
       </motion.li>
     );
   });

@@ -4,9 +4,10 @@ import PasswordForm from './PasswordForm';
 // CSS import.
 import styles from './UserProfile.module.css';
 
-export default function UserProfile(props) {
+export default function UserProfile({ session }) {
   const [changePassword, setChangePassword] = useState(false);
-  const userName = props.session.user.name;
+  const userName = session.user.name;
+  const userEmail = session.user.email; // To make the create-new-password assessable
 
   const toggleShowPasswordFormHandler = () => {
     setChangePassword((prevState) => !prevState);
@@ -18,7 +19,7 @@ export default function UserProfile(props) {
       <div onClick={toggleShowPasswordFormHandler} className={styles.changePassword} role='button'>
         <h2>{changePassword ? 'Close Password Form' : 'Change Password'}</h2>
       </div>
-      {changePassword && <PasswordForm />}
+      {changePassword && <PasswordForm userEmail={userEmail} />}
     </section>
   );
 }

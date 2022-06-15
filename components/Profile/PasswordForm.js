@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from 'react';
+import React, { useState, useRef, Fragment } from 'react';
 // CSS import.
 import styles from './PasswordForm.module.css';
 
@@ -27,11 +27,9 @@ export async function changePassword(passwordData) {
   return responseData;
 }
 
-export default function PasswordForm() {
-  // React states.
+export default function PasswordForm({ userEmail }) {
   const [statusMessage, setStatusMessage] = useState('');
   const [invalidPassword, setInvalidPassword] = useState(false);
-  // React refs.
   const currentPasswordRef = useRef();
   const newPasswordRef = useRef();
 
@@ -56,7 +54,7 @@ export default function PasswordForm() {
       }
     } else {
       setInvalidPassword(true);
-      setStatusMessage('Invalid password. Password must be atleast 7 characters long.');
+      setStatusMessage('Invalid password. Password must be at least 7 characters long.');
     }
   };
 
@@ -65,14 +63,18 @@ export default function PasswordForm() {
   return (
     <Fragment>
       <label className={statusMessageStyle}>{statusMessage}</label>
-      <form className={styles.form} onSubmit={submitHandler}>
+      <form className={styles.form} onSubmit={submitHandler} id='change-password'>
+        <div className={styles.hidden}>
+          <label htmlFor='username'>Email</label>
+          <input type='text' id='username' value={userEmail} readOnly autoComplete='username' />
+        </div>
         <div className={styles.control}>
           <label htmlFor='current-password'>Current Password</label>
-          <input type='password' id='current-password' ref={currentPasswordRef} />
+          <input type='password' id='current-password' ref={currentPasswordRef} autoComplete='current-password' />
         </div>
         <div className={styles.control}>
           <label htmlFor='new-password'>New Password</label>
-          <input type='password' id='new-password' ref={newPasswordRef} />
+          <input type='password' id='new-password' ref={newPasswordRef} autoComplete='new-password' />
         </div>
         <div className={styles.action}>
           <button>Submit Password Change</button>

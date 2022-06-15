@@ -16,7 +16,7 @@
   background-color: white;
   padding: 1rem;
   border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.90);
   z-index: 30;
   overflow-y: auto;
   display: block;

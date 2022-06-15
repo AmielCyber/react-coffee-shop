@@ -10,8 +10,8 @@ import styles from './AvailableDrinks.module.css';
 export default function AvailableDrinks() {
   const { items, isLoading, isError } = FetchItems('/api/menu/drinks');
 
-  // Display server error.
   if (isError) {
+    // Display server error if we had an error connecting to our server.
     return (
       <section className={styles.drinksError}>
         <Card>
@@ -20,8 +20,8 @@ export default function AvailableDrinks() {
       </section>
     );
   }
-  // Display loading content since we do not have our data yet.
   if (isLoading) {
+    // Display loading content since we do not have our data yet.
     return (
       <section className={styles.drinksLoading}>
         <Card>
@@ -31,7 +31,7 @@ export default function AvailableDrinks() {
       </section>
     );
   }
-  // Diplay the list of drinks.
+  // Display the list of drinks.
   return (
     <section className={styles.drinks}>
       <Card>

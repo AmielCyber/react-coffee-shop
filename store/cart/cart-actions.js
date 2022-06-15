@@ -27,7 +27,7 @@ async function fetchCartDataFromServer() {
 }
 
 /**
- * Gets a previous cart session from saved in the browser.
+ * Gets a previous cart session from the local storage in the browser.
  * @returns Cart Object
  */
 function fetchCartDataFromLocal() {
@@ -42,7 +42,7 @@ function fetchCartDataFromLocal() {
 }
 
 /**
- * Gets a cart objec from a previous session if there is one and replaces the cart in our redux state.
+ * Gets a cart object from a previous session if there is one and replaces the cart in our redux state.
  */
 export const fetchCartData = () => {
   return async (dispatch) => {
@@ -68,7 +68,7 @@ export const fetchCartData = () => {
         cartData = fetchCartDataFromLocal();
       }
       if (cartData) {
-        // If previous session was found and successfully aquired the cartData.
+        // If previous session was found and successfully acquired the cartData.
         dispatch(
           cartActions.replaceCart({
             items: cartData.items || [],
@@ -100,12 +100,13 @@ export const fetchCartData = () => {
         })
       );
     }
+    // Marked session fetch to avoid race conditions with sending cart data before we fetched.
     dispatch(uiActions.setFetchedCartCompleted());
   };
 };
 
 /**
- * Sends current cart data to our server.
+ * Sends the current cart data to our server.
  * @param {Cart Object} cart
  */
 async function sendCartDataToServer(cart) {
@@ -122,7 +123,7 @@ async function sendCartDataToServer(cart) {
 }
 
 /**
- * Sends the current cart data to the browser's storage.
+ * Sends the current cart data to the browser's local storage.
  * @param {Cart Object} cart
  */
 function sendCartDataToLocal(cart) {

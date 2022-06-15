@@ -1,7 +1,7 @@
-import React, { useRef, Fragment, useState } from 'react';
+import React, { useState, useRef, useCallback, Fragment } from 'react';
+import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
-import { useDispatch } from 'react-redux';
 // My import
 import { CART_STORAGE_NAME } from '../../store/cart/cart-actions';
 import { sendCartData, fetchCartData } from '../../store/cart/cart-actions';
@@ -12,8 +12,8 @@ import styles from './AuthForm.module.css';
 const isNotEmpty = (value) => value.trim() !== '';
 const isEmail = (value) => value.includes('@');
 
-export default function SignIn(props) {
-  const [formInuptIsValid, setFormInputIsValid] = useState({
+export default function SignIn({ switchToSignUp, formId }) {
+  const [formInputIsValid, setFormInputIsValid] = useState({
     email: true,
     password: true,
   });
@@ -23,7 +23,7 @@ export default function SignIn(props) {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  // Submission handler for signin form.
+  // Submission handler for sign-in form.
   const submitHandler = async (event) => {
     event.preventDefault();
 
@@ -84,31 +84,31 @@ export default function SignIn(props) {
     }
   };
 
-  const switchToSignUpHandler = () => {
-    props.switchToSignUp(false);
-  };
+  const switchToSignUpHandler = useCallback(() => {
+    switchToSignUp(false, '');
+  }, [switchToSignUp]);
 
   // Get the input classes depending on the input validity.
-  const emailClasses = `${styles.control} ${formInuptIsValid.email ? '' : styles.invalid}`;
-  const passwordClasses = `${styles.control} ${formInuptIsValid.password ? '' : styles.invalid}`;
+  const emailClasses = `${styles.control} ${formInputIsValid.email ? '' : styles.invalid}`;
+  const passwordClasses = `${styles.control} ${formInputIsValid.password ? '' : styles.invalid}`;
 
   return (
     <Fragment>
-      <h1>Login</h1>
+      <h1>Sign In</h1>
       {invalidCredentials && <p className={styles.errorMessage}>{invalidCredentials}</p>}
-      <form onSubmit={submitHandler} id={props.formId}>
+      <form onSubmit={submitHandler} id={formId}>
         <div className={emailClasses}>
           <label htmlFor='email'>Your Email</label>
-          <input type='email' id='email' ref={emailInputRef} />
-          {!formInuptIsValid.email && <p>Please enter a valid email</p>}
+          <input type='email' id='email' ref={emailInputRef} autoComplete='username' />
+          {!formInputIsValid.email && <p>Please enter a valid email</p>}
         </div>
         <div className={passwordClasses}>
           <label htmlFor='password'>Your Password</label>
-          <input type='password' id='password' ref={passwordInputRef} />
-          {!formInuptIsValid.password && <p>Please enter a password</p>}
+          <input type='password' id='password' ref={passwordInputRef} autoComplete='current-password' />
+          {!formInputIsValid.password && <p>Please enter a password</p>}
         </div>
         <div className={styles.actions}>
-          <button className={styles.submitButton}>Login</button>
+          <button className={styles.submitButton}>Sign In</button>
           <button type='button' className={styles.toggle} onClick={switchToSignUpHandler}>
             Create a new account
           </button>

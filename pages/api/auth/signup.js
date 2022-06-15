@@ -1,7 +1,7 @@
 // My imports.
-import { checkIfUserExists, connectToDatabase } from '../../../utils/db/db-util';
-import { hashPassword } from '../../../utils/auth/auth';
+import { connectToDatabase, checkIfUserExists } from '../../../utils/db/db-util';
 import { userDataIsValid } from '../../../utils/db/input-validation';
+import { hashPassword } from '../../../utils/auth/auth';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -57,5 +57,7 @@ export default async function handler(req, res) {
     }
 
     res.status(201).json({ message: 'Created new user!' });
+  } else {
+    res.status(403).json({ message: 'Forbidden' });
   }
 }

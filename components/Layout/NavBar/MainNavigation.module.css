@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: baseline;
+  align-items: center;
 }
 .nav li {
   margin-right: 2rem;
@@ -43,28 +43,27 @@
 /* Make the navigation bar vertical for mobile viewing */
 @media only screen and (max-width: 595px) {
   .header {
-    height: 16rem;
+    height: var(--mobile-margin-top);
   }
   .nav ul {
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 0;
   }
   .nav li {
     margin: 0.3rem 0 !important;
   }
-  .nav a:hover {
-    color: #FFF;
-    border-bottom: none;
-  }
-  .menu {
-    margin-right: 2rem !important;
+  .nav a {
+    font-size: 1.5rem !important;
   }
 }
 
 @media only screen and (max-width: 700px) {
   .nav li{
     margin-right: 0.7rem;
+  }
+  .nav a {
+    font-size: 1.4rem;
   }
 }

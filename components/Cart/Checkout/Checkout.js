@@ -6,7 +6,7 @@ import GuestCheckout from './GuestCheckout';
 // CSS import.
 import styles from './Checkout.module.css';
 
-export default function Checkout(props) {
+export default function Checkout({ onToSignIn, onClose, onCancel, onConfirm }) {
   const [guestInitial, setGuestInitial] = useState(true);
   const { data: session } = useSession();
 
@@ -24,9 +24,9 @@ export default function Checkout(props) {
         firstName={firstName}
         lastName={lastName}
         email={email}
-        onCancel={props.onCancel}
-        onClose={props.onClose}
-        onConfirm={props.onConfirm}
+        onCancel={onCancel}
+        onClose={onClose}
+        onConfirm={onConfirm}
       />
     );
   }
@@ -43,12 +43,12 @@ export default function Checkout(props) {
         <h2>Continue as guest?</h2>
         <div className={styles.actions}>
           <button onClick={handleContinueAsGuest}>Yes</button>
-          <button onClick={props.onToLogin}>Login/Signup</button>
+          <button onClick={onToSignIn}>Sign in/Create Account</button>
         </div>
       </div>
     );
   }
 
   // Guest user agreed to continue as guest.
-  return <GuestCheckout onCancel={props.onCancel} onClose={props.onClose} onConfirm={props.onConfirm} />;
+  return <GuestCheckout onCancel={onCancel} onClose={onClose} onConfirm={onConfirm} />;
 }

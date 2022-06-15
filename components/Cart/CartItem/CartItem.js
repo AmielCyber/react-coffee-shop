@@ -7,18 +7,18 @@ import { cartItemAnimation } from '../../../utils/animations/animation';
 // My CSS import.
 import styles from './CartItem.module.css';
 
-function areEqual(prevProps, nextProps) {
+function sameAmount(prevProps, nextProps) {
   // Only render if amount changed for the item.
   return prevProps.item.amount === nextProps.item.amount;
 }
 
-function CartItem(props) {
-  const { id, name, amount, price } = props.item;
+function CartItem({ item }) {
+  const { id, name, amount, price } = item;
   const dispatch = useDispatch();
   // Format the price to always show two decimal points.
   const priceF = `$${price.toFixed(2)}`;
 
-  // Handlers for item buttons(trash, subtract, add).
+  // Handlers for item buttons(empty/trash, subtract, add).
   const removeItemCompletelyHandler = (id) => {
     dispatch(cartActions.removeItemCompletelyFromCart(id));
   };
@@ -32,7 +32,7 @@ function CartItem(props) {
         name,
         amount: 1,
         price,
-      }),
+      })
     );
   };
 
@@ -52,10 +52,10 @@ function CartItem(props) {
           </span>
         </button>
         <button onClick={removeItemFromCartHandler.bind(null, id)}>−</button>
-        <button onClick={addItemToCartHandler.bind(null, props.item)}>+</button>
+        <button onClick={addItemToCartHandler.bind(null, item)}>+</button>
       </div>
     </motion.li>
   );
 }
 
-export default React.memo(CartItem, areEqual);
+export default React.memo(CartItem, sameAmount);

@@ -5,19 +5,9 @@ import CartItem from './CartItem';
 // CSS import.
 import styles from './CartItemList.module.css';
 
-export default function CartItemList(props) {
+export default function CartItemList({ items }) {
   // Get the list of all items the user selected.
-  const cartList = props.items.map((item) => (
-    <CartItem
-      key={item.id}
-      item={{
-        id: item.id,
-        name: item.name,
-        amount: item.amount,
-        price: item.price,
-      }}
-    />
-  ));
+  const cartList = items.map((item) => <CartItem key={item.id} item={item} />);
 
   return (
     <ul className={styles['cart-items']}>

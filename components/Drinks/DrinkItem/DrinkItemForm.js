@@ -20,7 +20,7 @@ function getNumberOptions() {
   return numberOptionList;
 }
 
-export default function DrinkItemForm(props) {
+export default function DrinkItemForm({ onAddToCart, name }) {
   const [amount, setAmount] = useState(1);
 
   const submitHandler = (event) => {
@@ -28,7 +28,7 @@ export default function DrinkItemForm(props) {
     const enteredAmount = amount;
     const enteredAmountNum = +enteredAmount; // Make sure is a Number.
     // Add the newly number of a drink item to the cart.
-    props.onAddToCart(enteredAmountNum);
+    onAddToCart(enteredAmountNum);
   };
 
   const handleChange = (event) => {
@@ -39,12 +39,12 @@ export default function DrinkItemForm(props) {
   return (
     <form className={styles.form} onSubmit={submitHandler}>
       <div className={styles.amount}>
-        <label htmlFor={props.id}>Amount:</label>
-        <select id={props.id} onChange={handleChange}>
+        <label htmlFor={name + '-' + 'amount'}>Amount:</label>
+        <select id={name + '-' + 'amount'} onChange={handleChange}>
           {getNumberOptions()}
         </select>
       </div>
-      <button>+ Add</button>
+      <button type='submit'>+ Add</button>
     </form>
   );
 }

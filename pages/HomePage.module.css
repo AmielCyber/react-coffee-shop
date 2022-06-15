@@ -9,7 +9,7 @@
 
 /* Welcome message section */
 .pageOverlay {
-  margin-top: 5rem;
+  margin-top: auto;
   position: relative;
   height: 80vh;
   width: 100vw;
@@ -21,6 +21,7 @@
 }
 .message h2 {
   font-size: 4rem;
+  margin-top: 6rem;
 }
 .message p {
   font-size: 2rem;
@@ -46,12 +47,20 @@
   }
   .message {
     margin-bottom: 8rem;
-    max-width: 75%;
   }
   .message h2 {
-    font-size: 2rem;
+    font-size: 2rem !important;
   }
   .message p {
     font-size: 1.5rem;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .message {
+    max-width: 75%;
+  }
+  .message h2 {
+    font-size: 3rem;
+    margin-top: auto;
   }
 }

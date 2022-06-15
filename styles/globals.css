@@ -10,7 +10,7 @@
   --secondary-color: #064E40;
   /* MSU Green */
   --name-color: #053E32;
-  /* Burgandy */
+  /* Burgundy */
   --complementary-color: #750017;
   --complementary-light: #9B0027;
   --complementary-dark: #520014;
@@ -31,7 +31,7 @@
   --cart-button-color: #004b3c;
   --cart-button-highlight-color: #003127; 
   --cart-badge-color: var(--primary-light);
-  /* Mobile margin */
+  /* Mobile margin from layout header*/
   --mobile-margin-top: 16rem;
 }
 html {

@@ -47,7 +47,7 @@ function DrinkItem(props) {
         <div className={styles.price}>{formattedPrice}</div>
       </div>
       <div className={styles.form}>
-        <DrinkItemForm onAddToCart={onAddToCartHandler} id={props.id} />
+        <DrinkItemForm onAddToCart={onAddToCartHandler} name={props.name} />
       </div>
     </motion.li>
   );

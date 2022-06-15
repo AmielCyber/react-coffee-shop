@@ -4,18 +4,18 @@ import CartCheck from '../../Layout/Icons/CartCheck';
 // CSS import.
 import styles from './Checkout.module.css';
 
-export default function RegisteredCheckout(props) {
+export default function RegisteredCheckout({ firstName, lastName, email, onCancel, onClose, onConfirm }) {
   const confirmHandler = (event) => {
     event.preventDefault();
 
     // Save user info data to send to database.
     const userInfo = {
-      email: props.email,
-      firstName: props.firstName,
-      lastName: props.lastName,
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
     };
 
-    props.onConfirm(userInfo);
+    onConfirm(userInfo);
   };
 
   return (
@@ -23,21 +23,21 @@ export default function RegisteredCheckout(props) {
       <div className={styles.user}>
         <h2>
           <span>Name:</span>
-          {`${props.firstName} ${props.lastName}`}
+          {`${firstName} ${lastName}`}
         </h2>
         <h2>
           <span>Email:</span>
-          {`${props.email}`}
+          {`${email}`}
         </h2>
       </div>
       <div className={styles.actions}>
-        <button className={styles.close} type='button' onClick={props.onClose}>
+        <button className={styles.close} type='button' onClick={onClose}>
           Close
         </button>
-        <button className={styles.cancel} type='button' onClick={props.onCancel}>
+        <button className={styles.cancel} type='button' onClick={onCancel}>
           Cancel
         </button>
-        <button className={styles.submit}>
+        <button className={styles.submit} type='submit'>
           <span>
             <CartCheck />
           </span>

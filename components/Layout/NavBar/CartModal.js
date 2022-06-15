@@ -10,13 +10,12 @@ function cartStateChanged(prevProps, nextProps) {
   return prevProps.cartIsShown === nextProps.cartIsShown;
 }
 
-function CartModal({ cartIsShown, onClose, onToLogin }) {
-  console.count('CartModal');
+function CartModal({ cartIsShown, onClose, onToSignIn }) {
   return ReactDOM.createPortal(
     <AnimatePresence>
       {cartIsShown && (
         <Modal onClose={onClose}>
-          <Cart onClose={onClose} onToLogin={onToLogin} />
+          <Cart onClose={onClose} onToSignIn={onToSignIn} />
         </Modal>
       )}
     </AnimatePresence>,

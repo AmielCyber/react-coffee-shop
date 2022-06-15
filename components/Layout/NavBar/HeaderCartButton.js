@@ -9,7 +9,7 @@ import CartModal from './CartModal';
 // CSS import.
 import styles from './HeaderCartButton.module.css';
 
-function HeaderCartButton({ onLogin }) {
+function HeaderCartButton({ onSignIn }) {
   const [mounted, setMounted] = useState(false);
   const [cartIsShown, setCartIsShown] = useState(false); // Show Cart overlay.
   const cart = useSelector((state) => state.cart);
@@ -49,10 +49,10 @@ function HeaderCartButton({ onLogin }) {
     setCartIsShown(false);
   }, [setCartIsShown]);
 
-  const onToLogin = useCallback(() => {
+  const signInHandler = useCallback(() => {
     setCartIsShown(false);
-    onLogin();
-  }, [setCartIsShown, onLogin]);
+    onSignIn();
+  }, [setCartIsShown, onSignIn]);
 
   return (
     <Fragment>
@@ -63,7 +63,7 @@ function HeaderCartButton({ onLogin }) {
         <span>Your Cart</span>
         <span className={styles.badge}>{cart.numberOfCartItems}</span>
       </motion.button>
-      {mounted && <CartModal cartIsShown={cartIsShown} onClose={hideCartHandler} onToLogin={onToLogin} />}
+      {mounted && <CartModal cartIsShown={cartIsShown} onClose={hideCartHandler} onToSignIn={signInHandler} />}
     </Fragment>
   );
 }

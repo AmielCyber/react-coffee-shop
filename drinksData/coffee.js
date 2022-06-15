@@ -1,3 +1,5 @@
+// My script to make the JSON object for drinks in my server.
+
 const fs = require('fs');
 
 const ESPRESSO = {

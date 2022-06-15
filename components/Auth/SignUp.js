@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from 'react';
+import React, { useState, useRef, useCallback, Fragment } from 'react';
 // CSS import.
 import styles from './AuthForm.module.css';
 
@@ -27,9 +27,9 @@ export async function createUser(userInfo) {
   return responseData;
 }
 
-export default function SignUp(props) {
+export default function SignUp({ switchToSignIn, formId }) {
   // Invalidation react states.
-  const [formInuptIsValid, setFormInputIsValid] = useState({
+  const [formInputIsValid, setFormInputIsValid] = useState({
     firstName: true,
     lastName: true,
   });
@@ -79,47 +79,56 @@ export default function SignUp(props) {
 
     try {
       const result = await createUser(userInfo); // Get reuslt from our database when creating a user.
-      props.switchToSignIn(true, result.message); // Redirect user to sign in with new credentials and let the user know their account was created
+      switchToSignIn(true, result.message); // Redirect user to sign in with new credentials and let the user know their account was created
     } catch (error) {
       setInvalidCredentials(error.message);
     }
   };
 
-  const switchToSignInHandler = () => {
-    props.switchToSignIn(false);
-  };
+  const switchToSignInHandler = useCallback(() => {
+    switchToSignIn(false);
+  }, [switchToSignIn]);
 
   // Get the input classes depending on the input validity.
-  const firstNameClasses = `${styles.control} ${formInuptIsValid.firstName ? '' : styles.invalid}`;
-  const lastNameClasses = `${styles.control} ${formInuptIsValid.lastName ? '' : styles.invalid}`;
+  const firstNameClasses = `${styles.control} ${formInputIsValid.firstName ? '' : styles.invalid}`;
+  const lastNameClasses = `${styles.control} ${formInputIsValid.lastName ? '' : styles.invalid}`;
 
   return (
     <Fragment>
-      <h1>Sign Up</h1>
+      <h1>Create Account</h1>
       {invalidCredentials && <p className={styles.errorMessage}>{invalidCredentials}</p>}
-      <form onSubmit={submitHandler} id={props.formId}>
+      <form onSubmit={submitHandler} id={formId}>
         <div className={firstNameClasses}>
-          <label htmlFor='firstName'>Your First Name</label>
-          <input type='text' id='firstName' ref={firstNameInputRef} />
-          {!formInuptIsValid.firstName && <p>Please enter a first name.</p>}
+          <label htmlFor='first-name'>Your First Name</label>
+          <input type='text' id='first-name' ref={firstNameInputRef} autoComplete='given-name' />
+          {!formInputIsValid.firstName && <p>Please enter a first name.</p>}
         </div>
         <div className={lastNameClasses}>
-          <label htmlFor='lastName'>Your Last Name</label>
-          <input type='text' id='lastName' ref={lastNameInputRef} />
-          {!formInuptIsValid.lastName && <p>Please enter a last name.</p>}
+          <label htmlFor='last-name'>Your Last Name</label>
+          <input type='text' id='last-name' ref={lastNameInputRef} autoComplete='family-name' />
+          {!formInputIsValid.lastName && <p>Please enter a last name.</p>}
         </div>
         <div className={styles.control}>
           <label htmlFor='email'>Your Email</label>
-          <input type='email' id='email' required ref={emailInputRef} />
+          <input type='email' id='email' required ref={emailInputRef} autoComplete='email' />
         </div>
         <div className={styles.control}>
           <label htmlFor='password'>Your Password</label>
-          <input type='password' id='password' ref={passwordInputRef} required minLength='7' />
+          <input
+            type='password'
+            id='password'
+            ref={passwordInputRef}
+            required
+            minLength='7'
+            autoComplete='new-password'
+          />
         </div>
         <div className={styles.actions}>
-          <button className={styles.submitButton}>Create Account</button>
+          <button className={styles.submitButton} type='submit'>
+            Create Account
+          </button>
           <button type='button' className={styles.toggle} onClick={switchToSignInHandler}>
-            Login with existing account
+            Sign in with existing account
           </button>
         </div>
       </form>

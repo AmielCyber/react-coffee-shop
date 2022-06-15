@@ -38,6 +38,7 @@
   margin-right: 0.5rem;
   transition: .3s ease-in;
 }
+/* Enlarge cart when hover */
 .button:hover .cartIcon{
-  transform: scale(1.5);
+  transform: scale(1.7);
 }

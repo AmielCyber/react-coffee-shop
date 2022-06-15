@@ -24,15 +24,9 @@ export const menuPageAnimation = {
   // Page settles in the middle.
   animate: {
     x: 0,
-    // Framer motion automatically turns a div into display block.
-    // Change back to inline so the background image stays fixed.
-    transitionEnd: {
-      display: 'inline',
-    },
   },
   // Page moves out to the right.
   out: {
-    display: 'block',
     x: '100vw',
   },
   transition: {
@@ -44,8 +38,7 @@ export const cartBumpAnimation = {
   // Make the cart appear larger then change back to its regular size.
   scale: [1, 0.9, 1.1, 1.15, 1],
   transition: {
-    ease: 'easeIn',
-    stiffness: 100,
+    ease: 'easeOut',
     duration: 0.3,
   },
 };

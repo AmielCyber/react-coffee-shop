@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import React, { useEffect, Fragment } from 'react';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 // My imports.
 import coffeeImage from '../../assets/coffeeWhiteBackground.jpg';
@@ -17,7 +17,7 @@ export default function AuthPage() {
 
   useEffect(() => {
     if (session) {
-      // If there is a session then just redirect user to the home page.
+      // If there is a session, then just redirect user to the home page.
       router.replace('/');
     }
   }, [router, session]);

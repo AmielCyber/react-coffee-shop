@@ -47,7 +47,7 @@ export default function Home(props) {
             <h2>{`Welcome ${userGreetingMsg}to React Coffee!`}</h2>
             <p>
               <Link href='/menu' passHref>
-                <a>Order now to get fresh tasting coffee.</a>
+                <a>Order now to get fresh tasting coffee!</a>
               </Link>
             </p>
           </section>

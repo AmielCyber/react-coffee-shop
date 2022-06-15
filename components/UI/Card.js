@@ -2,6 +2,11 @@ import React from 'react';
 // CSS import.
 import styles from './Card.module.css';
 
+/**
+ * Card style to have our Card component reusable.
+ * @param {string} cardType
+ * @returns styleType css module string
+ */
 function getCardStyle(cardType) {
   let styleType = '';
 

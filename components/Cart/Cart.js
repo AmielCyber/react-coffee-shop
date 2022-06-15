@@ -1,17 +1,17 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState, Fragment } from 'react';
 // My imports.
 import LoadingSpinner from '../UI/LoadingSpinner';
+import Receipt from '../Receipt/Receipt';
 import CartContent from './CartContent';
 // CSS import
 import styles from './Cart.module.css';
-import Receipt from '../Receipt/Receipt';
 
-export default function Cart(props) {
+export default function Cart({ onClose, onToSignIn }) {
   // Cart state hooks for the status of the form submission..
   const [isSubmitting, setIsSubmitting] = useState(false); // Form is being submitted.
   const [didSubmit, setDidSubmit] = useState(false); // Form was submitted.
   const [error, setError] = useState(false); // Error sending form to the database.
-  const [statusMessage, setStatusMessage] = useState(''); // Database result messsage after attempt for order submission.
+  const [statusMessage, setStatusMessage] = useState(''); // Database result message after attempt for order submission.
   const [orderData, setOrderData] = useState(null);
 
   // Handlers.
@@ -44,7 +44,7 @@ export default function Cart(props) {
   }
   if (didSubmit) {
     // Form has been submitted and has been accepted/rejected by our database.
-    const primaryErrorMessage = 'Error! Order was not sent.';
+    const primaryErrorMessage = 'Error! Order failed to send.';
     const messageStyle = error ? styles.errorMessage : styles.message;
     return (
       <Fragment>
@@ -56,11 +56,11 @@ export default function Cart(props) {
             totalItems={orderData.totalItems}
             totalPrice={orderData.totalPrice}
             orderDate={orderData.orderDate}
-            showRecieptItems={true}
+            showReceiptItems={true}
           />
         )}
         <div className={styles.actions}>
-          <button className={styles.actions} onClick={props.onClose}>
+          <button className={styles.actions} onClick={onClose}>
             Close
           </button>
         </div>
@@ -70,8 +70,8 @@ export default function Cart(props) {
   // User is looking at items ordered.
   return (
     <CartContent
-      onToLogin={props.onToLogin}
-      onClose={props.onClose}
+      onToSignIn={onToSignIn}
+      onClose={onClose}
       setIsSubmitting={submittingHandler}
       setDidSubmit={didSubmitHandler}
     />

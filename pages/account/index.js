@@ -45,7 +45,7 @@ export default function AccountPage(props) {
 
 // Protect API Route.
 export async function getServerSideProps(context) {
-  // Get current sesssion if there is one.
+  // Get current session if there is one.
   const session = await getSession({ req: context.req });
 
   if (!session) {

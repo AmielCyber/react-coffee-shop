@@ -1,8 +1,15 @@
 /* Background Image */
-.main-image {
+.menuPageImage{
   position: fixed;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
   z-index: -1;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
 }

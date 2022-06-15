@@ -13,7 +13,7 @@ import styles from './MainNavigation.module.css';
  * @param {string} currentPath url in the page.
  * @param {string} linkPath The navigation list item.
  * @param {string} style The default style.
- * @returns string name of the css style for the current path navigaion list.
+ * @returns string name of the css style for the current path navigation list.
  */
 function activeLinkStyle(currentPath, linkPath, style) {
   return currentPath === linkPath ? `${style} ${styles.active}` : style;
@@ -25,12 +25,11 @@ export default function MainNavigation() {
   const currentPath = router.asPath; // To highlight the current navigation link the navbar.
 
   // Handlers.
-  const logoutHandler = useCallback(() => {
-    // Signsout user and removes the session cookie using next-auth
-    // Reloads website to all of its initial state settings.
+  const signOutHandler = useCallback(() => {
+    // Signs-out user and removes the session cookie using next-auth. Reloads website and resets initial state settings.
     signOut();
   }, []);
-  const loginHandler = useCallback(() => {
+  const signInHandler = useCallback(() => {
     // Redirect user to the login page.
     router.push('/auth');
     // Avoid recreating this function.
@@ -53,9 +52,7 @@ export default function MainNavigation() {
           </li>
           {!session && status !== 'loading' && (
             <li className={activeLinkStyle(currentPath, '/auth', '')}>
-              <span className={styles.seperator}>
-                <Link href='/auth'>Login</Link>
-              </span>
+              <Link href='/auth'>Sign in</Link>
             </li>
           )}
           {session && (
@@ -64,13 +61,13 @@ export default function MainNavigation() {
                 <Link href='/account'>Account</Link>
               </li>
               <li>
-                <a onClick={logoutHandler}>Logout</a>
+                <a onClick={signOutHandler}>Sign out</a>
               </li>
             </Fragment>
           )}
           <li>
             <span className={styles.cartButton}>
-              <HeaderCartButton onLogin={loginHandler} />
+              <HeaderCartButton onSignIn={signInHandler} />
             </span>
           </li>
         </ul>

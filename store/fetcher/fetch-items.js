@@ -1,8 +1,13 @@
 import useSWR from 'swr';
 
-// Fetcher for the SWR state.
-async function fetcher(url) {
-  const response = await fetch(url);
+/**
+ * Fetcher function for the SWR hook.
+ * Fetches data from the passed api server.
+ * @param {string} uri
+ * @returns {items:Object[], isLoading:boolean, isError:string | null}
+ */
+async function fetcher(uri) {
+  const response = await fetch(uri);
   const responseData = await response.json();
   if (!response.ok) {
     // Make SWR catch the failed response.

@@ -10,7 +10,7 @@ export default function AuthForm() {
   const [newUserCreated, setNewUserCreated] = useState(false);
   const [serverMessage, setServerMessage] = useState('');
 
-  const formId = isLogin ? 'signInForm' : 'signUpForm';
+  const formId = isLogin ? 'sign-in' : 'sign-up';
 
   // Toggle Sign/Signup
   const switchAuthModeHandler = (isNewUser, message) => {

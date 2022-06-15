@@ -1,6 +1,6 @@
 // My imports.
 import { getSession } from 'next-auth/react';
-import { connectToDatabase, insertAndReplaceDocument, getOneDocumentFromUser } from '../../../utils/db/db-util';
+import { connectToDatabase, getOneDocumentFromUser, insertAndReplaceDocument } from '../../../utils/db/db-util';
 
 export default async function handler(req, res) {
   // Requests will only go to authenticated users.
@@ -58,7 +58,7 @@ export default async function handler(req, res) {
           res.status(500).json({ message: 'Inserting cart data failed!' });
           return;
         }
-        res.status(201).json({ message: 'Cart sucessfully updated!' });
+        res.status(201).json({ message: 'Cart successfully updated!' });
       }
       break;
     default:

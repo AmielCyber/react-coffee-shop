@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState, useCallback, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // My imports.
 import { cartActions } from '../../store/cart/cart-slice';
@@ -8,20 +8,18 @@ import ClearCart from '../Layout/Icons/ClearCart';
 // CSS import.
 import styles from './CartContent.module.css';
 
-export default function CartContent(props) {
-  // React state hook.
+export default function CartContent({ onToSignIn, onClose, setIsSubmitting, setDidSubmit }) {
   const [isCheckout, setIsCheckout] = useState(false);
-  // Redux state.
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  // Regular constants.
+
   const totalPriceFormatted = `$${cart.totalPrice.toFixed(2)}`;
   const hasItems = cart.items.length > 0;
 
   // Submission Handler for Checkout.
   const submitHandler = async (userData) => {
     // Set is submitting so our cart content can display a loading message.
-    props.setIsSubmitting(true);
+    setIsSubmitting(true);
     const orderData = {
       user: userData,
       cart: cart,
@@ -37,27 +35,27 @@ export default function CartContent(props) {
         },
       });
       result = await response.json();
-      props.setDidSubmit(response.ok, result.message, cart);
+      setDidSubmit(response.ok, result.message, cart);
     } catch (error) {
       // Let the user know that their order was not submitted.
-      props.setDidSubmit(false, 'Something went wrong...', null);
+      setDidSubmit(false, 'Something went wrong...', null);
     }
-    // Database is done recieving the order form.
-    props.setIsSubmitting(false);
+    // Database is done receiving the order form.
+    setIsSubmitting(false);
     dispatch(cartActions.clearCart());
   };
   // Order handler when user clicks the checkout button.
-  const orderHandler = () => {
+  const orderHandler = useCallback(() => {
     setIsCheckout(true);
-  };
-  // Handler for clear cart button.
-  const clearCartHandler = () => {
-    dispatch(cartActions.clearCart());
-  };
+  }, []);
   // Go back to current page.
-  const cancelHandler = () => {
+  const cancelHandler = useCallback(() => {
     setIsCheckout(false);
-  };
+  }, []);
+  // Handler for clear cart button.
+  const clearCartHandler = useCallback(() => {
+    dispatch(cartActions.clearCart());
+  }, [dispatch]);
 
   if (!hasItems) {
     // Cart is empty.
@@ -65,7 +63,7 @@ export default function CartContent(props) {
       <div className={styles.emptyCart}>
         <h3>Your cart is empty.</h3>
         <div className={styles.actions}>
-          <button className={styles.close} onClick={props.onClose}>
+          <button className={styles.close} onClick={onClose}>
             Close
           </button>
         </div>
@@ -81,12 +79,7 @@ export default function CartContent(props) {
         <span className={styles.price}>{totalPriceFormatted}</span>
       </div>
       {isCheckout && (
-        <Checkout
-          onToLogin={props.onToLogin}
-          onClose={props.onClose}
-          onCancel={cancelHandler}
-          onConfirm={submitHandler}
-        />
+        <Checkout onToSignIn={onToSignIn} onClose={onClose} onCancel={cancelHandler} onConfirm={submitHandler} />
       )}
       {!isCheckout && (
         <div className={styles.actions}>
@@ -96,7 +89,7 @@ export default function CartContent(props) {
             </span>{' '}
             Clear Cart
           </button>
-          <button className={styles.close} onClick={props.onClose}>
+          <button className={styles.close} onClick={onClose}>
             Close
           </button>
           <button className={styles.order} onClick={orderHandler}>

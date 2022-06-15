@@ -6,7 +6,7 @@ import { AnimatePresence } from 'framer-motion';
 // My imports.
 import store from '../store/index';
 import Layout from '../components/Layout/Layout';
-import Meta from '../components/Layout/Meta';
+import HeadMeta from '../components/Layout/HeadMeta';
 // CSS styles.
 import '../styles/globals.css';
 
@@ -15,9 +15,9 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <SessionProvider session={pageProps.session}>
+      <HeadMeta />
       <Provider store={store}>
         <Layout>
-          <Meta />
           <AnimatePresence initial={false}>
             <Component {...pageProps} key={route.asPath} />
           </AnimatePresence>

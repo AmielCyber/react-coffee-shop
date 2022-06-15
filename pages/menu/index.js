@@ -18,6 +18,7 @@ export default function Menu() {
         <meta name='description' content='Order React Coffe drinks to go!' title='title' />
       </Head>
       <motion.div
+        className={styles.menuPageImage}
         key='menu'
         initial='in'
         animate='animate'
@@ -25,25 +26,24 @@ export default function Menu() {
         variants={menuPageAnimation}
         transition={menuPageAnimation.transition}
       >
-        <div className={styles['main-image']}>
-          <Image
-            src={drinksImage}
-            title='Image by @c_reel from Unsplash'
-            alt='A table full of coffee drinks'
-            layout='fill'
-            objectFit='cover'
-            quality={80}
-            placeholder='blur'
-          />
-        </div>
+        <Image
+          src={drinksImage}
+          title='Image by @c_reel from Unsplash'
+          alt='A table full of coffee drinks'
+          layout='fill'
+          objectFit='cover'
+          quality={80}
+          placeholder='blur'
+        />
       </motion.div>
       <motion.div
+        className={styles.container}
         key='menuContents'
         initial='in'
         animate='animate'
-        exit={{ display: 'none' }}
         variants={menuPageAnimation}
         transition={menuPageAnimation.transition}
+        exit={{ display: 'none' }}
       >
         <DrinksSummary />
         <AvailableDrinks />

@@ -32,7 +32,7 @@ export default function PastOrders() {
     // User has no past orders.
     return (
       <Card style='displayContainer'>
-        <h2>There are no past orders.</h2>
+        <h2>You have no past orders.</h2>
       </Card>
     );
   }

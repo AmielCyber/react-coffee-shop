@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useRef } from 'react';
 // My import.
 import CartCheck from '../../Layout/Icons/CartCheck';
 // CSS import.
@@ -8,8 +8,8 @@ import styles from './Checkout.module.css';
 const isNotEmpty = (value) => value.trim() !== '';
 const isEmail = (value) => value.includes('@');
 
-export default function GuestCheckout(props) {
-  const [formInuptValid, setFormInputValid] = useState({
+export default function GuestCheckout({ onCancel, onClose, onConfirm }) {
+  const [formInputValid, setFormInputValid] = useState({
     firstName: true,
     lastName: true,
     email: true,
@@ -51,39 +51,39 @@ export default function GuestCheckout(props) {
       lastName: enteredLastName,
     };
 
-    props.onConfirm(userInfo);
+    onConfirm(userInfo);
   };
 
   // Get the input classes depending on the input validity.
-  const firstNameClasses = `${styles.control} ${formInuptValid.firstName ? '' : styles.invalid}`;
-  const lastNameClasses = `${styles.control} ${formInuptValid.lastName ? '' : styles.invalid}`;
-  const emailClasses = `${styles.control} ${formInuptValid.email ? '' : styles.invalid}`;
+  const firstNameClasses = `${styles.control} ${formInputValid.firstName ? '' : styles.invalid}`;
+  const lastNameClasses = `${styles.control} ${formInputValid.lastName ? '' : styles.invalid}`;
+  const emailClasses = `${styles.control} ${formInputValid.email ? '' : styles.invalid}`;
 
   return (
     <form className={styles.form} onSubmit={confirmHandler}>
       <div className={firstNameClasses}>
-        <label htmlFor='firstName'>First Name</label>
-        <input type='text' id='firstName' ref={firstNameInputRef} />
-        {!formInuptValid.firstName && <p>Please enter a valid first name</p>}
+        <label htmlFor='first-name'>First Name</label>
+        <input type='text' id='first-name' ref={firstNameInputRef} />
+        {!formInputValid.firstName && <p>Please enter a valid first name</p>}
       </div>
       <div className={lastNameClasses}>
-        <label htmlFor='lastName'>Last Name</label>
-        <input type='text' id='lastName' ref={lastNameInputRef} />
-        {!formInuptValid.lastName && <p>Please enter a valid last name</p>}
+        <label htmlFor='last-name'>Last Name</label>
+        <input type='text' id='last-name' ref={lastNameInputRef} />
+        {!formInputValid.lastName && <p>Please enter a valid last name</p>}
       </div>
       <div className={emailClasses}>
         <label htmlFor='email'>Email</label>
         <input type='email' id='email' ref={emailInputRef} />
-        {!formInuptValid.email && <p>Please enter a valid email(@).</p>}
+        {!formInputValid.email && <p>Please enter a valid email(@).</p>}
       </div>
       <div className={styles.actions}>
-        <button className={styles.close} type='button' onClick={props.onClose}>
+        <button className={styles.close} type='button' onClick={onClose}>
           Close
         </button>
-        <button className={styles.cancel} type='button' onClick={props.onCancel}>
+        <button className={styles.cancel} type='button' onClick={onCancel}>
           Cancel
         </button>
-        <button className={styles.submit}>
+        <button className={styles.submit} type='submit'>
           <span>
             <CartCheck />
           </span>

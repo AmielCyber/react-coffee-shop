@@ -2,13 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 // My imports.
 import DrinkItem from './DrinkItem';
-import { drinkItemListAnimation, drinkItemAnimation } from '../../../utils/animations/animation';
+import { drinkItemAnimation, drinkItemListAnimation } from '../../../utils/animations/animation';
 // CSS import.
 import styles from './DrinkItemList.module.css';
 
-function DrinkItemList(props) {
+function DrinkItemList({ drinks }) {
   // Get the Drink item list.
-  const drinkList = props.drinks.map((drink) => (
+  const drinkList = drinks.map((drink) => (
     <DrinkItem
       key={drink.id}
       id={drink.id}

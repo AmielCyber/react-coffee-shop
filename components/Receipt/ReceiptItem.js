@@ -2,8 +2,7 @@ import React from 'react';
 // CSS import.
 import styles from './ReceiptItem.module.css';
 
-export default function ReceiptItem(props) {
-  const { name, price, qty } = props;
+export default function ReceiptItem({ name, price, qty }) {
   const formattedPrice = `$${price.toFixed(2)}`;
 
   return (

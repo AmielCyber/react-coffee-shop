@@ -21,7 +21,7 @@ export default NextAuth({
           client = await connectToDatabase();
           usersCollection = client.db().collection(process.env.USER_COLLECTION);
           user = await usersCollection.findOne({ email: credentials.email });
-        } catch (errror) {
+        } catch (error) {
           throw new Error('Failed to connect to the database!');
         }
 

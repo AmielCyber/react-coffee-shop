@@ -55,6 +55,22 @@ export async function getAllDocumentsFromEmailUser(client, collectionName, userE
   return dataList;
 }
 /**
+ * Retrieves all documents in a collection from a user's email.
+ * @param {MongoClient} client
+ * @param {string} collectionName
+ * @param {string} userEmail to get all documents.
+ * @param {Object} sortQuery how to sort the array of documents.
+ * @returns An array of documents.
+ */
+export async function getAllDocumentsFromEmailUserSorted(client, collectionName, userEmail, sortQuery) {
+  // Get access to the collection.
+  const collection = client.db().collection(collectionName);
+  // Find all the documents in collection and get back an array of documents
+  const dataList = await collection.find({ email: userEmail }).sort(sortQuery).toArray();
+
+  return dataList;
+}
+/**
  * Retrieves all documents in a collection.
  * @param {MongoClient} client
  * @param {string} collectionName

@@ -1,4 +1,4 @@
-// My imports.
+// My import.
 import { connectToDatabase, getAllDocuments } from '../../../utils/db/db-util';
 
 export default async function handler(req, res) {

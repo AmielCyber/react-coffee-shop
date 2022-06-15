@@ -3,11 +3,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import cartSlice from './cart/cart-slice';
 import uiSlice from './ui/ui-slice';
 
-// Redux states: cart state and the UI state for server status display.
+// Export our redux store.
 const store = configureStore({
   reducer: {
-    cart: cartSlice.reducer,
-    ui: uiSlice.reducer,
+    cart: cartSlice.reducer, // For tracking our cart state.
+    ui: uiSlice.reducer, // For tracking server status.
   },
 });
 

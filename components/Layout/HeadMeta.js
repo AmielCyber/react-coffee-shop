@@ -2,10 +2,10 @@ import React from 'react';
 import Head from 'next/head';
 
 /**
- * Meta component containg our meta data and the links to our favicon.
+ * Meta component containing our meta data and the links to our favicon.
  * @returns Meta component.
  */
-export default function Meta() {
+function HeadMeta() {
   return (
     <Head>
       <link rel='icon' type='image/png' sizes='32x32' href='/favicon/favicon-32x32.png' />
@@ -18,3 +18,5 @@ export default function Meta() {
     </Head>
   );
 }
+
+export default React.memo(HeadMeta);
