@@ -3,13 +3,17 @@
   position: fixed;
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
+  overflow: auto;
   z-index: -1;
 }
 
 .container {
+  margin-top: auto;
   position: relative;
   display: flex;
+  width: 100vw;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   z-index: 1;
 }

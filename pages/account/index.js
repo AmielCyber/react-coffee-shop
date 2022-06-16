@@ -1,7 +1,9 @@
-import React, { useState, Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { getSession } from 'next-auth/react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 // My imports.
+import { pageAnimation } from '../../utils/animations/animation';
 import coffeeLove from '../../assets/coffeeLove.jpg';
 import Card from '../../components/UI/Card';
 import UserProfile from '../../components/Profile/UserProfile';
@@ -30,15 +32,17 @@ export default function AccountPage(props) {
           placeholder='blur'
         />
       </div>
-      <Card style='container'>
-        <UserProfile session={props.session} />
-      </Card>
-      <div className={styles.toggleShowOrders} onClick={toggleShowPastOrdersHandler} role='button'>
-        <Card style='displayContainer'>
-          <h2>{showPastOrders ? 'Hide Past Orders' : 'Show Past Orders'}</h2>
+      <motion.div initial='in' animate='animate' variants={pageAnimation}>
+        <Card style='container'>
+          <UserProfile session={props.session} />
         </Card>
-      </div>
-      {showPastOrders && <PastOrders />}
+        <div className={styles.toggleShowOrders} onClick={toggleShowPastOrdersHandler} role='button'>
+          <Card style='displayContainer'>
+            <h2>{showPastOrders ? 'Hide Past Orders' : 'Show Past Orders'}</h2>
+          </Card>
+        </div>
+        {showPastOrders && <PastOrders />}
+      </motion.div>
     </Fragment>
   );
 }

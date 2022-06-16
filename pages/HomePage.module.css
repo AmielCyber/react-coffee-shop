@@ -8,11 +8,8 @@
 }
 
 /* Welcome message section */
-.pageOverlay {
-  margin-top: auto;
-  position: relative;
+.pageOverlay{
   height: 80vh;
-  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,8 +17,7 @@
   z-index: 0;
 }
 .message h2 {
-  font-size: 4rem;
-  margin-top: 6rem;
+  font-size: 3rem;
 }
 .message p {
   font-size: 2rem;
@@ -42,12 +38,6 @@
 }
 /* Mobile changes */
 @media only screen and (max-width: 595px) {
-  .pageOverlay {
-    margin-top: var(--mobile-margin-top);
-  }
-  .message {
-    margin-bottom: 8rem;
-  }
   .message h2 {
     font-size: 2rem !important;
   }
@@ -61,6 +51,5 @@
   }
   .message h2 {
     font-size: 3rem;
-    margin-top: auto;
   }
 }

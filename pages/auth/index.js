@@ -2,10 +2,12 @@ import React, { useEffect, Fragment } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 // My imports.
 import coffeeImage from '../../assets/coffeeWhiteBackground.jpg';
 import Card from '../../components/UI/Card';
 import LoadingSpinner from '../../components/UI/LoadingSpinner';
+import { pageAnimation } from '../../utils/animations/animation';
 import AuthForm from '../../components/Auth/AuthForm';
 // CSS import.
 import styles from './AuthPage.module.css';
@@ -46,9 +48,11 @@ export default function AuthPage() {
         </section>
       )}
       {!isLoading && (
-        <Card style='slim'>
-          <AuthForm />
-        </Card>
+        <motion.div initial='in' animate='animate' variants={pageAnimation}>
+          <Card style='slim'>
+            <AuthForm />
+          </Card>
+        </motion.div>
       )}
     </Fragment>
   );

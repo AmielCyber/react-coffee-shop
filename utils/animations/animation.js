@@ -1,45 +1,21 @@
-export const homePageAnimation = {
-  // Page moves in from the left.
+export const pageAnimation = {
   in: {
-    x: '-100vw',
+    y: -200,
   },
-  // Page settles in the middle.
   animate: {
-    x: 0,
-  },
-  // Page moves out to the left.
-  out: {
-    x: '-100vw',
+    y: 0,
   },
   transition: {
-    duration: 0.4,
+    type: 'spring',
+    duration: 0.3,
   },
 };
-
-export const menuPageAnimation = {
-  // Page moves in from the right.
-  in: {
-    x: '100vw',
-  },
-  // Page settles in the middle.
-  animate: {
-    x: 0,
-  },
-  // Page moves out to the right.
-  out: {
-    x: '100vw',
-  },
-  transition: {
-    duration: 0.4,
-  },
-};
-
 export const cartBumpAnimation = {
   // Make the cart appear larger then change back to its regular size.
   scale: [1, 0.9, 1.1, 1.15, 1],
   transition: {
     ease: 'easeOut',
-    duration: 0.3,
+    duration: 0.2,
   },
 };
 
@@ -91,7 +67,7 @@ export const drinkItemListAnimation = {
 };
 
 export const drinkItemAnimation = {
-  in: { opacity: 0, x: 100 },
+  in: { opacity: 0, x: -200 },
   animate: { opacity: 1, x: 0 },
 };
 
