@@ -34,7 +34,7 @@ export default function AuthPage() {
           src={coffeeImage}
           layout='fill'
           objectFit='cover'
-          quality={80}
+          quality={50}
           objectPosition='center'
           placeholder='blur'
         />

@@ -27,7 +27,7 @@ export default function AccountPage(props) {
           title='Image by @inchristalone from Unsplash'
           layout='fill'
           objectFit='cover'
-          quality={80}
+          quality={30}
           objectPosition='center'
           placeholder='blur'
         />

@@ -8,46 +8,11 @@
 }
 
 /* Welcome message section */
-.pageOverlay, .message {
+.pageOverlay{
+  height: 80vh;
+  z-index: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-.pageOverlay{
-  height: 80vh;
-  z-index: 0;
-}
-.message h2 {
-  font-size: 3rem;
-}
-.message p {
-  font-size: 2rem;
-}
-.message {
-  color: white;
-  max-width: 60%;
-  text-align: center;
-  text-shadow: 5px 5px 5px var(--primary-dark);
-  z-index: 1;
-}
-.message a:hover{
-  text-shadow: 5px 5px 5px var(--nav-highlight-color);
-}
-/* Mobile changes */
-@media only screen and (max-width: 595px) {
-  .message h2 {
-    font-size: 2rem !important;
-  }
-  .message p {
-    font-size: 1.5rem;
-  }
-}
-@media only screen and (max-width: 700px) {
-  .message {
-    max-width: 75%;
-  }
-  .message h2 {
-    font-size: 3rem;
-  }
 }
