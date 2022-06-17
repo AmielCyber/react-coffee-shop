@@ -17,7 +17,7 @@ export async function hashPassword(password) {
  * Compares the raw password from the user to the hashedPassword from our database.
  * @param {string} password
  * @param {string} hashedPassword
- * @returns a boolean if the password is currect from our database.
+ * @returns a boolean if the password is correct from our database.
  */
 export async function verifyPassword(password, hashedPassword) {
   const isValid = await compare(password, hashedPassword);

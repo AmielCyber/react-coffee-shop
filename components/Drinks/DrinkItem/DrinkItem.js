@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Image from 'next/image';
 // My imports.
 import { cartActions } from '../../../store/cart/cart-slice';
@@ -29,7 +29,7 @@ function DrinkItem(props) {
   };
 
   return (
-    <motion.li className={styles.drink} variants={props.variants}>
+    <m.li className={styles.drink} variants={props.variants}>
       <div className={styles.itemImage}>
         <Image
           src={props.imgSrc}
@@ -49,7 +49,7 @@ function DrinkItem(props) {
       <div className={styles.form}>
         <DrinkItemForm onAddToCart={onAddToCartHandler} name={props.name} />
       </div>
-    </motion.li>
+    </m.li>
   );
 }
 

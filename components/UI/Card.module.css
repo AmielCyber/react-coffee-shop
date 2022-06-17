@@ -4,31 +4,27 @@
   border-radius: 50px;
   background-color: #FFF;
 }
-.container {
+.container, .orderContainer, .slim, .displayContainer {
   position: relative;
-  padding: 0.5rem 1rem;
+  z-index: 1;
+}
+.container, .orderContainer, .slim {
   background-color:transparent;
+}
+.container {
+  padding: 0.5rem 1rem;
   width: 60%;
   margin: 0 20%;
-  z-index: 1;
 }
 .orderContainer {
-  position: relative;
-  background-color: transparent;
   width: 50%;
   margin: 2rem 25%;
-  z-index: 1;
 }
-
 .slim {
-  position: relative;
   padding: 5% 1rem;
-  background-color:transparent;
   margin-top: 5rem;
-  z-index: 1;
 }
 .displayContainer {
-  position: relative;
   text-align: center;
   background-color: white;
   padding: 0.5rem 0;
@@ -36,7 +32,6 @@
   margin: 0rem 25%;
   border-radius: 20px;
   box-shadow:  -1px 6px 6px rgba(1, 0, 0, 0.3), 1px -1px 2px rgba(0, 0, 0, 0.2);
-  z-index: 1;
   color: var(--primary-color);
 }
 

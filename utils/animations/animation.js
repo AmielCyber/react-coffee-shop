@@ -1,4 +1,5 @@
 export const pageAnimation = {
+  // Item appears from the top and settles in a bouncy way.
   in: {
     y: -200,
   },
@@ -41,6 +42,7 @@ export const modalAnimation = {
 };
 
 export const cartItemAnimation = {
+  // Cart items disappear to the right.
   out: {
     x: 100,
     opacity: 0,
@@ -67,6 +69,7 @@ export const drinkItemListAnimation = {
 };
 
 export const drinkItemAnimation = {
+  // Items appear from the left.
   in: { opacity: 0, x: -200 },
   animate: { opacity: 1, x: 0 },
 };

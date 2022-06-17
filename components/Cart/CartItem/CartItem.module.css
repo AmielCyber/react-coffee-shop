@@ -1,7 +1,9 @@
-.cart-item {
+.cart-item, .summary {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.cart-item {
   border-bottom: 2px solid var(--complementary-color);
   padding: 1rem 0;
   margin: 1rem 0;
@@ -13,9 +15,6 @@
 }
 .summary {
   width: 10rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 .price {
   font-size: 1.3rem;
@@ -49,7 +48,7 @@
 .actions button:hover,
 .actions button:active {
   background-color: var(--button-color-active);
-  color: white;
+  color: #FFF;
 }
 .iconContainer {
   padding: 0.3rem 0;

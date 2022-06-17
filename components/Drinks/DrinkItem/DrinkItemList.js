@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 // My imports.
 import DrinkItem from './DrinkItem';
 import { drinkItemAnimation, drinkItemListAnimation } from '../../../utils/animations/animation';
@@ -22,9 +22,9 @@ function DrinkItemList({ drinks }) {
   ));
 
   return (
-    <motion.ul initial='in' animate='animate' variants={drinkItemListAnimation} className={styles.drinkList}>
+    <m.ul initial='in' animate='animate' variants={drinkItemListAnimation} className={styles.drinkList}>
       {drinkList}
-    </motion.ul>
+    </m.ul>
   );
 }
 export default DrinkItemList;

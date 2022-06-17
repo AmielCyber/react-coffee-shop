@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 // My imports.
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../../../store/cart/cart-slice';
@@ -37,7 +37,7 @@ function CartItem({ item }) {
   };
 
   return (
-    <motion.li className={styles['cart-item']} exit='out' variants={cartItemAnimation}>
+    <m.li className={styles['cart-item']} exit='out' variants={cartItemAnimation}>
       <div className={styles.description}>
         <h2>{name}</h2>
         <div className={styles.summary}>
@@ -54,7 +54,7 @@ function CartItem({ item }) {
         <button onClick={removeItemFromCartHandler.bind(null, id)}>−</button>
         <button onClick={addItemToCartHandler.bind(null, item)}>+</button>
       </div>
-    </motion.li>
+    </m.li>
   );
 }
 

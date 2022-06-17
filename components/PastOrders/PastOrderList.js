@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 // My imports.
 import { pastOrdersAnimationItem, pastOrdersAnimationList } from '../../utils/animations/animation';
 import Receipt from '../Receipt/Receipt';
@@ -24,7 +24,7 @@ function PastOrderList({ orders, onShowReceipt }) {
     // Overwrite orderDate since when we get it from MongoDB it will be a string instead of Date object.
     orderObj.orderDate = new Date(order.orderDate);
     return (
-      <motion.li
+      <m.li
         variants={pastOrdersAnimationItem}
         className={styles.orderContainer}
         key={order.orderDate}
@@ -32,14 +32,14 @@ function PastOrderList({ orders, onShowReceipt }) {
         role='button'
       >
         <Receipt {...orderObj} showReceiptItems={false} />
-      </motion.li>
+      </m.li>
     );
   });
 
   return (
-    <motion.ul initial='hidden' animate='visible' variants={pastOrdersAnimationList} className={styles.orderList}>
+    <m.ul initial='hidden' animate='visible' variants={pastOrdersAnimationList} className={styles.orderList}>
       {pastOrders}
-    </motion.ul>
+    </m.ul>
   );
 }
 

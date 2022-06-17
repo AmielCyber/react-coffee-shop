@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, Fragment } from 'react';
-import { useAnimation, motion } from 'framer-motion';
+import { useAnimation, m } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
 // My imports.
 import { fetchCartData, sendCartData } from '../../../store/cart/cart-actions';
@@ -56,13 +56,13 @@ function HeaderCartButton({ onSignIn }) {
 
   return (
     <Fragment>
-      <motion.button className={styles.button} onClick={showCartHandler} animate={animateButton}>
+      <m.button className={styles.button} onClick={showCartHandler} animate={animateButton}>
         <span className={styles.cartIcon}>
           <CartIcon />
         </span>
         <span>Your Cart</span>
         <span className={styles.badge}>{cart.numberOfCartItems}</span>
-      </motion.button>
+      </m.button>
       {mounted && <CartModal cartIsShown={cartIsShown} onClose={hideCartHandler} onToSignIn={signInHandler} />}
     </Fragment>
   );

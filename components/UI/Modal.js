@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 // My import.
 import { modalAnimation } from '../../utils/animations/animation';
 // CSS import.
@@ -18,7 +18,7 @@ export default function Modal(props) {
   return (
     <Fragment>
       <Backdrop onClose={props.onClose} />
-      <motion.div
+      <m.div
         className={styles.modal}
         initial='in'
         animate='animate'
@@ -27,7 +27,7 @@ export default function Modal(props) {
         transition={modalAnimation.transition}
       >
         <div className={styles.content}>{props.children}</div>
-      </motion.div>
+      </m.div>
     </Fragment>
   );
 }

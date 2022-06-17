@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Link from 'next/link';
 import { getSession } from 'next-auth/react';
 // My Imports.
@@ -29,12 +29,12 @@ export default function Home(props) {
           src={coffeeShopImage}
           layout='fill'
           objectFit='cover'
-          quality={80}
+          quality={70}
           objectPosition='center'
           placeholder='blur'
         />
       </div>
-      <motion.div className={styles.pageOverlay} initial='in' animate='animate' variants={pageAnimation}>
+      <m.div className={styles.pageOverlay} initial='in' animate='animate' variants={pageAnimation}>
         <section className={styles.message}>
           <h2>{`Welcome ${userGreetingMsg}to React Coffee!`}</h2>
           <p>
@@ -43,7 +43,7 @@ export default function Home(props) {
             </Link>
           </p>
         </section>
-      </motion.div>
+      </m.div>
     </Fragment>
   );
 }

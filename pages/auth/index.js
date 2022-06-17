@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 // My imports.
 import coffeeImage from '../../assets/coffeeWhiteBackground.jpg';
 import Card from '../../components/UI/Card';
@@ -48,11 +48,11 @@ export default function AuthPage() {
         </section>
       )}
       {!isLoading && (
-        <motion.div initial='in' animate='animate' variants={pageAnimation}>
+        <m.div initial='in' animate='animate' variants={pageAnimation}>
           <Card style='slim'>
             <AuthForm />
           </Card>
-        </motion.div>
+        </m.div>
       )}
     </Fragment>
   );

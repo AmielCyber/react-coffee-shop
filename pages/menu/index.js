@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 // My imports.
 import drinksImage from '../../assets/coffee-drinks.jpg';
 import DrinksSummary from '../../components/Drinks/DrinksSummary';
@@ -28,9 +28,9 @@ export default function Menu() {
           placeholder='blur'
         />
       </div>
-      <motion.div className={styles.container} initial='in' animate='animate' variants={pageAnimation}>
+      <m.div className={styles.container} initial='in' animate='animate' variants={pageAnimation}>
         <DrinksSummary />
-      </motion.div>
+      </m.div>
       <AvailableDrinks />
     </Fragment>
   );

@@ -8,12 +8,14 @@
 }
 
 /* Welcome message section */
-.pageOverlay{
-  height: 80vh;
+.pageOverlay, .message {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.pageOverlay{
+  height: 80vh;
   z-index: 0;
 }
 .message h2 {
@@ -23,10 +25,6 @@
   font-size: 2rem;
 }
 .message {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   color: #FFF;
   max-width: 60%;
   text-align: center;

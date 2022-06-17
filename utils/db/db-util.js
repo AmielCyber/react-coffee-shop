@@ -12,19 +12,6 @@ export async function connectToDatabase() {
 
 // Getters.
 /**
- * Fetches the first document in the collection.
- * @param {MongoClient} client
- * @param {string} collectionName
- * @returns Document requested.
- */
-export async function getFirstDocument(client, collectionName) {
-  // Get access of the collection.
-  const collection = client.db().collection(collectionName);
-  // Get the first document.
-  const document = await collection.findOne();
-  return document;
-}
-/**
  * Retrieves one document in a collection from an email user.
  * @param {MongoClient} client
  * @param {string} collectionName in the database to retrieve.
@@ -86,21 +73,6 @@ export async function getAllDocuments(client, collectionName) {
 }
 
 // Inserts
-/**
- * Inserts and replaces the first document in the collection.
- * @param {MongoClient} client
- * @param {string} collectionName
- * @param {JSON} document
- * @returns MongoDB status result. { acknowledged:boolean, modifiedCount:Number, upsertedId:Object, upsertedCount:Number, matchedCount:Number}
- */
-export async function insertAndReplaceDocumentFirstDocument(client, collectionName, document) {
-  // Get access to the collection.
-  const collection = client.db().collection(collectionName);
-  // Replace first document({}).
-  const result = await collection.replaceOne({}, document, { upsert: true });
-
-  return result;
-}
 /**
  * Inserts a document in the collection.
  * @param {MongoClient} client

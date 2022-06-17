@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { getSession } from 'next-auth/react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Image from 'next/image';
 // My imports.
 import { pageAnimation } from '../../utils/animations/animation';
@@ -32,7 +32,7 @@ export default function AccountPage(props) {
           placeholder='blur'
         />
       </div>
-      <motion.div initial='in' animate='animate' variants={pageAnimation}>
+      <m.div initial='in' animate='animate' variants={pageAnimation}>
         <Card style='container'>
           <UserProfile session={props.session} />
         </Card>
@@ -42,7 +42,7 @@ export default function AccountPage(props) {
           </Card>
         </div>
         {showPastOrders && <PastOrders />}
-      </motion.div>
+      </m.div>
     </Fragment>
   );
 }

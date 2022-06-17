@@ -16,7 +16,7 @@
 .actions button:active {
   background-color: var(--button-color-active);
   border-color: var(--complementary-dark);
-  color: white;
+  color: #FFF;
 }
 /* Mobile changes */
 @media only screen and (max-width: 595px) {

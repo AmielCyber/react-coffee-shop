@@ -1,31 +1,27 @@
-.drinksError {
+.drinksError, .drinksLoading {
   text-align: center;
-  color: var(--error-color);
-  max-width: 60rem;
   width: 70%;
-  margin: 2rem auto;
   opacity: 90%;
-  box-shadow: 5px 10px 5px 5px rgba(0, 0, 0, 0.75);
+}
+
+.drinksError, .drinksLoading, .drinks {
+  max-width: 60rem;
+  margin: 2rem auto;
   border-radius: 50px;
+}
+.drinksError {
+  color: var(--error-color);
+  box-shadow: 5px 10px 5px 5px rgba(0, 0, 0, 0.75);
 }
 
 .drinksLoading {
-  text-align: center;
   color: var(--primary-light);
-  margin: 2rem auto;
-  max-width: 60rem;
-  width: 70%;
-  opacity: 90%;
   box-shadow: 5px 10px 5px 5px rgba(0, 0, 0, 0.60);
-  border-radius: 50px;
 }
 
 .drinks {
-  max-width: 60rem;
   width: 80%;
-  margin: 2rem auto;
   opacity: 95%;
-  border-radius: 50px;
   box-shadow: 5px 10px 5px 5px rgba(0, 0, 0, 0.75);
 }
 
@@ -38,5 +34,4 @@
     margin: 1rem auto;
     opacity: 93%;
   }
-
 }
