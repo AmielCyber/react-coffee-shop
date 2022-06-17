@@ -18,7 +18,7 @@
 .guestPrompt .actions button{
   border: 1px solid var(--complementary-darkest);
   background-color: var(--button-color);
-  color: #FFF;
+  color: white;
 }
 
 /* Inputs */

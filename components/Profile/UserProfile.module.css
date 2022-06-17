@@ -9,6 +9,10 @@
   border-radius: 30px;
   color: var(--name-color);
 }
+.successfulStatus{
+  color: var(--primary-dark);
+  margin-bottom: 0;
+}
 /* User name header */
 .profile h1 {
   font-size: 4rem;

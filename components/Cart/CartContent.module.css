@@ -36,12 +36,12 @@
 .actions button:active {
   background-color: var(--button-color-active);
   border-color: var(--complementary-dark);
-  color: #FFF;
+  color: white;
 }
 .close, .order {
   background-color: var(--button-color);
   border: 1px solid var(--complementary-darkest);
-  color: #FFF;
+  color: white;
 }
 .clearCart {
   color: var(--complementary-color);

@@ -43,7 +43,7 @@ export default function MainNavigation() {
           <li className={activeLinkStyle(currentPath, '/', '')}>
             <Link href={'/'} passHref>
               <a>
-                <CompanyIcon width={30} height={30} fill={'#FFF'} />
+                <CompanyIcon width={30} height={30} fill={'white'} />
               </a>
             </Link>
           </li>

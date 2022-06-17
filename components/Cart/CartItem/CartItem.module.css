@@ -48,7 +48,7 @@
 .actions button:hover,
 .actions button:active {
   background-color: var(--button-color-active);
-  color: #FFF;
+  color: white;
 }
 .iconContainer {
   padding: 0.3rem 0;

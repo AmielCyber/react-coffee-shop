@@ -6,7 +6,7 @@
   width: 60%;
   margin: 1rem auto;
   position: relative;
-  background-color: #FFF;
+  background-color: white;
   color: var(--name-color);
   border-radius: 20px;
   box-shadow: 5px 10px 5px 5px rgba(0, 0, 0, 0.55);

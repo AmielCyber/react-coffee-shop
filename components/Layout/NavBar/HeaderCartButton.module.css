@@ -3,7 +3,7 @@
   font: inherit;
   border: none;
   background-color: var(--cart-button-color);
-  color: #FFF;
+  color: white;
   padding: 0.75rem 2rem;
   display: flex;
   justify-content: space-around;

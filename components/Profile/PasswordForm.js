@@ -27,9 +27,10 @@ export async function changePassword(passwordData) {
   return responseData;
 }
 
-export default function PasswordForm({ userEmail }) {
+export default function PasswordForm({ userEmail, onSuccess }) {
   const [statusMessage, setStatusMessage] = useState('');
   const [invalidPassword, setInvalidPassword] = useState(false);
+  const formRef = useRef();
   const currentPasswordRef = useRef();
   const newPasswordRef = useRef();
 
@@ -46,24 +47,25 @@ export default function PasswordForm({ userEmail }) {
           currentPassword: enteredCurrentPassword,
           newPassword: enteredNewPassword,
         });
-        setStatusMessage(result.message);
-        setInvalidPassword(false);
+        onSuccess(result.message);
       } catch (error) {
         setStatusMessage(error.message);
         setInvalidPassword(true);
+        formRef.current.reset();
       }
     } else {
       setInvalidPassword(true);
-      setStatusMessage('Invalid password. Password must be at least 7 characters long.');
+      setStatusMessage('Invalid new password. Password must be at least 7 characters long.');
+      formRef.current.reset();
     }
   };
 
-  const statusMessageStyle = invalidPassword ? styles.errorStatus : styles.successfulStatus;
+  const statusMessageStyle = invalidPassword ? styles.errorStatus : styles.otherStatus;
 
   return (
     <Fragment>
       <label className={statusMessageStyle}>{statusMessage}</label>
-      <form className={styles.form} onSubmit={submitHandler} id='change-password'>
+      <form className={styles.form} onSubmit={submitHandler} id='change-password-form' ref={formRef}>
         <div className={styles.hidden}>
           <label htmlFor='username'>Email</label>
           <input type='text' id='username' value={userEmail} readOnly autoComplete='username' />

@@ -8,7 +8,7 @@
   font: inherit;
   cursor: pointer;
   background-color: var(--button-color);
-  color: #FFF;
+  color: white;
   border: 1px solid var(--complementary-darkest);
   padding: 0.5rem 2rem;
   border-radius: 25px;
@@ -18,7 +18,7 @@
 .actions button:active {
   background-color: var(--complementary-darkest);
   border-color: var(--complementary-darkest);
-  color: #FFF;
+  color: white;
 }
 
 .isSubmitting, .loading {
