@@ -2,11 +2,17 @@
 
 ## Production Demo
 
-### Link
+### Live Demo
 
 [Coffee Shop Website](https://react-coffee-shop.vercel.app)
 
-### Screenshots
+### Previews
+
+#### Desktop Preview
+
+![Desktop Preview](/assets/desktopPreview.gif)
+
+#### Mobile Preview
 
 ## Description
 
