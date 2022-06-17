@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import React, { useState, useEffect, useCallback, Fragment } from 'react';
 import { useAnimation, m } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
@@ -5,22 +6,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchCartData, sendCartData } from '../../../store/cart/cart-actions';
 import { cartBumpAnimation } from '../../../utils/animations/animation';
 import CartIcon from '../Icons/CartIcon';
-import CartModal from './CartModal';
 // CSS import.
 import styles from './HeaderCartButton.module.css';
+// My dynamic import.
+// Turn off ssr render for this component since it uses client side functions.
+const CartModal = dynamic(() => import('./CartModal'), { ssr: false });
 
 function HeaderCartButton({ onSignIn }) {
-  const [mounted, setMounted] = useState(false);
   const [cartIsShown, setCartIsShown] = useState(false); // Show Cart overlay.
   const cart = useSelector((state) => state.cart);
   const fetchCartCompleted = useSelector((state) => state.ui.fetchCartCompleted);
   const dispatch = useDispatch();
   const animateButton = useAnimation();
-
-  useEffect(() => {
-    // This component has been mounted to the client and we can use client functions like create portal.
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     // On initial startup/session, get the cart from previous session if there's one
@@ -63,7 +60,7 @@ function HeaderCartButton({ onSignIn }) {
         <span>Your Cart</span>
         <span className={styles.badge}>{cart.numberOfCartItems}</span>
       </m.button>
-      {mounted && <CartModal cartIsShown={cartIsShown} onClose={hideCartHandler} onToSignIn={signInHandler} />}
+      <CartModal cartIsShown={cartIsShown} onClose={hideCartHandler} onToSignIn={signInHandler} />
     </Fragment>
   );
 }

@@ -1,9 +1,11 @@
+import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 // My imports.
-import SignIn from './SignIn';
-import SignUp from './SignUp';
 // CSS import.
 import styles from './AuthForm.module.css';
+// My dynamic imports.
+const SignIn = dynamic(() => import('./SignIn'));
+const SignUp = dynamic(() => import('./SignUp'));
 
 export default function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);

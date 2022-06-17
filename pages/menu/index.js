@@ -1,14 +1,16 @@
+import dynamic from 'next/dynamic';
 import React, { Fragment } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { m } from 'framer-motion';
 // My imports.
-import drinksImage from '../../assets/coffee-drinks.jpg';
 import DrinksSummary from '../../components/Drinks/DrinksSummary';
-import AvailableDrinks from '../../components/Drinks/AvailableDrinks';
+import drinksImage from '../../assets/coffee-drinks.jpg';
 import { pageAnimation } from '../../utils/animations/animation';
 // CSS styles.
 import styles from './MenuPage.module.css';
+// My dynamic import.
+const AvailableDrinks = dynamic(() => import('../../components/Drinks/AvailableDrinks'));
 
 export default function Menu() {
   return (

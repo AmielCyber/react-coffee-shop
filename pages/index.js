@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import React, { Fragment } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -5,9 +6,10 @@ import { m } from 'framer-motion';
 // My Imports.
 import coffeeShopImage from '../assets/coffee-shop.jpg';
 import { pageAnimation } from '../utils/animations/animation';
-import WelcomeMessage from '../components/Welcome/WelcomeMessage';
 // CSS styles.
 import styles from './HomePage.module.css';
+// My dynamic import.
+const WelcomeMessage = dynamic(() => import('../components/Welcome/WelcomeMessage'));
 
 export default function Home(props) {
   let userGreetingMsg = props.userName;
