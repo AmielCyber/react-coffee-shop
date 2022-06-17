@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import React, { Fragment, useState } from 'react';
 import { getSession } from 'next-auth/react';
 import { m } from 'framer-motion';
@@ -7,9 +8,10 @@ import { pageAnimation } from '../../utils/animations/animation';
 import coffeeLove from '../../assets/coffeeLove.jpg';
 import Card from '../../components/UI/Card';
 import UserProfile from '../../components/Profile/UserProfile';
-import PastOrders from '../../components/PastOrders/PastOrders';
 // CSS import.
 import styles from './AccountPage.module.css';
+// My dynamic import.
+const PastOrders = dynamic(() => import('../../components/PastOrders/PastOrders'));
 
 export default function AccountPage(props) {
   const [showPastOrders, setShowPastOrders] = useState(false);

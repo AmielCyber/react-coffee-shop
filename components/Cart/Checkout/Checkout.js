@@ -1,10 +1,11 @@
+import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
-// My import.
-import RegisteredCheckout from './RegisteredCheckout';
-import GuestCheckout from './GuestCheckout';
 // CSS import.
 import styles from './Checkout.module.css';
+// My dynamic imports.
+const RegisteredCheckout = dynamic(() => import('./RegisteredCheckout'));
+const GuestCheckout = dynamic(() => import('./GuestCheckout'));
 
 export default function Checkout({ onToSignIn, onClose, onCancel, onConfirm }) {
   const [guestInitial, setGuestInitial] = useState(true);

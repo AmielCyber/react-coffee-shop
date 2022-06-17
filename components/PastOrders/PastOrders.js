@@ -1,11 +1,14 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 // My imports.
 import FetchItems from '../../store/fetcher/fetch-items';
 import Card from '../UI/Card';
 import LoadingSpinner from '../UI/LoadingSpinner';
-import DisplayPastOrders from './DisplayPastOrders';
 // CSS import.
 import styles from './PastOrders.module.css';
+// My dynamic import.
+// Turn off ssr render for this component since it uses client side functions.
+const DisplayPastOrders = dynamic(() => import('./DisplayPastOrders'), { ssr: false });
 
 export default function PastOrders() {
   const { items, isLoading, isError } = FetchItems('/api/order/order');

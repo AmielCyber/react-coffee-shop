@@ -1,12 +1,14 @@
+import dynamic from 'next/dynamic';
 import React, { useState, useCallback, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // My imports.
 import { cartActions } from '../../store/cart/cart-slice';
 import CartItemList from './CartItem/CartItemList';
-import Checkout from './Checkout/Checkout';
 import ClearCart from '../Layout/Icons/ClearCart';
 // CSS import.
 import styles from './CartContent.module.css';
+// My dynamic import
+const Checkout = dynamic(() => import('./Checkout/Checkout'));
 
 export default function CartContent({ onToSignIn, onClose, setIsSubmitting, setDidSubmit }) {
   const [isCheckout, setIsCheckout] = useState(false);

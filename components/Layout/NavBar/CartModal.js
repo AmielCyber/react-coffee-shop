@@ -1,9 +1,11 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AnimatePresence } from 'framer-motion';
 // My imports.
 import Modal from '../../UI/Modal';
-import Cart from '../../Cart/Cart';
+// My dynamic import.
+const Cart = dynamic(() => import('../../Cart/Cart'));
 
 // Only rerender if cartIsShown has changed.
 function cartStateChanged(prevProps, nextProps) {
