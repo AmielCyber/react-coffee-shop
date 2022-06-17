@@ -14,6 +14,8 @@
 
 #### Mobile Preview
 
+![Mobile Preview](/assets/mobilePreview.gif)
+
 ## Description
 
 ### Website Description
@@ -109,3 +111,163 @@ occurred
 - [x] Past Order animation using framer motion
 
 ### File Structure
+```
+react-coffee-shop
+├── assets
+│   ├── coffee-drinks.jpg
+│   ├── coffee-shop.jpg
+│   ├── coffeeLove.jpg 
+│   ├── coffeeWhiteBackground.jpg
+│   ├── desktopPreview.gif 
+│   ├── mobilePreview.gif
+│   └── source.txt
+│    ./react-coffee-shop/components
+│    ├── Auth
+│    │   ├── AuthForm.js
+│    │   ├── AuthForm.module.css
+│    │   ├── SignIn.js
+│    │   └── SignUp.js
+│    ├── Cart
+│    │   ├── Cart.js
+│    │   ├── Cart.module.css
+│    │   ├── CartContent.js
+│    │   ├── CartContent.module.css
+│    │   ├── CartItem
+│    │   │   ├── CartItem.js
+│    │   │   ├── CartItem.module.css
+│    │   │   ├── CartItemList.js
+│    │   │   └── CartItemList.module.css
+│    │   └── Checkout
+│    │       ├── Checkout.js
+│    │       ├── Checkout.module.css
+│    │       ├── GuestCheckout.js
+│    │       └── RegisteredCheckout.js
+│    ├── Drinks
+│    │   ├── AvailableDrinks.js
+│    │   ├── AvailableDrinks.module.css
+│    │   ├── DrinkItem
+│    │   │   ├── DrinkItem.js
+│    │   │   ├── DrinkItem.module.css
+│    │   │   ├── DrinkItemForm.js
+│    │   │   ├── DrinkItemForm.module.css
+│    │   │   ├── DrinkItemList.js
+│    │   │   └── DrinkItemList.module.css
+│    │   ├── DrinksSummary.js
+│    │   └── DrinksSummary.module.css
+│    ├── Layout
+│    │   ├── HeadMeta.js
+│    │   ├── Icons
+│    │   │   ├── CartCheck.js
+│    │   │   ├── CartIcon.js
+│    │   │   ├── ClearCart.js
+│    │   │   └── CompanyIcon.js
+│    │   ├── Layout.js
+│    │   ├── Layout.module.css
+│    │   └── NavBar
+│    │       ├── CartModal.js
+│    │       ├── HeaderCartButton.js
+│    │       ├── HeaderCartButton.module.css
+│    │       ├── MainNavigation.js
+│    │       └── MainNavigation.module.css
+│    ├── PastOrders
+│    │   ├── DisplayPastOrders.js
+│    │   ├── DisplayPastOrders.module.css
+│    │   ├── PastOrderList.js
+│    │   ├── PastOrderList.module.css
+│    │   ├── PastOrders.js
+│    │   └── PastOrders.module.css
+│    ├── Profile
+│    │   ├── PasswordForm.js
+│    │   ├── PasswordForm.module.css
+│    │   ├── UserProfile.js
+│    │   └── UserProfile.module.css
+│    ├── Receipt
+│    │   ├── Receipt.js
+│    │   ├── Receipt.module.css
+│    │   ├── ReceiptItem.js
+│    │   └── ReceiptItem.module.css
+│    ├── UI
+│    │   ├── Card.js
+│    │   ├── Card.module.css
+│    │   ├── LoadingSpinner.js
+│    │   ├── LoadingSpinner.module.css
+│    │   ├── Modal.js
+│    │   └── Modal.module.css
+│    └── Welcome
+│        ├── WelcomeMessage.js
+│        └── WelcomeMessage.module.css
+├── drinksData
+│   ├── coffee.js
+│   └── drinks.json
+├── pages
+│   ├── HomePage.module.css
+│   ├── _app.js
+│   ├── _document.js
+│   ├── account
+│   │   ├── AccountPage.module.css
+│   │   └── index.js
+│   ├── api
+│   │   ├── auth
+│   │   │   ├── [...nextauth].js
+│   │   │   └── signup.js
+│   │   ├── cart
+│   │   │   └── cart.js
+│   │   ├── menu
+│   │   │   └── drinks.js
+│   │   ├── order
+│   │   │   └── order.js
+│   │   └── user
+│   │       └── change-password.js
+│   ├── auth
+│   │   ├── AuthPage.module.css
+│   │   └── index.js
+│   ├── index.js
+│   └── menu
+│       ├── MenuPage.module.css
+│       └── index.js
+├── public
+│   ├── drinkImages
+│   │   ├── americano.jpg
+│   │   ├── cappuccino.jpg
+│   │   ├── coldBrew.jpg
+│   │   ├── cortado.jpg
+│   │   ├── dripCoffee.jpg
+│   │   ├── espresso.jpg
+│   │   ├── flatWhite.jpg
+│   │   ├── icedLatte.jpg
+│   │   ├── latte.jpg
+│   │   ├── macchiato.jpg
+│   │   ├── nitroBrew.jpg
+│   │   └── source.txt
+│   └── favicon
+│       ├── android-chrome-192x192.png
+│       ├── android-chrome-512x512.png
+│       ├── apple-touch-icon.png
+│       ├── favicon-16x16.png
+│       ├── favicon-32x32.png
+│       ├── favicon.ico
+│       ├── safari-pinned-tab.svg
+│       ├── site.webmanifest
+│       └── source.txt
+├── store
+│   ├── cart
+│   │   ├── cart-actions.js
+│   │   └── cart-slice.js
+│   ├── fetcher
+│   │   └── fetch-items.js
+│   ├── index.js
+│   └── ui
+│       └── ui-slice.js
+├── styles
+│   └── globals.css
+└── utils
+    ├── animations
+    │   └── animation.js
+    ├── auth
+    │   └── auth.js
+    └── db
+        ├── db-drinks-util.js
+        ├── db-util.js
+        ├── input-validation.js
+        └── mongodb-client.js
+```
