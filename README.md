@@ -1,5 +1,23 @@
 # React Coffee Shop Website
 
+## Table of Contents
+- [Production Demo](#production-demo)
+  - [Live Demo](#live-demo)
+  - [Previews](#previews)
+    - [Desktop Preview](#desktop-preview)
+    - [Mobile Preview](#mobile-preview)
+- [Description](#description)
+  - [Website Description](#website-description)
+  - [Project Description](#project-description)
+    - [Goal](#goal)
+    - [Development Process](#development-process)
+  - [Tools](#tools)
+- [Usage](#usage)
+- [Features](#features)
+- [Performance](#performance)
+- [File Structure](#file-structure)
+
+
 ## Production Demo
 
 ### Live Demo
@@ -26,11 +44,11 @@ their created account. Authenticated users can also view their previous orders.
 ### Project Description
 
 #### Goal
-The goal of this project was to show the ability to use the tools mentioned below and implement the features shown 
-below. Another goal was to have experience with the Javascript frameworks and libraries I had learned. With these 
-tools, I created a responsive website that communicates with the backend to fetch and store: cart sessions, available 
-drinks, orders, and registered users. My decision to create a coffee shop website was due to my favorite morning hobby 
-of drinking espresso drinks and making them.
+The goal of this project was to show the ability to use the tools mentioned [below](#tools) and implement the 
+features also shown [below](#features). Another goal was to have experience with the Javascript frameworks and 
+libraries I had learned. With these tools, I created a responsive website that communicates with the backend to fetch 
+and store: cart sessions, available drinks, orders, and registered users. My decision to create a coffee shop website 
+is due to my favorite morning hobby of drinking espresso drinks and making them.
 
 #### Development Process
 
@@ -41,8 +59,9 @@ with NextJS. With NextJS, it was easy to host the project on Vercel for producti
 The features mentioned below started as to do features I wanted to implement (Please see my previous commits to see
 how that process went through). I started out with a project I did partially guided by
 [Maximilian](https://github.com/maxschwarzmueller)'s React course in the project named 
-[Food Order Page](guide-code/tree/17-practice-food-order-http-forms). The first page I had was the menu page, then the 
-home page, then the authentication page, and finally the account page. These four pages have multiple React components 
+[Food Order Page](https://github.com/academind/react-complete-guide-code/tree/17-practice-food-order-http-forms). 
+The first page I had was the menu page, then the home page, then the authentication page, and finally the account page.
+These four pages have multiple React components 
 and CSS modules for the styling.
 
 Each time I finished a page, I move to debug and checked how many times a component rendered to make sure I was not 
@@ -54,16 +73,25 @@ code to minimize server calls, like using Vercel’s SWR hook for data caching.
 
 - **Javascript** and **NodeJS**
 - **CSS** modules
-- **ReactJS** component framework
-- **NextJS** fullstack/production framework
-- **MongoDB** database
-- **NextAuth** user authentication
-- **Redux** state management
-- **bcryptjs** cryptography
-- **Framer Motion** animation
-- **Vercel** hosting
+- [**ReactJS**](https://reactjs.org) component framework
+- [**NextJS**](https://nextjs.org) fullstack/production framework
+- [**MongoDB**](https://www.mongodb.com) database
+- [**NextAuth**](https://next-auth.js.org) user authentication
+- [**Redux**](https://redux.js.org) state management
+- [**bcryptjs**](https://github.com/dcodeIO/bcrypt.js) cryptography
+- [**Framer Motion**](https://www.framer.com/motion/) animation
+- [**Vercel**](https://vercel.com) hosting
 
-### Features
+## Usage
+Click the website link [above](#live-demo) to try out the project. Try out on your phone too to experience the mobile 
+layout. Use the app as a registered user or a guest user. If you do not want to create an account, then try the 
+following demo account porvided for you: 
+
+demo@gmail.com
+
+1234567
+
+## Features
 
 The following features are in check list order due to they were to do to lists but are now completed, hence the
 checkmark.
@@ -110,8 +138,18 @@ occurred
 - [x] Past Order History from the profile page
 - [x] Past Order animation using framer motion
 
-### File Structure
-```
+## Performance 
+
+- Decrease about 10% the bundle size from v2.0 to 2.1 
+![2.0 Screenshot](/assets/v2.0.png)
+![2.1 Screenshot](/assets/v2.1.png)
+- Increase content loading times
+
+Screenshot from Vercel using [Checkly](https://vercel.com/integrations/checkly) integration 
+![Performance Screenshot](/assets/performance.png)
+
+## File Structure
+```bash
 react-coffee-shop
 ├── assets
 │   ├── coffee-drinks.jpg
@@ -121,7 +159,7 @@ react-coffee-shop
 │   ├── desktopPreview.gif 
 │   ├── mobilePreview.gif
 │   └── source.txt
-│    ./react-coffee-shop/components
+│    components
 │    ├── Auth
 │    │   ├── AuthForm.js
 │    │   ├── AuthForm.module.css
