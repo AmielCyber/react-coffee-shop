@@ -76,7 +76,7 @@
   background-color: var(--button-color-active);
   color: white;
 }
-/* Toggle Singin/Signup button */
+/* Toggle SingIn/SignUp button */
 .actions .toggle {
   margin-top: 1.4rem;
   background-color: transparent;

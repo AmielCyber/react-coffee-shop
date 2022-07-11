@@ -78,7 +78,7 @@ export default function SignUp({ switchToSignIn, formId }) {
     };
 
     try {
-      const result = await createUser(userInfo); // Get reuslt from our database when creating a user.
+      const result = await createUser(userInfo); // Get result from our database when creating a user.
       switchToSignIn(true, result.message); // Redirect user to sign in with new credentials and let the user know their account was created
     } catch (error) {
       setInvalidCredentials(error.message);
