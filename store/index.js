@@ -1,7 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 // My imports.
-import cartSlice from './cart/cart-slice';
-import uiSlice from './ui/ui-slice';
+import cartSlice from "./cart/cart-slice";
+import uiSlice from "./ui/ui-slice";
 
 // Export our redux store.
 const store = configureStore({

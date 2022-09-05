@@ -1,16 +1,16 @@
-import React, { useState, useRef, useCallback, Fragment } from 'react';
-import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
-import { signIn } from 'next-auth/react';
+import React, { useState, useRef, useCallback, Fragment } from "react";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
 // My import
-import { CART_STORAGE_NAME } from '../../store/cart/cart-actions';
-import { sendCartData, fetchCartData } from '../../store/cart/cart-actions';
+import { CART_STORAGE_NAME } from "../../store/cart/cart-actions";
+import { sendCartData, fetchCartData } from "../../store/cart/cart-actions";
 // CSS import.
-import styles from './AuthForm.module.css';
+import styles from "./AuthForm.module.css";
 
 // Front-end validation constants.
-const isNotEmpty = (value) => value.trim() !== '';
-const isEmail = (value) => value.includes('@');
+const isNotEmpty = (value) => value.trim() !== "";
+const isEmail = (value) => value.includes("@");
 
 export default function SignIn({ switchToSignUp, formId }) {
   const [formInputIsValid, setFormInputIsValid] = useState({
@@ -32,7 +32,8 @@ export default function SignIn({ switchToSignUp, formId }) {
     const enteredPassword = passwordInputRef.current.value;
 
     // Validate user input.
-    const enteredEmailIsValid = isNotEmpty(enteredEmail) && isEmail(enteredEmail);
+    const enteredEmailIsValid =
+      isNotEmpty(enteredEmail) && isEmail(enteredEmail);
     const enteredPasswordIsValid = isNotEmpty(enteredPassword);
 
     // Save validation for user validation feedback.
@@ -53,14 +54,21 @@ export default function SignIn({ switchToSignUp, formId }) {
     // Redirect false: Does not redirect to an error page, which returns a promise.
     // Pass credential data too for the backend.
     // Result will have an error if there is an error
-    const result = await signIn('credentials', { redirect: false, email: enteredEmail, password: enteredPassword });
+    const result = await signIn("credentials", {
+      redirect: false,
+      email: enteredEmail,
+      password: enteredPassword,
+    });
 
     if (!result.error) {
       // Successful signIn
 
       // Check if we have any guest cart session.
-      const guestCartSessionStorage = window.localStorage.getItem(CART_STORAGE_NAME);
-      const cart = guestCartSessionStorage ? JSON.parse(guestCartSessionStorage) : null;
+      const guestCartSessionStorage =
+        window.localStorage.getItem(CART_STORAGE_NAME);
+      const cart = guestCartSessionStorage
+        ? JSON.parse(guestCartSessionStorage)
+        : null;
       if (cart && cart.numberOfCartItems > 0) {
         // If we had a guest cart session then save that session into our server with the signin user.
         // Send the cart session to our database if we had items during our guest session.
@@ -78,38 +86,58 @@ export default function SignIn({ switchToSignUp, formId }) {
       // clear the local storage from our guest session
       window.localStorage.removeItem(CART_STORAGE_NAME);
       // Redirect user to the home page.
-      router.replace('/');
+      router.replace("/");
     } else {
       setInvalidCredentials(result.error);
     }
   };
 
   const switchToSignUpHandler = useCallback(() => {
-    switchToSignUp(false, '');
+    switchToSignUp(false, "");
   }, [switchToSignUp]);
 
   // Get the input classes depending on the input validity.
-  const emailClasses = `${styles.control} ${formInputIsValid.email ? '' : styles.invalid}`;
-  const passwordClasses = `${styles.control} ${formInputIsValid.password ? '' : styles.invalid}`;
+  const emailClasses = `${styles.control} ${
+    formInputIsValid.email ? "" : styles.invalid
+  }`;
+  const passwordClasses = `${styles.control} ${
+    formInputIsValid.password ? "" : styles.invalid
+  }`;
 
   return (
     <Fragment>
       <h1>Sign In</h1>
-      {invalidCredentials && <p className={styles.errorMessage}>{invalidCredentials}</p>}
-      <form onSubmit={submitHandler} id={formId}>
+      {invalidCredentials && (
+        <p className={styles.errorMessage}>{invalidCredentials}</p>
+      )}
+      <form onSubmit={submitHandler} id={formId} name="sign-in">
         <div className={emailClasses}>
-          <label htmlFor='email'>Your Email</label>
-          <input type='email' id='email' ref={emailInputRef} autoComplete='username' />
+          <label htmlFor="email">Your Email</label>
+          <input
+            type="email"
+            id="email"
+            ref={emailInputRef}
+            autoComplete="username"
+          />
           {!formInputIsValid.email && <p>Please enter a valid email</p>}
         </div>
         <div className={passwordClasses}>
-          <label htmlFor='password'>Your Password</label>
-          <input type='password' id='password' ref={passwordInputRef} autoComplete='current-password' />
+          <label htmlFor="password">Your Password</label>
+          <input
+            type="password"
+            id="password"
+            ref={passwordInputRef}
+            autoComplete="current-password"
+          />
           {!formInputIsValid.password && <p>Please enter a password</p>}
         </div>
         <div className={styles.actions}>
           <button className={styles.submitButton}>Sign In</button>
-          <button type='button' className={styles.toggle} onClick={switchToSignUpHandler}>
+          <button
+            type="button"
+            className={styles.toggle}
+            onClick={switchToSignUpHandler}
+          >
             Create a new account
           </button>
         </div>

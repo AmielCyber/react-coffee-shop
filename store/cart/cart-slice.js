@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 // Cart state object.
 const defaultCartState = {
@@ -10,7 +10,7 @@ const defaultCartState = {
 /** Cart slice to stored cart items that the user selected for checkout. */
 const cartSlice = createSlice({
   // Name of slice.
-  name: 'cart',
+  name: "cart",
   initialState: defaultCartState,
   reducers: {
     // Methods to modify the cart state.
@@ -26,7 +26,9 @@ const cartSlice = createSlice({
       // Update the total amount of items
       state.numberOfCartItems += newItem.amount;
       // Find the index of the added item if its in our items list
-      const cartItemIndex = state.items.findIndex((item) => item.id === newItem.id);
+      const cartItemIndex = state.items.findIndex(
+        (item) => item.id === newItem.id
+      );
       if (cartItemIndex > -1) {
         // Update the amount for that item.
         state.items[cartItemIndex].amount += newItem.amount;
