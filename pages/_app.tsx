@@ -10,11 +10,14 @@ import Layout from "../components/Layout/Layout";
 // CSS style.
 import "../styles/globals.css";
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   return (
     <Fragment>
       <HeadMeta />
-      <SessionProvider session={pageProps?.session}>
+      <SessionProvider session={session}>
         <Provider store={store}>
           <LazyMotion features={domAnimation} strict>
             <Layout>
