@@ -1,12 +1,12 @@
-import React, { useCallback, Fragment } from 'react';
-import { useSession, signOut } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+import React, { useCallback, Fragment } from "react";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 // My imports.
-import CompanyIcon from '../Icons/CompanyIcon';
-import HeaderCartButton from './HeaderCartButton';
+import CompanyIcon from "../Icons/CompanyIcon";
+import HeaderCartButton from "./HeaderCartButton";
 // CSS import.
-import styles from './MainNavigation.module.css';
+import styles from "./MainNavigation.module.css";
 
 /**
  * Returns the link's css styled class based on the current page.
@@ -15,23 +15,23 @@ import styles from './MainNavigation.module.css';
  * @param {string} style The default style.
  * @returns string name of the css style for the current path navigation list.
  */
-function activeLinkStyle(currentPath, linkPath, style) {
+function activeLinkStyle(currentPath: string, linkPath: string, style: string): string {
   return currentPath === linkPath ? `${style} ${styles.active}` : style;
 }
 
-export default function MainNavigation() {
+const MainNavigation = () => {
   const { data: session, status } = useSession(); // Check if there is an authenticated session.
   const router = useRouter();
   const currentPath = router.asPath; // To highlight the current navigation link the navbar.
 
   // Handlers.
-  const signOutHandler = useCallback(() => {
+  const signOutHandler = useCallback((): void => {
     // Signs-out user and removes the session cookie using next-auth. Reloads website and resets initial state settings.
     signOut();
   }, []);
-  const signInHandler = useCallback(() => {
+  const signInHandler = useCallback((): void => {
     // Redirect user to the login page.
-    router.push('/auth');
+    router.push("/auth");
     // Avoid recreating this function.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -40,25 +40,25 @@ export default function MainNavigation() {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <ul>
-          <li className={activeLinkStyle(currentPath, '/', '')}>
-            <Link href={'/'} passHref>
+          <li className={activeLinkStyle(currentPath, "/", "")}>
+            <Link href={"/"} passHref>
               <a>
-                <CompanyIcon width={30} height={30} fill={'white'} />
+                <CompanyIcon width={30} height={30} fill={"white"} />
               </a>
             </Link>
           </li>
-          <li className={activeLinkStyle(currentPath, '/menu', styles.menu)}>
-            <Link href='/menu'>Menu</Link>
+          <li className={activeLinkStyle(currentPath, "/menu", styles.menu)}>
+            <Link href="/menu">Menu</Link>
           </li>
-          {!session && status !== 'loading' && (
-            <li className={activeLinkStyle(currentPath, '/auth', '')}>
-              <Link href='/auth'>Sign in</Link>
+          {!session && status !== "loading" && (
+            <li className={activeLinkStyle(currentPath, "/auth", "")}>
+              <Link href="/auth">Sign in</Link>
             </li>
           )}
           {session && (
             <Fragment>
-              <li className={activeLinkStyle(currentPath, '/account', '')}>
-                <Link href='/account'>Account</Link>
+              <li className={activeLinkStyle(currentPath, "/account", "")}>
+                <Link href="/account">Account</Link>
               </li>
               <li>
                 <a onClick={signOutHandler}>Sign out</a>
@@ -74,4 +74,6 @@ export default function MainNavigation() {
       </nav>
     </header>
   );
-}
+};
+
+export default MainNavigation;

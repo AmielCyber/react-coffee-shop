@@ -1,8 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { RootState } from "../index";
+// My imports.
+// Types
+import Cart from "../../models/Cart";
+import DrinkItem from "../../models/DrinkItem";
 
-// Cart state object.
-const defaultCartState = {
-  items: [], // items:drinkItem {id:string, name:string, amount:Number, price:Number}
+// Define the initial state using Cart type
+const initialState: Cart = {
+  items: [], // DrinkItem[]
   numberOfCartItems: 0,
   totalPrice: 0,
 };
@@ -11,16 +16,16 @@ const defaultCartState = {
 const cartSlice = createSlice({
   // Name of slice.
   name: "cart",
-  initialState: defaultCartState,
+  initialState: initialState,
   reducers: {
     // Methods to modify the cart state.
     /**
      * @param {Cart} state the prev/current state before modifications
      * @param {{id:string, name:string, amount:Number, price:Number}} action.payload
      */
-    addItemToCart(state, action) {
+    addItemToCart: (state: Cart, action: PayloadAction<DrinkItem>) => {
       // Get the payload
-      const newItem = action.payload;
+      const newItem: DrinkItem = action.payload;
       // Update the totalPrice
       state.totalPrice += newItem.price * newItem.amount;
       // Update the total amount of items
@@ -41,7 +46,7 @@ const cartSlice = createSlice({
      * @param {Cart} state the prev/current state before modifications
      * @param {id:string} action.payload
      */
-    removeItemFromCart(state, action) {
+    removeItemFromCart: (state: Cart, action: PayloadAction<string>) => {
       const id = action.payload;
       // Get the item in our items list.
       const existingItem = state.items.find((item) => item.id === id);
@@ -67,7 +72,7 @@ const cartSlice = createSlice({
      * @param {Cart} state the prev/current state before modifications
      * @param {id:string} action.payload.
      */
-    removeItemCompletelyFromCart(state, action) {
+    removeItemCompletelyFromCart: (state: Cart, action: PayloadAction<string>) => {
       // Remove an item completely from the cart.
       const id = action.payload;
       // Get the item in our items list.
@@ -87,7 +92,7 @@ const cartSlice = createSlice({
     /**
      * @param {Cart} state the prev/current state before modifications
      */
-    clearCart(state) {
+    clearCart: (state: Cart) => {
       // Reset cart state to an empty cart state.
       state.items = [];
       state.totalPrice = 0;
@@ -97,7 +102,7 @@ const cartSlice = createSlice({
      * @param {Cart} state the prev/current state before modifications
      * @param {{items[]:CartItem, totalPrice:Number, numberOfCartItems:Number}} action.payload
      */
-    replaceCart(state, action) {
+    replaceCart: (state: Cart, action: PayloadAction<Cart>) => {
       // Replace cart from a previous session.
       state.items = action.payload.items;
       state.totalPrice = action.payload.totalPrice;
@@ -107,4 +112,7 @@ const cartSlice = createSlice({
 });
 
 export const cartActions = cartSlice.actions;
-export default cartSlice;
+
+export const selectCart = (state: RootState) => state.cart;
+
+export default cartSlice.reducer;

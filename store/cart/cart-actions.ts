@@ -1,10 +1,13 @@
-import { getSession } from 'next-auth/react';
+import { getSession } from "next-auth/react";
 // My imports.
-import { uiActions } from '../ui/ui-slice';
-import { cartActions } from './cart-slice';
+import { uiActions } from "../ui/ui-slice";
+import { cartActions } from "./cart-slice";
+// Import Types
+import ServerStatus from "../../models/ServerStatus";
+import Cart from "../../models/Cart";
 
 // Local cart storage name
-export const CART_STORAGE_NAME = 'react-coffee-cart-session';
+export const CART_STORAGE_NAME = "react-coffee-cart-session";
 
 /**
  * Gets a previous cart session from our server.
@@ -12,15 +15,15 @@ export const CART_STORAGE_NAME = 'react-coffee-cart-session';
  */
 async function fetchCartDataFromServer() {
   // Call our api route.
-  const response = await fetch('/api/cart/cart', {
-    method: 'GET',
+  const response = await fetch("/api/cart/cart", {
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
 
   if (!response.ok) {
-    throw new Error('Could not fetch cart data!');
+    throw new Error("Could not fetch cart data!");
   }
   const data = await response.json();
   return data;
@@ -45,20 +48,20 @@ function fetchCartDataFromLocal() {
  * Gets a cart object from a previous session if there is one and replaces the cart in our redux state.
  */
 export const fetchCartData = () => {
-  return async (dispatch) => {
+  return async (dispatch: Function) => {
     // Begin cart fetching session.
-    dispatch(
-      uiActions.showNotification({
-        status: 'pending',
-        title: 'Fetching...',
-        message: 'Fetching data from previous session.',
-      })
-    );
+    let currentStatus: ServerStatus = {
+      status: "pending",
+      title: "Fetching...",
+      message: "Fetching data from previous session.",
+    };
+    dispatch(uiActions.showNotification(currentStatus));
+
     // Login page updates the cart data session if local storage had items, hence no race condition.
     const session = await getSession();
 
     // Cart object: {id:string, name:string, amount:Number, price:Number} or null if there is no previous cart session.
-    let cartData = null;
+    let cartData: Cart | null = null;
     try {
       if (session) {
         // Fetch data from user session if there is one.
@@ -69,34 +72,37 @@ export const fetchCartData = () => {
       }
       if (cartData) {
         // If previous session was found and successfully acquired the cartData.
-        dispatch(
-          cartActions.replaceCart({
-            items: cartData.items || [],
-            totalPrice: cartData.totalPrice || 0,
-            numberOfCartItems: cartData.numberOfCartItems || 0,
-          })
-        );
-        uiActions.showNotification({
-          status: 'success',
-          title: 'Success!',
-          message: 'Fetch data from last session successfully!',
-        });
+        const newCart: Cart = {
+          items: cartData.items || [],
+          totalPrice: cartData.totalPrice || 0,
+          numberOfCartItems: cartData.numberOfCartItems || 0,
+        };
+        dispatch(cartActions.replaceCart(newCart));
+
+        currentStatus = {
+          status: "success",
+          title: "Success!",
+          message: "Fetch data from last session successfully!",
+        };
+        uiActions.showNotification(currentStatus);
       } else {
         // No previous session found from either from user or guest session.
         // MAY UPDATE to status: 'completed'
-        uiActions.showNotification({
-          status: 'success',
-          title: 'No data session found.',
-          message: 'There was nothing to fetch.',
-        });
+        currentStatus = {
+          status: "success",
+          title: "Success!",
+          message: "Fetch data from last session successfully!",
+        };
+        uiActions.showNotification(currentStatus);
       }
     } catch (error) {
       // Failed to fetch the data.
       dispatch(
         uiActions.showNotification({
-          status: 'error',
-          title: 'Error!',
-          message: error.message,
+          status: "error",
+          title: "Error!",
+          message:
+            error instanceof Error ? error.message : "Something went wrong.",
         })
       );
     }
@@ -109,16 +115,16 @@ export const fetchCartData = () => {
  * Sends the current cart data to our server.
  * @param {Cart Object} cart
  */
-async function sendCartDataToServer(cart) {
-  const response = await fetch('/api/cart/cart', {
-    method: 'POST',
+async function sendCartDataToServer(cart: Cart) {
+  const response = await fetch("/api/cart/cart", {
+    method: "POST",
     body: JSON.stringify(cart),
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
   if (!response.ok) {
-    throw new Error('Sending cart data failed.');
+    throw new Error("Sending cart data failed.");
   }
 }
 
@@ -126,7 +132,7 @@ async function sendCartDataToServer(cart) {
  * Sends the current cart data to the browser's local storage.
  * @param {Cart Object} cart
  */
-function sendCartDataToLocal(cart) {
+function sendCartDataToLocal(cart: Cart) {
   window.localStorage.setItem(CART_STORAGE_NAME, JSON.stringify(cart));
 }
 
@@ -136,16 +142,15 @@ function sendCartDataToLocal(cart) {
  * @param {Cart Object} cart {id:string, name:string, amount:Number, price:Number}
  * @returns void
  */
-export const sendCartData = (cart) => {
-  return async (dispatch) => {
+export const sendCartData = (cart: Cart) => {
+  return async (dispatch: Function) => {
     // Begin server connection.
-    dispatch(
-      uiActions.showNotification({
-        status: 'pending',
-        title: 'Sending...',
-        message: 'Sending cart data!',
-      })
-    );
+    let currentStatus: ServerStatus = {
+      status: "pending",
+      title: "Sending...",
+      message: "Sending cart data!",
+    };
+    dispatch(uiActions.showNotification(currentStatus));
 
     const session = await getSession();
     try {
@@ -154,21 +159,19 @@ export const sendCartData = (cart) => {
       } else {
         sendCartDataToLocal(cart);
       }
-      dispatch(
-        uiActions.showNotification({
-          status: 'success',
-          title: 'Success!',
-          message: 'Sent cart data successfully!',
-        })
-      );
+      currentStatus = {
+        status: "success",
+        title: "Success!",
+        message: "Sent cart data successfully!",
+      };
     } catch (error) {
-      dispatch(
-        uiActions.showNotification({
-          status: 'error',
-          title: 'Error!',
-          message: error.message,
-        })
-      );
+      currentStatus = {
+        status: "error",
+        title: "Error!",
+        message:
+          error instanceof Error ? error.message : "Something went wrong.",
+      };
     }
+    dispatch(uiActions.showNotification(currentStatus));
   };
 };
