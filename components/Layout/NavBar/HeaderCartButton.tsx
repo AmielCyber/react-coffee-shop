@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import React, { useState, useEffect, useCallback, Fragment } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useAnimation, m } from "framer-motion";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 // My imports.
@@ -12,11 +12,11 @@ import styles from "./HeaderCartButton.module.css";
 // Turn off ssr render for this component since it uses client side functions.
 const CartModal = dynamic(() => import("./CartModal"), { ssr: false });
 
-type Props = {
-  onSignIn: Function;
+type HeaderCartButtonProps = {
+  onSignIn: () => void;
 };
 
-const HeaderCartButton = ({ onSignIn }: Props) => {
+const HeaderCartButton = ({ onSignIn }: HeaderCartButtonProps) => {
   const [cartIsShown, setCartIsShown] = useState(false); // Show Cart overlay.
   const cart = useAppSelector((state) => state.cart);
   const fetchCartCompleted = useAppSelector(
@@ -58,7 +58,7 @@ const HeaderCartButton = ({ onSignIn }: Props) => {
   }, [setCartIsShown, onSignIn]);
 
   return (
-    <Fragment>
+    <>
       <m.button
         className={styles.button}
         onClick={showCartHandler}
@@ -75,7 +75,7 @@ const HeaderCartButton = ({ onSignIn }: Props) => {
         onClose={hideCartHandler}
         onToSignIn={signInHandler}
       />
-    </Fragment>
+    </>
   );
 };
 

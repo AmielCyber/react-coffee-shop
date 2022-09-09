@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { SessionProvider } from "next-auth/react";
 import { Provider } from "react-redux";
 import { LazyMotion, domAnimation } from "framer-motion";
@@ -14,7 +14,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   // @ts-ignore
   const session = pageProps?.session;
   return (
-    <Fragment>
+    <>
       <HeadMeta />
       <SessionProvider session={session}>
         <Provider store={store}>
@@ -25,6 +25,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           </LazyMotion>
         </Provider>
       </SessionProvider>
-    </Fragment>
+    </>
   );
 }

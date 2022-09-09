@@ -1,3 +1,4 @@
+import { Variants, Transition } from "framer-motion";
 export const pageAnimation = {
   // Item appears from the top and settles in a bouncy way.
   in: {
@@ -7,7 +8,7 @@ export const pageAnimation = {
     y: 0,
   },
   transition: {
-    type: 'spring',
+    type: "spring",
     duration: 0.3,
   },
 };
@@ -15,12 +16,12 @@ export const cartBumpAnimation = {
   // Make the cart appear larger then change back to its regular size.
   scale: [1, 0.9, 1.1, 1.15, 1],
   transition: {
-    ease: 'easeOut',
+    ease: "easeOut",
     duration: 0.2,
   },
 };
 
-export const modalAnimation = {
+export const modalAnimation: Variants = {
   // Modal drops in from the top of the page.
   in: {
     y: -200,
@@ -36,9 +37,10 @@ export const modalAnimation = {
     y: -200,
     opacity: 0,
   },
-  transition: {
-    duration: 0.3,
-  },
+};
+
+export const modalTransition: Transition = {
+  duration: 0.3,
 };
 
 export const cartItemAnimation = {
@@ -54,7 +56,7 @@ export const drinkItemListAnimation = {
   in: {
     opacity: 0,
     transition: {
-      when: 'afterChildren',
+      when: "afterChildren",
     },
   },
   // Drink animates to visible
@@ -62,7 +64,7 @@ export const drinkItemListAnimation = {
   animate: {
     opacity: 1,
     transition: {
-      when: 'beforeChildren',
+      when: "beforeChildren",
       staggerChildren: 0.2,
     },
   },
@@ -78,13 +80,13 @@ export const pastOrdersAnimationList = {
   hidden: {
     opacity: 0,
     transition: {
-      when: 'afterChildren',
+      when: "afterChildren",
     },
   },
   visible: {
     opacity: 1,
     transition: {
-      when: 'beforeChildren',
+      when: "beforeChildren",
       staggerChildren: 0.3,
     },
   },

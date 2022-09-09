@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 // My imports.
 import MainNavigation from "./NavBar/MainNavigation";
 // CSS import.
@@ -11,10 +11,10 @@ type LayoutProps = {
 // The layout of the react coffee shop web page.
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <Fragment>
+    <>
       <MainNavigation />
       <main className={styles.main}>{children}</main>
-    </Fragment>
+    </>
   );
 };
 

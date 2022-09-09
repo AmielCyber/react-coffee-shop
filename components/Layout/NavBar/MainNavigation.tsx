@@ -1,4 +1,5 @@
-import React, { useCallback, Fragment } from "react";
+import React from "react";
+import { useCallback } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -15,7 +16,11 @@ import styles from "./MainNavigation.module.css";
  * @param {string} style The default style.
  * @returns string name of the css style for the current path navigation list.
  */
-function activeLinkStyle(currentPath: string, linkPath: string, style: string): string {
+function activeLinkStyle(
+  currentPath: string,
+  linkPath: string,
+  style: string
+): string {
   return currentPath === linkPath ? `${style} ${styles.active}` : style;
 }
 
@@ -25,11 +30,11 @@ const MainNavigation = () => {
   const currentPath = router.asPath; // To highlight the current navigation link the navbar.
 
   // Handlers.
-  const signOutHandler = useCallback((): void => {
+  const signOutHandler = useCallback(() => {
     // Signs-out user and removes the session cookie using next-auth. Reloads website and resets initial state settings.
     signOut();
   }, []);
-  const signInHandler = useCallback((): void => {
+  const signInHandler = useCallback(() => {
     // Redirect user to the login page.
     router.push("/auth");
     // Avoid recreating this function.
@@ -56,14 +61,14 @@ const MainNavigation = () => {
             </li>
           )}
           {session && (
-            <Fragment>
+            <>
               <li className={activeLinkStyle(currentPath, "/account", "")}>
                 <Link href="/account">Account</Link>
               </li>
               <li>
                 <a onClick={signOutHandler}>Sign out</a>
               </li>
-            </Fragment>
+            </>
           )}
           <li>
             <span className={styles.cartButton}>

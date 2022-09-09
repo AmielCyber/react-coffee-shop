@@ -1,13 +1,11 @@
 // My import.
 import type DrinkItem from "./DrinkItem";
 
-type Order = {
-  name: string;
-  email: string;
+interface Order {
   items: DrinkItem[];
   totalItems: number;
   totalPrice: number;
-  orderDate: Date;
-};
+  orderDate: Date | null;
+}
 
 export default Order;

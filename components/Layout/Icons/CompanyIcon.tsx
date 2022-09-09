@@ -1,6 +1,6 @@
 import React from "react";
 
-type Props = {
+type CompanyIconProps = {
   width: number;
   height: number;
   fill: string;
@@ -11,7 +11,7 @@ type Props = {
  * Icon by svgrepo.com https://www.svgrepo.com/svg/75540/hot-coffee-cup-with-hearts
  * @returns SVG element.
  */
-const CompanyIcon = ({ width, height, fill }: Props) => {
+const CompanyIcon = ({ width, height, fill }: CompanyIconProps) => {
   return (
     <svg
       width={width}
