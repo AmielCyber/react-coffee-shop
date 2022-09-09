@@ -1,9 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// My type import
-import type { RootState } from '../index';
-import UI_State from '../../models/UI_State'
-import ServerStatus from "../../models/ServerStatus"
-
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+// My imports
+import type { RootState } from "../index";
+import type UI_State from "../../models/UI_State";
+import type ServerStatus from "../../models/ServerStatus";
 
 const uiDefaultState: UI_State = {
   notification: null,
@@ -13,10 +12,13 @@ const uiDefaultState: UI_State = {
 // UI slice to show server status notifications to the user or for debugging.
 // TO BE USED in next update/push.
 const uiSlice = createSlice({
-  name: 'ui',
+  name: "ui",
   initialState: uiDefaultState,
   reducers: {
-    showNotification: (state: UI_State, action: PayloadAction<ServerStatus>) => {
+    showNotification: (
+      state: UI_State,
+      action: PayloadAction<ServerStatus>
+    ) => {
       state.notification = {
         status: action.payload.status,
         title: action.payload.title,

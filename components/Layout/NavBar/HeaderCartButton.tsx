@@ -2,7 +2,6 @@ import dynamic from "next/dynamic";
 import React, { useState, useEffect, useCallback, Fragment } from "react";
 import { useAnimation, m } from "framer-motion";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
-import {} from "../../../store/cart/cart-slice";
 // My imports.
 import { fetchCartData, sendCartData } from "../../../store/cart/cart-actions";
 import { cartBumpAnimation } from "../../../utils/animations/animation";

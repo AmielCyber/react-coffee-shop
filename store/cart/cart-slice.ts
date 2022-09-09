@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../index";
 // My imports.
-// Types
-import Cart from "../../models/Cart";
-import DrinkItem from "../../models/DrinkItem";
+import type Cart from "../../models/Cart";
+import type DrinkItem from "../../models/DrinkItem";
 
 // Define the initial state using Cart type
 const initialState: Cart = {
@@ -72,7 +71,10 @@ const cartSlice = createSlice({
      * @param {Cart} state the prev/current state before modifications
      * @param {id:string} action.payload.
      */
-    removeItemCompletelyFromCart: (state: Cart, action: PayloadAction<string>) => {
+    removeItemCompletelyFromCart: (
+      state: Cart,
+      action: PayloadAction<string>
+    ) => {
       // Remove an item completely from the cart.
       const id = action.payload;
       // Get the item in our items list.
