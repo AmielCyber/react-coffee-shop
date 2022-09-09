@@ -57,6 +57,11 @@ const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    session({ session }) {
+      return session;
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
 };
 
