@@ -1,18 +1,22 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 // My imports.
 import { verifyPassword } from "../../../utils/auth/auth";
 import { connectToDatabase } from "../../../utils/db/db-util";
 
-// Handles all other auth routes.
-export default NextAuth({
+const authOptions: NextAuthOptions = {
   session: {
-    strategy: "jwt", // Use Jason Web Tokens
+    strategy: "jwt",
   },
   providers: [
     CredentialsProvider({
-      // Use when loginIn is called.
+      type: "credentials",
+      credentials: {},
       async authorize(credentials) {
+        const { email, password } = credentials as {
+          email: string;
+          password: string;
+        };
         let client;
         let usersCollection;
         let user;
@@ -20,7 +24,7 @@ export default NextAuth({
         try {
           client = await connectToDatabase();
           usersCollection = client.db().collection(process.env.USER_COLLECTION);
-          user = await usersCollection.findOne({ email: credentials.email });
+          user = await usersCollection.findOne({ email: email });
         } catch (error) {
           throw new Error("Failed to connect to the database!");
         }
@@ -35,7 +39,7 @@ export default NextAuth({
         // Verify user's input credentials.
         let isValid;
         try {
-          isValid = await verifyPassword(credentials.password, user.password);
+          isValid = await verifyPassword(password, user.password);
         } catch (error) {
           isValid = false;
         }
@@ -54,4 +58,7 @@ export default NextAuth({
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-});
+};
+
+// Handles all other auth routes.
+export default NextAuth(authOptions);
