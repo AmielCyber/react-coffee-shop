@@ -1,20 +1,34 @@
-import dynamic from 'next/dynamic';
-import React, { useState } from 'react';
-import { useSession } from 'next-auth/react';
+import dynamic from "next/dynamic";
+import React, { useState } from "react";
+import { useSession } from "next-auth/react";
+// My imports.
+import type User from "../../../models/User";
 // CSS import.
-import styles from './Checkout.module.css';
+import styles from "./Checkout.module.css";
 // My dynamic imports.
-const RegisteredCheckout = dynamic(() => import('./RegisteredCheckout'));
-const GuestCheckout = dynamic(() => import('./GuestCheckout'));
+const RegisteredCheckout = dynamic(() => import("./RegisteredCheckout"));
+const GuestCheckout = dynamic(() => import("./GuestCheckout"));
 
-export default function Checkout({ onToSignIn, onClose, onCancel, onConfirm }) {
+type CheckoutProps = {
+  onToSignIn: () => void;
+  onClose: () => void;
+  onCancel: () => void;
+  onConfirm: (userData: User) => Promise<void>;
+};
+
+const Checkout = ({
+  onToSignIn,
+  onClose,
+  onCancel,
+  onConfirm,
+}: CheckoutProps) => {
   const [guestInitial, setGuestInitial] = useState(true);
   const { data: session } = useSession();
 
   if (session) {
     // If there is a register user about to checkout.
     const fullName = session.user.name;
-    const nameDividerPos = fullName.indexOf(' ');
+    const nameDividerPos = fullName.indexOf(" ");
 
     const firstName = fullName.slice(0, nameDividerPos);
     const lastName = fullName.slice(nameDividerPos);
@@ -51,5 +65,13 @@ export default function Checkout({ onToSignIn, onClose, onCancel, onConfirm }) {
   }
 
   // Guest user agreed to continue as guest.
-  return <GuestCheckout onCancel={onCancel} onClose={onClose} onConfirm={onConfirm} />;
-}
+  return (
+    <GuestCheckout
+      onCancel={onCancel}
+      onClose={onClose}
+      onConfirm={onConfirm}
+    />
+  );
+};
+
+export default Checkout;

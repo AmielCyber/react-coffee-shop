@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // My imports
-import type { RootState } from "../index";
-import type UI_State from "../../models/UI_State";
 import type ServerStatus from "../../models/ServerStatus";
+import type UI_State from "../../models/UI_State";
+import type { RootState } from "../index";
 
 const uiDefaultState: UI_State = {
   notification: null,

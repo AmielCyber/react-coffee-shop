@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 // My imports.
 import LoadingSpinner from "../UI/LoadingSpinner";
 import Receipt from "../Receipt/Receipt";
@@ -36,9 +36,9 @@ const Cart = ({ onClose, onToSignIn }: CartProps) => {
   const didSubmitHandler = (
     successful: boolean,
     resultMessage: string,
-    cart: CartInterface
+    cart: CartInterface | null
   ) => {
-    if (successful) {
+    if (successful && cart) {
       const newOrder: Order = {
         items: cart.items,
         totalItems: cart.numberOfCartItems,
@@ -67,26 +67,18 @@ const Cart = ({ onClose, onToSignIn }: CartProps) => {
     const primaryErrorMessage = "Error! Order failed to send.";
     const messageStyle = error ? styles.errorMessage : styles.message;
     return (
-      <Fragment>
+      <>
         {error && (
           <h3 className={styles.errorMessage}>{primaryErrorMessage}</h3>
         )}
         <h3 className={messageStyle}>{statusMessage}</h3>
-        {!error && (
-          <Receipt
-            items={orderData.items}
-            totalItems={orderData.totalItems}
-            totalPrice={orderData.totalPrice}
-            orderDate={orderData.orderDate}
-            showReceiptItems={true}
-          />
-        )}
+        {!error && <Receipt order={orderData} showReceiptItems={true} />}
         <div className={styles.actions}>
           <button className={styles.actions} onClick={onClose}>
             Close
           </button>
         </div>
-      </Fragment>
+      </>
     );
   }
   // User is looking at items ordered.

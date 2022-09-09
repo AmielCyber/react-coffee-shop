@@ -43,7 +43,7 @@ export const modalTransition: Transition = {
   duration: 0.3,
 };
 
-export const cartItemAnimation = {
+export const cartItemAnimation: Variants = {
   // Cart items disappear to the right.
   out: {
     x: 100,

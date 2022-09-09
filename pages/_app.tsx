@@ -11,8 +11,7 @@ import Layout from "../components/Layout/Layout";
 import "../styles/globals.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  // @ts-ignore
-  const session = pageProps?.session;
+  const session = pageProps ? pageProps.session : null;
   return (
     <>
       <HeadMeta />

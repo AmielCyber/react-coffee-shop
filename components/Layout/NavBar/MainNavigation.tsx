@@ -1,7 +1,7 @@
 import React from "react";
-import { useCallback } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useCallback } from "react";
 import Link from "next/link";
 // My imports.
 import CompanyIcon from "../Icons/CompanyIcon";

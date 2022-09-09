@@ -1,28 +1,33 @@
-import React from 'react';
-import { m } from 'framer-motion';
+import React from "react";
+import { m } from "framer-motion";
 // My imports.
-import { useDispatch } from 'react-redux';
-import { cartActions } from '../../../store/cart/cart-slice';
-import { cartItemAnimation } from '../../../utils/animations/animation';
+import type DrinkItem from "../../../models/DrinkItem";
+import { useAppDispatch } from "../../../store/hooks";
+import { cartActions } from "../../../store/cart/cart-slice";
+import { cartItemAnimation } from "../../../utils/animations/animation";
 // My CSS import.
-import styles from './CartItem.module.css';
+import styles from "./CartItem.module.css";
 
-function sameAmount(prevProps, nextProps) {
+const sameAmount = (prevProps: CartItemProps, nextProps: CartItemProps) => {
   // Only render if amount changed for the item.
   return prevProps.item.amount === nextProps.item.amount;
-}
+};
 
-function CartItem({ item }) {
+type CartItemProps = {
+  item: DrinkItem;
+};
+
+const CartItem = ({ item }: CartItemProps) => {
   const { id, name, amount, price } = item;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   // Format the price to always show two decimal points.
   const priceF = `$${price.toFixed(2)}`;
 
   // Handlers for item buttons(empty/trash, subtract, add).
-  const removeItemCompletelyHandler = (id) => {
+  const removeItemCompletelyHandler = (id: string) => {
     dispatch(cartActions.removeItemCompletelyFromCart(id));
   };
-  const removeItemFromCartHandler = (id) => {
+  const removeItemFromCartHandler = (id: string) => {
     dispatch(cartActions.removeItemFromCart(id));
   };
   const addItemToCartHandler = () => {
@@ -37,7 +42,11 @@ function CartItem({ item }) {
   };
 
   return (
-    <m.li className={styles['cart-item']} exit='out' variants={cartItemAnimation}>
+    <m.li
+      className={styles["cart-item"]}
+      exit="out"
+      variants={cartItemAnimation}
+    >
       <div className={styles.description}>
         <h2>{name}</h2>
         <div className={styles.summary}>
@@ -46,9 +55,12 @@ function CartItem({ item }) {
         </div>
       </div>
       <div className={styles.actions}>
-        <button onClick={removeItemCompletelyHandler.bind(null, id)} title='Remove this item'>
+        <button
+          onClick={removeItemCompletelyHandler.bind(null, id)}
+          title="Remove this item"
+        >
           <span className={styles.iconContainer}>
-            <span className={styles['gg-trash']}></span>
+            <span className={styles["gg-trash"]}></span>
           </span>
         </button>
         <button onClick={removeItemFromCartHandler.bind(null, id)}>−</button>
@@ -56,6 +68,6 @@ function CartItem({ item }) {
       </div>
     </m.li>
   );
-}
+};
 
 export default React.memo(CartItem, sameAmount);

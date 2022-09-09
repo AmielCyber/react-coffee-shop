@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../index";
 // My imports.
 import type Cart from "../../models/Cart";
 import type DrinkItem from "../../models/DrinkItem";
+import type { RootState } from "../index";
 
 // Define the initial state using Cart type
 const initialState: Cart = {
