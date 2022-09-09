@@ -14,7 +14,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Fragment>
       <HeadMeta />
-      <SessionProvider session={pageProps.session}>
+      <SessionProvider session={pageProps?.session}>
         <Provider store={store}>
           <LazyMotion features={domAnimation} strict>
             <Layout>

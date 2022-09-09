@@ -1,13 +1,13 @@
-import NextAuth from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 // My imports.
-import { verifyPassword } from '../../../utils/auth/auth';
-import { connectToDatabase } from '../../../utils/db/db-util';
+import { verifyPassword } from "../../../utils/auth/auth";
+import { connectToDatabase } from "../../../utils/db/db-util";
 
 // Handles all other auth routes.
 export default NextAuth({
   session: {
-    strategy: 'jwt', // Use Jason Web Tokens
+    strategy: "jwt", // Use Jason Web Tokens
   },
   providers: [
     CredentialsProvider({
@@ -22,12 +22,14 @@ export default NextAuth({
           usersCollection = client.db().collection(process.env.USER_COLLECTION);
           user = await usersCollection.findOne({ email: credentials.email });
         } catch (error) {
-          throw new Error('Failed to connect to the database!');
+          throw new Error("Failed to connect to the database!");
         }
 
         if (!user) {
           // No user was found in our database.
-          throw new Error('No user found with this email address. Please try again.');
+          throw new Error(
+            "No user found with this email address. Please try again."
+          );
         }
 
         // Verify user's input credentials.
@@ -40,7 +42,7 @@ export default NextAuth({
 
         if (!isValid) {
           // User enter invalid credentials.
-          throw new Error('Incorrect password. Please try again.');
+          throw new Error("Incorrect password. Please try again.");
         }
 
         // Return user object.
