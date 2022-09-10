@@ -70,7 +70,7 @@ export const drinkItemListAnimation = {
   },
 };
 
-export const drinkItemAnimation = {
+export const drinkItemAnimation: Variants = {
   // Items appear from the left.
   in: { opacity: 0, x: -200 },
   animate: { opacity: 1, x: 0 },

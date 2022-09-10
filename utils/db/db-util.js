@@ -1,10 +1,11 @@
-const clientPromise = require('./mongodb-client');
+"use strict";
+const clientPromise = require("./mongodb-client");
 
 /**
  * Connect to the MongoDB.
  * @returns MongoClient Object
  */
-export async function connectToDatabase() {
+async function connectToDatabase() {
   // Connect to the database.
   const client = await clientPromise; // client promise as recommended from MongoDB
   return client;
@@ -18,7 +19,7 @@ export async function connectToDatabase() {
  * @param {string} emailUser to get one unique document.
  * @returns One document if found, else it returns false.
  */
-export async function getOneDocumentFromUser(client, collectionName, emailUser) {
+async function getOneDocumentFromUser(client, collectionName, emailUser) {
   // Get access of the collection.
   const collection = client.db().collection(collectionName);
   // Get the document corresponding to that email.
@@ -33,7 +34,7 @@ export async function getOneDocumentFromUser(client, collectionName, emailUser) 
  * @param {string} userEmail to get all documents.
  * @returns An array of documents.
  */
-export async function getAllDocumentsFromEmailUser(client, collectionName, userEmail) {
+async function getAllDocumentsFromEmailUser(client, collectionName, userEmail) {
   // Get access to the collection.
   const collection = client.db().collection(collectionName);
   // Find all the documents in collection and get back an array of documents
@@ -49,11 +50,19 @@ export async function getAllDocumentsFromEmailUser(client, collectionName, userE
  * @param {Object} sortQuery how to sort the array of documents.
  * @returns An array of documents.
  */
-export async function getAllDocumentsFromEmailUserSorted(client, collectionName, userEmail, sortQuery) {
+async function getAllDocumentsFromEmailUserSorted(
+  client,
+  collectionName,
+  userEmail,
+  sortQuery
+) {
   // Get access to the collection.
   const collection = client.db().collection(collectionName);
   // Find all the documents in collection and get back an array of documents
-  const dataList = await collection.find({ email: userEmail }).sort(sortQuery).toArray();
+  const dataList = await collection
+    .find({ email: userEmail })
+    .sort(sortQuery)
+    .toArray();
 
   return dataList;
 }
@@ -63,7 +72,7 @@ export async function getAllDocumentsFromEmailUserSorted(client, collectionName,
  * @param {string} collectionName
  * @returns An array of documents.
  */
-export async function getAllDocuments(client, collectionName) {
+async function getAllDocuments(client, collectionName) {
   // Get access to the collection.
   const collection = client.db().collection(collectionName);
   // Find all the documents in collection and get back an array of documents
@@ -80,7 +89,7 @@ export async function getAllDocuments(client, collectionName) {
  * @param {JSON} document to insert in the collection
  * @returns MongoDB status result. { acknowledged:boolean, modifiedCount:Number, upsertedId:Object, upsertedCount:Number, matchedCount:Number}
  */
-export async function insertADocument(client, collectionName, document) {
+async function insertADocument(client, collectionName, document) {
   // Get access to the collection.
   const collection = client.db().collection(collectionName);
   // Insert the document
@@ -97,11 +106,20 @@ export async function insertADocument(client, collectionName, document) {
  * @param {string} userEmail
  * @returns {JSON} document the original document replaced if found, else it returns null.
  */
-export async function insertAndReplaceDocument(client, collectionName, replacementDocument, userEmail) {
+async function insertAndReplaceDocument(
+  client,
+  collectionName,
+  replacementDocument,
+  userEmail
+) {
   // Get access to the collection.
   const collection = client.db().collection(collectionName);
   // Finds a document with the matching email if there is one, else it will create one and result will be null.
-  const result = await collection.findOneAndReplace({ email: userEmail }, replacementDocument, { upsert: true });
+  const result = await collection.findOneAndReplace(
+    { email: userEmail },
+    replacementDocument,
+    { upsert: true }
+  );
 
   return result;
 }
@@ -110,10 +128,24 @@ export async function insertAndReplaceDocument(client, collectionName, replaceme
  * @param {string} email
  * @returns boolean: true->user exists false->no user found
  */
-export async function checkIfUserExists(email) {
+async function checkIfUserExists(email) {
   const client = await connectToDatabase();
-  const existingUser = await client.db().collection(process.env.USER_COLLECTION).findOne({ email: email });
+  const existingUser = await client
+    .db()
+    .collection(process.env.USER_COLLECTION)
+    .findOne({ email: email });
 
   // Only return boolean value since existing user is falsey or truthy.
   return existingUser !== null;
 }
+
+module.exports = {
+  connectToDatabase,
+  getOneDocumentFromUser,
+  getAllDocumentsFromEmailUser,
+  getAllDocumentsFromEmailUserSorted,
+  getAllDocuments,
+  insertADocument,
+  insertAndReplaceDocument,
+  checkIfUserExists,
+};

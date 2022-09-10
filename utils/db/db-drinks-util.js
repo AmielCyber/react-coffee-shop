@@ -1,22 +1,23 @@
-import { connectToDatabase, getAllDocuments } from './db-util';
+"use strict";
+const { connectToDatabase, getAllDocuments } = require("./db-util");
 
 /**
  * Gets the drink list from the server with the correct price.
  * Makes sure that we get the data from our server instead of the front-end.
  * @returns drinkData ={drinks(Map):{key-id:string, value-{name:string, price:Number}}}}
  */
-export async function getDrinksFromServer() {
+async function getDrinksFromServer() {
   // Drink data we will return.
   const drinkData = {
     drinks: null,
-    errorMessage: '',
+    errorMessage: "",
   };
   // Connect to the drinks database.
   let client;
   try {
     client = await connectToDatabase();
   } catch (error) {
-    drinkData.errorMessage = 'Connecting to the database failed';
+    drinkData.errorMessage = "Connecting to the database failed";
     return drinkData;
   }
   // Get drinks document.
@@ -24,7 +25,7 @@ export async function getDrinksFromServer() {
   try {
     drinkList = await getAllDocuments(client, process.env.DRINK_COLLECTION);
   } catch (error) {
-    drinkData.errorMessage = 'Fetching data failed!';
+    drinkData.errorMessage = "Fetching data failed!";
     return drinkData;
   }
   // Map all the drink items in the document.
@@ -38,3 +39,5 @@ export async function getDrinksFromServer() {
   drinkData.drinks = drinkMap;
   return drinkData;
 }
+
+module.exports = getDrinksFromServer;

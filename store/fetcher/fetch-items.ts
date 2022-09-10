@@ -1,4 +1,6 @@
-import useSWR from 'swr';
+import useSWR from "swr";
+// My import
+import type Drink from "../../models/Drink";
 
 /**
  * Fetcher function for the SWR hook.
@@ -6,7 +8,7 @@ import useSWR from 'swr';
  * @param {string} uri
  * @returns {items:Object[], isLoading:boolean, isError:string | null}
  */
-async function fetcher(uri) {
+const fetcher = async (uri: string): Promise<Drink[]> => {
   const response = await fetch(uri);
   const responseData = await response.json();
   if (!response.ok) {
@@ -14,9 +16,9 @@ async function fetcher(uri) {
     throw new Error(responseData.message);
   }
   return responseData;
-}
+};
 
-export default function FetchItems(uri) {
+const FetchItems = (uri: string) => {
   const { data, error } = useSWR(uri, fetcher, { revalidateOnFocus: false });
 
   return {
@@ -24,4 +26,6 @@ export default function FetchItems(uri) {
     isLoading: !error && !data, // There is no error and data is still being fetched.
     isError: error,
   };
-}
+};
+
+export default FetchItems;

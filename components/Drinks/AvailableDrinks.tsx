@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 // My imports.
-import FetchItems from '../../store/fetcher/fetch-items';
-import Card from '../UI/Card';
-import LoadingSpinner from '../UI/LoadingSpinner';
-import DrinkItemList from './DrinkItem/DrinkItemList';
+import FetchItems from "../../store/fetcher/fetch-items";
+import Card from "../UI/Card";
+import LoadingSpinner from "../UI/LoadingSpinner";
+import DrinkItemList from "./DrinkItem/DrinkItemList";
 // CSS import.
-import styles from './AvailableDrinks.module.css';
+import styles from "./AvailableDrinks.module.css";
 
-export default function AvailableDrinks() {
-  const { items, isLoading, isError } = FetchItems('/api/menu/drinks');
+const AvailableDrinks = () => {
+  const { items, isLoading, isError } = FetchItems("/api/menu/drinks");
 
   if (isError) {
     // Display server error if we had an error connecting to our server.
@@ -35,8 +35,16 @@ export default function AvailableDrinks() {
   return (
     <section className={styles.drinks}>
       <Card>
-        <DrinkItemList drinks={items} />
+        {items ? (
+          <DrinkItemList drinks={items} />
+        ) : (
+          <section className={styles.drinksError}>
+            <h3>Could not fetch menu items</h3>
+          </section>
+        )}
       </Card>
     </section>
   );
-}
+};
+
+export default AvailableDrinks;

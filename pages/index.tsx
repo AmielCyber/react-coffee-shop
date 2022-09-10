@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import React, { Fragment } from "react";
+import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { m } from "framer-motion";
@@ -9,13 +9,13 @@ import { pageAnimation } from "../utils/animations/animation";
 // CSS styles.
 import styles from "./HomePage.module.css";
 // My dynamic import.
-const WelcomeMessage = dynamic(() =>
-  import("../components/Welcome/WelcomeMessage")
+const WelcomeMessage = dynamic(
+  () => import("../components/Welcome/WelcomeMessage")
 );
 
 export default function Home() {
   return (
-    <Fragment>
+    <>
       <Head>
         <title>React Coffee</title>
         <meta
@@ -44,6 +44,6 @@ export default function Home() {
       >
         <WelcomeMessage />
       </m.div>
-    </Fragment>
+    </>
   );
 }

@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 // From MongoDB 'Best Practices Connecting From Vercel'
 // https://www.mongodb.com/docs/atlas/best-practices-connecting-from-vercel/
 
 // Import the dependency.
-const { MongoClient } = require('mongodb');
+const { MongoClient } = require("mongodb");
 
 const uri = process.env.MONGODB_URI;
 const options = {
@@ -14,7 +14,7 @@ const options = {
 let client;
 let clientPromise;
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === "development") {
   // In development mode, use a global variable so that the value
   // is preserved across module reloads caused by HMR (hot module replacement).
   if (!global._mongoClientPromise) {
