@@ -7,7 +7,7 @@ import {
   getAllDocumentsFromEmailUserSorted,
   insertADocument,
 } from "../../../utils/db/db-util";
-import { getDrinksFromServer } from "../../../utils/db/db-drinks-util";
+import getDrinksFromServer from "../../../utils/db/db-drinks-util";
 
 export default async function handler(req, res) {
   // Get session if there is one.

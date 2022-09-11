@@ -1,21 +1,21 @@
-import dynamic from 'next/dynamic';
-import React, { useState } from 'react';
+import dynamic from "next/dynamic";
+import React, { useState } from "react";
 // My imports.
 // CSS import.
-import styles from './AuthForm.module.css';
+import styles from "./AuthForm.module.css";
 // My dynamic imports.
-const SignIn = dynamic(() => import('./SignIn'));
-const SignUp = dynamic(() => import('./SignUp'));
+const SignIn = dynamic(() => import("./SignIn"));
+const SignUp = dynamic(() => import("./SignUp"));
 
-export default function AuthForm() {
+const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [newUserCreated, setNewUserCreated] = useState(false);
-  const [serverMessage, setServerMessage] = useState('');
+  const [serverMessage, setServerMessage] = useState("");
 
-  const formId = isLogin ? 'sign-in' : 'sign-up';
+  const formId = isLogin ? "sign-in" : "sign-up";
 
   // Toggle Sign/Signup
-  const switchAuthModeHandler = (isNewUser, message) => {
+  const switchAuthModeHandler = (isNewUser: boolean, message: string) => {
     if (isNewUser) {
       setNewUserCreated(true);
       setServerMessage(message);
@@ -39,4 +39,6 @@ export default function AuthForm() {
       )}
     </div>
   );
-}
+};
+
+export default AuthForm;

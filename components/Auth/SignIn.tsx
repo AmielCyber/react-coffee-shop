@@ -1,5 +1,5 @@
-import React, { useState, useRef, useCallback, Fragment } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useRef, useCallback } from "react";
+import { useAppDispatch } from "../../store/hooks";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 // My import
@@ -9,27 +9,36 @@ import { sendCartData, fetchCartData } from "../../store/cart/cart-actions";
 import styles from "./AuthForm.module.css";
 
 // Front-end validation constants.
-const isNotEmpty = (value) => value.trim() !== "";
-const isEmail = (value) => value.includes("@");
+const isNotEmpty = (value: string): boolean => value.trim() !== "";
+const isEmail = (value: string): boolean => value.includes("@");
 
-export default function SignIn({ switchToSignUp, formId }) {
+type SignInProps = {
+  switchToSignUp: (isNewUser: boolean, message: string) => void;
+  formId: "sign-in" | "sign-up";
+};
+
+const SignIn = ({ switchToSignUp, formId }: SignInProps) => {
   const [formInputIsValid, setFormInputIsValid] = useState({
     email: true,
     password: true,
   });
-  const [invalidCredentials, setInvalidCredentials] = useState(null);
-  const emailInputRef = useRef();
-  const passwordInputRef = useRef();
-  const dispatch = useDispatch();
+  const [invalidCredentials, setInvalidCredentials] = useState("");
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   // Submission handler for sign-in form.
-  const submitHandler = async (event) => {
+  const submitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
 
     // Get user input.
-    const enteredEmail = emailInputRef.current.value;
-    const enteredPassword = passwordInputRef.current.value;
+    const enteredEmail = emailInputRef.current
+      ? emailInputRef.current.value
+      : "";
+    const enteredPassword = passwordInputRef.current
+      ? passwordInputRef.current.value
+      : "";
 
     // Validate user input.
     const enteredEmailIsValid =
@@ -60,7 +69,7 @@ export default function SignIn({ switchToSignUp, formId }) {
       password: enteredPassword,
     });
 
-    if (!result.error) {
+    if (!result?.error) {
       // Successful signIn
 
       // Check if we have any guest cart session.
@@ -88,7 +97,7 @@ export default function SignIn({ switchToSignUp, formId }) {
       // Redirect user to the home page.
       router.replace("/");
     } else {
-      setInvalidCredentials(result.error);
+      setInvalidCredentials(result ? result.error : "Something went wrong...");
     }
   };
 
@@ -105,9 +114,9 @@ export default function SignIn({ switchToSignUp, formId }) {
   }`;
 
   return (
-    <Fragment>
+    <>
       <h1>Sign In</h1>
-      {invalidCredentials && (
+      {isNotEmpty(invalidCredentials) && (
         <p className={styles.errorMessage}>{invalidCredentials}</p>
       )}
       <form onSubmit={submitHandler} id={formId} name="sign-in">
@@ -119,7 +128,7 @@ export default function SignIn({ switchToSignUp, formId }) {
             ref={emailInputRef}
             autoComplete="username"
           />
-          {!formInputIsValid.email && <p>Please enter a valid email</p>}
+          {!formInputIsValid.email && <p>Please enter your email</p>}
         </div>
         <div className={passwordClasses}>
           <label htmlFor="password">Your Password</label>
@@ -129,7 +138,7 @@ export default function SignIn({ switchToSignUp, formId }) {
             ref={passwordInputRef}
             autoComplete="current-password"
           />
-          {!formInputIsValid.password && <p>Please enter a password</p>}
+          {!formInputIsValid.password && <p>Please enter your password</p>}
         </div>
         <div className={styles.actions}>
           <button className={styles.submitButton}>Sign In</button>
@@ -142,6 +151,8 @@ export default function SignIn({ switchToSignUp, formId }) {
           </button>
         </div>
       </form>
-    </Fragment>
+    </>
   );
-}
+};
+
+export default SignIn;

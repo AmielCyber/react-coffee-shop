@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import styles from "./WelcomeMessage.module.css";
 
-export default function WelcomeMessage() {
+const WelcomeMessage = () => {
   const { data: session } = useSession();
 
   let userGreetingMsg = "";
@@ -22,4 +22,6 @@ export default function WelcomeMessage() {
       </p>
     </section>
   );
-}
+};
+
+export default WelcomeMessage;
