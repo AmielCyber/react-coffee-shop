@@ -53,13 +53,13 @@ export const authOptions: NextAuthOptions = {
         return {
           email: user.email,
           name: `${user.firstName} ${user.lastName}`,
+          image: null,
         };
       },
     }),
   ],
   callbacks: {
     session({ session }) {
-      console.log("..next", session);
       return session;
     },
   },

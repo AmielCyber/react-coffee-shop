@@ -72,8 +72,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     authOptions
   );
 
-  console.log(session);
-
   if (!session) {
     // If there is no session prompt user to sign in.
     return {
@@ -85,13 +83,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   return {
     props: {
-      session: {
-        user: {
-          name: session.user.name,
-          email: session.user.email,
-        },
-        expires: session.expires,
-      },
+      session,
     },
   };
 };
