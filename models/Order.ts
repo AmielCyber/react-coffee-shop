@@ -5,7 +5,7 @@ interface Order {
   items: DrinkItem[];
   totalItems: number;
   totalPrice: number;
-  orderDate: Date | null;
+  orderDate: Date | string;
 }
 
 export default Order;

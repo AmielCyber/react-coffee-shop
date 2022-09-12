@@ -17,7 +17,7 @@ const initialOrderObject: Order = {
   items: [],
   totalItems: 0,
   totalPrice: 0,
-  orderDate: null,
+  orderDate: new Date(),
 };
 
 const Cart = ({ onClose, onToSignIn }: CartProps) => {

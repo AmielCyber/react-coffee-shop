@@ -1,5 +1,6 @@
 import { getSession } from "next-auth/react";
 // My imports.
+import type { AppDispatch } from "../index";
 import { uiActions } from "../ui/ui-slice";
 import { cartActions } from "./cart-slice";
 // Import Types
@@ -48,7 +49,7 @@ function fetchCartDataFromLocal() {
  * Gets a cart object from a previous session if there is one and replaces the cart in our redux state.
  */
 export const fetchCartData = () => {
-  return async (dispatch: Function) => {
+  return async (dispatch: AppDispatch) => {
     // Begin cart fetching session.
     let currentStatus: ServerStatus = {
       status: "pending",
@@ -143,7 +144,7 @@ function sendCartDataToLocal(cart: Cart) {
  * @returns void
  */
 export const sendCartData = (cart: Cart) => {
-  return async (dispatch: Function) => {
+  return async (dispatch: AppDispatch) => {
     // Begin server connection.
     let currentStatus: ServerStatus = {
       status: "pending",

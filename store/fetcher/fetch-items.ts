@@ -8,7 +8,7 @@ import type Drink from "../../models/Drink";
  * @param {string} uri
  * @returns {items:Object[], isLoading:boolean, isError:string | null}
  */
-const fetcher = async (uri: string): Promise<Drink[]> => {
+const fetcher = async (uri: string) => {
   const response = await fetch(uri);
   const responseData = await response.json();
   if (!response.ok) {
@@ -18,11 +18,15 @@ const fetcher = async (uri: string): Promise<Drink[]> => {
   return responseData;
 };
 
-const FetchItems = (uri: string) => {
-  const { data, error } = useSWR(uri, fetcher, { revalidateOnFocus: false });
+const FetchItems = <T>(uri: string, arr: T[]) => {
+  const { data, error } = useSWR<T[], Error>(uri, fetcher, {
+    revalidateOnFocus: false,
+  });
+
+  arr = data ? data : [];
 
   return {
-    items: data,
+    items: arr,
     isLoading: !error && !data, // There is no error and data is still being fetched.
     isError: error,
   };

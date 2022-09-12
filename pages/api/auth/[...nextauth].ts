@@ -4,7 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { verifyPassword } from "../../../utils/auth/auth";
 import { connectToDatabase } from "../../../utils/db/db-util";
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
@@ -59,6 +59,7 @@ const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     session({ session }) {
+      console.log("..next", session);
       return session;
     },
   },

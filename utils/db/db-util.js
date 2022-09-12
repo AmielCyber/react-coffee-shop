@@ -86,7 +86,7 @@ async function getAllDocuments(client, collectionName) {
  * Inserts a document in the collection.
  * @param {MongoClient} client
  * @param {string} collectionName
- * @param {JSON} document to insert in the collection
+ * @param {Object} document to insert in the collection
  * @returns MongoDB status result. { acknowledged:boolean, modifiedCount:Number, upsertedId:Object, upsertedCount:Number, matchedCount:Number}
  */
 async function insertADocument(client, collectionName, document) {

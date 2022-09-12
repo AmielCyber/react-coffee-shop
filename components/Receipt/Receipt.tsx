@@ -34,10 +34,7 @@ type ReceiptProps = {
 const Receipt = ({ order, showReceiptItems }: ReceiptProps) => {
   console.log(order);
   const formattedTotalPrice = `$${order.totalPrice.toFixed(2)}`;
-  const localDate =
-    order.orderDate === null
-      ? new Date().toLocaleString()
-      : order.orderDate.toLocaleString();
+  const localDate = order.orderDate.toLocaleString();
   const summaryStyles = `${styles.summary} ${
     showReceiptItems ? styles.divider : ""
   }`;

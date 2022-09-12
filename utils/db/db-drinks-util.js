@@ -9,7 +9,7 @@ const { connectToDatabase, getAllDocuments } = require("./db-util");
 async function getDrinksFromServer() {
   // Drink data we will return.
   const drinkData = {
-    drinks: null,
+    drinks: new Map(),
     errorMessage: "",
   };
   // Connect to the drinks database.
@@ -29,14 +29,12 @@ async function getDrinksFromServer() {
     return drinkData;
   }
   // Map all the drink items in the document.
-  const drinkMap = new Map();
   for (const key in drinkList) {
-    drinkMap.set(drinkList[key]._id.toString(), {
+    drinkData.drinks.set(drinkList[key]._id.toString(), {
       name: drinkList[key].name,
       price: drinkList[key].price,
     });
   }
-  drinkData.drinks = drinkMap;
   return drinkData;
 }
 
