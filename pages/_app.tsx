@@ -11,7 +11,7 @@ import Layout from "../components/Layout/Layout";
 import "../styles/globals.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  console.log("pageProps:", typeof pageProps);
+  // @ts-ignore
   const session = Object.hasOwn(pageProps, "session")
     ? pageProps.session
     : null;
