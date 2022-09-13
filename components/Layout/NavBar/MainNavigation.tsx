@@ -46,7 +46,7 @@ const MainNavigation = () => {
         <ul>
           <li className={activeLinkStyle(currentPath, "/", "")}>
             <Link href={"/"} passHref>
-              <a>
+              <a aria-label="Home">
                 <CompanyIcon width={30} height={30} fill={"white"} />
               </a>
             </Link>

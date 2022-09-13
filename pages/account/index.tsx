@@ -6,6 +6,7 @@ import Image from "next/image";
 // Frontend imports
 import dynamic from "next/dynamic";
 import { useState, Suspense } from "react";
+import Head from "next/head";
 import { m } from "framer-motion";
 import type { Session } from "next-auth";
 // My imports.
@@ -33,6 +34,14 @@ export default function AccountPage({ session }: AccountPageProps) {
 
   return (
     <>
+      <Head>
+        <title>View your account.</title>
+        <meta
+          name="description"
+          content="Change your password or view your past orders."
+          title="title"
+        />
+      </Head>
       <div className={styles.accountPageImage}>
         <Image
           alt="A coffee cup in a white background and letters spelling LOVE"

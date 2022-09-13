@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Head from "next/head";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -27,6 +28,14 @@ export default function AuthPage() {
   // There is no session, hence we prompt the user to sign in.
   return (
     <>
+      <Head>
+        <title>Sign In to React Coffee!</title>
+        <meta
+          name="description"
+          content="Sign in to react coffee! Or Sign up to see your past orders."
+          title="title"
+        />
+      </Head>
       <div className={styles.authPageImage}>
         <Image
           alt="Latte on top of a white table"
