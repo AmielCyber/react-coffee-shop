@@ -72,7 +72,7 @@ code to minimize server calls, like using Vercel’s SWR hook for data caching.
 
 ### Tools
 
-- **Javascript** and **NodeJS**
+- **Typescript** and **NodeJS**
 - **CSS** modules
 - [**ReactJS**](https://reactjs.org) component framework
 - [**NextJS**](https://nextjs.org) fullstack/production framework
@@ -139,7 +139,7 @@ checkmark.
 - [x] Receipt after checkout
 - [x] Past Order History from the profile page
 - [x] Past Order animation using framer motion
-- [ ] Typescript Migration
+- [x] Typescript Migration
 
 ## Performance
 
@@ -155,161 +155,157 @@ Screenshot from Vercel using [Checkly](https://vercel.com/integrations/checkly) 
 
 ```bash
 react-coffee-shop
-├── assets
+├── __tests__/
+├── assets/
 │   ├── coffee-drinks.jpg
 │   ├── coffee-shop.jpg
-│   ├── coffeeLove.jpg 
-│   ├── coffeeWhiteBackground.jpg
-│   ├── desktopPreview.gif 
-│   ├── mobilePreview.gif
-│   └── source.txt
-│    components
-│    ├── Auth
-│    │   ├── AuthForm.js
-│    │   ├── AuthForm.module.css
-│    │   ├── SignIn.js
-│    │   └── SignUp.js
-│    ├── Cart
-│    │   ├── Cart.js
-│    │   ├── Cart.module.css
-│    │   ├── CartContent.js
-│    │   ├── CartContent.module.css
-│    │   ├── CartItem
-│    │   │   ├── CartItem.js
-│    │   │   ├── CartItem.module.css
-│    │   │   ├── CartItemList.js
-│    │   │   └── CartItemList.module.css
-│    │   └── Checkout
-│    │       ├── Checkout.js
-│    │       ├── Checkout.module.css
-│    │       ├── GuestCheckout.js
-│    │       └── RegisteredCheckout.js
-│    ├── Drinks
-│    │   ├── AvailableDrinks.js
-│    │   ├── AvailableDrinks.module.css
-│    │   ├── DrinkItem
-│    │   │   ├── DrinkItem.js
-│    │   │   ├── DrinkItem.module.css
-│    │   │   ├── DrinkItemForm.js
-│    │   │   ├── DrinkItemForm.module.css
-│    │   │   ├── DrinkItemList.js
-│    │   │   └── DrinkItemList.module.css
-│    │   ├── DrinksSummary.js
-│    │   └── DrinksSummary.module.css
-│    ├── Layout
-│    │   ├── HeadMeta.js
-│    │   ├── Icons
-│    │   │   ├── CartCheck.js
-│    │   │   ├── CartIcon.js
-│    │   │   ├── ClearCart.js
-│    │   │   └── CompanyIcon.js
-│    │   ├── Layout.js
-│    │   ├── Layout.module.css
-│    │   └── NavBar
-│    │       ├── CartModal.js
-│    │       ├── HeaderCartButton.js
-│    │       ├── HeaderCartButton.module.css
-│    │       ├── MainNavigation.js
-│    │       └── MainNavigation.module.css
-│    ├── PastOrders
-│    │   ├── DisplayPastOrders.js
-│    │   ├── DisplayPastOrders.module.css
-│    │   ├── PastOrderList.js
-│    │   ├── PastOrderList.module.css
-│    │   ├── PastOrders.js
-│    │   └── PastOrders.module.css
-│    ├── Profile
-│    │   ├── PasswordForm.js
-│    │   ├── PasswordForm.module.css
-│    │   ├── UserProfile.js
-│    │   └── UserProfile.module.css
-│    ├── Receipt
-│    │   ├── Receipt.js
-│    │   ├── Receipt.module.css
-│    │   ├── ReceiptItem.js
-│    │   └── ReceiptItem.module.css
-│    ├── UI
-│    │   ├── Card.js
-│    │   ├── Card.module.css
-│    │   ├── LoadingSpinner.js
-│    │   ├── LoadingSpinner.module.css
-│    │   ├── Modal.js
-│    │   └── Modal.module.css
-│    └── Welcome
-│        ├── WelcomeMessage.js
-│        └── WelcomeMessage.module.css
-├── drinksData
-│   ├── coffee.js
-│   └── drinks.json
-├── pages
+│   ├── coffeeLove.jpg
+│   ├── coffeeWhiteBackground.jpg
+│   ├── desktopPreview.gif
+│   ├── mobilePreview.gif
+│   ├── performance.png
+│   ├── source.txt
+├── components/
+│   ├── Auth/
+│   │   ├── AuthForm.module.css
+│   │   ├── AuthForm.tsx
+│   │   ├── SignIn.tsx
+│   │   └── SignUp.tsx
+│   ├── Cart/
+│   │   ├── Cart.module.css
+│   │   ├── Cart.tsx
+│   │   ├── CartContent.module.css
+│   │   ├── CartContent.tsx
+│   │   ├── CartItem/
+│   │   │   ├── CartItem.module.css
+│   │   │   ├── CartItem.tsx
+│   │   │   ├── CartItemList.module.css
+│   │   │   └── CartItemList.tsx
+│   │   └── Checkout/
+│   │       ├── Checkout.module.css
+│   │       ├── Checkout.tsx
+│   │       ├── GuestCheckout.tsx
+│   │       └── RegisteredCheckout.tsx
+│   ├── Drinks/
+│   │   ├── AvailableDrinks.module.css
+│   │   ├── AvailableDrinks.tsx
+│   │   ├── DrinkItem/
+│   │   │   ├── DrinkItem.module.css
+│   │   │   ├── DrinkItem.tsx
+│   │   │   ├── DrinkItemForm.module.css
+│   │   │   ├── DrinkItemForm.tsx
+│   │   │   ├── DrinkItemList.module.css
+│   │   │   └── DrinkItemList.tsx
+│   │   ├── DrinksSummary.module.css
+│   │   └── DrinksSummary.tsx
+│   ├── Layout/
+│   │   ├── HeadMeta.tsx
+│   │   ├── Icons/
+│   │   │   ├── CartCheck.tsx
+│   │   │   ├── CartIcon.tsx
+│   │   │   ├── ClearCart.tsx
+│   │   │   └── CompanyIcon.tsx
+│   │   ├── Layout.module.css
+│   │   ├── Layout.tsx
+│   │   └── NavBar/
+│   │       ├── CartModal.tsx
+│   │       ├── HeaderCartButton.module.css
+│   │       ├── HeaderCartButton.tsx
+│   │       ├── MainNavigation.module.css
+│   │       └── MainNavigation.tsx
+│   ├── PastOrders/
+│   │   ├── DisplayPastOrders.module.css
+│   │   ├── DisplayPastOrders.tsx
+│   │   ├── PastOrderList.module.css
+│   │   ├── PastOrderList.tsx
+│   │   ├── PastOrders.module.css
+│   │   └── PastOrders.tsx
+│   ├── Profile/
+│   │   ├── PasswordForm.module.css
+│   │   ├── PasswordForm.tsx
+│   │   ├── UserProfile.module.css
+│   │   └── UserProfile.tsx
+│   ├── Receipt/
+│   │   ├── Receipt.module.css
+│   │   ├── Receipt.tsx
+│   │   ├── ReceiptItem.module.css
+│   │   └── ReceiptItem.tsx
+│   ├── UI/
+│   │   ├── Card.module.css
+│   │   ├── Card.tsx
+│   │   ├── LoadingSpinner.module.css
+│   │   ├── LoadingSpinner.tsx
+│   │   ├── Modal.module.css
+│   │   └── Modal.tsx
+│   └── Welcome/
+│       ├── WelcomeMessage.module.css
+│       └── WelcomeMessage.tsx
+├── drinksData/
+│   ├── drinks.json
+│   └── setCoffeeJSON_Data.js
+├── models/
+│   ├── Cart.ts
+│   ├── Drink.ts
+│   ├── DrinkItem.ts
+│   ├── Order.ts
+│   ├── Receipt.ts
+│   ├── RegisteredUser.ts
+│   ├── ServerStatus.ts
+│   ├── UI_State.ts
+│   └── User.ts
+├── pages/
 │   ├── HomePage.module.css
-│   ├── _app.js
-│   ├── _document.js
-│   ├── account
+│   ├── _app.tsx
+│   ├── _document.tsx
+│   ├── account/
 │   │   ├── AccountPage.module.css
-│   │   └── index.js
-│   ├── api
-│   │   ├── auth
-│   │   │   ├── [...nextauth].js
-│   │   │   └── signup.js
-│   │   ├── cart
-│   │   │   └── cart.js
-│   │   ├── menu
-│   │   │   └── drinks.js
-│   │   ├── order
-│   │   │   └── order.js
-│   │   └── user
-│   │       └── change-password.js
-│   ├── auth
+│   │   └── index.tsx
+│   ├── api/
+│   │   ├── auth/
+│   │   │   ├── [...nextauth].ts
+│   │   │   └── signup.ts
+│   │   ├── cart/
+│   │   │   └── cart.ts
+│   │   ├── menu/
+│   │   │   └── drinks.ts
+│   │   ├── order/
+│   │   │   └── order.ts
+│   │   └── user/
+│   │       └── change-password.ts
+│   ├── auth/
 │   │   ├── AuthPage.module.css
-│   │   └── index.js
-│   ├── index.js
-│   └── menu
+│   │   └── index.tsx
+│   ├── index.tsx
+│   └── menu/
 │       ├── MenuPage.module.css
-│       └── index.js
+│       └── index.tsx
 ├── public
-│   ├── drinkImages
-│   │   ├── americano.jpg
-│   │   ├── cappuccino.jpg
-│   │   ├── coldBrew.jpg
-│   │   ├── cortado.jpg
-│   │   ├── dripCoffee.jpg
-│   │   ├── espresso.jpg
-│   │   ├── flatWhite.jpg
-│   │   ├── icedLatte.jpg
-│   │   ├── latte.jpg
-│   │   ├── macchiato.jpg
-│   │   ├── nitroBrew.jpg
-│   │   └── source.txt
-│   └── favicon
-│       ├── android-chrome-192x192.png
-│       ├── android-chrome-512x512.png
-│       ├── apple-touch-icon.png
-│       ├── favicon-16x16.png
-│       ├── favicon-32x32.png
-│       ├── favicon.ico
-│       ├── safari-pinned-tab.svg
-│       ├── site.webmanifest
-│       └── source.txt
-├── store
-│   ├── cart
-│   │   ├── cart-actions.js
-│   │   └── cart-slice.js
-│   ├── fetcher
-│   │   └── fetch-items.js
-│   ├── index.js
-│   └── ui
-│       └── ui-slice.js
-├── styles
+│   ├── drinkImages/
+│   └── favicon/
+├── store/
+│   ├── cart/
+│   │   ├── cart-actions.ts
+│   │   └── cart-slice.ts
+│   ├── fetcher/
+│   │   └── fetch-items.ts
+│   ├── hooks.ts
+│   ├── index.ts
+│   └── ui/
+│       └── ui-slice.ts
+├── styles/
 │   └── globals.css
-└── utils
-    ├── animations
-    │   └── animation.js
-    ├── auth
+├── types/
+│   └── next-auth.d.ts
+└── utils/
+    ├── animations/
+    │   └── animation.ts
+    ├── auth/
     │   └── auth.js
-    └── db
-        ├── db-drinks-util.js
-        ├── db-util.js
-        ├── input-validation.js
-        └── mongodb-client.js
+    ├── db/
+    │   ├── db-drinks-util.js
+    │   ├── db-util.js
+    │   ├── input-validation.js
+    │   └── mongodb-client.js
+    └── validation/
+        └── input_validation.ts
 ```
