@@ -1,13 +1,16 @@
 import dynamic from "next/dynamic";
-import React, { useState } from "react";
+import { useState, Suspense } from "react";
 import { useSession } from "next-auth/react";
 // My imports.
 import type User from "../../../models/User";
+import LoadingSpinner from "../../UI/LoadingSpinner";
 // CSS import.
 import styles from "./Checkout.module.css";
 // My dynamic imports.
-const RegisteredCheckout = dynamic(() => import("./RegisteredCheckout"));
-const GuestCheckout = dynamic(() => import("./GuestCheckout"));
+const RegisteredCheckout = dynamic(() => import("./RegisteredCheckout"), {
+  ssr: false,
+});
+const GuestCheckout = dynamic(() => import("./GuestCheckout"), { ssr: false });
 
 type CheckoutProps = {
   onToSignIn: () => void;
@@ -35,14 +38,16 @@ const Checkout = ({
     const email = session.user.email;
 
     return (
-      <RegisteredCheckout
-        firstName={firstName}
-        lastName={lastName}
-        email={email}
-        onCancel={onCancel}
-        onClose={onClose}
-        onConfirm={onConfirm}
-      />
+      <Suspense fallback={<LoadingSpinner />}>
+        <RegisteredCheckout
+          firstName={firstName}
+          lastName={lastName}
+          email={email}
+          onCancel={onCancel}
+          onClose={onClose}
+          onConfirm={onConfirm}
+        />
+      </Suspense>
     );
   }
 
@@ -66,11 +71,13 @@ const Checkout = ({
 
   // Guest user agreed to continue as guest.
   return (
-    <GuestCheckout
-      onCancel={onCancel}
-      onClose={onClose}
-      onConfirm={onConfirm}
-    />
+    <Suspense fallback={<LoadingSpinner />}>
+      <GuestCheckout
+        onCancel={onCancel}
+        onClose={onClose}
+        onConfirm={onConfirm}
+      />
+    </Suspense>
   );
 };
 

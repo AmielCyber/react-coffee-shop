@@ -1,4 +1,3 @@
-import React from "react";
 import { SessionProvider } from "next-auth/react";
 import { Provider } from "react-redux";
 import { LazyMotion, domAnimation } from "framer-motion";

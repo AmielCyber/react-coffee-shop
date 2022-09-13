@@ -1,10 +1,9 @@
-import React from "react";
 // My imports.
-import type Drink from "../../models/Drink";
 import FetchItems from "../../store/fetcher/fetch-items";
 import Card from "../UI/Card";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import DrinkItemList from "./DrinkItem/DrinkItemList";
+import type Drink from "../../models/Drink";
 // CSS import.
 import styles from "./AvailableDrinks.module.css";
 

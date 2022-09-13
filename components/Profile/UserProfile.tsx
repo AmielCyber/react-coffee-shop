@@ -1,5 +1,5 @@
+import { useState } from "react";
 import type { Session } from "next-auth";
-import React, { useState } from "react";
 // My import.
 import PasswordForm from "./PasswordForm";
 // CSS import.

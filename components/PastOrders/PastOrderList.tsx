@@ -1,12 +1,12 @@
-import React from "react";
+import { memo } from "react";
 import { m } from "framer-motion";
 // My imports.
-import type Order from "../../models/Order";
 import {
   pastOrdersAnimationItem,
   pastOrdersAnimationList,
 } from "../../utils/animations/animation";
 import Receipt from "../Receipt/Receipt";
+import type Order from "../../models/Order";
 // CSS import.
 import styles from "./PastOrderList.module.css";
 
@@ -61,4 +61,4 @@ const PastOrderList = ({ orders, onShowReceipt }: PastOrderListProps) => {
 };
 
 // Memoized component since the parent changes states frequently.
-export default React.memo(PastOrderList, ordersAreTheSame);
+export default memo(PastOrderList, ordersAreTheSame);

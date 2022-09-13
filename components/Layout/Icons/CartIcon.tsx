@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 /**
  * Cart Icon to display for our button.
  * By https://ionic.io/ionicons
@@ -14,4 +14,4 @@ const CartIcon = () => {
     </svg>
   );
 };
-export default React.memo(CartIcon);
+export default memo(CartIcon);

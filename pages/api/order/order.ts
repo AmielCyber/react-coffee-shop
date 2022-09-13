@@ -88,7 +88,7 @@ export default async function handler(
           items: [],
           totalItems: 0,
           totalPrice: 0,
-          orderDate: "",
+          orderDate: new Date(),
         };
 
         // Check if each item in the list from the cart is valid.
@@ -123,7 +123,7 @@ export default async function handler(
             return;
           }
         }
-        // Create date ordered.
+        // Update date ordered.
         receipt.orderDate = new Date();
 
         // Connect to the order database.

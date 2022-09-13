@@ -1,11 +1,11 @@
-import React, { useState, Fragment, useCallback } from "react";
+import { useState, Fragment, useCallback } from "react";
 import ReactDOM from "react-dom";
 import { AnimatePresence } from "framer-motion";
 // My imports.
-import type Order from "../../models/Order";
 import PastOrderList from "./PastOrderList";
 import Modal from "../UI/Modal";
 import Receipt from "../Receipt/Receipt";
+import type Order from "../../models/Order";
 // CSS import.
 import styles from "./DisplayPastOrders.module.css";
 

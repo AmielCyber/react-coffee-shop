@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, memo, Suspense } from "react";
 import dynamic from "next/dynamic";
 import { useAnimation, m } from "framer-motion";
 // My imports.
@@ -79,4 +79,4 @@ const HeaderCartButton = ({ onSignIn }: HeaderCartButtonProps) => {
   );
 };
 
-export default React.memo(HeaderCartButton);
+export default memo(HeaderCartButton);

@@ -1,12 +1,13 @@
 import dynamic from "next/dynamic";
-import React, { useState, useCallback } from "react";
+import { useState, useCallback, Suspense } from "react";
 // My imports.
-import type Cart from "../../models/Cart";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import type User from "../../models/User";
 import { cartActions } from "../../store/cart/cart-slice";
 import CartItemList from "./CartItem/CartItemList";
 import ClearCart from "../Layout/Icons/ClearCart";
+import LoadingSpinner from "../UI/LoadingSpinner";
+import type Cart from "../../models/Cart";
+import type User from "../../models/User";
 // CSS import.
 import styles from "./CartContent.module.css";
 // My dynamic import
@@ -99,12 +100,14 @@ const CartContent = ({
         <span className={styles.price}>{totalPriceFormatted}</span>
       </div>
       {isCheckout && (
-        <Checkout
-          onToSignIn={onToSignIn}
-          onClose={onClose}
-          onCancel={cancelHandler}
-          onConfirm={submitHandler}
-        />
+        <Suspense fallback={<LoadingSpinner />}>
+          <Checkout
+            onToSignIn={onToSignIn}
+            onClose={onClose}
+            onCancel={cancelHandler}
+            onConfirm={submitHandler}
+          />
+        </Suspense>
       )}
       {!isCheckout && (
         <div className={styles.actions}>

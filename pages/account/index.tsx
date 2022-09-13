@@ -5,9 +5,9 @@ import { unstable_getServerSession } from "next-auth/next";
 import Image from "next/image";
 // Frontend imports
 import dynamic from "next/dynamic";
-import type { Session } from "next-auth";
-import React, { useState } from "react";
+import { useState, Suspense } from "react";
 import { m } from "framer-motion";
+import type { Session } from "next-auth";
 // My imports.
 import { pageAnimation } from "../../utils/animations/animation";
 import coffeeLove from "../../assets/coffeeLove.jpg";
@@ -17,7 +17,8 @@ import UserProfile from "../../components/Profile/UserProfile";
 import styles from "./AccountPage.module.css";
 // My dynamic import.
 const PastOrders = dynamic(
-  () => import("../../components/PastOrders/PastOrders")
+  () => import("../../components/PastOrders/PastOrders"),
+  { ssr: false }
 );
 
 type AccountPageProps = {
@@ -57,7 +58,11 @@ export default function AccountPage({ session }: AccountPageProps) {
             <h2>{showPastOrders ? "Hide Past Orders" : "Show Past Orders"}</h2>
           </Card>
         </div>
-        {showPastOrders && <PastOrders />}
+        {showPastOrders && (
+          <Suspense fallback={`Loading...`}>
+            <PastOrders />
+          </Suspense>
+        )}
       </m.div>
     </>
   );

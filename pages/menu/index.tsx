@@ -1,5 +1,5 @@
+import { Suspense } from "react";
 import dynamic from "next/dynamic";
-import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { m } from "framer-motion";
@@ -7,11 +7,13 @@ import { m } from "framer-motion";
 import DrinksSummary from "../../components/Drinks/DrinksSummary";
 import drinksImage from "../../assets/coffee-drinks.jpg";
 import { pageAnimation } from "../../utils/animations/animation";
+import LoadingSpinner from "../../components/UI/LoadingSpinner";
 // CSS styles.
 import styles from "./MenuPage.module.css";
 // My dynamic import.
 const AvailableDrinks = dynamic(
-  () => import("../../components/Drinks/AvailableDrinks")
+  () => import("../../components/Drinks/AvailableDrinks"),
+  { ssr: false }
 );
 
 export default function Menu() {
@@ -44,7 +46,9 @@ export default function Menu() {
       >
         <DrinksSummary />
       </m.div>
-      <AvailableDrinks />
+      <Suspense fallback={<LoadingSpinner />}>
+        <AvailableDrinks />
+      </Suspense>
     </>
   );
 }

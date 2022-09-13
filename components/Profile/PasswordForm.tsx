@@ -1,11 +1,8 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
+// My import.
+import { isValidPassword } from "../../utils/validation/input_validation";
 // CSS import.
 import styles from "./PasswordForm.module.css";
-
-// Verifies at the front end if password is valid.
-const passwordIsValid = (password: string) => {
-  return password.trim() !== "" && password.length >= 7;
-};
 
 type PasswordManager = {
   currentPassword: string;
@@ -56,7 +53,7 @@ const PasswordForm = ({ userEmail, onSuccess }: PasswordFormProps) => {
       : "";
 
     // Front-end validation
-    if (passwordIsValid(enteredNewPassword)) {
+    if (isValidPassword(enteredNewPassword)) {
       try {
         const result = await changePassword({
           currentPassword: enteredCurrentPassword,

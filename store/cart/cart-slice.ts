@@ -115,6 +115,7 @@ const cartSlice = createSlice({
 
 export const cartActions = cartSlice.actions;
 
+// Will automatically set type to Cart when selecting cart.
 export const selectCart = (state: RootState) => state.cart;
 
 export default cartSlice.reducer;

@@ -1,8 +1,7 @@
 import { AnimatePresence } from "framer-motion";
-import React from "react";
 // My import.
-import type DrinkItem from "models/DrinkItem";
 import CartItem from "./CartItem";
+import type DrinkItem from "models/DrinkItem";
 // CSS import.
 import styles from "./CartItemList.module.css";
 

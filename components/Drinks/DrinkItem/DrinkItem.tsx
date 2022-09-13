@@ -1,12 +1,13 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { m, Variants } from "framer-motion";
+import { memo } from "react";
+import { m } from "framer-motion";
 import Image from "next/image";
+import type { Variants } from "framer-motion";
 // My imports.
-import type Drink from "../../../models/Drink";
-import type DrinkItemInterface from "../../../models/DrinkItem";
+import { useAppDispatch } from "../../../store/hooks";
 import { cartActions } from "../../../store/cart/cart-slice";
 import DrinkItemForm from "./DrinkItemForm";
+import type Drink from "../../../models/Drink";
+import type DrinkItemInterface from "../../../models/DrinkItem";
 // CSS import.
 import styles from "./DrinkItem.module.css";
 
@@ -24,7 +25,7 @@ const drinksAreSame = (
 };
 
 const DrinkItem = ({ drink, variants }: DrinkItemProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const formattedPrice = `$${drink.price.toFixed(2)}`;
 
   const onAddToCartHandler = (amount: number) => {
@@ -62,4 +63,4 @@ const DrinkItem = ({ drink, variants }: DrinkItemProps) => {
   );
 };
 
-export default React.memo(DrinkItem, drinksAreSame);
+export default memo(DrinkItem, drinksAreSame);

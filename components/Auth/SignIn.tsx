@@ -1,16 +1,16 @@
-import React, { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useAppDispatch } from "../../store/hooks";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
-// My import
+// My imports
 import { CART_STORAGE_NAME } from "../../store/cart/cart-actions";
 import { sendCartData, fetchCartData } from "../../store/cart/cart-actions";
+import {
+  isValidEmail,
+  isValidPassword,
+} from "../../utils/validation/input_validation";
 // CSS import.
 import styles from "./AuthForm.module.css";
-
-// Front-end validation constants.
-const isNotEmpty = (value: string): boolean => value.trim() !== "";
-const isEmail = (value: string): boolean => value.includes("@");
 
 type SignInProps = {
   switchToSignUp: (isNewUser: boolean, message: string) => void;
@@ -41,9 +41,8 @@ const SignIn = ({ switchToSignUp, formId }: SignInProps) => {
       : "";
 
     // Validate user input.
-    const enteredEmailIsValid =
-      isNotEmpty(enteredEmail) && isEmail(enteredEmail);
-    const enteredPasswordIsValid = isNotEmpty(enteredPassword);
+    const enteredEmailIsValid = isValidEmail(enteredEmail);
+    const enteredPasswordIsValid = isValidPassword(enteredPassword);
 
     // Save validation for user validation feedback.
     setFormInputIsValid({
@@ -116,7 +115,7 @@ const SignIn = ({ switchToSignUp, formId }: SignInProps) => {
   return (
     <>
       <h1>Sign In</h1>
-      {isNotEmpty(invalidCredentials) && (
+      {invalidCredentials !== "" && (
         <p className={styles.errorMessage}>{invalidCredentials}</p>
       )}
       <form onSubmit={submitHandler} id={formId} name="sign-in">

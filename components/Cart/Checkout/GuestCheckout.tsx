@@ -1,13 +1,10 @@
-import React, { useState, useRef } from "react";
-// My import.
+import { useState, useRef } from "react";
+// My imports.
 import CartCheck from "../../Layout/Icons/CartCheck";
-// CSS import.
+import { isValidEmail, isValidName } from "utils/validation/input_validation";
 import type User from "../../../models/User";
+// CSS import.
 import styles from "./Checkout.module.css";
-
-// Front-end validation constants.
-const isNotEmpty = (value: string): boolean => value.trim() !== "";
-const isEmail = (value: string): boolean => value.includes("@");
 
 type GuestCheckoutProps = {
   onCancel: () => void;
@@ -45,10 +42,9 @@ const GuestCheckout = ({
       : "";
 
     // Validate user inputs.
-    const enteredFirstNameIsValid = isNotEmpty(enteredFirstName);
-    const enteredLastNameIsValid = isNotEmpty(enteredLastName);
-    const enteredEmailIsValid =
-      isNotEmpty(enteredEmail) && isEmail(enteredEmail);
+    const enteredFirstNameIsValid = isValidName(enteredFirstName);
+    const enteredLastNameIsValid = isValidName(enteredLastName);
+    const enteredEmailIsValid = isValidEmail(enteredEmail);
 
     // Save validation for user validation feedback.
     setFormInputValid({

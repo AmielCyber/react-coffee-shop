@@ -1,4 +1,3 @@
-import React from "react";
 /**
  * Used to clear the cart.
  * Source: https://icons.getbootstrap.com/icons/cart-x/

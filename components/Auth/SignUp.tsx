@@ -1,11 +1,9 @@
-import React, { useState, useRef, useCallback } from "react";
-// My import.
+import { useState, useRef, useCallback } from "react";
+// My imports.
+import { isValidName } from "../../utils/validation/input_validation";
 import type RegisteredUser from "../../models/RegisteredUser";
 // CSS import.
 import styles from "./AuthForm.module.css";
-
-// Front-end validation constants.
-const isNotEmpty = (value: string) => value.trim() !== "";
 
 /**
  * Calls our signup API which creates a new user.
@@ -71,8 +69,8 @@ const SignUp = ({ switchToSignIn, formId }: SingUpProps) => {
 
     // Validate user input name.
     // Let email and password get handled by input HTML object.
-    const enteredFirstNameIsValid = isNotEmpty(enteredFirstName);
-    const enteredLastNameIsValid = isNotEmpty(enteredLastName);
+    const enteredFirstNameIsValid = isValidName(enteredFirstName);
+    const enteredLastNameIsValid = isValidName(enteredLastName);
 
     // Save validation for user validation feedback.
     setFormInputIsValid({
@@ -117,7 +115,7 @@ const SignUp = ({ switchToSignIn, formId }: SingUpProps) => {
   return (
     <>
       <h1>Create Account</h1>
-      {isNotEmpty(invalidCredentials) && (
+      {invalidCredentials !== "" && (
         <p className={styles.errorMessage}>{invalidCredentials}</p>
       )}
       <form onSubmit={submitHandler} id={formId}>

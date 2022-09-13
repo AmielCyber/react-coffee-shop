@@ -1,4 +1,3 @@
-import React from "react";
 // My imports.
 import MainNavigation from "./NavBar/MainNavigation";
 // CSS import.

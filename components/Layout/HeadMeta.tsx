@@ -1,11 +1,11 @@
-import React from "react";
+import { memo } from "react";
 import Head from "next/head";
 
 /**
  * Meta component containing our meta data and the links to our favicon.
  * @returns Meta component.
  */
-function HeadMeta() {
+const HeadMeta = () => {
   return (
     <Head>
       <link
@@ -35,6 +35,6 @@ function HeadMeta() {
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
   );
-}
+};
 
-export default React.memo(HeadMeta);
+export default memo(HeadMeta);

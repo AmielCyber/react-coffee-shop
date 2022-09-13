@@ -1,6 +1,4 @@
 import useSWR from "swr";
-// My import
-import type Drink from "../../models/Drink";
 
 /**
  * Fetcher function for the SWR hook.
@@ -23,7 +21,7 @@ const FetchItems = <T>(uri: string, arr: T[]) => {
     revalidateOnFocus: false,
   });
 
-  arr = data ? data : [];
+  arr = data ? data : arr;
 
   return {
     items: arr,

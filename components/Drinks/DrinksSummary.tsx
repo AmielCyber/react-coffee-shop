@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 // CSS import.
 import styles from "./DrinksSummary.module.css";
 
@@ -14,4 +14,4 @@ const DrinksSummary = () => {
     </section>
   );
 };
-export default React.memo(DrinksSummary);
+export default memo(DrinksSummary);

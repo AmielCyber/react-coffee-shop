@@ -1,11 +1,11 @@
 import dynamic from "next/dynamic";
-import React, { useState } from "react";
+import { useState, Suspense } from "react";
 // My imports.
 // CSS import.
 import styles from "./AuthForm.module.css";
 // My dynamic imports.
-const SignIn = dynamic(() => import("./SignIn"));
-const SignUp = dynamic(() => import("./SignUp"));
+const SignIn = dynamic(() => import("./SignIn"), { ssr: false });
+const SignUp = dynamic(() => import("./SignUp"), { ssr: false });
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -33,9 +33,13 @@ const AuthForm = () => {
         </label>
       )}
       {isLogin ? (
-        <SignIn switchToSignUp={switchAuthModeHandler} formId={formId} />
+        <Suspense fallback={`Loading...`}>
+          <SignIn switchToSignUp={switchAuthModeHandler} formId={formId} />
+        </Suspense>
       ) : (
-        <SignUp switchToSignIn={switchAuthModeHandler} formId={formId} />
+        <Suspense fallback={`Loading...`}>
+          <SignUp switchToSignIn={switchAuthModeHandler} formId={formId} />
+        </Suspense>
       )}
     </div>
   );

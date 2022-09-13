@@ -1,12 +1,11 @@
-import React from "react";
 import { m } from "framer-motion";
 // My imports.
-import type Drink from "../../../models/Drink";
 import DrinkItem from "./DrinkItem";
 import {
   drinkItemAnimation,
   drinkItemListAnimation,
 } from "../../../utils/animations/animation";
+import type Drink from "../../../models/Drink";
 // CSS import.
 import styles from "./DrinkItemList.module.css";
 

@@ -1,16 +1,18 @@
+import { Suspense } from "react";
 import dynamic from "next/dynamic";
-import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { m } from "framer-motion";
-// My Imports.
+// My imports.
 import coffeeShopImage from "../assets/coffee-shop.jpg";
 import { pageAnimation } from "../utils/animations/animation";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
 // CSS styles.
 import styles from "./HomePage.module.css";
 // My dynamic import.
 const WelcomeMessage = dynamic(
-  () => import("../components/Welcome/WelcomeMessage")
+  () => import("../components/Welcome/WelcomeMessage"),
+  { ssr: false }
 );
 
 export default function Home() {
@@ -42,7 +44,9 @@ export default function Home() {
         animate="animate"
         variants={pageAnimation}
       >
-        <WelcomeMessage />
+        <Suspense fallback={<LoadingSpinner />}>
+          <WelcomeMessage />
+        </Suspense>
       </m.div>
     </>
   );

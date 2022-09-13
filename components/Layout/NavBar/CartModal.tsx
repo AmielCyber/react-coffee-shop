@@ -1,11 +1,12 @@
-import React from "react";
+import { memo, Suspense } from "react";
 import dynamic from "next/dynamic";
 import ReactDOM from "react-dom";
 import { AnimatePresence } from "framer-motion";
 // My imports.
 import Modal from "../../UI/Modal";
+import LoadingSpinner from "../../UI/LoadingSpinner";
 // My dynamic import.
-const Cart = dynamic(() => import("../../Cart/Cart"));
+const Cart = dynamic(() => import("../../Cart/Cart"), { ssr: false });
 
 type CartModalProps = {
   cartIsShown: boolean;
@@ -28,7 +29,9 @@ const CartModal = ({ cartIsShown, onClose, onToSignIn }: CartModalProps) => {
     <AnimatePresence>
       {cartIsShown && (
         <Modal onClose={onClose}>
-          <Cart onClose={onClose} onToSignIn={onToSignIn} />
+          <Suspense fallback={<LoadingSpinner />}>
+            <Cart onClose={onClose} onToSignIn={onToSignIn} />
+          </Suspense>
         </Modal>
       )}
     </AnimatePresence>,
@@ -36,4 +39,4 @@ const CartModal = ({ cartIsShown, onClose, onToSignIn }: CartModalProps) => {
   );
 };
 
-export default React.memo(CartModal, cartStateChanged);
+export default memo(CartModal, cartStateChanged);

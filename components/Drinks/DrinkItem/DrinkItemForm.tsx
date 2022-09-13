@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 // CSS import.
 import styles from "./DrinkItemForm.module.css";
 

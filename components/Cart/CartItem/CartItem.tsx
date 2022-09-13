@@ -1,10 +1,10 @@
-import React from "react";
+import { memo } from "react";
 import { m } from "framer-motion";
 // My imports.
-import type DrinkItem from "../../../models/DrinkItem";
 import { useAppDispatch } from "../../../store/hooks";
 import { cartActions } from "../../../store/cart/cart-slice";
 import { cartItemAnimation } from "../../../utils/animations/animation";
+import type DrinkItem from "../../../models/DrinkItem";
 // My CSS import.
 import styles from "./CartItem.module.css";
 
@@ -70,4 +70,4 @@ const CartItem = ({ item }: CartItemProps) => {
   );
 };
 
-export default React.memo(CartItem, sameAmount);
+export default memo(CartItem, sameAmount);

@@ -1,4 +1,3 @@
-import React from "react";
 /**
  * Used to checkout.
  * Source: https://icons.getbootstrap.com/icons/cart-check/

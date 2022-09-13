@@ -1,8 +1,7 @@
-import React from "react";
 // My import.
+import ReceiptItem from "./ReceiptItem";
 import type DrinkItem from "../../models/DrinkItem";
 import type Order from "../../models/Order";
-import ReceiptItem from "./ReceiptItem";
 // CSS import.
 import styles from "./Receipt.module.css";
 
@@ -32,7 +31,6 @@ type ReceiptProps = {
 };
 
 const Receipt = ({ order, showReceiptItems }: ReceiptProps) => {
-  console.log(order);
   const formattedTotalPrice = `$${order.totalPrice.toFixed(2)}`;
   const localDate = order.orderDate.toLocaleString();
   const summaryStyles = `${styles.summary} ${

@@ -1,7 +1,6 @@
-import React from "react";
-// My import.
-import type User from "../../../models/User";
+// My imports.
 import CartCheck from "../../Layout/Icons/CartCheck";
+import type User from "../../../models/User";
 // CSS import.
 import styles from "./Checkout.module.css";
 

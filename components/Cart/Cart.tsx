@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 // My imports.
 import LoadingSpinner from "../UI/LoadingSpinner";
 import Receipt from "../Receipt/Receipt";

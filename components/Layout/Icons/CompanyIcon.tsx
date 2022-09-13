@@ -1,5 +1,5 @@
-import React from "react";
-
+import { memo } from "react";
+// My import type.
 type CompanyIconProps = {
   width: number;
   height: number;
@@ -98,4 +98,4 @@ const CompanyIcon = ({ width, height, fill }: CompanyIconProps) => {
   );
 };
 
-export default React.memo(CompanyIcon);
+export default memo(CompanyIcon);
