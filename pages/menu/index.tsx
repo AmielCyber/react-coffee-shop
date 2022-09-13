@@ -4,13 +4,14 @@ import Head from "next/head";
 import Image from "next/image";
 import { m } from "framer-motion";
 // My imports.
-import DrinksSummary from "../../components/Drinks/DrinksSummary";
 import drinksImage from "../../assets/coffee-drinks.jpg";
 import { pageAnimation } from "../../utils/animations/animation";
-import LoadingSpinner from "../../components/UI/LoadingSpinner";
 // CSS styles.
 import styles from "./MenuPage.module.css";
-// My dynamic import.
+// Components.
+import DrinksSummary from "../../components/Drinks/DrinksSummary";
+import LoadingSpinner from "../../components/UI/LoadingSpinner";
+// Dynamic component.
 const AvailableDrinks = dynamic(
   () => import("../../components/Drinks/AvailableDrinks"),
   { ssr: false }

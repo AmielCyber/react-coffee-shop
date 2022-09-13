@@ -1,8 +1,7 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import { SessionProvider } from "next-auth/react";
 import WelcomeMessage from "../../../components/Welcome/WelcomeMessage";
-import "@testing-library/jest-dom";
 
 const userName = "First Last";
 const email = "demo@email.com";
@@ -23,7 +22,7 @@ const sessionObj = {
   },
 };
 
-test("Page Displays heading with signin user's name.", () => {
+test("Component displays heading with signin user's name.", () => {
   render(<WelcomeRender session={sessionObj} />);
   expect(
     screen.getByRole("heading", {
@@ -32,8 +31,9 @@ test("Page Displays heading with signin user's name.", () => {
   );
 });
 
-test("Page Displays heading displays Welcome to guest.", () => {
+test("Component displays heading Welcome to guest.", () => {
   render(<WelcomeRender session={null} />);
+  // Assertion
   expect(
     screen.getByRole("heading", {
       name: new RegExp("Welcome to"),

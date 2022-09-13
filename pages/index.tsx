@@ -6,10 +6,11 @@ import { m } from "framer-motion";
 // My imports.
 import coffeeShopImage from "../assets/coffee-shop.jpg";
 import { pageAnimation } from "../utils/animations/animation";
-import LoadingSpinner from "../components/UI/LoadingSpinner";
 // CSS styles.
 import styles from "./HomePage.module.css";
-// My dynamic import.
+// Component.
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+// Dynamic component.
 const WelcomeMessage = dynamic(
   () => import("../components/Welcome/WelcomeMessage"),
   { ssr: false }

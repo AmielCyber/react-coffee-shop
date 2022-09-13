@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, memo, Suspense } from "react";
+import { useState, useEffect, useCallback, memo } from "react";
 import dynamic from "next/dynamic";
 import { useAnimation, m } from "framer-motion";
 // My imports.
