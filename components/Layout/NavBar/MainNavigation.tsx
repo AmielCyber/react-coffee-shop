@@ -24,7 +24,7 @@ function activeLinkStyle(
 }
 
 const MainNavigation = () => {
-  const { data: session, status } = useSession(); // Check if there is an authenticated session.
+  const { status } = useSession(); // Check if user is an authenticated user or a guest user.
   const router = useRouter();
   const currentPath = router.asPath; // To highlight the current navigation link the navbar.
 
@@ -40,6 +40,28 @@ const MainNavigation = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  let accountLinkElement;
+  if (status === "authenticated") {
+    accountLinkElement = (
+      <>
+        <li className={activeLinkStyle(currentPath, "/account", "")}>
+          <Link href="/account">Account</Link>
+        </li>
+        <li>
+          <a onClick={signOutHandler}>Sign out</a>
+        </li>
+      </>
+    );
+  } else if (status === "unauthenticated") {
+    accountLinkElement = (
+      <li className={activeLinkStyle(currentPath, "/auth", "")}>
+        <Link href="/auth">Sign in</Link>
+      </li>
+    );
+  } else {
+    accountLinkElement = <li className={styles.loading}>Loading...</li>;
+  }
+
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -54,21 +76,7 @@ const MainNavigation = () => {
           <li className={activeLinkStyle(currentPath, "/menu", styles.menu)}>
             <Link href="/menu">Menu</Link>
           </li>
-          {!session && status !== "loading" && (
-            <li className={activeLinkStyle(currentPath, "/auth", "")}>
-              <Link href="/auth">Sign in</Link>
-            </li>
-          )}
-          {session && (
-            <>
-              <li className={activeLinkStyle(currentPath, "/account", "")}>
-                <Link href="/account">Account</Link>
-              </li>
-              <li>
-                <a onClick={signOutHandler}>Sign out</a>
-              </li>
-            </>
-          )}
+          {accountLinkElement}
           <li>
             <span className={styles.cartButton}>
               <HeaderCartButton onSignIn={signInHandler} />

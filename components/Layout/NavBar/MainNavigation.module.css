@@ -22,7 +22,7 @@
 .nav li {
   margin-right: 2rem;
 }
-.nav a {
+.nav a, .loading {
   color: #ffffff;
   font-size: 1.5rem;
 }
@@ -54,7 +54,7 @@
   .nav li {
     margin: 0.3rem 0 !important;
   }
-  .nav a {
+  .nav a, .loading {
     font-size: 1.5rem !important;
   }
 }
@@ -63,7 +63,7 @@
   .nav li{
     margin-right: 0.7rem;
   }
-  .nav a {
+  .nav a, .loading {
     font-size: 1.4rem;
   }
 }
