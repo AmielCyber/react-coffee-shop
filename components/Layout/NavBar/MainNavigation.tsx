@@ -1,5 +1,6 @@
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useCallback } from "react";
 import Link from "next/link";
 // My imports.
 import CompanyIcon from "../Icons/CompanyIcon";
@@ -28,14 +29,14 @@ function MainNavigation() {
   const currentPath = router.asPath; // To highlight the current navigation link the navbar.
 
   // Handlers.
-  const signOutHandler = () => {
+  const signOutHandler = useCallback(() => {
     // Signs-out user and removes the session cookie using next-auth. Reloads website and resets initial state settings.
     signOut();
-  };
-  const signInHandler = () => {
+  }, []);
+  const signInHandler = useCallback(() => {
     // Redirect user to the login page.
     router.push("/auth");
-  };
+  }, [router]);
 
   let accountLinkElement: JSX.Element;
   if (status === "authenticated") {
