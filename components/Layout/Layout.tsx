@@ -8,13 +8,13 @@ type LayoutProps = {
 };
 
 // The layout of the react coffee shop web page.
-const Layout = ({ children }: LayoutProps) => {
+function Layout({ children }: LayoutProps) {
   return (
     <>
       <MainNavigation />
       <main className={styles.main}>{children}</main>
     </>
   );
-};
+}
 
 export default Layout;
