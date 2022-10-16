@@ -1,6 +1,5 @@
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useCallback } from "react";
 import Link from "next/link";
 // My imports.
 import CompanyIcon from "../Icons/CompanyIcon";
@@ -23,24 +22,22 @@ function activeLinkStyle(
   return currentPath === linkPath ? `${style} ${styles.active}` : style;
 }
 
-const MainNavigation = () => {
+function MainNavigation() {
   const { status } = useSession(); // Check if user is an authenticated user or a guest user.
   const router = useRouter();
   const currentPath = router.asPath; // To highlight the current navigation link the navbar.
 
   // Handlers.
-  const signOutHandler = useCallback(() => {
+  const signOutHandler = () => {
     // Signs-out user and removes the session cookie using next-auth. Reloads website and resets initial state settings.
     signOut();
-  }, []);
-  const signInHandler = useCallback(() => {
+  };
+  const signInHandler = () => {
     // Redirect user to the login page.
     router.push("/auth");
-    // Avoid recreating this function.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
 
-  let accountLinkElement;
+  let accountLinkElement: JSX.Element;
   if (status === "authenticated") {
     accountLinkElement = (
       <>
@@ -86,6 +83,6 @@ const MainNavigation = () => {
       </nav>
     </header>
   );
-};
+}
 
 export default MainNavigation;
