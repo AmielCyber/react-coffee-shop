@@ -1,23 +1,20 @@
-import { useState, useEffect, useCallback, memo } from "react";
-import dynamic from "next/dynamic";
+import { useState, useEffect, memo } from "react";
 import { useAnimation, m } from "framer-motion";
 // My imports.
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import { fetchCartData, sendCartData } from "../../../store/cart/cart-actions";
 import { cartBumpAnimation } from "../../../utils/animations/animation";
 import CartIcon from "../Icons/CartIcon";
+import CartModal from "./CartModal";
 // CSS import.
 import styles from "./HeaderCartButton.module.css";
-// Dynamic import.
-// Turn off ssr render for this component since it uses client side functions.
-const CartModal = dynamic(() => import("./CartModal"), { ssr: false });
 
 type HeaderCartButtonProps = {
   onSignIn: () => void;
 };
 
-const HeaderCartButton = ({ onSignIn }: HeaderCartButtonProps) => {
-  const [cartIsShown, setCartIsShown] = useState(false); // Show Cart overlay.
+function HeaderCartButton({ onSignIn }: HeaderCartButtonProps) {
+  const [cartIsShown, setCartIsShown] = useState(false);
   const cart = useAppSelector((state) => state.cart);
   const fetchCartCompleted = useAppSelector(
     (state) => state.ui.fetchCartCompleted
@@ -41,25 +38,26 @@ const HeaderCartButton = ({ onSignIn }: HeaderCartButtonProps) => {
         animateButton.start(cartBumpAnimation);
       }
     }
+    // Clean up animation.
+    return () => animateButton.stop();
   }, [fetchCartCompleted, dispatch, cart, animateButton]);
 
   // Handlers.
-  const showCartHandler = useCallback(() => {
+  const showCartHandler = () => {
     setCartIsShown(true);
-  }, [setCartIsShown]);
-
-  const hideCartHandler = useCallback(() => {
+  };
+  const hideCartHandler = () => {
     setCartIsShown(false);
-  }, [setCartIsShown]);
-
-  const signInHandler = useCallback(() => {
+  };
+  const signInHandler = () => {
     setCartIsShown(false);
     onSignIn();
-  }, [setCartIsShown, onSignIn]);
+  };
 
   return (
     <>
       <m.button
+        id="cartButton"
         className={styles.button}
         onClick={showCartHandler}
         animate={animateButton}
@@ -77,6 +75,6 @@ const HeaderCartButton = ({ onSignIn }: HeaderCartButtonProps) => {
       />
     </>
   );
-};
+}
 
 export default memo(HeaderCartButton);
