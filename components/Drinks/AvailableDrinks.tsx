@@ -7,7 +7,7 @@ import type Drink from "../../models/Drink";
 // CSS import.
 import styles from "./AvailableDrinks.module.css";
 
-const AvailableDrinks = () => {
+function AvailableDrinks() {
   const drinkArray: Drink[] = [];
   const { items, isLoading, isError } = FetchItems(
     "/api/menu/drinks",
@@ -49,6 +49,6 @@ const AvailableDrinks = () => {
       </Card>
     </section>
   );
-};
+}
 
 export default AvailableDrinks;

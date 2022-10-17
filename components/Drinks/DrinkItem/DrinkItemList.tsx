@@ -13,7 +13,7 @@ type DrinkItemListProps = {
   drinks: Drink[];
 };
 
-const DrinkItemList = ({ drinks }: DrinkItemListProps) => {
+function DrinkItemList({ drinks }: DrinkItemListProps) {
   // Get the Drink item list.
   const drinkList = drinks.map((drink) => (
     <DrinkItem key={drink.id} drink={drink} variants={drinkItemAnimation} />
@@ -29,5 +29,5 @@ const DrinkItemList = ({ drinks }: DrinkItemListProps) => {
       {drinkList}
     </m.ul>
   );
-};
+}
 export default DrinkItemList;

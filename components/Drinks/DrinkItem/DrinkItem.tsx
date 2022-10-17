@@ -17,14 +17,11 @@ type DrinkItemProps = {
 };
 
 // Only re-render if drink id changed.
-const drinksAreSame = (
-  prevProps: DrinkItemProps,
-  currProps: DrinkItemProps
-) => {
+function drinksAreSame(prevProps: DrinkItemProps, currProps: DrinkItemProps) {
   return prevProps.drink.id === currProps.drink.id;
-};
+}
 
-const DrinkItem = ({ drink, variants }: DrinkItemProps) => {
+function DrinkItem({ drink, variants }: DrinkItemProps) {
   const dispatch = useAppDispatch();
   const formattedPrice = `$${drink.price.toFixed(2)}`;
 
@@ -61,6 +58,6 @@ const DrinkItem = ({ drink, variants }: DrinkItemProps) => {
       </div>
     </m.li>
   );
-};
+}
 
 export default memo(DrinkItem, drinksAreSame);

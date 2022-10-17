@@ -8,7 +8,7 @@ const MAX_INPUT_NUM = 5;
  * Creates a list of number of options.
  * @returns Number of options [1-MAX_INPUT_NUM]
  */
-const getNumberOptions = () => {
+function getNumberOptions() {
   const numberOptionList = [];
   for (let numberOfItems = 1; numberOfItems <= MAX_INPUT_NUM; numberOfItems++) {
     numberOptionList.push(
@@ -18,14 +18,14 @@ const getNumberOptions = () => {
     );
   }
   return numberOptionList;
-};
+}
 
 type DrinkItemFormProps = {
   onAddToCart: (amount: number) => void;
   name: string;
 };
 
-const DrinkItemForm = ({ onAddToCart, name }: DrinkItemFormProps) => {
+function DrinkItemForm({ onAddToCart, name }: DrinkItemFormProps) {
   const [amount, setAmount] = useState(1);
 
   const submitHandler = (event: React.FormEvent) => {
@@ -52,6 +52,6 @@ const DrinkItemForm = ({ onAddToCart, name }: DrinkItemFormProps) => {
       <button type="submit">+ Add</button>
     </form>
   );
-};
+}
 
 export default DrinkItemForm;

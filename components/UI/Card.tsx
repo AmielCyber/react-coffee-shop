@@ -6,7 +6,7 @@ import styles from "./Card.module.css";
  * @param {string} cardType
  * @returns styleType css module string
  */
-const getCardStyle = (cardType: string) => {
+function getCardStyle(cardType: string) {
   let styleType = "";
 
   switch (cardType) {
@@ -27,7 +27,7 @@ const getCardStyle = (cardType: string) => {
   }
 
   return styleType;
-};
+}
 type CartProps = {
   style?: string;
   children: React.ReactNode;
@@ -37,11 +37,11 @@ type CartProps = {
  * @param {any} props any type of props will be forwarded.
  * @returns React Component.
  */
-const Card = ({ style, children }: CartProps) => {
+function Card({ style, children }: CartProps) {
   const cardStyle = style ? style : "";
   const styleType = getCardStyle(cardStyle);
 
   return <div className={styleType}>{children}</div>;
-};
+}
 
 export default Card;

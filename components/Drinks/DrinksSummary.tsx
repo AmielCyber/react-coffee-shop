@@ -2,7 +2,7 @@ import { memo } from "react";
 // CSS import.
 import styles from "./DrinksSummary.module.css";
 
-const DrinksSummary = () => {
+function DrinksSummary() {
   return (
     <section className={styles.summary}>
       <h2>Order drinks to go!</h2>
@@ -13,5 +13,5 @@ const DrinksSummary = () => {
       </p>
     </section>
   );
-};
+}
 export default memo(DrinksSummary);
