@@ -8,81 +8,73 @@ import dynamic from "next/dynamic";
 import { useState, Suspense } from "react";
 import Head from "next/head";
 import { m } from "framer-motion";
-import { useSession } from "next-auth/react";
+import type { Session } from "next-auth";
 // My imports.
 import { pageAnimation } from "../../utils/animations/animation";
 import coffeeLove from "../../assets/coffeeLove.jpg";
 import Card from "../../components/UI/Card";
+import UserProfile from "../../components/Profile/UserProfile";
 // CSS import.
 import styles from "./AccountPage.module.css";
 // My dynamic import.
-const UserProfile = dynamic(
-  () => import("../../components/Profile/UserProfile"),
-  { ssr: false }
-);
 const PastOrders = dynamic(
   () => import("../../components/PastOrders/PastOrders"),
   { ssr: false }
 );
 
-export default function AccountPage() {
-  const { data: session } = useSession();
+type AccountPageProps = {
+  session: Session;
+};
+export default function AccountPage({ session }: AccountPageProps) {
   const [showPastOrders, setShowPastOrders] = useState(false);
 
   const toggleShowPastOrdersHandler = () => {
     setShowPastOrders((prevState) => !prevState);
   };
 
-  if (session) {
-    return (
-      <>
-        <Head>
-          <title>View your account.</title>
-          <meta
-            name="description"
-            content="Change your password or view your past orders."
-            title="title"
-          />
-        </Head>
-        <div className={styles.accountPageImage}>
-          <Image
-            alt="A coffee cup in a white background and letters spelling LOVE"
-            src={coffeeLove}
-            title="Image by @inchristalone from Unsplash"
-            layout="fill"
-            objectFit="cover"
-            quality={30}
-            objectPosition="center"
-            placeholder="blur"
-          />
-        </div>
-        <m.div initial="in" animate="animate" variants={pageAnimation}>
-          <Card style="container">
-            <Suspense fallback={`Loading User Profile...`}>
-              <UserProfile session={session} />
-            </Suspense>
+  return (
+    <>
+      <Head>
+        <title>View your account.</title>
+        <meta
+          name="description"
+          content="Change your password or view your past orders."
+          title="title"
+        />
+      </Head>
+      <div className={styles.accountPageImage}>
+        <Image
+          alt="A coffee cup in a white background and letters spelling LOVE"
+          src={coffeeLove}
+          title="Image by @inchristalone from Unsplash"
+          layout="fill"
+          objectFit="cover"
+          quality={80}
+          objectPosition="center"
+          placeholder="blur"
+        />
+      </div>
+      <m.div initial="in" animate="animate" variants={pageAnimation}>
+        <Card style="container">
+          <UserProfile session={session} />
+        </Card>
+        <div
+          className={styles.toggleShowOrders}
+          onClick={toggleShowPastOrdersHandler}
+          role="button"
+        >
+          <Card style="displayContainer">
+            <h2>{showPastOrders ? "Hide Past Orders" : "Show Past Orders"}</h2>
           </Card>
-          <div
-            className={styles.toggleShowOrders}
-            onClick={toggleShowPastOrdersHandler}
-            role="button"
-          >
-            <Card style="displayContainer">
-              <h2>
-                {showPastOrders ? "Hide Past Orders" : "Show Past Orders"}
-              </h2>
-            </Card>
-          </div>
-          {showPastOrders && (
-            <Suspense fallback={`Loading Past Orders...`}>
-              <PastOrders />
-            </Suspense>
-          )}
-        </m.div>
-      </>
-    );
-  }
-  return <p>Access Denied</p>;
+        </div>
+        {showPastOrders && (
+          <Suspense fallback={`Loading Past Orders...`}>
+            <PastOrders />
+          </Suspense>
+        )}
+      </m.div>
+    </>
+  );
 }
 
 // Protect API Route.
@@ -96,7 +88,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (session) {
     return {
-      props: {},
+      props: {
+        session,
+      },
     };
   }
   // If there is no session prompt user to sign in.
