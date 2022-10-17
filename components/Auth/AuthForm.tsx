@@ -7,7 +7,7 @@ import styles from "./AuthForm.module.css";
 const SignIn = dynamic(() => import("./SignIn"), { ssr: false });
 const SignUp = dynamic(() => import("./SignUp"), { ssr: false });
 
-const AuthForm = () => {
+function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
   const [newUserCreated, setNewUserCreated] = useState(false);
   const [serverMessage, setServerMessage] = useState("");
@@ -43,6 +43,6 @@ const AuthForm = () => {
       )}
     </div>
   );
-};
+}
 
 export default AuthForm;

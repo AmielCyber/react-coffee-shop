@@ -10,7 +10,7 @@ import styles from "./AuthForm.module.css";
  * @param {User Object{firstName:string, lastName:string, email:string, password:string }} userInfo
  * @returns string result message.
  */
-const createUser = async (userInfo: RegisteredUser) => {
+async function createUser(userInfo: RegisteredUser) {
   const response = await fetch("/api/auth/signup", {
     method: "POST",
     body: JSON.stringify(userInfo),
@@ -25,14 +25,14 @@ const createUser = async (userInfo: RegisteredUser) => {
     throw new Error(responseData.message || "Something went wrong!");
   }
   return responseData;
-};
+}
 
 type SingUpProps = {
   switchToSignIn: (isNewUser: boolean, message: string) => void;
   formId: "sign-in" | "sign-up";
 };
 
-const SignUp = ({ switchToSignIn, formId }: SingUpProps) => {
+function SignUp({ switchToSignIn, formId }: SingUpProps) {
   // Invalidation react states.
   const [formInputIsValid, setFormInputIsValid] = useState({
     firstName: true,
@@ -175,6 +175,6 @@ const SignUp = ({ switchToSignIn, formId }: SingUpProps) => {
       </form>
     </>
   );
-};
+}
 
 export default SignUp;

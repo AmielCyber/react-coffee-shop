@@ -17,7 +17,7 @@ type SignInProps = {
   formId: "sign-in" | "sign-up";
 };
 
-const SignIn = ({ switchToSignUp, formId }: SignInProps) => {
+function SignIn({ switchToSignUp, formId }: SignInProps) {
   const [formInputIsValid, setFormInputIsValid] = useState({
     email: true,
     password: true,
@@ -152,6 +152,6 @@ const SignIn = ({ switchToSignUp, formId }: SignInProps) => {
       </form>
     </>
   );
-};
+}
 
 export default SignIn;
