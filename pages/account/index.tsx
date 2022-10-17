@@ -5,9 +5,10 @@ import { unstable_getServerSession } from "next-auth/next";
 import Image from "next/image";
 // Frontend imports
 import dynamic from "next/dynamic";
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import Head from "next/head";
 import { m } from "framer-motion";
+import { useSession } from "next-auth/react";
 import type { Session } from "next-auth";
 // My imports.
 import { pageAnimation } from "../../utils/animations/animation";
@@ -25,61 +26,64 @@ const PastOrders = dynamic(
   { ssr: false }
 );
 
-type AccountPageProps = {
-  session: Session;
-};
-export default function AccountPage({ session }: AccountPageProps) {
+export default function AccountPage() {
+  const { data: session } = useSession();
   const [showPastOrders, setShowPastOrders] = useState(false);
 
   const toggleShowPastOrdersHandler = () => {
     setShowPastOrders((prevState) => !prevState);
   };
 
-  return (
-    <>
-      <Head>
-        <title>View your account.</title>
-        <meta
-          name="description"
-          content="Change your password or view your past orders."
-          title="title"
-        />
-      </Head>
-      <div className={styles.accountPageImage}>
-        <Image
-          alt="A coffee cup in a white background and letters spelling LOVE"
-          src={coffeeLove}
-          title="Image by @inchristalone from Unsplash"
-          layout="fill"
-          objectFit="cover"
-          quality={30}
-          objectPosition="center"
-          placeholder="blur"
-        />
-      </div>
-      <m.div initial="in" animate="animate" variants={pageAnimation}>
-        <Card style="container">
-          <Suspense fallback={`Loading User Profile...`}>
-            <UserProfile session={session} />
-          </Suspense>
-        </Card>
-        <div
-          className={styles.toggleShowOrders}
-          onClick={toggleShowPastOrdersHandler}
-          role="button"
-        >
-          <Card style="displayContainer">
-            <h2>{showPastOrders ? "Hide Past Orders" : "Show Past Orders"}</h2>
-          </Card>
+  if (session) {
+    return (
+      <>
+        <Head>
+          <title>View your account.</title>
+          <meta
+            name="description"
+            content="Change your password or view your past orders."
+            title="title"
+          />
+        </Head>
+        <div className={styles.accountPageImage}>
+          <Image
+            alt="A coffee cup in a white background and letters spelling LOVE"
+            src={coffeeLove}
+            title="Image by @inchristalone from Unsplash"
+            layout="fill"
+            objectFit="cover"
+            quality={30}
+            objectPosition="center"
+            placeholder="blur"
+          />
         </div>
-        {showPastOrders && (
-          <Suspense fallback={`Loading Past Orders...`}>
-            <PastOrders />
-          </Suspense>
-        )}
-      </m.div>
-    </>
-  );
+        <m.div initial="in" animate="animate" variants={pageAnimation}>
+          <Card style="container">
+            <Suspense fallback={`Loading User Profile...`}>
+              <UserProfile session={session} />
+            </Suspense>
+          </Card>
+          <div
+            className={styles.toggleShowOrders}
+            onClick={toggleShowPastOrdersHandler}
+            role="button"
+          >
+            <Card style="displayContainer">
+              <h2>
+                {showPastOrders ? "Hide Past Orders" : "Show Past Orders"}
+              </h2>
+            </Card>
+          </div>
+          {showPastOrders && (
+            <Suspense fallback={`Loading Past Orders...`}>
+              <PastOrders />
+            </Suspense>
+          )}
+        </m.div>
+      </>
+    );
+  }
+  return <p>Access Denied</p>;
 }
 
 // Protect API Route.
@@ -93,9 +97,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (session) {
     return {
-      props: {
-        session,
-      },
+      props: {},
     };
   }
   // If there is no session prompt user to sign in.
