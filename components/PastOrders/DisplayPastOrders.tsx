@@ -15,7 +15,7 @@ type DisplayPastOrdersProps = {
 
 const OverlayElement = document.querySelector("#overlays") as HTMLElement;
 
-const DisplayPastOrders = ({ orders }: DisplayPastOrdersProps) => {
+function DisplayPastOrders({ orders }: DisplayPastOrdersProps) {
   const [showReceipt, setShowReceipt] = useState(false);
   const [modalOrderReceipt, setModalOrderReceipt] = useState<Order | null>(
     null
@@ -50,6 +50,6 @@ const DisplayPastOrders = ({ orders }: DisplayPastOrdersProps) => {
       )}
     </Fragment>
   );
-};
+}
 
 export default DisplayPastOrders;

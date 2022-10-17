@@ -1,15 +1,17 @@
+import dynamic from "next/dynamic";
 import { useState, useCallback, Suspense } from "react";
 // My imports.
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { cartActions } from "../../store/cart/cart-slice";
-import CartItemList from "./CartItem/CartItemList";
 import ClearCart from "../Layout/Icons/ClearCart";
-import Checkout from "./Checkout/Checkout";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import type Cart from "../../models/Cart";
 import type User from "../../models/User";
 // CSS import.
 import styles from "./CartContent.module.css";
+// Dynamic Imports.
+const CartItemList = dynamic(() => import("./CartItem/CartItemList"));
+const Checkout = dynamic(() => import("./Checkout/Checkout"));
 
 type CartContentProps = {
   onToSignIn: () => void;
@@ -92,7 +94,9 @@ function CartContent({
   // Cart has items.
   return (
     <>
-      <CartItemList items={cart.items} />
+      <Suspense fallback={<LoadingSpinner />}>
+        <CartItemList items={cart.items} />
+      </Suspense>
       <div className={styles.total}>
         <span>Total Amount</span>
         <span className={styles.price}>{totalPriceFormatted}</span>

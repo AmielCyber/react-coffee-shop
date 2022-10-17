@@ -13,7 +13,7 @@ const DisplayPastOrders = dynamic(() => import("./DisplayPastOrders"), {
   ssr: false,
 });
 
-const PastOrders = () => {
+function PastOrders() {
   const orderArray: Order[] = [];
   const {
     items,
@@ -23,7 +23,11 @@ const PastOrders = () => {
     items: Order[] | undefined;
     isLoading: boolean;
     isError: Error | undefined;
-  } = FetchItems("/api/order/order", orderArray);
+  } = FetchItems("/api/order/order", orderArray, {
+    revalidateIfStale: true,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: true,
+  });
 
   if (isError) {
     // Error in fetching user's past orders.
@@ -60,6 +64,6 @@ const PastOrders = () => {
       </Suspense>
     </Card>
   );
-};
+}
 
 export default PastOrders;

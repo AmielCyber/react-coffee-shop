@@ -16,10 +16,14 @@ const fetcher = async (uri: string) => {
   return responseData;
 };
 
-const FetchItems = <T>(uri: string, arr: T[]) => {
-  const { data, error } = useSWR<T[], Error>(uri, fetcher, {
-    revalidateOnFocus: false,
-  });
+type revalidateOptions = {
+  revalidateOnFocus: boolean;
+  revalidateIfStale: boolean;
+  revalidateOnReconnect: boolean;
+};
+
+const FetchItems = <T>(uri: string, arr: T[], options: revalidateOptions) => {
+  const { data, error } = useSWR<T[], Error>(uri, fetcher, options);
 
   arr = data ? data : arr;
 

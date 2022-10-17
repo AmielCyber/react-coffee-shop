@@ -23,7 +23,7 @@ function ordersAreTheSame(
   return prevProps.orders === currProps.orders;
 }
 
-const PastOrderList = ({ orders, onShowReceipt }: PastOrderListProps) => {
+function PastOrderList({ orders, onShowReceipt }: PastOrderListProps) {
   // Handlers.
   const showDetailedReceipt = (order: Order) => {
     onShowReceipt(order);
@@ -58,7 +58,7 @@ const PastOrderList = ({ orders, onShowReceipt }: PastOrderListProps) => {
       {pastOrders}
     </m.ul>
   );
-};
+}
 
 // Memoized component since the parent changes states frequently.
 export default memo(PastOrderList, ordersAreTheSame);

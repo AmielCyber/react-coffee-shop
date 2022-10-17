@@ -8,15 +8,18 @@ import type Drink from "../../models/Drink";
 // CSS import.
 import styles from "./AvailableDrinks.module.css";
 // Dynamic import
-const DrinkItemList = dynamic(() => import("./DrinkItem/DrinkItemList"), {
-  ssr: true,
-});
+const DrinkItemList = dynamic(() => import("./DrinkItem/DrinkItemList"));
 
 function AvailableDrinks() {
   const drinkArray: Drink[] = [];
   const { items, isLoading, isError } = FetchItems(
     "/api/menu/drinks",
-    drinkArray
+    drinkArray,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
 
   if (isError) {
