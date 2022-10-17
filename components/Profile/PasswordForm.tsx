@@ -13,7 +13,7 @@ type PasswordManager = {
  * Calls our change-password api to change user's password.
  * @param {string} passwordData
  */
-const changePassword = async (passwordData: PasswordManager) => {
+async function changePassword(passwordData: PasswordManager) {
   const response = await fetch("/api/user/change-password", {
     method: "PATCH",
     body: JSON.stringify(passwordData),
@@ -28,14 +28,14 @@ const changePassword = async (passwordData: PasswordManager) => {
     throw new Error(responseData.message || "Something went wrong!");
   }
   return responseData;
-};
+}
 
 type PasswordFormProps = {
   userEmail: string;
   onSuccess: (message: string) => void;
 };
 
-const PasswordForm = ({ userEmail, onSuccess }: PasswordFormProps) => {
+function PasswordForm({ userEmail, onSuccess }: PasswordFormProps) {
   const [statusMessage, setStatusMessage] = useState("");
   const [invalidPassword, setInvalidPassword] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -123,6 +123,6 @@ const PasswordForm = ({ userEmail, onSuccess }: PasswordFormProps) => {
       </form>
     </>
   );
-};
+}
 
 export default PasswordForm;

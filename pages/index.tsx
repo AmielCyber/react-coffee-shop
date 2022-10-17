@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { m } from "framer-motion";
@@ -8,8 +7,6 @@ import { pageAnimation } from "../utils/animations/animation";
 import WelcomeMessage from "../components/Welcome/WelcomeMessage";
 // CSS styles.
 import styles from "./HomePage.module.css";
-// Component.
-import LoadingSpinner from "../components/UI/LoadingSpinner";
 
 export default function Home() {
   return (
@@ -40,9 +37,7 @@ export default function Home() {
         animate="animate"
         variants={pageAnimation}
       >
-        <Suspense fallback={<LoadingSpinner />}>
-          <WelcomeMessage />
-        </Suspense>
+        <WelcomeMessage />
       </m.div>
     </>
   );

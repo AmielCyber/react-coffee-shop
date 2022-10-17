@@ -1,15 +1,16 @@
-import { useState } from "react";
+import dynamic from "next/dynamic";
+import { useState, Suspense } from "react";
 import type { Session } from "next-auth";
-// My import.
-import PasswordForm from "./PasswordForm";
 // CSS import.
 import styles from "./UserProfile.module.css";
+// My dynamic import.
+const PasswordForm = dynamic(() => import("./PasswordForm"), { ssr: false });
 
 type UserProfileProps = {
   session: Session;
 };
 
-const UserProfile = ({ session }: UserProfileProps) => {
+function UserProfile({ session }: UserProfileProps) {
   const [statusMessage, setStatusMessage] = useState("");
   const [changePassword, setChangePassword] = useState(false);
   const userName = session.user.name;
@@ -37,13 +38,15 @@ const UserProfile = ({ session }: UserProfileProps) => {
         <h2>{changePassword ? "Close Password Form" : "Change Password"}</h2>
       </div>
       {changePassword && (
-        <PasswordForm
-          userEmail={userEmail}
-          onSuccess={successfulPasswordChangeHandler}
-        />
+        <Suspense fallback="Loading Password Form...">
+          <PasswordForm
+            userEmail={userEmail}
+            onSuccess={successfulPasswordChangeHandler}
+          />
+        </Suspense>
       )}
     </section>
   );
-};
+}
 
 export default UserProfile;
