@@ -5,11 +5,10 @@ import { unstable_getServerSession } from "next-auth/next";
 import Image from "next/image";
 // Frontend imports
 import dynamic from "next/dynamic";
-import { useState, Suspense, useEffect } from "react";
+import { useState, Suspense } from "react";
 import Head from "next/head";
 import { m } from "framer-motion";
 import { useSession } from "next-auth/react";
-import type { Session } from "next-auth";
 // My imports.
 import { pageAnimation } from "../../utils/animations/animation";
 import coffeeLove from "../../assets/coffeeLove.jpg";
