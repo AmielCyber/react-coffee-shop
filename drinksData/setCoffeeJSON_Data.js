@@ -127,6 +127,6 @@ const coffeJSON = JSON.stringify(drinks, null, 4);
 
 fs.writeFile("drinks.json", coffeJSON, (err) => {
   if (err) {
-    console.log(err.message);
+    console.err(err.message);
   }
 });
