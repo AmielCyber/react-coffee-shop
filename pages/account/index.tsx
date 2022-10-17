@@ -13,10 +13,13 @@ import type { Session } from "next-auth";
 import { pageAnimation } from "../../utils/animations/animation";
 import coffeeLove from "../../assets/coffeeLove.jpg";
 import Card from "../../components/UI/Card";
-import UserProfile from "../../components/Profile/UserProfile";
 // CSS import.
 import styles from "./AccountPage.module.css";
 // My dynamic import.
+const UserProfile = dynamic(
+  () => import("../../components/Profile/UserProfile"),
+  { ssr: false }
+);
 const PastOrders = dynamic(
   () => import("../../components/PastOrders/PastOrders"),
   { ssr: false }
@@ -56,7 +59,9 @@ export default function AccountPage({ session }: AccountPageProps) {
       </div>
       <m.div initial="in" animate="animate" variants={pageAnimation}>
         <Card style="container">
-          <UserProfile session={session} />
+          <Suspense fallback={`Loading User Profile...`}>
+            <UserProfile session={session} />
+          </Suspense>
         </Card>
         <div
           className={styles.toggleShowOrders}
@@ -68,7 +73,7 @@ export default function AccountPage({ session }: AccountPageProps) {
           </Card>
         </div>
         {showPastOrders && (
-          <Suspense fallback={`Loading...`}>
+          <Suspense fallback={`Loading Past Orders...`}>
             <PastOrders />
           </Suspense>
         )}
@@ -86,18 +91,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     authOptions
   );
 
-  if (!session) {
-    // If there is no session prompt user to sign in.
+  if (session) {
     return {
-      redirect: {
-        destination: "/auth",
-        permanent: false,
+      props: {
+        session,
       },
     };
   }
+  // If there is no session prompt user to sign in.
   return {
-    props: {
-      session,
+    redirect: {
+      destination: "/auth",
+      permanent: false,
     },
   };
 };
