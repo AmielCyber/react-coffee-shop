@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import styles from "./WelcomeMessage.module.css";
 
-const WelcomeMessage = () => {
+function WelcomeMessage() {
   const { data: session } = useSession();
 
   let userGreetingMsg = "";
@@ -21,6 +21,6 @@ const WelcomeMessage = () => {
       </p>
     </section>
   );
-};
+}
 
 export default WelcomeMessage;

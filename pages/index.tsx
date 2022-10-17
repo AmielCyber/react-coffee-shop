@@ -1,20 +1,15 @@
 import { Suspense } from "react";
-import dynamic from "next/dynamic";
 import Head from "next/head";
 import Image from "next/image";
 import { m } from "framer-motion";
 // My imports.
 import coffeeShopImage from "../assets/coffee-shop.jpg";
 import { pageAnimation } from "../utils/animations/animation";
+import WelcomeMessage from "../components/Welcome/WelcomeMessage";
 // CSS styles.
 import styles from "./HomePage.module.css";
 // Component.
 import LoadingSpinner from "../components/UI/LoadingSpinner";
-// Dynamic component.
-const WelcomeMessage = dynamic(
-  () => import("../components/Welcome/WelcomeMessage"),
-  { ssr: false }
-);
 
 export default function Home() {
   return (
