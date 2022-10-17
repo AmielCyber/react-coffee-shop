@@ -17,16 +17,16 @@ type BackdropProps = {
  * @param {props} props.onClose click handler when a user clicks outside the cart or inside the backdrop.
  * @returns React component.
  */
-const Backdrop = ({ onClose }: BackdropProps) => {
+function Backdrop({ onClose }: BackdropProps) {
   return <div className={styles.backdrop} onClick={onClose} />;
-};
+}
 
 type ModalProps = {
   onClose: () => void;
   children: React.ReactNode;
 };
 
-const Modal = ({ onClose, children }: ModalProps) => {
+function Modal({ onClose, children }: ModalProps) {
   return (
     <>
       <Backdrop onClose={onClose} />
@@ -42,6 +42,6 @@ const Modal = ({ onClose, children }: ModalProps) => {
       </m.div>
     </>
   );
-};
+}
 
 export default Modal;

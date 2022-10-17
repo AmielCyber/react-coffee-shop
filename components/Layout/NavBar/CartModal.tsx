@@ -1,5 +1,5 @@
-import { memo, Suspense } from "react";
 import dynamic from "next/dynamic";
+import { memo, Suspense } from "react";
 import ReactDOM from "react-dom";
 import { AnimatePresence } from "framer-motion";
 // My imports.
@@ -14,17 +14,17 @@ type CartModalProps = {
   onToSignIn: () => void;
 };
 
-// Only rerender if cartIsShown has changed.
 function cartStateChanged(
   prevProps: CartModalProps,
   nextProps: CartModalProps
 ) {
+  // Only rerender if cartIsShown has changed.
   return prevProps.cartIsShown === nextProps.cartIsShown;
 }
 
 const OverlayElement = document.querySelector("#overlays") as HTMLElement;
 
-const CartModal = ({ cartIsShown, onClose, onToSignIn }: CartModalProps) => {
+function CartModal({ cartIsShown, onClose, onToSignIn }: CartModalProps) {
   return ReactDOM.createPortal(
     <AnimatePresence>
       {cartIsShown && (
@@ -37,6 +37,6 @@ const CartModal = ({ cartIsShown, onClose, onToSignIn }: CartModalProps) => {
     </AnimatePresence>,
     OverlayElement
   );
-};
+}
 
 export default memo(CartModal, cartStateChanged);

@@ -11,7 +11,7 @@ type CompanyIconProps = {
  * Icon by svgrepo.com https://www.svgrepo.com/svg/75540/hot-coffee-cup-with-hearts
  * @returns SVG element.
  */
-const CompanyIcon = ({ width, height, fill }: CompanyIconProps) => {
+function CompanyIcon({ width, height, fill }: CompanyIconProps) {
   return (
     <svg
       width={width}
@@ -96,6 +96,6 @@ const CompanyIcon = ({ width, height, fill }: CompanyIconProps) => {
       />
     </svg>
   );
-};
+}
 
 export default memo(CompanyIcon);

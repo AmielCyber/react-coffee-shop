@@ -13,14 +13,14 @@ type RegisteredCheckoutProps = {
   onConfirm: (userData: User) => Promise<void>;
 };
 
-const RegisteredCheckout = ({
+function RegisteredCheckout({
   firstName,
   lastName,
   email,
   onCancel,
   onClose,
   onConfirm,
-}: RegisteredCheckoutProps) => {
+}: RegisteredCheckoutProps) {
   const confirmHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -36,7 +36,7 @@ const RegisteredCheckout = ({
 
   return (
     <form className={styles.form} onSubmit={confirmHandler}>
-      <div className={styles.user}>
+      <section className={styles.user} title="User Information">
         <h2>
           <span>Name:</span>
           {`${firstName} ${lastName}`}
@@ -45,8 +45,8 @@ const RegisteredCheckout = ({
           <span>Email:</span>
           {`${email}`}
         </h2>
-      </div>
-      <div className={styles.actions}>
+      </section>
+      <section className={styles.actions} title="buttons">
         <button className={styles.close} type="button" onClick={onClose}>
           Close
         </button>
@@ -59,9 +59,9 @@ const RegisteredCheckout = ({
           </span>
           {" Confirm"}
         </button>
-      </div>
+      </section>
     </form>
   );
-};
+}
 
 export default RegisteredCheckout;

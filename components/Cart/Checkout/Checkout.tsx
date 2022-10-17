@@ -2,8 +2,8 @@ import dynamic from "next/dynamic";
 import { useState, Suspense } from "react";
 import { useSession } from "next-auth/react";
 // My imports.
-import type User from "../../../models/User";
 import LoadingSpinner from "../../UI/LoadingSpinner";
+import type User from "../../../models/User";
 // CSS import.
 import styles from "./Checkout.module.css";
 // My dynamic imports.
@@ -19,12 +19,7 @@ type CheckoutProps = {
   onConfirm: (userData: User) => Promise<void>;
 };
 
-const Checkout = ({
-  onToSignIn,
-  onClose,
-  onCancel,
-  onConfirm,
-}: CheckoutProps) => {
+function Checkout({ onToSignIn, onClose, onCancel, onConfirm }: CheckoutProps) {
   const [guestInitial, setGuestInitial] = useState(true);
   const { data: session } = useSession();
 
@@ -79,6 +74,6 @@ const Checkout = ({
       />
     </Suspense>
   );
-};
+}
 
 export default Checkout;

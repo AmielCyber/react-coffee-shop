@@ -20,7 +20,7 @@ const initialOrderObject: Order = {
   orderDate: new Date(),
 };
 
-const Cart = ({ onClose, onToSignIn }: CartProps) => {
+function Cart({ onClose, onToSignIn }: CartProps) {
   // Cart state hooks for the status of the form submission..
   const [isSubmitting, setIsSubmitting] = useState(false); // Form is being submitted.
   const [didSubmit, setDidSubmit] = useState(false); // Form was submitted.
@@ -56,10 +56,10 @@ const Cart = ({ onClose, onToSignIn }: CartProps) => {
   if (isSubmitting) {
     // Form is being submitted to the order database.
     return (
-      <div className={styles.loading}>
+      <section className={styles.loading} title="Order Status Loading...">
         <h3 className={styles.message}>Sending order data...</h3>
         <LoadingSpinner />
-      </div>
+      </section>
     );
   }
   if (didSubmit) {
@@ -90,6 +90,6 @@ const Cart = ({ onClose, onToSignIn }: CartProps) => {
       setDidSubmit={didSubmitHandler}
     />
   );
-};
+}
 
 export default Cart;

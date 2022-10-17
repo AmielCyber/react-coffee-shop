@@ -9,7 +9,7 @@ type CartItemListProps = {
   items: DrinkItem[];
 };
 
-const CartItemList = ({ items }: CartItemListProps) => {
+function CartItemList({ items }: CartItemListProps) {
   // Get the list of all items the user selected.
   const cartList = items.map((item) => <CartItem key={item.id} item={item} />);
 
@@ -18,6 +18,6 @@ const CartItemList = ({ items }: CartItemListProps) => {
       <AnimatePresence>{cartList}</AnimatePresence>
     </ul>
   );
-};
+}
 
 export default CartItemList;

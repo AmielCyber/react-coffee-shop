@@ -11,7 +11,7 @@ import styles from "./Receipt.module.css";
  * @param {string} date local date string.
  * @returns An array of ReceiptItem components.
  */
-const getReceiptItems = (items: DrinkItem[], date: string) => {
+function getReceiptItems(items: DrinkItem[], date: string): JSX.Element[] {
   const itemList = items.map((item: DrinkItem) => {
     return (
       <ReceiptItem
@@ -23,14 +23,14 @@ const getReceiptItems = (items: DrinkItem[], date: string) => {
     );
   });
   return itemList;
-};
+}
 
 type ReceiptProps = {
   order: Order;
   showReceiptItems: boolean;
 };
 
-const Receipt = ({ order, showReceiptItems }: ReceiptProps) => {
+function Receipt({ order, showReceiptItems }: ReceiptProps) {
   const formattedTotalPrice = `$${order.totalPrice.toFixed(2)}`;
   const localDate = order.orderDate.toLocaleString();
   const summaryStyles = `${styles.summary} ${
@@ -44,11 +44,11 @@ const Receipt = ({ order, showReceiptItems }: ReceiptProps) => {
         <span>{localDate}</span>
       </div>
       {showReceiptItems && (
-        <div className={styles.receiptItems}>
+        <section className={styles.receiptItems} title="Receipt Items">
           <ul>{getReceiptItems(order.items, localDate)}</ul>
-        </div>
+        </section>
       )}
-      <div className={summaryStyles}>
+      <section className={summaryStyles} title="Total">
         <div className={styles.totalItems}>
           <h3>Total Items</h3>
           <span>{order.totalItems}</span>
@@ -57,9 +57,9 @@ const Receipt = ({ order, showReceiptItems }: ReceiptProps) => {
           <h3>Total Price</h3>
           <span className={styles.price}>{formattedTotalPrice}</span>
         </div>
-      </div>
+      </section>
     </div>
   );
-};
+}
 
 export default Receipt;

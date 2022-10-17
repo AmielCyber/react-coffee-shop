@@ -5,7 +5,7 @@ import Head from "next/head";
  * Meta component containing our meta data and the links to our favicon.
  * @returns Meta component.
  */
-const HeadMeta = () => {
+function HeadMeta() {
   return (
     <Head>
       <link
@@ -35,6 +35,6 @@ const HeadMeta = () => {
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
   );
-};
+}
 
 export default memo(HeadMeta);

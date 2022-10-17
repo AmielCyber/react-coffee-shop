@@ -17,7 +17,7 @@ type CartItemProps = {
   item: DrinkItem;
 };
 
-const CartItem = ({ item }: CartItemProps) => {
+function CartItem({ item }: CartItemProps) {
   const { id, name, amount, price } = item;
   const dispatch = useAppDispatch();
   // Format the price to always show two decimal points.
@@ -68,6 +68,6 @@ const CartItem = ({ item }: CartItemProps) => {
       </div>
     </m.li>
   );
-};
+}
 
 export default memo(CartItem, sameAmount);

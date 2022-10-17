@@ -12,11 +12,7 @@ type GuestCheckoutProps = {
   onConfirm: (userData: User) => Promise<void>;
 };
 
-const GuestCheckout = ({
-  onCancel,
-  onClose,
-  onConfirm,
-}: GuestCheckoutProps) => {
+function GuestCheckout({ onCancel, onClose, onConfirm }: GuestCheckoutProps) {
   const [formInputValid, setFormInputValid] = useState({
     firstName: true,
     lastName: true,
@@ -118,6 +114,6 @@ const GuestCheckout = ({
       </div>
     </form>
   );
-};
+}
 
 export default GuestCheckout;

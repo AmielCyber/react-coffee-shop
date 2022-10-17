@@ -1,13 +1,16 @@
 import { useState, useEffect, memo } from "react";
+import dynamic from "next/dynamic";
 import { useAnimation, m } from "framer-motion";
 // My imports.
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import { fetchCartData, sendCartData } from "../../../store/cart/cart-actions";
 import { cartBumpAnimation } from "../../../utils/animations/animation";
 import CartIcon from "../Icons/CartIcon";
-import CartModal from "./CartModal";
 // CSS import.
 import styles from "./HeaderCartButton.module.css";
+// Dynamic import.
+// Turn off ssr render for this component since it uses client side functions.
+const CartModal = dynamic(() => import("./CartModal"), { ssr: false });
 
 type HeaderCartButtonProps = {
   onSignIn: () => void;

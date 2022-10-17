@@ -7,7 +7,7 @@ type ReceiptItemProps = {
   qty: number;
 };
 
-const ReceiptItem = ({ name, price, qty }: ReceiptItemProps) => {
+function ReceiptItem({ name, price, qty }: ReceiptItemProps) {
   const formattedPrice = `$${price.toFixed(2)}`;
 
   return (
@@ -19,6 +19,6 @@ const ReceiptItem = ({ name, price, qty }: ReceiptItemProps) => {
       <span className={styles.price}>{formattedPrice}</span>
     </li>
   );
-};
+}
 
 export default ReceiptItem;

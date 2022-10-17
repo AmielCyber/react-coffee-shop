@@ -1,17 +1,15 @@
-import dynamic from "next/dynamic";
 import { useState, useCallback, Suspense } from "react";
 // My imports.
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { cartActions } from "../../store/cart/cart-slice";
 import CartItemList from "./CartItem/CartItemList";
 import ClearCart from "../Layout/Icons/ClearCart";
+import Checkout from "./Checkout/Checkout";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import type Cart from "../../models/Cart";
 import type User from "../../models/User";
 // CSS import.
 import styles from "./CartContent.module.css";
-// My dynamic import
-const Checkout = dynamic(() => import("./Checkout/Checkout"));
 
 type CartContentProps = {
   onToSignIn: () => void;
@@ -24,12 +22,12 @@ type CartContentProps = {
   ) => void;
 };
 
-const CartContent = ({
+function CartContent({
   onToSignIn,
   onClose,
   setIsSubmitting,
   setDidSubmit,
-}: CartContentProps) => {
+}: CartContentProps) {
   const [isCheckout, setIsCheckout] = useState(false);
   const cart = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
@@ -131,6 +129,6 @@ const CartContent = ({
       )}
     </>
   );
-};
+}
 
 export default CartContent;

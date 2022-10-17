@@ -40,6 +40,7 @@ function MainNavigation() {
 
   let accountLinkElement: JSX.Element;
   if (status === "authenticated") {
+    // Displays Account and Sign Out in NavBar
     accountLinkElement = (
       <>
         <li className={activeLinkStyle(currentPath, "/account", "")}>
@@ -51,12 +52,14 @@ function MainNavigation() {
       </>
     );
   } else if (status === "unauthenticated") {
+    // Displays Sign In in NavBar
     accountLinkElement = (
       <li className={activeLinkStyle(currentPath, "/auth", "")}>
         <Link href="/auth">Sign in</Link>
       </li>
     );
   } else {
+    // Displays Loading in NavBar
     accountLinkElement = <li className={styles.loading}>Loading...</li>;
   }
 
