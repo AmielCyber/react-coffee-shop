@@ -1,6 +1,6 @@
 {
   "name": "react-coffee-shop",
-  "version": "2.0.1",
+  "version": "2.3.0",
   "description": "A mock up website of a coffee shop using Next.js(React & JavaScript)",
   "main": "next.config.js",
   "scripts": {
