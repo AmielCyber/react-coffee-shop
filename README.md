@@ -146,6 +146,8 @@ checkmark.
 - Decrease about 10% the bundle size from v2.0 to 2.1
   ![2.0 Screenshot](/assets/v2.0.png)
   ![2.1 Screenshot](/assets/v2.1.png)
+  ![2.3 Screenshot](/assets/v2.3.png)
+
 - Increase content loading times
 
 Screenshot from Vercel using [Checkly](https://vercel.com/integrations/checkly) integration
