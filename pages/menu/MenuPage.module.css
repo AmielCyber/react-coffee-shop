@@ -10,11 +10,7 @@
 .container {
   margin: auto;
   position: relative;
-  display: flex;
   width: 60%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   z-index: 1;
 }
 @media only screen and (max-width: 595px) {

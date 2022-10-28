@@ -24,4 +24,7 @@
   .summary h2{
     font-size: 1.5rem;
   }
+  .summary {
+    margin-top: 0;
+  }
 }
