@@ -1,3 +1,6 @@
+import { m } from "framer-motion";
+// My imports.
+import { backdropAnimation } from "utils/animations/animation";
 import styles from "./Backdrop.module.css";
 type BackdropProps = {
   onClose: () => void;
@@ -9,6 +12,15 @@ type BackdropProps = {
  * @returns React component.
  */
 function Backdrop({ onClose }: BackdropProps) {
-  return <div className={styles.backdrop} onClick={onClose} />;
+  return (
+    <m.div
+      className={styles.backdrop}
+      onClick={onClose}
+      initial="brighten"
+      animate="darken"
+      exit="brighten"
+      variants={backdropAnimation}
+    />
+  );
 }
 export default Backdrop;
