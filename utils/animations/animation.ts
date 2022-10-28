@@ -97,3 +97,23 @@ export const pastOrdersAnimationItem = {
   hidden: { opacity: 0, y: -100 },
   visible: { opacity: 1, y: 0 },
 };
+
+export const sideDrawerAnimation = {
+  hidden: {
+    x: 200,
+  },
+  show: {
+    x: 0,
+  },
+  transition: {
+    type: "linear",
+  },
+};
+export const backdropAnimation = {
+  brighten: {
+    opacity: 0,
+  },
+  darken: {
+    opacity: 1,
+  },
+};
