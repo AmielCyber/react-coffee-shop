@@ -1,69 +1,22 @@
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5rem;
-  background-color: var(--header-color);
-  color: white;
-  margin: 0;
-  box-shadow: 0 2px 8px var(--primary-darkest);
-  z-index: 10;
+/* Default sideBarButton is not shown */
+.sideBarButton {
+  display: none;
 }
-
-/* Navigation links */
-.nav ul {
-  list-style: none;
+.mobileNavigation {
+  height: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
+  flex-direction: column-reverse;
 }
-.nav li {
-  margin-right: 2rem;
+.mainNavigation {
+  display: flex;
+  justify-content: space-between;
 }
-.nav a, .loading {
-  color: #ffffff;
-  font-size: 1.5rem;
-}
-.nav a:hover {
-  color: var(--secondary-color);
-  border-bottom: 4px solid var(--primary-dark);
-  cursor: pointer;
-}
-/* Highlight current navigation page */
-.active {
-  border-bottom: 4px solid var(--nav-highlight-color);
-}
-
-.menu {
-  margin-right: auto !important;
-}
-
 /* Make the navigation bar vertical for mobile viewing */
 @media only screen and (max-width: 595px) {
-  .header {
-    height: var(--mobile-margin-top);
+  .mainNavigation {
+    display: none;
   }
-  .nav ul {
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    padding: 0;
-  }
-  .nav li {
-    margin: 0.3rem 0 !important;
-  }
-  .nav a, .loading {
-    font-size: 1.5rem !important;
-  }
-}
-
-@media only screen and (max-width: 700px) {
-  .nav li{
-    margin-right: 0.7rem;
-  }
-  .nav a, .loading {
-    font-size: 1.4rem;
+  .sideBarButton {
+    display: inherit;
   }
 }

@@ -1,34 +1,33 @@
+import { useState, useCallback } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useCallback } from "react";
-import Link from "next/link";
+import { AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 // My imports.
-import CompanyIcon from "../Icons/CompanyIcon";
+import Backdrop from "../../UI/Backdrop";
+import NavigationLinks from "./NavigationLinks";
+import MainHeader from "./MainHeader";
 import HeaderCartButton from "./HeaderCartButton";
-// CSS import.
+import SideDrawerButton from "../MobileSideDrawer/SideDrawerButton";
 import styles from "./MainNavigation.module.css";
-
-/**
- * Returns the link's css styled class based on the current page.
- * @param {string} currentPath url in the page.
- * @param {string} linkPath The navigation list item.
- * @param {string} style The default style.
- * @returns string name of the css style for the current path navigation list.
- */
-function activeLinkStyle(
-  currentPath: string,
-  linkPath: string,
-  style: string
-): string {
-  return currentPath === linkPath ? `${style} ${styles.active}` : style;
-}
+const MobileSideDrawer = dynamic(
+  () => import("../MobileSideDrawer/MobileSideDrawer"),
+  { ssr: false }
+);
 
 function MainNavigation() {
+  const [drawerIsOpen, setDrawerIsOpen] = useState<boolean>(false);
   const { status } = useSession(); // Check if user is an authenticated user or a guest user.
   const router = useRouter();
   const currentPath = router.asPath; // To highlight the current navigation link the navbar.
 
   // Handlers.
+  const openDrawerHandler = useCallback(() => {
+    setDrawerIsOpen(true);
+  }, []);
+  const closeDrawerHandler = useCallback(() => {
+    setDrawerIsOpen(false);
+  }, []);
   const signOutHandler = useCallback(() => {
     // Signs-out user and removes the session cookie using next-auth. Reloads website and resets initial state settings.
     signOut();
@@ -38,54 +37,40 @@ function MainNavigation() {
     router.push("/auth");
   }, [router]);
 
-  let accountLinkElement: JSX.Element;
-  if (status === "authenticated") {
-    // Displays Account and Sign Out in NavBar
-    accountLinkElement = (
-      <>
-        <li className={activeLinkStyle(currentPath, "/account", "")}>
-          <Link href="/account">Account</Link>
-        </li>
-        <li>
-          <a onClick={signOutHandler}>Sign out</a>
-        </li>
-      </>
-    );
-  } else if (status === "unauthenticated") {
-    // Displays Sign In in NavBar
-    accountLinkElement = (
-      <li className={activeLinkStyle(currentPath, "/auth", "")}>
-        <Link href="/auth">Sign in</Link>
-      </li>
-    );
-  } else {
-    // Displays Loading in NavBar
-    accountLinkElement = <li className={styles.loading}>Loading...</li>;
-  }
-
   return (
-    <header className={styles.header}>
-      <nav className={styles.nav}>
-        <ul>
-          <li className={activeLinkStyle(currentPath, "/", "")}>
-            <Link href={"/"} passHref>
-              <a aria-label="Home">
-                <CompanyIcon width={30} height={30} fill={"white"} />
-              </a>
-            </Link>
-          </li>
-          <li className={activeLinkStyle(currentPath, "/menu", styles.menu)}>
-            <Link href="/menu">Menu</Link>
-          </li>
-          {accountLinkElement}
-          <li>
-            <span className={styles.cartButton}>
-              <HeaderCartButton onSignIn={signInHandler} />
-            </span>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <>
+      <MainHeader>
+        <nav className={styles.mainNavigation}>
+          <NavigationLinks
+            authStatus={status}
+            currentPath={currentPath}
+            onSignOut={signOutHandler}
+          />
+        </nav>
+        <span className={styles.cartButton}>
+          <HeaderCartButton onSignIn={signInHandler} />
+        </span>
+        <span className={styles.sideBarButton}>
+          <SideDrawerButton onOpenDrawer={openDrawerHandler} />
+        </span>
+      </MainHeader>
+      <AnimatePresence>
+        {drawerIsOpen && (
+          <>
+            <Backdrop onClose={closeDrawerHandler} />
+            <MobileSideDrawer onClose={closeDrawerHandler}>
+              <nav className={styles.mobileNavigation}>
+                <NavigationLinks
+                  authStatus={status}
+                  currentPath={currentPath}
+                  onSignOut={signOutHandler}
+                />
+              </nav>
+            </MobileSideDrawer>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
