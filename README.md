@@ -139,7 +139,10 @@ checkmark.
 - [x] Receipt after checkout
 - [x] Past Order History from the profile page
 - [x] Past Order animation using framer motion
+- [x] React 18 Migration
 - [x] Typescript Migration
+- [x] Redesigned mobile Navigation Bar for easier access for mobile users
+- [ ] Next.js 13 Migration
 
 ## Performance
 
@@ -206,15 +209,25 @@ react-coffee-shop
 │   │   │   ├── CartCheck.tsx
 │   │   │   ├── CartIcon.tsx
 │   │   │   ├── ClearCart.tsx
-│   │   │   └── CompanyIcon.tsx
+│   │   │   ├── CompanyIcon.tsx
+│   │   │   └── MenuHamburger.tsx
 │   │   ├── Layout.module.css
 │   │   ├── Layout.tsx
-│   │   └── NavBar/
-│   │       ├── CartModal.tsx
-│   │       ├── HeaderCartButton.module.css
-│   │       ├── HeaderCartButton.tsx
-│   │       ├── MainNavigation.module.css
-│   │       └── MainNavigation.tsx
+│   │   ├── MobileSideDrawer
+│   │   │   ├── MobileSideDrawer.module.css
+│   │   │   ├── MobileSideDrawer.tsx
+│   │   │   ├── SideDrawerButton.module.css
+│   │   │   └── SideDrawerButton.tsx
+│   │   └── NavBar
+│   │       ├── CartModal.tsx
+│   │       ├── HeaderCartButton.module.css
+│   │       ├── HeaderCartButton.tsx
+│   │       ├── MainHeader.module.css
+│   │       ├── MainHeader.tsx
+│   │       ├── MainNavigation.module.css
+│   │       ├── MainNavigation.tsx
+│   │       ├── NavigationLinks.module.css
+│   │       └── NavigationLinks.tsx
 │   ├── PastOrders/
 │   │   ├── DisplayPastOrders.module.css
 │   │   ├── DisplayPastOrders.tsx
