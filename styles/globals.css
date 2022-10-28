@@ -25,6 +25,7 @@
   --button-opaque: #F1F1F1;
   --coffee-name-color: var(--primary-dark);
   /* Navigation colors */
+  --nav-header-height: 5rem;
   --header-color: #00755E;
   --nav-highlight-color: #00C9A1;
   --nav-highlight-color2: #75003F;
@@ -32,7 +33,8 @@
   --cart-button-highlight-color: #003127; 
   --cart-badge-color: var(--primary-light);
   /* Mobile margin from layout header*/
-  --mobile-margin-top: 16rem;
+  --mobile-margin-top-min: 8rem;
+  --mobile-margin-top-max: 16rem;
 }
 html {
 /*   font-family: 'Open Sans', sans-serif; */
