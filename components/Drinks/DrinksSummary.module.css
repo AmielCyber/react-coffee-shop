@@ -1,10 +1,11 @@
 .summary {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  width: 60%;
-  margin: 1rem auto;
+  margin: 1rem 0.5rem auto auto;
+  padding: 5px;
   position: relative;
   background-color: white;
   color: var(--name-color);
@@ -20,9 +21,6 @@
 }
 
 @media only screen and (max-width: 595px) {
-  .summary {
-    width: 90%;
-  }
   .summary h2{
     font-size: 1.5rem;
   }
