@@ -6,6 +6,7 @@ function Document() {
     <Html lang="en">
       <Head />
       <body>
+        <div id="drawer-hook"></div>
         <div id="overlays"></div>
         <Main />
         <NextScript />
