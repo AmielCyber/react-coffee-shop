@@ -1,0 +1,16 @@
+.sideDrawer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 45vw;
+  height: 40vh;
+  background: var(--header-color);
+  z-index: 30;
+  margin-bottom: var(--nav-header-height);
+  border-top-left-radius: 10px;
+}
+@media only screen and (min-width: 596px) {
+  .sideDrawer {
+    display: none;
+  }
+}
