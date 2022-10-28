@@ -1,0 +1,25 @@
+.mainHeader {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-header-height);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--header-color);
+  box-shadow: 0 2px 8px var(--primary-darkest);
+  padding: 0 1rem;
+  margin: 0;
+  z-index: 5;
+}
+@media only screen and (max-width: 595px) {
+  .mainHeader {
+    top:auto;
+    left:auto;
+    bottom: 0;
+    right: 0;
+    padding: 0 0.5rem;
+    justify-content: space-evenly;
+  }
+}
