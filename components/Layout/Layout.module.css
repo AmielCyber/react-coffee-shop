@@ -1,10 +1,12 @@
 /* All pages will be below the Header. */
 .main {
-  margin:  5rem auto;
+  padding-top: var(--nav-header-height);
 }
-/* Mobile changes */
+
 @media only screen and (max-width: 595px) {
+  /* All pages will be above the Header. */
   .main {
-    margin: var(--mobile-margin-top) auto;
+    padding-top: 0;
+    padding-bottom: var(--nav-header-height);
   }
 }
