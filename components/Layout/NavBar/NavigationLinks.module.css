@@ -1,0 +1,42 @@
+/*.paths navigation links */
+.pathList {
+  list-style: none;
+  display: flex;
+  flex-direction: inherit;
+  align-items: center;
+}
+.pathList li {
+  margin-right: 2rem;
+}
+.pathList a, .loading {
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+.pathList a:hover {
+  color: var(--secondary-color);
+  border-bottom: 4px solid var(--primary-dark);
+  cursor: pointer;
+}
+/* Highlight current path navigation page */
+.active {
+  border-bottom: 4px solid var(--nav-highlight-color);
+}
+
+/* Make the navigation bar vertical for mobile viewing */
+@media only screen and (max-width: 595px) {
+  .pathList {
+    padding: 0;
+    height: 100%;
+    margin: 0;
+    justify-content: space-evenly;
+  }
+  .pathList a, .loading {
+    font-size: 1.5rem !important;
+  }
+  .pathList li{
+    margin: 0;
+  }
+  .pathList a, .loading {
+    font-size: 1.4rem;
+  }
+}
