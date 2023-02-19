@@ -142,6 +142,7 @@ checkmark.
 - [x] React 18 Migration
 - [x] Typescript Migration
 - [x] Redesigned mobile Navigation Bar for easier access for mobile users
+- [ ] Store JWT in Cookie as recommended by JWT instead of local storage
 - [ ] Next.js 13 Migration
 - [ ] Validate emails using a 3rd party library
 - [ ] Checkmark/button acceptance that no order is actually placed
