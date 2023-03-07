@@ -55,8 +55,8 @@ function NavigationLinks({
   return (
     <ul className={styles.pathList}>
       <li className={getLinkStyle(currentPath, "/")}>
-        <Link href={"/"} passHref>
-          <a aria-label="Home">
+        <Link href={"/"} aria-label="Home Page" legacyBehavior>
+          <a>
             <CompanyIcon width={30} height={30} fill={"white"} />
           </a>
         </Link>
