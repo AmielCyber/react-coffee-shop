@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { unstable_getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 // My imports.
 import type User from "../../../models/User";
@@ -19,7 +19,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // Get session if there is one.
-  const session = await unstable_getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, authOptions);
 
   switch (req.method) {
     case "POST":

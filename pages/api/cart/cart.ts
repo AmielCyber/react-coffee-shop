@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { unstable_getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth/next";
 // My imports.
 import type Cart from "../../../models/Cart";
 import { authOptions } from "../auth/[...nextauth]";
@@ -14,7 +14,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // Requests will only go to authenticated users.
-  const session = await unstable_getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, authOptions);
   if (!session) {
     // User is not authenticated.
     res.status(401).json({ message: "User is not logged in!" });

@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { unstable_getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 // My imports.
 import { passwordIsValid } from "../../../utils/db/input-validation";
@@ -19,7 +19,7 @@ export default async function handler(
   }
 
   // Get current session.
-  const session = await unstable_getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, authOptions);
 
   if (!session) {
     // Client is not authenticated.
