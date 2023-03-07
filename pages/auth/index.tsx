@@ -41,11 +41,9 @@ export default function AuthPage() {
           alt="Latte on top of a white table"
           title="Image by @heftiba from Unsplash"
           src={coffeeImage}
-          layout="fill"
-          objectFit="cover"
           quality={50}
-          objectPosition="center"
           placeholder="blur"
+          fill
         />
       </div>
       {isLoading && (

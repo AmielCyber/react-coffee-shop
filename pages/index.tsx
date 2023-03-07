@@ -24,11 +24,9 @@ export default function Home() {
           alt="Coffee Shop Interior"
           title="Image by @pinchebesu from Unsplash"
           src={coffeeShopImage}
-          layout="fill"
-          objectFit="cover"
           quality={80}
-          objectPosition="center"
           placeholder="blur"
+          fill
         />
       </div>
       <m.div

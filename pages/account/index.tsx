@@ -44,11 +44,9 @@ export default function AccountPage() {
             alt="A coffee cup in a white background and letters spelling LOVE"
             src={coffeeLove}
             title="Image by @inchristalone from Unsplash"
-            layout="fill"
-            objectFit="cover"
             quality={80}
-            objectPosition="center"
             placeholder="blur"
+            fill
           />
         </div>
         <m.div initial="in" animate="animate" variants={pageAnimation}>

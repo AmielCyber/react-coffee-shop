@@ -26,10 +26,9 @@ export default function Menu() {
           src={drinksImage}
           title="Image by @c_reel from Unsplash"
           alt="A table full of coffee drinks"
-          layout="fill"
-          objectFit="cover"
           quality={80}
           placeholder="blur"
+          fill
         />
       </div>
       <m.div
