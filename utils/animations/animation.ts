@@ -105,9 +105,6 @@ export const sideDrawerAnimation = {
   show: {
     x: 0,
   },
-  transition: {
-    type: "linear",
-  },
 };
 export const backdropAnimation = {
   brighten: {

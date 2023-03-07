@@ -18,7 +18,6 @@ function SideDrawer({ onClose, children }: SideDrawerProps) {
       initial="hidden"
       animate="show"
       exit="hidden"
-      transition={sideDrawerAnimation.transition}
       variants={sideDrawerAnimation}
     >
       {children}
