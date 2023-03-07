@@ -15,9 +15,7 @@ function WelcomeMessage() {
     <section className={styles.message}>
       <h2>{`Welcome ${userGreetingMsg}to React Coffee!`}</h2>
       <p>
-        <Link href="/menu" passHref>
-          <a>Order fresh coffee to go now!</a>
-        </Link>
+        <Link href="/menu" >Order fresh coffee to go now!</Link>
       </p>
     </section>
   );

@@ -2,8 +2,12 @@
   position: fixed;
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
   z-index: -1;
+}
+.accountPageImage img {
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
 }
 /* Div button to show past orders made */
 .toggleShowOrders {

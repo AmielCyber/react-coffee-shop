@@ -41,10 +41,8 @@ function DrinkItem({ drink, variants }: DrinkItemProps) {
         <Image
           src={drink.imgSrc}
           alt={`${drink.name} drink`}
-          layout="responsive"
-          width={250}
-          height={250}
           quality={80}
+          fill
           title={drink.originalSource}
         />
       </div>
