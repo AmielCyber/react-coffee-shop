@@ -3,11 +3,12 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 // My imports.
 import getDrinksFromServer from "utils/db/db-drinks-util";
-import type User from "../../../models/User";
 import type Cart from "../../../models/Cart";
 import type Receipt from "../../../models/Receipt";
-import { userDataIsValid } from "../../../utils/db/input-validation";
+import { SafeParseReturnType } from "zod";
 import prisma from "../../../utils/db/prisma";
+import User from "../../../models/User";
+import {validateUserData} from "../../../utils/db/input-validation";
 
 export default async function handler(
   req: NextApiRequest,
@@ -21,10 +22,10 @@ export default async function handler(
     const { user, cart }: { user: User; cart: Cart } = req.body;
 
     // Backend Validation: Validate user input.
-    const invalidUserMessage = userDataIsValid(user);
-    if (invalidUserMessage !== "") {
+    const userValidation: SafeParseReturnType<User,User> = validateUserData(user);
+    if(!userValidation.success){
       // If userDataIsValid return a non empty string then an error message occurred.
-      res.status(422).json({ message: invalidUserMessage });
+      res.status(422).json({ message: userValidation.error.issues.map(issue => issue.path + ": " + issue.message).join(" ") });
       return;
     }
 

@@ -40,7 +40,8 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
     "redux": "^4.2.0",
-    "swr": "^2.1.0"
+    "swr": "^2.1.0",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^12.2.5",

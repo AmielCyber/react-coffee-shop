@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 // My imports.
 import type RegisteredUser from "../../../models/RegisteredUser";
-import { userDataIsValid } from "../../../utils/db/input-validation";
+import { SafeParseReturnType } from "zod";
+import { validateRegisteredUserData } from "../../../utils/db/input-validation";
 import { hashPassword } from "../../../utils/auth/auth";
 import prisma from "../../../utils/db/prisma";
 
@@ -13,18 +14,9 @@ export default async function handler(
     const userInfo: RegisteredUser = req.body;
 
     // Backend Validation: Validate user input.
-    const invalidUserMessage = userDataIsValid(userInfo);
-    if (invalidUserMessage !== "") {
-      // Validate user name and email.
-      res.status(422).json({ message: invalidUserMessage });
-      return;
-    }
-    if (!userInfo.password || userInfo.password.trim().length < 7) {
-      // Validate user password.
-      res.status(422).json({
-        message:
-          "Invalid password entered. Password must be at least 7 characters long.",
-      });
+    const registeredUserValidation: SafeParseReturnType<RegisteredUser, RegisteredUser> = validateRegisteredUserData(userInfo);
+    if(!registeredUserValidation.success){
+      res.status(422).json({ message: registeredUserValidation.error.issues.map(issue => issue.path + ": " + issue.message).join(" ")});
       return;
     }
 

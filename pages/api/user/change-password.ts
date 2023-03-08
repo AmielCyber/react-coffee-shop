@@ -3,8 +3,9 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 import { User } from "@prisma/client";
+import { SafeParseReturnType } from "zod";
 // My imports.
-import { passwordIsValid } from "../../../utils/db/input-validation";
+import { validatePassword } from "../../../utils/db/input-validation";
 import { hashPassword, verifyPassword } from "../../../utils/auth/auth";
 import prisma from "../../../utils/db/prisma";
 
@@ -40,10 +41,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // Validate new password.
-    if(!passwordIsValid(enteredNewPassword)){
+    const passwordValidation: SafeParseReturnType<string,string> = validatePassword(enteredNewPassword);
+    if(!passwordValidation.success){
         res.status(400).json({
-            message: "Invalid new password entered. Password must be 7 characters or more."
-        })
+            message: passwordValidation.error.message,
+        });
         return;
     }
 
