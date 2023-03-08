@@ -143,8 +143,9 @@ checkmark.
 - [x] Typescript Migration
 - [x] Redesigned mobile Navigation Bar for easier access for mobile users
 - [x] Next.js 13 Migration
+- [x] Replace Mongoose with Prisma
 - [ ] Typescript in the backend
-- [ ] Prisma and zod in the backend
+- [ ] Add Zod library to validate
 - [ ] Store JWT in Cookie as recommended by JWT instead of local storage
 - [ ] Validate emails using a 3rd party library
 - [ ] Checkmark/button acceptance that no order is actually placed
