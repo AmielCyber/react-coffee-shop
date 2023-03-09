@@ -1,21 +1,21 @@
 import { m } from "framer-motion";
 // My imports.
-import DrinkItem from "./DrinkItem";
+import styles from "./DrinkItemList.module.css";
+import type Drink from "../../../models/Drink";
 import {
   drinkItemAnimation,
   drinkItemListAnimation,
 } from "../../../utils/animations/animation";
-import type Drink from "../../../models/Drink";
-// CSS import.
-import styles from "./DrinkItemList.module.css";
+// My component.
+import DrinkItem from "./DrinkItem";
 
 type DrinkItemListProps = {
   drinks: Drink[];
 };
 
-function DrinkItemList({ drinks }: DrinkItemListProps) {
+export default function DrinkItemList(props: DrinkItemListProps) {
   // Get the Drink item list.
-  const drinkList = drinks.map((drink) => (
+  const drinkList = props.drinks.map((drink) => (
     <DrinkItem key={drink.id} drink={drink} variants={drinkItemAnimation} />
   ));
 
@@ -30,4 +30,3 @@ function DrinkItemList({ drinks }: DrinkItemListProps) {
     </m.ul>
   );
 }
-export default DrinkItemList;

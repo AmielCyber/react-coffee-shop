@@ -34,14 +34,12 @@ type CartProps = {
 };
 /**
  * Styles the passed props.children component into a a square with rounded corners.
- * @param {any} props any type of props will be forwarded.
+ * @param {CartProps} props any type of props will be forwarded.
  * @returns React Component.
  */
-function Card({ style, children }: CartProps) {
-  const cardStyle = style ? style : "";
+export default function Card(props: CartProps) {
+  const cardStyle = props.style ? props.style : "";
   const styleType = getCardStyle(cardStyle);
 
-  return <div className={styleType}>{children}</div>;
+  return <div className={styleType}>{props.children}</div>;
 }
-
-export default Card;

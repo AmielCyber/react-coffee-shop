@@ -8,7 +8,7 @@ const MAX_INPUT_NUM = 5;
  * Creates a list of number of options.
  * @returns Number of options [1-MAX_INPUT_NUM]
  */
-function getNumberOptions() {
+function getNumberOptions(): JSX.Element[] {
   const numberOptionList = [];
   for (let numberOfItems = 1; numberOfItems <= MAX_INPUT_NUM; numberOfItems++) {
     numberOptionList.push(
@@ -25,7 +25,7 @@ type DrinkItemFormProps = {
   name: string;
 };
 
-function DrinkItemForm({ onAddToCart, name }: DrinkItemFormProps) {
+export default function DrinkItemForm(props: DrinkItemFormProps) {
   const [amount, setAmount] = useState(1);
 
   const submitHandler = (event: React.FormEvent) => {
@@ -33,7 +33,7 @@ function DrinkItemForm({ onAddToCart, name }: DrinkItemFormProps) {
     const enteredAmount = amount;
     const enteredAmountNum = +enteredAmount; // Make sure is a Number.
     // Add the newly number of a drink item to the cart.
-    onAddToCart(enteredAmountNum);
+    props.onAddToCart(enteredAmountNum);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -44,8 +44,8 @@ function DrinkItemForm({ onAddToCart, name }: DrinkItemFormProps) {
   return (
     <form className={styles.form} onSubmit={submitHandler}>
       <div className={styles.amount}>
-        <label htmlFor={name + "-" + "amount"}>Amount:</label>
-        <select id={name + "-" + "amount"} onChange={handleChange}>
+        <label htmlFor={props.name + "-" + "amount"}>Amount:</label>
+        <select id={props.name + "-" + "amount"} onChange={handleChange}>
           {getNumberOptions()}
         </select>
       </div>
@@ -53,5 +53,3 @@ function DrinkItemForm({ onAddToCart, name }: DrinkItemFormProps) {
     </form>
   );
 }
-
-export default DrinkItemForm;
