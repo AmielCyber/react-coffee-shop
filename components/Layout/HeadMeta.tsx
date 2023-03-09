@@ -4,7 +4,7 @@ import Head from "next/head";
 /**
  * Meta component containing our meta data and the links to our favicon.
  */
-export default function HeadMeta() {
+function HeadMeta() {
   return (
     <Head>
       <link
@@ -35,3 +35,5 @@ export default function HeadMeta() {
     </Head>
   );
 }
+
+export default memo(HeadMeta);
