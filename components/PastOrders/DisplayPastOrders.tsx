@@ -2,12 +2,12 @@ import { useState, Fragment, useCallback } from "react";
 import ReactDOM from "react-dom";
 import { AnimatePresence } from "framer-motion";
 // My imports.
+import styles from "./DisplayPastOrders.module.css";
+import type Order from "../../models/Order";
+// My components.
 import PastOrderList from "./PastOrderList";
 import Modal from "../UI/Modal";
 import Receipt from "../Receipt/Receipt";
-import type Order from "../../models/Order";
-// CSS import.
-import styles from "./DisplayPastOrders.module.css";
 
 type DisplayPastOrdersProps = {
   orders: Order[];
@@ -15,7 +15,7 @@ type DisplayPastOrdersProps = {
 
 const OverlayElement = document.querySelector("#overlays") as HTMLElement;
 
-function DisplayPastOrders({ orders }: DisplayPastOrdersProps) {
+export default function DisplayPastOrders(props: DisplayPastOrdersProps) {
   const [showReceipt, setShowReceipt] = useState(false);
   const [modalOrderReceipt, setModalOrderReceipt] = useState<Order | null>(
     null
@@ -34,7 +34,10 @@ function DisplayPastOrders({ orders }: DisplayPastOrdersProps) {
 
   return (
     <Fragment>
-      <PastOrderList orders={orders} onShowReceipt={showDetailedReceipt} />
+      <PastOrderList
+        orders={props.orders}
+        onShowReceipt={showDetailedReceipt}
+      />
       {ReactDOM.createPortal(
         <AnimatePresence>
           {showReceipt && modalOrderReceipt && (
@@ -51,5 +54,3 @@ function DisplayPastOrders({ orders }: DisplayPastOrdersProps) {
     </Fragment>
   );
 }
-
-export default DisplayPastOrders;

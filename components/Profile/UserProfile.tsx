@@ -1,20 +1,20 @@
+import type { Session } from "next-auth";
 import dynamic from "next/dynamic";
 import { useState, Suspense } from "react";
-import type { Session } from "next-auth";
-// CSS import.
+// My imports.
 import styles from "./UserProfile.module.css";
-// My dynamic import.
+// My component.
 const PasswordForm = dynamic(() => import("./PasswordForm"), { ssr: false });
 
 type UserProfileProps = {
   session: Session;
 };
 
-function UserProfile({ session }: UserProfileProps) {
+export default function UserProfile(props: UserProfileProps) {
   const [statusMessage, setStatusMessage] = useState("");
   const [changePassword, setChangePassword] = useState(false);
-  const userName = session.user.name;
-  const userEmail = session.user.email; // To make the create-new-password assessable
+  const userName = props.session.user.name;
+  const userEmail = props.session.user.email; // To make the create-new-password assessable
 
   const toggleShowPasswordFormHandler = () => {
     setStatusMessage("");
@@ -48,5 +48,3 @@ function UserProfile({ session }: UserProfileProps) {
     </section>
   );
 }
-
-export default UserProfile;

@@ -84,7 +84,6 @@ code to minimize server calls, like using Vercel’s SWR hook for data caching.
 - [**Prisma**](https://www.prisma.io) ORM for MongoDB
 - [**Zod**](https://zod.dev) validation
 
-
 ## Usage
 
 Click the website link [above](#live-demo) to try out the project. Try out on your phone too to experience the mobile
@@ -148,6 +147,8 @@ checkmark.
 - [x] Replace Mongoose with Prisma
 - [x] Migrated backend to typescript
 - [x] Add Zod library to validate
+- [ ] Confirm password on change
+- [ ] Close account
 - [ ] Store JWT in Cookie as recommended by JWT instead of local storage
 - [ ] Checkmark/button acceptance that no order is actually placed
 

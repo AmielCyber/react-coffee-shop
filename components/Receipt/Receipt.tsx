@@ -1,9 +1,9 @@
-// My import.
-import ReceiptItem from "./ReceiptItem";
+// My imports.
+import styles from "./Receipt.module.css";
 import type DrinkItem from "../../models/DrinkItem";
 import type Order from "../../models/Order";
-// CSS import.
-import styles from "./Receipt.module.css";
+// My component.
+import ReceiptItem from "./ReceiptItem";
 
 /**
  * Gets the list of Receipt Item components.
@@ -30,11 +30,11 @@ type ReceiptProps = {
   showReceiptItems: boolean;
 };
 
-function Receipt({ order, showReceiptItems }: ReceiptProps) {
-  const formattedTotalPrice = `$${order.totalPrice.toFixed(2)}`;
-  const localDate = order.orderDate.toLocaleString();
+export default function Receipt(props: ReceiptProps) {
+  const formattedTotalPrice = `$${props.order.totalPrice.toFixed(2)}`;
+  const localDate = props.order.orderDate.toLocaleString();
   const summaryStyles = `${styles.summary} ${
-    showReceiptItems ? styles.divider : ""
+    props.showReceiptItems ? styles.divider : ""
   }`;
 
   return (
@@ -43,15 +43,15 @@ function Receipt({ order, showReceiptItems }: ReceiptProps) {
         <h3>Order Date</h3>
         <span>{localDate}</span>
       </div>
-      {showReceiptItems && (
+      {props.showReceiptItems && (
         <section className={styles.receiptItems} title="Receipt Items">
-          <ul>{getReceiptItems(order.items, localDate)}</ul>
+          <ul>{getReceiptItems(props.order.items, localDate)}</ul>
         </section>
       )}
       <section className={summaryStyles} title="Total">
         <div className={styles.totalItems}>
           <h3>Total Items</h3>
-          <span>{order.totalItems}</span>
+          <span>{props.order.totalItems}</span>
         </div>
         <div className={styles.totalPrice}>
           <h3>Total Price</h3>
@@ -61,5 +61,3 @@ function Receipt({ order, showReceiptItems }: ReceiptProps) {
     </div>
   );
 }
-
-export default Receipt;

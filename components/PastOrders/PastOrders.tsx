@@ -1,33 +1,34 @@
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 // My imports.
+import type Order from "../../models/Order";
+import styles from "./PastOrders.module.css";
 import FetchItems from "../../store/fetcher/fetch-items";
+// My components.
 import Card from "../UI/Card";
 import LoadingSpinner from "../UI/LoadingSpinner";
-import type Order from "../../models/Order";
-// CSS import.
-import styles from "./PastOrders.module.css";
-import { Suspense } from "react";
-// My dynamic import.
 // Turn off ssr render for this component since it uses client side functions.
 const DisplayPastOrders = dynamic(() => import("./DisplayPastOrders"), {
   ssr: false,
 });
 
-function PastOrders() {
+type fetchOrderedReturnType = {
+  items: Order[];
+  isLoading: boolean;
+  isError: Error | undefined;
+};
+
+export default function PastOrders() {
   const orderArray: Order[] = [];
-  const {
-    items,
-    isLoading,
-    isError,
-  }: {
-    items: Order[] | undefined;
-    isLoading: boolean;
-    isError: Error | undefined;
-  } = FetchItems("/api/order/order", orderArray, {
-    revalidateIfStale: true,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: true,
-  });
+  const { items, isLoading, isError }: fetchOrderedReturnType = FetchItems(
+    "/api/order/order",
+    orderArray,
+    {
+      revalidateIfStale: true,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: true,
+    }
+  );
 
   if (isError) {
     // Error in fetching user's past orders.
@@ -65,5 +66,3 @@ function PastOrders() {
     </Card>
   );
 }
-
-export default PastOrders;

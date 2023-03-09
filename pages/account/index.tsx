@@ -6,13 +6,13 @@ import { m } from "framer-motion";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 // My imports.
+import styles from "./AccountPage.module.css";
 import { pageAnimation } from "../../utils/animations/animation";
 import coffeeLove from "../../public/background/coffeeLove.jpg";
+// My components.
 import Card from "../../components/UI/Card";
 import UserProfile from "../../components/Profile/UserProfile";
 import LoadingSpinner from "components/UI/LoadingSpinner";
-// CSS import.
-import styles from "./AccountPage.module.css";
 // My dynamic import.
 const PastOrders = dynamic(
   () => import("../../components/PastOrders/PastOrders"),

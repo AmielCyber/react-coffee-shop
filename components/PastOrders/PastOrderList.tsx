@@ -1,14 +1,14 @@
 import { memo } from "react";
 import { m } from "framer-motion";
 // My imports.
+import type Order from "../../models/Order";
+import styles from "./PastOrderList.module.css";
 import {
   pastOrdersAnimationItem,
   pastOrdersAnimationList,
 } from "../../utils/animations/animation";
+// My component.
 import Receipt from "../Receipt/Receipt";
-import type Order from "../../models/Order";
-// CSS import.
-import styles from "./PastOrderList.module.css";
 
 type PastOrderListProps = {
   orders: Order[];
@@ -23,12 +23,12 @@ function ordersAreTheSame(
   return prevProps.orders === currProps.orders;
 }
 
-function PastOrderList({ orders, onShowReceipt }: PastOrderListProps) {
+function PastOrderList(props: PastOrderListProps) {
   // Handlers.
   const showDetailedReceipt = (order: Order) => {
-    onShowReceipt(order);
+    props.onShowReceipt(order);
   };
-  const pastOrders = orders.map((order: Order) => {
+  const pastOrders = props.orders.map((order: Order) => {
     // Create new order object.
     const orderObj = {
       ...order,

@@ -1,8 +1,7 @@
 import { useState, useRef } from "react";
-// My import.
-import { isValidPassword } from "../../utils/validation/input_validation";
-// CSS import.
+// My imports.
 import styles from "./PasswordForm.module.css";
+import { isValidPassword } from "../../utils/validation/input_validation";
 
 type PasswordManager = {
   currentPassword: string;
@@ -35,7 +34,7 @@ type PasswordFormProps = {
   onSuccess: (message: string) => void;
 };
 
-function PasswordForm({ userEmail, onSuccess }: PasswordFormProps) {
+export default function PasswordForm(props: PasswordFormProps) {
   const [statusMessage, setStatusMessage] = useState("");
   const [invalidPassword, setInvalidPassword] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -59,7 +58,7 @@ function PasswordForm({ userEmail, onSuccess }: PasswordFormProps) {
           currentPassword: enteredCurrentPassword,
           newPassword: enteredNewPassword,
         });
-        onSuccess(result.message);
+        props.onSuccess(result.message);
       } catch (error) {
         setStatusMessage(
           error instanceof Error ? error.message : "Something went wrong..."
@@ -94,7 +93,7 @@ function PasswordForm({ userEmail, onSuccess }: PasswordFormProps) {
           <input
             type="text"
             id="username"
-            value={userEmail}
+            value={props.userEmail}
             readOnly
             autoComplete="username"
           />
@@ -124,5 +123,3 @@ function PasswordForm({ userEmail, onSuccess }: PasswordFormProps) {
     </>
   );
 }
-
-export default PasswordForm;

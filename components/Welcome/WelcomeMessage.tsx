@@ -17,7 +17,7 @@ export default function WelcomeMessage() {
 
   return (
     <section className={styles.message}>
-      <h2>{`Welcome ${greetingMessage}to React Coffee!`}</h2>
+      <h2>{greetingMessage}</h2>
       <p>
         <Link href="/menu">Order fresh coffee to go now!</Link>
       </p>

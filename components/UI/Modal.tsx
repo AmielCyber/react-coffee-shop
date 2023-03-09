@@ -1,24 +1,23 @@
 import React from "react";
 import { m } from "framer-motion";
-// My import.
+// My imports.
+import styles from "./Modal.module.css";
 import {
   modalAnimation,
   modalTransition,
 } from "../../utils/animations/animation";
-// My import.
+// My component.
 import Backdrop from "./Backdrop";
-// CSS import.
-import styles from "./Modal.module.css";
 
 type ModalProps = {
   onClose: () => void;
   children: React.ReactNode;
 };
 
-function Modal({ onClose, children }: ModalProps) {
+export default function Modal(props: ModalProps) {
   return (
     <>
-      <Backdrop onClose={onClose} />
+      <Backdrop onClose={props.onClose} />
       <m.div
         className={styles.modal}
         initial="in"
@@ -27,10 +26,8 @@ function Modal({ onClose, children }: ModalProps) {
         variants={modalAnimation}
         transition={modalTransition}
       >
-        <div className={styles.content}>{children}</div>
+        <div className={styles.content}>{props.children}</div>
       </m.div>
     </>
   );
 }
-
-export default Modal;

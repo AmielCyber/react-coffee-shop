@@ -1,11 +1,5 @@
 import useSWR from "swr";
 
-/**
- * Fetcher function for the SWR hook.
- * Fetches data from the passed api server.
- * @param {string} uri
- * @returns {items:Object[], isLoading:boolean, isError:string | null}
- */
 const fetcher = async (uri: string) => {
   const response = await fetch(uri);
   const responseData = await response.json();
@@ -22,7 +16,15 @@ type revalidateOptions = {
   revalidateOnReconnect: boolean;
 };
 
-const FetchItems = <T>(uri: string, arr: T[], options: revalidateOptions) => {
+export default function FetchItems<T>(
+  uri: string,
+  arr: T[],
+  options: revalidateOptions
+): {
+  items: T[];
+  isLoading: false;
+  isError: Error | undefined;
+} {
   const { data, error } = useSWR<T[], Error>(uri, fetcher, options);
 
   arr = data ? data : arr;
@@ -32,6 +34,4 @@ const FetchItems = <T>(uri: string, arr: T[], options: revalidateOptions) => {
     isLoading: !error && !data, // There is no error and data is still being fetched.
     isError: error,
   };
-};
-
-export default FetchItems;
+}
