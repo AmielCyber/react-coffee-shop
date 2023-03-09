@@ -1,24 +1,26 @@
+import type { Session } from "next-auth";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 // My imports.
 import styles from "./WelcomeMessage.module.css";
 
-function WelcomeMessage() {
-  const { data: session } = useSession();
-
-  let userGreetingMsg = "";
+function getGreetingMessage(session: Session | null): string {
   if (session) {
-    userGreetingMsg = `back ${session.user.name}, `;
+    return `Welcome back ${session.user.name} to React Coffee!`;
   }
+  return "Welcome to React Coffee!";
+}
+
+export default function WelcomeMessage() {
+  const { data: session } = useSession();
+  const greetingMessage = getGreetingMessage(session);
 
   return (
     <section className={styles.message}>
-      <h2>{`Welcome ${userGreetingMsg}to React Coffee!`}</h2>
+      <h2>{`Welcome ${greetingMessage}to React Coffee!`}</h2>
       <p>
-        <Link href="/menu" >Order fresh coffee to go now!</Link>
+        <Link href="/menu">Order fresh coffee to go now!</Link>
       </p>
     </section>
   );
 }
-
-export default WelcomeMessage;

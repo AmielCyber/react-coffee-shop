@@ -2,11 +2,11 @@ import Head from "next/head";
 import Image from "next/image";
 import { m } from "framer-motion";
 // My imports.
+import styles from "./HomePage.module.css";
 import coffeeShopImage from "../public/background/coffee-shop.jpg";
 import { pageAnimation } from "../utils/animations/animation";
+// My component.
 import WelcomeMessage from "../components/Welcome/WelcomeMessage";
-// CSS styles.
-import styles from "./HomePage.module.css";
 
 export default function Home() {
   return (
