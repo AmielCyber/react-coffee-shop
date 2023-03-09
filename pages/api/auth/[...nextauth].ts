@@ -2,7 +2,7 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 // My imports.
 import { verifyPassword } from "../../../utils/auth/auth";
-import { connectToDatabase } from "../../../utils/db/db-util";
+import prisma from "../../../utils/db/prisma";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -17,14 +17,14 @@ export const authOptions: NextAuthOptions = {
           email: string;
           password: string;
         };
-        let client;
-        let usersCollection;
         let user;
         // Connect to the database and fetch credentials.
         try {
-          client = await connectToDatabase();
-          usersCollection = client.db().collection(process.env.USER_COLLECTION);
-          user = await usersCollection.findOne({ email: email });
+          user = await prisma.user.findUnique({
+            where: {
+              email: email
+            }
+          });
         } catch (error) {
           throw new Error("Failed to connect to the database!");
         }
@@ -51,7 +51,7 @@ export const authOptions: NextAuthOptions = {
 
         // Return user object.
         return {
-          id: user._id.toString(),
+          id: user.id,
           email: user.email,
           name: `${user.firstName} ${user.lastName}`,
           image: null,

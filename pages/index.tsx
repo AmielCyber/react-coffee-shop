@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { m } from "framer-motion";
 // My imports.
-import coffeeShopImage from "../assets/coffee-shop.jpg";
+import coffeeShopImage from "../public/background/coffee-shop.jpg";
 import { pageAnimation } from "../utils/animations/animation";
 import WelcomeMessage from "../components/Welcome/WelcomeMessage";
 // CSS styles.
@@ -26,6 +26,7 @@ export default function Home() {
           src={coffeeShopImage}
           quality={80}
           placeholder="blur"
+          blurDataURL="/blur/homeBlur.png"
           fill
         />
       </div>

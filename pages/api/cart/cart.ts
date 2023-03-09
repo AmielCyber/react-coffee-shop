@@ -3,11 +3,7 @@ import { getServerSession } from "next-auth/next";
 // My imports.
 import type Cart from "../../../models/Cart";
 import { authOptions } from "../auth/[...nextauth]";
-import {
-  connectToDatabase,
-  getOneDocumentFromUser,
-  insertAndReplaceDocument,
-} from "../../../utils/db/db-util";
+import prisma from "../../../utils/db/prisma";
 
 export default async function handler(
   req: NextApiRequest,
@@ -26,69 +22,43 @@ export default async function handler(
     case "GET":
       // Get a Cart object from our Cart collection.
       {
-        // Connect to the database.
-        let client;
+        // Get the cart session
+        let cartSession: Cart | null;
         try {
-          client = await connectToDatabase();
-        } catch (error) {
-          res
-            .status(500)
-            .json({ message: "Connecting to the cart database failed!" });
-          return;
-        }
-        // Get document.
-        let cart: Cart;
-        try {
-          if (process.env.CART_COLLECTION === undefined) {
-            console.error(
-              "Process environment for Cart Collection not set/found!"
-            );
-            throw new Error("Server Error!");
-          }
-          cart = await getOneDocumentFromUser(
-            client,
-            process.env.CART_COLLECTION,
-            email
-          );
+          cartSession = await prisma.cartSession.findUnique({
+            where: {
+              email: email,
+            }
+          });
         } catch (error) {
           res.status(500).json({ message: "Fetching cart data failed!" });
           return;
         }
-        res.status(200).json(cart);
+        res.status(200).json(cartSession);
       }
       break;
     case "POST":
       // Insert a Cart object to our Cart collection
       {
-        const cartData = req.body;
-        // Add the user email to the cart data
-        cartData.email = email;
-
-        // Connect to the cart database.
-        let client;
+        const cartData: Cart = req.body;
+        // Update the new cart data.
         try {
-          client = await connectToDatabase();
-        } catch (error) {
-          res
-            .status(500)
-            .json({ message: "Connecting to the cart database failed!" });
-          return;
-        }
-
-        // Add cart document to the database.
-        try {
-          if (process.env.CART_COLLECTION === undefined) {
-            console.error(
-              "Process environment for Cart Collection not set/found!"
-            );
-            throw new Error("Server Error!");
-          }
-          await insertAndReplaceDocument(
-            client,
-            process.env.CART_COLLECTION,
-            cartData,
-            email
-          );
+          await prisma.cartSession.upsert({
+            where: {
+              email: email,
+            },
+            update: {
+              items: cartData.items,
+              numberOfCartItems: cartData.numberOfCartItems,
+              totalPrice: cartData.totalPrice,
+            },
+            create: {
+              email: email,
+              items: cartData.items,
+              numberOfCartItems: cartData.numberOfCartItems,
+              totalPrice: cartData.totalPrice,
+            }
+          })
         } catch (error) {
           res.status(500).json({ message: "Inserting cart data failed!" });
           return;

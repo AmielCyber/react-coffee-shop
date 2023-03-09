@@ -1,5 +1,4 @@
-const { compare, hash } = require("bcryptjs");
-
+import {compare, hash} from "bcryptjs";
 // Helper functions to use to verify and store user's credentials.
 
 /**
@@ -7,7 +6,7 @@ const { compare, hash } = require("bcryptjs");
  * @param {string} password
  * @returns A string hashed password.
  */
-async function hashPassword(password) {
+export async function hashPassword(password: string): Promise<string> {
   const hashedPassword = await hash(password, 12);
 
   return hashedPassword;
@@ -19,13 +18,8 @@ async function hashPassword(password) {
  * @param {string} hashedPassword
  * @returns a boolean if the password is correct from our database.
  */
-async function verifyPassword(password, hashedPassword) {
+export async function verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
   const isValid = await compare(password, hashedPassword);
 
   return isValid;
 }
-
-module.exports = {
-  hashPassword,
-  verifyPassword,
-};

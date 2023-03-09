@@ -16,7 +16,6 @@
 - [Usage](#usage)
 - [Features](#features)
 - [Performance](#performance)
-- [File Structure](#file-structure)
 
 ## Production Demo
 
@@ -75,19 +74,22 @@ code to minimize server calls, like using Vercel’s SWR hook for data caching.
 - **Typescript** and **NodeJS**
 - **CSS** modules
 - [**ReactJS**](https://reactjs.org) component framework
-- [**NextJS**](https://nextjs.org) fullstack/production framework
+- [**NextJS**](https://nextjs.org) fullstack/production framework using serverless functions
 - [**MongoDB**](https://www.mongodb.com) database
 - [**NextAuth**](https://next-auth.js.org) user authentication
 - [**Redux**](https://redux.js.org) state management
 - [**bcryptjs**](https://github.com/dcodeIO/bcrypt.js) cryptography
 - [**Framer Motion**](https://www.framer.com/motion/) animation
 - [**Vercel**](https://vercel.com) hosting
+- [**Prisma**](https://www.prisma.io) ORM for MongoDB
+- [**Zod**](https://zod.dev) validation
+
 
 ## Usage
 
 Click the website link [above](#live-demo) to try out the project. Try out on your phone too to experience the mobile
 layout. Use the app as a registered user or a guest user. If you do not want to create an account, then try the
-following demo account porvided for you:
+following demo account provided for you:
 
 demo@gmail.com
 
@@ -143,10 +145,10 @@ checkmark.
 - [x] Typescript Migration
 - [x] Redesigned mobile Navigation Bar for easier access for mobile users
 - [x] Next.js 13 Migration
-- [ ] Typescript in the backend
-- [ ] Prisma and zod in the backend
+- [x] Replace Mongoose with Prisma
+- [x] Migrated backend to typescript
+- [x] Add Zod library to validate
 - [ ] Store JWT in Cookie as recommended by JWT instead of local storage
-- [ ] Validate emails using a 3rd party library
 - [ ] Checkmark/button acceptance that no order is actually placed
 
 ## Performance
@@ -160,172 +162,3 @@ checkmark.
 
 Screenshot from Vercel using [Checkly](https://vercel.com/integrations/checkly) integration
 ![Performance Screenshot](/assets/performance.png)
-
-## File Structure
-
-```bash
-react-coffee-shop
-├── __tests__/
-├── assets/
-│   ├── coffee-drinks.jpg
-│   ├── coffee-shop.jpg
-│   ├── coffeeLove.jpg
-│   ├── coffeeWhiteBackground.jpg
-│   ├── desktopPreview.gif
-│   ├── mobilePreview.gif
-│   ├── performance.png
-│   ├── source.txt
-├── components/
-│   ├── Auth/
-│   │   ├── AuthForm.module.css
-│   │   ├── AuthForm.tsx
-│   │   ├── SignIn.tsx
-│   │   └── SignUp.tsx
-│   ├── Cart/
-│   │   ├── Cart.module.css
-│   │   ├── Cart.tsx
-│   │   ├── CartContent.module.css
-│   │   ├── CartContent.tsx
-│   │   ├── CartItem/
-│   │   │   ├── CartItem.module.css
-│   │   │   ├── CartItem.tsx
-│   │   │   ├── CartItemList.module.css
-│   │   │   └── CartItemList.tsx
-│   │   └── Checkout/
-│   │       ├── Checkout.module.css
-│   │       ├── Checkout.tsx
-│   │       ├── GuestCheckout.tsx
-│   │       └── RegisteredCheckout.tsx
-│   ├── Drinks/
-│   │   ├── AvailableDrinks.module.css
-│   │   ├── AvailableDrinks.tsx
-│   │   ├── DrinkItem/
-│   │   │   ├── DrinkItem.module.css
-│   │   │   ├── DrinkItem.tsx
-│   │   │   ├── DrinkItemForm.module.css
-│   │   │   ├── DrinkItemForm.tsx
-│   │   │   ├── DrinkItemList.module.css
-│   │   │   └── DrinkItemList.tsx
-│   │   ├── DrinksSummary.module.css
-│   │   └── DrinksSummary.tsx
-│   ├── Layout/
-│   │   ├── HeadMeta.tsx
-│   │   ├── Icons/
-│   │   │   ├── CartCheck.tsx
-│   │   │   ├── CartIcon.tsx
-│   │   │   ├── ClearCart.tsx
-│   │   │   ├── CompanyIcon.tsx
-│   │   │   └── MenuHamburger.tsx
-│   │   ├── Layout.module.css
-│   │   ├── Layout.tsx
-│   │   ├── MobileSideDrawer
-│   │   │   ├── MobileSideDrawer.module.css
-│   │   │   ├── MobileSideDrawer.tsx
-│   │   │   ├── SideDrawerButton.module.css
-│   │   │   └── SideDrawerButton.tsx
-│   │   └── NavBar
-│   │       ├── CartModal.tsx
-│   │       ├── HeaderCartButton.module.css
-│   │       ├── HeaderCartButton.tsx
-│   │       ├── MainHeader.module.css
-│   │       ├── MainHeader.tsx
-│   │       ├── MainNavigation.module.css
-│   │       ├── MainNavigation.tsx
-│   │       ├── NavigationLinks.module.css
-│   │       └── NavigationLinks.tsx
-│   ├── PastOrders/
-│   │   ├── DisplayPastOrders.module.css
-│   │   ├── DisplayPastOrders.tsx
-│   │   ├── PastOrderList.module.css
-│   │   ├── PastOrderList.tsx
-│   │   ├── PastOrders.module.css
-│   │   └── PastOrders.tsx
-│   ├── Profile/
-│   │   ├── PasswordForm.module.css
-│   │   ├── PasswordForm.tsx
-│   │   ├── UserProfile.module.css
-│   │   └── UserProfile.tsx
-│   ├── Receipt/
-│   │   ├── Receipt.module.css
-│   │   ├── Receipt.tsx
-│   │   ├── ReceiptItem.module.css
-│   │   └── ReceiptItem.tsx
-│   ├── UI/
-│   │   ├── Card.module.css
-│   │   ├── Card.tsx
-│   │   ├── LoadingSpinner.module.css
-│   │   ├── LoadingSpinner.tsx
-│   │   ├── Modal.module.css
-│   │   └── Modal.tsx
-│   └── Welcome/
-│       ├── WelcomeMessage.module.css
-│       └── WelcomeMessage.tsx
-├── drinksData/
-│   ├── drinks.json
-│   └── setCoffeeJSON_Data.js
-├── models/
-│   ├── Cart.ts
-│   ├── Drink.ts
-│   ├── DrinkItem.ts
-│   ├── Order.ts
-│   ├── Receipt.ts
-│   ├── RegisteredUser.ts
-│   ├── ServerStatus.ts
-│   ├── UI_State.ts
-│   └── User.ts
-├── pages/
-│   ├── HomePage.module.css
-│   ├── _app.tsx
-│   ├── _document.tsx
-│   ├── account/
-│   │   ├── AccountPage.module.css
-│   │   └── index.tsx
-│   ├── api/
-│   │   ├── auth/
-│   │   │   ├── [...nextauth].ts
-│   │   │   └── signup.ts
-│   │   ├── cart/
-│   │   │   └── cart.ts
-│   │   ├── menu/
-│   │   │   └── drinks.ts
-│   │   ├── order/
-│   │   │   └── order.ts
-│   │   └── user/
-│   │       └── change-password.ts
-│   ├── auth/
-│   │   ├── AuthPage.module.css
-│   │   └── index.tsx
-│   ├── index.tsx
-│   └── menu/
-│       ├── MenuPage.module.css
-│       └── index.tsx
-├── public
-│   ├── drinkImages/
-│   └── favicon/
-├── store/
-│   ├── cart/
-│   │   ├── cart-actions.ts
-│   │   └── cart-slice.ts
-│   ├── fetcher/
-│   │   └── fetch-items.ts
-│   ├── hooks.ts
-│   ├── index.ts
-│   └── ui/
-│       └── ui-slice.ts
-├── styles/
-│   └── globals.css
-├── types/
-│   └── next-auth.d.ts
-└── utils/
-    ├── animations/
-    │   └── animation.ts
-    ├── auth/
-    │   └── auth.js
-    ├── db/
-    │   ├── db-drinks-util.js
-    │   ├── db-util.js
-    │   ├── input-validation.js
-    │   └── mongodb-client.js
-    └── validation/
-        └── input_validation.ts
-```
