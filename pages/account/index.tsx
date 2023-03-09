@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 // My imports.
 import { pageAnimation } from "../../utils/animations/animation";
-import coffeeLove from "../../assets/coffeeLove.jpg";
+import coffeeLove from "../../public/background/coffeeLove.jpg";
 import Card from "../../components/UI/Card";
 import UserProfile from "../../components/Profile/UserProfile";
 import LoadingSpinner from "components/UI/LoadingSpinner";
@@ -46,6 +46,7 @@ export default function AccountPage() {
             title="Image by @inchristalone from Unsplash"
             quality={80}
             placeholder="blur"
+            blurDataURL="/blur/accountBlur.png"
             fill
           />
         </div>

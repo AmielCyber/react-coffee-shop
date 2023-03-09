@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { m } from "framer-motion";
 // My imports.
-import drinksImage from "../../assets/coffee-drinks.jpg";
+import drinksImage from "../../public/background/coffee-drinks.jpg";
 import { pageAnimation } from "../../utils/animations/animation";
 // CSS styles.
 import styles from "./MenuPage.module.css";
@@ -28,6 +28,7 @@ export default function Menu() {
           alt="A table full of coffee drinks"
           quality={80}
           placeholder="blur"
+          blurDataURL="/blur/menuBlur.png"
           fill
         />
       </div>

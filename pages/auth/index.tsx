@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { m } from "framer-motion";
 // My imports.
-import coffeeImage from "../../assets/coffeeWhiteBackground.jpg";
+import coffeeImage from "../../public/background/coffeeWhiteBackground.jpg";
 import Card from "../../components/UI/Card";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import { pageAnimation } from "../../utils/animations/animation";
@@ -43,6 +43,7 @@ export default function AuthPage() {
           src={coffeeImage}
           quality={50}
           placeholder="blur"
+          blurDataURL="/blur/accountBlur.png"
           fill
         />
       </div>

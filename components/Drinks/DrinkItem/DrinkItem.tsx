@@ -44,6 +44,7 @@ function DrinkItem({ drink, variants }: DrinkItemProps) {
           quality={80}
           fill
           title={drink.originalSource}
+          sizes="(min-width: 250px, min-height: 250px) 100vw, (min-width: 150px, min-height: 150px) 50vw"
         />
       </div>
       <div className={styles.itemDescription}>
