@@ -1,12 +1,11 @@
 import { useState, useRef, useCallback } from "react";
 // My imports.
-import { isValidName } from "../../utils/validation/input_validation";
 import type RegisteredUser from "../../models/RegisteredUser";
-// CSS import.
 import styles from "./AuthForm.module.css";
+import { isValidName } from "../../utils/validation/input_validation";
 
 /**
- * Calls our signup API which creates a new user.
+ * Calls our signUp API which creates a new user.
  * @param {User Object{firstName:string, lastName:string, email:string, password:string }} userInfo
  * @returns string result message.
  */
@@ -32,7 +31,7 @@ type SingUpProps = {
   formId: "sign-in" | "sign-up";
 };
 
-function SignUp({ switchToSignIn, formId }: SingUpProps) {
+export default function SignUp({ switchToSignIn, formId }: SingUpProps) {
   // Invalidation react states.
   const [formInputIsValid, setFormInputIsValid] = useState({
     firstName: true,
@@ -176,5 +175,3 @@ function SignUp({ switchToSignIn, formId }: SingUpProps) {
     </>
   );
 }
-
-export default SignUp;

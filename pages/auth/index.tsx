@@ -1,17 +1,17 @@
 import { useEffect } from "react";
-import Head from "next/head";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import Image from "next/image";
 import { m } from "framer-motion";
 // My imports.
-import coffeeImage from "../../public/background/coffeeWhiteBackground.jpg";
-import Card from "../../components/UI/Card";
-import LoadingSpinner from "../../components/UI/LoadingSpinner";
-import { pageAnimation } from "../../utils/animations/animation";
-import AuthForm from "../../components/Auth/AuthForm";
-// CSS import.
 import styles from "./AuthPage.module.css";
+import coffeeImage from "../../public/background/coffeeWhiteBackground.jpg";
+import { pageAnimation } from "../../utils/animations/animation";
+// My components.
+import LoadingSpinner from "../../components/UI/LoadingSpinner";
+import Card from "../../components/UI/Card";
+import AuthForm from "../../components/Auth/AuthForm";
 
 export default function AuthPage() {
   const { data: session, status } = useSession();
