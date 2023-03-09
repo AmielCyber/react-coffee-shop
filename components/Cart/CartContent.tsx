@@ -1,15 +1,14 @@
 import dynamic from "next/dynamic";
 import { useState, useCallback, Suspense } from "react";
 // My imports.
+import styles from "./CartContent.module.css";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { cartActions } from "../../store/cart/cart-slice";
-import ClearCart from "../Layout/Icons/ClearCart";
-import LoadingSpinner from "../UI/LoadingSpinner";
 import type Cart from "../../models/Cart";
 import type User from "../../models/User";
-// CSS import.
-import styles from "./CartContent.module.css";
-// Dynamic Imports.
+// My components.
+import ClearCart from "../Layout/Icons/ClearCart";
+import LoadingSpinner from "../UI/LoadingSpinner";
 const CartItemList = dynamic(() => import("./CartItem/CartItemList"));
 const Checkout = dynamic(() => import("./Checkout/Checkout"));
 
@@ -24,12 +23,7 @@ type CartContentProps = {
   ) => void;
 };
 
-function CartContent({
-  onToSignIn,
-  onClose,
-  setIsSubmitting,
-  setDidSubmit,
-}: CartContentProps) {
+export default function CartContent(props: CartContentProps) {
   const [isCheckout, setIsCheckout] = useState(false);
   const cart = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
@@ -40,7 +34,7 @@ function CartContent({
   // Submission Handler for Checkout.
   const submitHandler = async (userData: User) => {
     // Set is submitting so our cart content can display a loading message.
-    setIsSubmitting(true);
+    props.setIsSubmitting(true);
     const orderData = {
       user: userData,
       cart: cart,
@@ -56,13 +50,13 @@ function CartContent({
         },
       });
       result = await response.json();
-      setDidSubmit(response.ok, result.message, cart);
+      props.setDidSubmit(response.ok, result.message, cart);
     } catch (error) {
       // Let the user know that their order was not submitted.
-      setDidSubmit(false, "Something went wrong...", null);
+      props.setDidSubmit(false, "Something went wrong...", null);
     }
     // Database is done receiving the order form.
-    setIsSubmitting(false);
+    props.setIsSubmitting(false);
     dispatch(cartActions.clearCart());
   };
   // Order handler when user clicks the checkout button.
@@ -84,7 +78,7 @@ function CartContent({
       <div className={styles.emptyCart}>
         <h3>Your cart is empty.</h3>
         <div className={styles.actions}>
-          <button className={styles.close} onClick={onClose}>
+          <button className={styles.close} onClick={props.onClose}>
             Close
           </button>
         </div>
@@ -104,8 +98,8 @@ function CartContent({
       {isCheckout && (
         <Suspense fallback={<LoadingSpinner />}>
           <Checkout
-            onToSignIn={onToSignIn}
-            onClose={onClose}
+            onToSignIn={props.onToSignIn}
+            onClose={props.onClose}
             onCancel={cancelHandler}
             onConfirm={submitHandler}
           />
@@ -123,7 +117,7 @@ function CartContent({
             </span>{" "}
             Clear Cart
           </button>
-          <button className={styles.close} onClick={onClose}>
+          <button className={styles.close} onClick={props.onClose}>
             Close
           </button>
           <button className={styles.order} onClick={orderHandler}>
@@ -134,5 +128,3 @@ function CartContent({
     </>
   );
 }
-
-export default CartContent;

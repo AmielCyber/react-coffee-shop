@@ -1,9 +1,9 @@
+// My import.
 import styles from "./MainHeader.module.css";
+
 type MainHeaderProps = {
   children: React.ReactNode;
 };
-function MainHeader({ children }: MainHeaderProps) {
-  return <header className={styles.mainHeader}>{children}</header>;
+export default function MainHeader(props: MainHeaderProps) {
+  return <header className={styles.mainHeader}>{props.children}</header>;
 }
-
-export default MainHeader;

@@ -1,10 +1,10 @@
 import { useState, useRef } from "react";
 // My imports.
-import CartCheck from "../../Layout/Icons/CartCheck";
-import { isValidEmail, isValidName } from "utils/validation/input_validation";
-import type User from "../../../models/User";
-// CSS import.
 import styles from "./Checkout.module.css";
+import type User from "../../../models/User";
+import { isValidEmail, isValidName } from "utils/validation/input_validation";
+// My component.
+import CartCheck from "../../Layout/Icons/CartCheck";
 
 type GuestCheckoutProps = {
   onCancel: () => void;
@@ -12,7 +12,7 @@ type GuestCheckoutProps = {
   onConfirm: (userData: User) => Promise<void>;
 };
 
-function GuestCheckout({ onCancel, onClose, onConfirm }: GuestCheckoutProps) {
+export default function GuestCheckout(props: GuestCheckoutProps) {
   const [formInputValid, setFormInputValid] = useState({
     firstName: true,
     lastName: true,
@@ -62,7 +62,7 @@ function GuestCheckout({ onCancel, onClose, onConfirm }: GuestCheckoutProps) {
       lastName: enteredLastName,
     };
 
-    onConfirm(userInfo);
+    props.onConfirm(userInfo);
   };
 
   // Get the input classes depending on the input validity.
@@ -99,10 +99,14 @@ function GuestCheckout({ onCancel, onClose, onConfirm }: GuestCheckoutProps) {
         {!formInputValid.email && <p>Please enter a valid email(@).</p>}
       </div>
       <div className={styles.actions}>
-        <button className={styles.close} type="button" onClick={onClose}>
+        <button className={styles.close} type="button" onClick={props.onClose}>
           Close
         </button>
-        <button className={styles.cancel} type="button" onClick={onCancel}>
+        <button
+          className={styles.cancel}
+          type="button"
+          onClick={props.onCancel}
+        >
           Cancel
         </button>
         <button className={styles.submit} type="submit">
@@ -115,5 +119,3 @@ function GuestCheckout({ onCancel, onClose, onConfirm }: GuestCheckoutProps) {
     </form>
   );
 }
-
-export default GuestCheckout;

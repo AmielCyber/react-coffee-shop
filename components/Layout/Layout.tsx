@@ -8,13 +8,11 @@ type LayoutProps = {
 };
 
 // The layout of the react coffee shop web page.
-function Layout({ children }: LayoutProps) {
+export default function Layout(props: LayoutProps) {
   return (
     <>
       <MainNavigation />
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>{props.children}</main>
     </>
   );
 }
-
-export default Layout;

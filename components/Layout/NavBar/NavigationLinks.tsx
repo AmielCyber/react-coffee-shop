@@ -1,7 +1,8 @@
 import Link from "next/link";
 // My imports.
-import CompanyIcon from "../Icons/CompanyIcon";
 import styles from "./NavigationLinks.module.css";
+// My component.
+import CompanyIcon from "../Icons/CompanyIcon";
 
 /**
  * Returns the link's css styled class based on the current page.
@@ -20,6 +21,7 @@ type UserLinksProps = {
   currentPath: string;
   onSignOut: () => void;
 };
+
 function UserLinks({ authStatus, currentPath, onSignOut }: UserLinksProps) {
   if (authStatus === "authenticated") {
     // Displays Account and Sign Out in NavBar
@@ -47,27 +49,22 @@ function UserLinks({ authStatus, currentPath, onSignOut }: UserLinksProps) {
 
 type NavigationLinksProps = UserLinksProps;
 
-function NavigationLinks({
-  authStatus,
-  currentPath,
-  onSignOut,
-}: NavigationLinksProps) {
+export default function NavigationLinks(props: NavigationLinksProps) {
   return (
     <ul className={styles.pathList}>
-      <li className={getLinkStyle(currentPath, "/")}>
+      <li className={getLinkStyle(props.currentPath, "/")}>
         <Link href={"/"} aria-label="Home Page">
-            <CompanyIcon width={30} height={30} fill={"white"} />
+          <CompanyIcon width={30} height={30} fill={"white"} />
         </Link>
       </li>
-      <li className={getLinkStyle(currentPath, "/menu")}>
+      <li className={getLinkStyle(props.currentPath, "/menu")}>
         <Link href="/menu">Menu</Link>
       </li>
       <UserLinks
-        authStatus={authStatus}
-        currentPath={currentPath}
-        onSignOut={onSignOut}
+        authStatus={props.authStatus}
+        currentPath={props.currentPath}
+        onSignOut={props.onSignOut}
       />
     </ul>
   );
 }
-export default NavigationLinks;

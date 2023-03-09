@@ -1,12 +1,11 @@
 import { memo } from "react";
 import { m } from "framer-motion";
 // My imports.
+import styles from "./CartItem.module.css";
+import type DrinkItem from "../../../models/DrinkItem";
 import { useAppDispatch } from "../../../store/hooks";
 import { cartActions } from "../../../store/cart/cart-slice";
 import { cartItemAnimation } from "../../../utils/animations/animation";
-import type DrinkItem from "../../../models/DrinkItem";
-// My CSS import.
-import styles from "./CartItem.module.css";
 
 const sameAmount = (prevProps: CartItemProps, nextProps: CartItemProps) => {
   // Only render if amount changed for the item.
@@ -17,8 +16,8 @@ type CartItemProps = {
   item: DrinkItem;
 };
 
-function CartItem({ item }: CartItemProps) {
-  const { id, name, amount, price } = item;
+function CartItem(props: CartItemProps) {
+  const { id, name, amount, price } = props.item;
   const dispatch = useAppDispatch();
   // Format the price to always show two decimal points.
   const priceF = `$${price.toFixed(2)}`;
@@ -64,7 +63,7 @@ function CartItem({ item }: CartItemProps) {
           </span>
         </button>
         <button onClick={removeItemFromCartHandler.bind(null, id)}>−</button>
-        <button onClick={addItemToCartHandler.bind(null, item)}>+</button>
+        <button onClick={addItemToCartHandler.bind(null, props.item)}>+</button>
       </div>
     </m.li>
   );

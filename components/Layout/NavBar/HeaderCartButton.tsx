@@ -2,14 +2,13 @@ import { useState, useEffect, memo, Suspense } from "react";
 import dynamic from "next/dynamic";
 import { useAnimation, m } from "framer-motion";
 // My imports.
+import styles from "./HeaderCartButton.module.css";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import { fetchCartData, sendCartData } from "../../../store/cart/cart-actions";
 import { cartBumpAnimation } from "../../../utils/animations/animation";
+// My components.
 import CartIcon from "../Icons/CartIcon";
 import LoadingSpinner from "components/UI/LoadingSpinner";
-// CSS import.
-import styles from "./HeaderCartButton.module.css";
-// Dynamic import.
 // Turn off ssr render for this component since it uses client side functions.
 const CartModal = dynamic(() => import("./CartModal"), { ssr: false });
 
@@ -17,7 +16,7 @@ type HeaderCartButtonProps = {
   onSignIn: () => void;
 };
 
-function HeaderCartButton({ onSignIn }: HeaderCartButtonProps) {
+function HeaderCartButton(props: HeaderCartButtonProps) {
   const [cartIsShown, setCartIsShown] = useState(false);
   const cart = useAppSelector((state) => state.cart);
   const fetchCartCompleted = useAppSelector(
@@ -55,7 +54,7 @@ function HeaderCartButton({ onSignIn }: HeaderCartButtonProps) {
   };
   const signInHandler = () => {
     setCartIsShown(false);
-    onSignIn();
+    props.onSignIn();
   };
 
   return (

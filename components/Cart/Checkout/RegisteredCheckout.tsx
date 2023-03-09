@@ -1,8 +1,8 @@
 // My imports.
-import CartCheck from "../../Layout/Icons/CartCheck";
-import type User from "../../../models/User";
-// CSS import.
 import styles from "./Checkout.module.css";
+import type User from "../../../models/User";
+// My component.
+import CartCheck from "../../Layout/Icons/CartCheck";
 
 type RegisteredCheckoutProps = {
   firstName: string;
@@ -13,25 +13,18 @@ type RegisteredCheckoutProps = {
   onConfirm: (userData: User) => Promise<void>;
 };
 
-function RegisteredCheckout({
-  firstName,
-  lastName,
-  email,
-  onCancel,
-  onClose,
-  onConfirm,
-}: RegisteredCheckoutProps) {
+export default function RegisteredCheckout(props: RegisteredCheckoutProps) {
   const confirmHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
     // Save user info data to send to database.
     const userInfo: User = {
-      email: email,
-      firstName: firstName,
-      lastName: lastName,
+      email: props.email,
+      firstName: props.firstName,
+      lastName: props.lastName,
     };
 
-    onConfirm(userInfo);
+    props.onConfirm(userInfo);
   };
 
   return (
@@ -39,18 +32,22 @@ function RegisteredCheckout({
       <section className={styles.user} title="User Information">
         <h2>
           <span>Name:</span>
-          {`${firstName} ${lastName}`}
+          {`${props.firstName} ${props.lastName}`}
         </h2>
         <h2>
           <span>Email:</span>
-          {`${email}`}
+          {`${props.email}`}
         </h2>
       </section>
       <section className={styles.actions} title="buttons">
-        <button className={styles.close} type="button" onClick={onClose}>
+        <button className={styles.close} type="button" onClick={props.onClose}>
           Close
         </button>
-        <button className={styles.cancel} type="button" onClick={onCancel}>
+        <button
+          className={styles.cancel}
+          type="button"
+          onClick={props.onCancel}
+        >
           Cancel
         </button>
         <button className={styles.submit} type="submit">
@@ -63,5 +60,3 @@ function RegisteredCheckout({
     </form>
   );
 }
-
-export default RegisteredCheckout;

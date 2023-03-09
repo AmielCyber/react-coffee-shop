@@ -3,9 +3,8 @@ import Head from "next/head";
 
 /**
  * Meta component containing our meta data and the links to our favicon.
- * @returns Meta component.
  */
-function HeadMeta() {
+export default function HeadMeta() {
   return (
     <Head>
       <link
@@ -36,5 +35,3 @@ function HeadMeta() {
     </Head>
   );
 }
-
-export default memo(HeadMeta);

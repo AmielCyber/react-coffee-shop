@@ -4,18 +4,19 @@ import { useRouter } from "next/router";
 import { AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 // My imports.
+import styles from "./MainNavigation.module.css";
+// My components.
 import Backdrop from "../../UI/Backdrop";
 import NavigationLinks from "./NavigationLinks";
 import MainHeader from "./MainHeader";
 import HeaderCartButton from "./HeaderCartButton";
 import SideDrawerButton from "../MobileSideDrawer/SideDrawerButton";
-import styles from "./MainNavigation.module.css";
 const MobileSideDrawer = dynamic(
   () => import("../MobileSideDrawer/MobileSideDrawer"),
   { ssr: false }
 );
 
-function MainNavigation() {
+export default function MainNavigation() {
   const [drawerIsOpen, setDrawerIsOpen] = useState<boolean>(false);
   const { status } = useSession(); // Check if user is an authenticated user or a guest user.
   const router = useRouter();
@@ -73,5 +74,3 @@ function MainNavigation() {
     </>
   );
 }
-
-export default MainNavigation;

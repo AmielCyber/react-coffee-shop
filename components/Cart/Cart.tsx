@@ -1,12 +1,12 @@
 import { useState } from "react";
 // My imports.
+import styles from "./Cart.module.css";
+import type Order from "../../models/Order";
+import type CartInterface from "../../models/Cart";
+// My components.
 import LoadingSpinner from "../UI/LoadingSpinner";
 import Receipt from "../Receipt/Receipt";
 import CartContent from "./CartContent";
-import type Order from "../../models/Order";
-import type CartInterface from "../../models/Cart";
-// CSS import
-import styles from "./Cart.module.css";
 
 type CartProps = {
   onClose: () => void;
@@ -20,7 +20,7 @@ const initialOrderObject: Order = {
   orderDate: new Date(),
 };
 
-function Cart({ onClose, onToSignIn }: CartProps) {
+export default function Cart(props: CartProps) {
   // Cart state hooks for the status of the form submission..
   const [isSubmitting, setIsSubmitting] = useState(false); // Form is being submitted.
   const [didSubmit, setDidSubmit] = useState(false); // Form was submitted.
@@ -74,7 +74,7 @@ function Cart({ onClose, onToSignIn }: CartProps) {
         <h3 className={messageStyle}>{statusMessage}</h3>
         {!error && <Receipt order={orderData} showReceiptItems={true} />}
         <div className={styles.actions}>
-          <button className={styles.actions} onClick={onClose}>
+          <button className={styles.actions} onClick={props.onClose}>
             Close
           </button>
         </div>
@@ -84,12 +84,10 @@ function Cart({ onClose, onToSignIn }: CartProps) {
   // User is looking at items ordered.
   return (
     <CartContent
-      onToSignIn={onToSignIn}
-      onClose={onClose}
+      onToSignIn={props.onToSignIn}
+      onClose={props.onClose}
       setIsSubmitting={submittingHandler}
       setDidSubmit={didSubmitHandler}
     />
   );
 }
-
-export default Cart;
