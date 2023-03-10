@@ -147,9 +147,8 @@ checkmark.
 - [x] Replace Mongoose with Prisma
 - [x] Migrated backend to typescript
 - [x] Add Zod library to validate
-- [ ] Confirm password on change
+- [x] Confirm password on change
 - [ ] Close account
-- [ ] Store JWT in Cookie as recommended by JWT instead of local storage
 - [ ] Checkmark/button acceptance that no order is actually placed
 
 ## Performance

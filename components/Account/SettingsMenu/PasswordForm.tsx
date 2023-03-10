@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 // My imports.
 import styles from "./PasswordForm.module.css";
-import { isValidPassword } from "../../utils/validation/input_validation";
+import { isValidPassword } from "../../../utils/validation/input_validation";
 
 type PasswordManager = {
   currentPassword: string;
@@ -31,7 +31,6 @@ async function changePassword(passwordData: PasswordManager) {
 
 type PasswordFormProps = {
   userEmail: string;
-  onSuccess: (message: string) => void;
 };
 
 export default function PasswordForm(props: PasswordFormProps) {
@@ -40,6 +39,7 @@ export default function PasswordForm(props: PasswordFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const currentPasswordRef = useRef<HTMLInputElement>(null);
   const newPasswordRef = useRef<HTMLInputElement>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement>(null);
 
   const submitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -47,18 +47,34 @@ export default function PasswordForm(props: PasswordFormProps) {
     const enteredCurrentPassword = currentPasswordRef.current
       ? currentPasswordRef.current.value
       : "";
+    const enteredConfirmPassword = confirmPasswordRef.current
+      ? confirmPasswordRef.current.value
+      : "";
     const enteredNewPassword = newPasswordRef.current
       ? newPasswordRef.current.value
       : "";
 
     // Front-end validation
-    if (isValidPassword(enteredNewPassword)) {
+    if (!isValidPassword(enteredNewPassword)) {
+      setInvalidPassword(true);
+      setStatusMessage(
+        "Invalid new password. Password must be at least 7 characters long."
+      );
+      formRef.current?.reset();
+    } else if (enteredNewPassword !== enteredConfirmPassword) {
+      setInvalidPassword(true);
+      setStatusMessage(
+        "New password and confirmation password must be identical."
+      );
+      formRef.current?.reset();
+    } else {
       try {
         const result = await changePassword({
           currentPassword: enteredCurrentPassword,
           newPassword: enteredNewPassword,
         });
-        props.onSuccess(result.message);
+        setStatusMessage(result.message);
+        formRef.current?.reset();
       } catch (error) {
         setStatusMessage(
           error instanceof Error ? error.message : "Something went wrong..."
@@ -66,12 +82,6 @@ export default function PasswordForm(props: PasswordFormProps) {
         setInvalidPassword(true);
         formRef.current?.reset();
       }
-    } else {
-      setInvalidPassword(true);
-      setStatusMessage(
-        "Invalid new password. Password must be at least 7 characters long."
-      );
-      formRef.current?.reset();
     }
   };
 
@@ -114,6 +124,14 @@ export default function PasswordForm(props: PasswordFormProps) {
             id="new-password"
             ref={newPasswordRef}
             autoComplete="new-password"
+          />
+        </div>
+        <div className={styles.control}>
+          <label htmlFor="confirm-password">Confirm Password</label>
+          <input
+            type="password"
+            id="confirm-password"
+            ref={confirmPasswordRef}
           />
         </div>
         <div className={styles.action}>

@@ -1,0 +1,31 @@
+.menu {
+    display: flex;
+    flex-direction: column;
+}
+.menuSelection {
+    display: inherit;
+    flex-direction: inherit;
+    align-self: center;
+    margin: 1rem;
+    gap: 0.5rem;
+}
+
+.menuSelection:first-child {
+    margin-top: 0;
+}
+
+.menuSelection button {
+    background-color: transparent;
+    width: auto;
+    border: 0;
+    font-size: x-large;
+    color: var(--primary-color);
+}
+.menuSelection button:hover {
+  cursor: pointer;
+  color: var(--complementary-color);
+}
+
+.menuSelection button:selection {
+    color: var(--complementary-light);
+}

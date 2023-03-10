@@ -20,11 +20,15 @@
   margin-bottom: 1.5rem;
 }
 /* Toggle change password div button */
-.changePassword {
+.viewSettings {
   color: var(--primary-color);
   padding-bottom: 0.2rem;
+  border: none;
+  font-size: 2rem;
+  margin: 0.7rem;
+  background-color: transparent;
 }
-.changePassword:hover {
+.viewSettings:hover {
   cursor: pointer;
   color: var(--button-color-active);
 }
