@@ -1,0 +1,6 @@
+.selectionButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 0.4rem;
+    justify-content: flex-end;
+}

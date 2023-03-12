@@ -40,7 +40,7 @@ function getMenuComponent(
       return <PasswordForm userEmail={session.user.email} />;
     }
     case "delete": {
-      return <DeleteAccountMenu userEmail={session.user.email} />;
+      return <DeleteAccountMenu />;
     }
     default:
       throw new Error("Invalid args in getMenuTitle");

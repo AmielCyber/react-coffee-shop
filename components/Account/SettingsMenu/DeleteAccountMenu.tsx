@@ -1,30 +1,47 @@
 import { useState, useRef } from "react";
+import { signOut } from "next-auth/react";
 import styles from "./PasswordForm.module.css";
+import ConfirmDeletionModal from "./ConfirmDeletionModal";
 
-function deleteAccount(password: string) {
-  new Promise(() => setTimeout(() => console.log(password), 3000));
+async function deleteAccount(password: string) {
+  const response = await fetch("/api/user/user", {
+    method: "DELETE",
+    body: JSON.stringify({
+      password: password,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const responseData = await response.json();
+
+  if (!response.ok) {
+    // Something went wrong in our server.
+    throw new Error(responseData.message || "Something went wrong!");
+  }
+
+  return responseData;
 }
 
-type DeleteAccountMenuProps = {
-  userEmail: string;
-};
-export default function DeleteAccountMenu(props: DeleteAccountMenuProps) {
+export default function DeleteAccountMenu() {
   const [statusMessage, setStatusMessage] = useState("");
+  const [successfulDeletion, setSuccessfulDeletion] = useState(false);
   const [invalidPassword, setInvalidPassword] = useState(false);
+  const [beginDeletion, setBeginDeletion] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const currentPasswordRef = useRef<HTMLInputElement>(null);
 
-  const submitHandler = async (event: React.FormEvent) => {
-    event.preventDefault();
-
+  const confirmDeletionHandler = async () => {
     const enteredCurrentPassword = currentPasswordRef.current
       ? currentPasswordRef.current.value
       : "";
 
     try {
-      deleteAccount(enteredCurrentPassword);
-      setStatusMessage(`Deleted Account: ${props.userEmail}`);
-      formRef.current?.reset();
+      const result = await deleteAccount(enteredCurrentPassword);
+      setStatusMessage(result.message);
+      setSuccessfulDeletion(true);
+      setInvalidPassword(false);
     } catch (error) {
       setStatusMessage(
         error instanceof Error ? error.message : "Something went wrong..."
@@ -34,25 +51,34 @@ export default function DeleteAccountMenu(props: DeleteAccountMenuProps) {
     }
   };
 
-  const statusMessageStyle = invalidPassword
-    ? styles.errorStatus
-    : styles.otherStatus;
+  const submissionHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+    setBeginDeletion(true);
+  };
+
+  const confirmStatusHandler = () => {
+    if (successfulDeletion) {
+      signOut();
+    } else {
+      setBeginDeletion(false);
+      setStatusMessage("");
+    }
+  };
+
+  const passwordStyle = `${styles.control} ${
+    invalidPassword ? styles.invalid : ""
+  }`;
 
   return (
     <>
-      <label className={statusMessageStyle}>{statusMessage}</label>
       <form
         className={styles.form}
-        onSubmit={submitHandler}
+        onSubmit={submissionHandler}
         id="delete-account"
         ref={formRef}
         autoComplete="off"
       >
-        <div className={styles.hidden}>
-          <label htmlFor="username">Email</label>
-          <input type="text" id="username" value={props.userEmail} readOnly />
-        </div>
-        <div className={styles.control}>
+        <div className={passwordStyle}>
           <label htmlFor="password">Current Password</label>
           <input type="password" id="password" ref={currentPasswordRef} />
         </div>
@@ -60,6 +86,15 @@ export default function DeleteAccountMenu(props: DeleteAccountMenuProps) {
           <button>Delete Account</button>
         </div>
       </form>
+
+      <ConfirmDeletionModal
+        showModal={beginDeletion}
+        onClose={() => setBeginDeletion(false)}
+        onConfirm={confirmDeletionHandler}
+        success={successfulDeletion}
+        statusMessage={statusMessage}
+        onOkButton={confirmStatusHandler}
+      />
     </>
   );
 }

@@ -1,0 +1,14 @@
+.successful {
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.error {
+    text-align: center;
+    color: var(--error-color);
+}
+
+.okButton {
+    display: flex;
+    justify-content: center;
+}
