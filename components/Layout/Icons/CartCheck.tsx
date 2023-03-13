@@ -3,7 +3,7 @@
  * Source: https://icons.getbootstrap.com/icons/cart-check/
  * @returns SVG Cart icon with a check
  */
-function CartCheck() {
+export default function CartCheck() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -17,5 +17,3 @@ function CartCheck() {
     </svg>
   );
 }
-
-export default CartCheck;

@@ -6,9 +6,10 @@ import styles from "./SideDrawerButton.module.css";
 type SideDrawerButtonProps = {
   onOpenDrawer: () => void;
 };
-function SideDrawerButton({ onOpenDrawer }: SideDrawerButtonProps) {
+
+function SideDrawerButton(props: SideDrawerButtonProps) {
   return (
-    <button className={styles.drawerButton} onClick={onOpenDrawer}>
+    <button className={styles.drawerButton} onClick={props.onOpenDrawer}>
       <MenuHamburger />
     </button>
   );

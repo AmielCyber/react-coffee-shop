@@ -1,17 +1,19 @@
 import { AnimatePresence } from "framer-motion";
 // My import.
-import CartItem from "./CartItem";
-import type DrinkItem from "models/DrinkItem";
-// CSS import.
 import styles from "./CartItemList.module.css";
+import type DrinkItem from "models/DrinkItem";
+// My component.
+import CartItem from "./CartItem";
 
 type CartItemListProps = {
   items: DrinkItem[];
 };
 
-function CartItemList({ items }: CartItemListProps) {
+export default function CartItemList(props: CartItemListProps) {
   // Get the list of all items the user selected.
-  const cartList = items.map((item) => <CartItem key={item.id} item={item} />);
+  const cartList = props.items.map((item) => (
+    <CartItem key={item.id} item={item} />
+  ));
 
   return (
     <ul className={styles["cart-items"]}>
@@ -19,5 +21,3 @@ function CartItemList({ items }: CartItemListProps) {
     </ul>
   );
 }
-
-export default CartItemList;

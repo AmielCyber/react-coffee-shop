@@ -1,7 +1,8 @@
 .spinner {
-  display: inline-block;
+  display:block;
   width: 80px;
   height: 80px;
+  margin: auto;
 }
 .spinner:after {
   content: ' ';

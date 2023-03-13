@@ -14,18 +14,25 @@ export default async function handler(
     const userInfo: RegisteredUser = req.body;
 
     // Backend Validation: Validate user input.
-    const registeredUserValidation: SafeParseReturnType<RegisteredUser, RegisteredUser> = validateRegisteredUserData(userInfo);
-    if(!registeredUserValidation.success){
-      res.status(422).json({ message: registeredUserValidation.error.issues.map(issue => issue.path + ": " + issue.message).join(" ")});
+    const registeredUserValidation: SafeParseReturnType<
+      RegisteredUser,
+      RegisteredUser
+    > = validateRegisteredUserData(userInfo);
+    if (!registeredUserValidation.success) {
+      res.status(422).json({
+        message: registeredUserValidation.error.issues
+          .map((issue) => issue.path + ": " + issue.message)
+          .join(" "),
+      });
       return;
     }
 
     // Check if user already exists.
     const userExists = await prisma.user.findUnique({
       where: {
-        email: userInfo.email 
-      }
-    })
+        email: userInfo.email,
+      },
+    });
     if (userExists) {
       // User found therefore an account already exists.
       res.status(401).json({
@@ -38,16 +45,16 @@ export default async function handler(
     const hashedPassword = await hashPassword(userInfo.password);
 
     // Add the new user and its credentials to our database.
-    try{
+    try {
       await prisma.user.create({
         data: {
           email: userInfo.email,
           firstName: userInfo.firstName,
           lastName: userInfo.lastName,
           password: hashedPassword, // DO NOT STORE PLAIN PASSWORDS in database, must be encrypted.
-        }
-      })
-    }catch(error){
+        },
+      });
+    } catch (error) {
       res.status(500).json({ message: "Failed to create new user." });
       return;
     }

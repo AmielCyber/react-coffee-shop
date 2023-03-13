@@ -62,3 +62,31 @@ h1 {
 body, html {
   height: 100%;
 }
+
+.globalButton {
+    margin: auto;
+}
+
+.globalButton button{
+  padding: 0.5rem 1.5rem;
+  border: 1px solid var(--complementary-darkest);
+  border-radius: 20px;
+  background-color: var(--button-color);
+  color: white;
+  font: inherit;
+  cursor: pointer;
+  margin-bottom: 1.2rem;
+
+}
+.globalButton button:hover {
+  background-color: var(--button-color-active);
+  border-color: var(--complementary-color);
+}
+
+/* Mobile Changes */
+@media only screen and (max-width: 595px) {
+  .globalButton {
+    width: 90%;
+  }
+
+}

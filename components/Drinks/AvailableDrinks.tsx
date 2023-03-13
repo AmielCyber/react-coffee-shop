@@ -1,16 +1,15 @@
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 // My imports.
+import type Drink from "../../models/Drink";
+import styles from "./AvailableDrinks.module.css";
 import FetchItems from "../../store/fetcher/fetch-items";
+// My components.
 import Card from "../UI/Card";
 import LoadingSpinner from "../UI/LoadingSpinner";
-import type Drink from "../../models/Drink";
-// CSS import.
-import styles from "./AvailableDrinks.module.css";
-// Dynamic import
 const DrinkItemList = dynamic(() => import("./DrinkItem/DrinkItemList"));
 
-function AvailableDrinks() {
+export default function AvailableDrinks() {
   const drinkArray: Drink[] = [];
   const { items, isLoading, isError } = FetchItems(
     "/api/menu/drinks",
@@ -60,5 +59,3 @@ function AvailableDrinks() {
     </section>
   );
 }
-
-export default AvailableDrinks;

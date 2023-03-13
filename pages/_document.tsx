@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
 // HTML DOM custom structure.
-function Document() {
+export default function Document() {
   return (
     <Html lang="en">
       <Head />
@@ -14,5 +14,3 @@ function Document() {
     </Html>
   );
 }
-
-export default Document;

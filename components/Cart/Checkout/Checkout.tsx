@@ -2,11 +2,10 @@ import dynamic from "next/dynamic";
 import { useState, Suspense } from "react";
 import { useSession } from "next-auth/react";
 // My imports.
-import LoadingSpinner from "../../UI/LoadingSpinner";
-import type User from "../../../models/User";
-// CSS import.
 import styles from "./Checkout.module.css";
-// My dynamic imports.
+import type User from "../../../models/User";
+// My components.
+import LoadingSpinner from "../../UI/LoadingSpinner";
 const RegisteredCheckout = dynamic(() => import("./RegisteredCheckout"), {
   ssr: false,
 });
@@ -19,7 +18,7 @@ type CheckoutProps = {
   onConfirm: (userData: User) => Promise<void>;
 };
 
-function Checkout({ onToSignIn, onClose, onCancel, onConfirm }: CheckoutProps) {
+export default function Checkout(props: CheckoutProps) {
   const [guestInitial, setGuestInitial] = useState(true);
   const { data: session } = useSession();
 
@@ -38,9 +37,9 @@ function Checkout({ onToSignIn, onClose, onCancel, onConfirm }: CheckoutProps) {
           firstName={firstName}
           lastName={lastName}
           email={email}
-          onCancel={onCancel}
-          onClose={onClose}
-          onConfirm={onConfirm}
+          onCancel={props.onCancel}
+          onClose={props.onClose}
+          onConfirm={props.onConfirm}
         />
       </Suspense>
     );
@@ -58,7 +57,7 @@ function Checkout({ onToSignIn, onClose, onCancel, onConfirm }: CheckoutProps) {
         <h2>Continue as guest?</h2>
         <div className={styles.actions}>
           <button onClick={handleContinueAsGuest}>Yes</button>
-          <button onClick={onToSignIn}>Sign in/Create Account</button>
+          <button onClick={props.onToSignIn}>Sign in/Create Account</button>
         </div>
       </div>
     );
@@ -68,12 +67,10 @@ function Checkout({ onToSignIn, onClose, onCancel, onConfirm }: CheckoutProps) {
   return (
     <Suspense fallback={<LoadingSpinner />}>
       <GuestCheckout
-        onCancel={onCancel}
-        onClose={onClose}
-        onConfirm={onConfirm}
+        onCancel={props.onCancel}
+        onClose={props.onClose}
+        onConfirm={props.onConfirm}
       />
     </Suspense>
   );
 }
-
-export default Checkout;

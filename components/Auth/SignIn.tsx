@@ -3,21 +3,20 @@ import { useAppDispatch } from "../../store/hooks";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 // My imports
+import styles from "./AuthForm.module.css";
 import { CART_STORAGE_NAME } from "../../store/cart/cart-actions";
 import { sendCartData, fetchCartData } from "../../store/cart/cart-actions";
 import {
   isValidEmail,
   isValidPassword,
 } from "../../utils/validation/input_validation";
-// CSS import.
-import styles from "./AuthForm.module.css";
 
 type SignInProps = {
   switchToSignUp: (isNewUser: boolean, message: string) => void;
   formId: "sign-in" | "sign-up";
 };
 
-function SignIn({ switchToSignUp, formId }: SignInProps) {
+export default function SignIn({ switchToSignUp, formId }: SignInProps) {
   const [formInputIsValid, setFormInputIsValid] = useState({
     email: true,
     password: true,
@@ -153,5 +152,3 @@ function SignIn({ switchToSignUp, formId }: SignInProps) {
     </>
   );
 }
-
-export default SignIn;

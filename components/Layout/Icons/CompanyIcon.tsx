@@ -11,12 +11,12 @@ type CompanyIconProps = {
  * Icon by svgrepo.com https://www.svgrepo.com/svg/75540/hot-coffee-cup-with-hearts
  * @returns SVG element.
  */
-function CompanyIcon({ width, height, fill }: CompanyIconProps) {
+function CompanyIcon(props: CompanyIconProps) {
   return (
     <svg
-      width={width}
-      height={height}
-      fill={fill}
+      width={props.width}
+      height={props.height}
+      fill={props.fill}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 25.468 25.468"
     >

@@ -28,7 +28,7 @@ export default async function handler(
           cartSession = await prisma.cartSession.findUnique({
             where: {
               email: email,
-            }
+            },
           });
         } catch (error) {
           res.status(500).json({ message: "Fetching cart data failed!" });
@@ -57,13 +57,13 @@ export default async function handler(
               items: cartData.items,
               numberOfCartItems: cartData.numberOfCartItems,
               totalPrice: cartData.totalPrice,
-            }
-          })
+            },
+          });
         } catch (error) {
           res.status(500).json({ message: "Inserting cart data failed!" });
           return;
         }
-        res.status(201).json({ message: "Cart successfully updated!" });
+        res.status(201).json({ message: "Cart updated!" });
       }
       break;
     default:
