@@ -1,13 +1,17 @@
 import dynamic from "next/dynamic";
 import { Session } from "next-auth";
 import { useState } from "react";
-import MenuTitle from "./MenuTitle";
+// My imports.
 import styles from "./SettingsMenu.module.css";
+// My components.
+import MenuTitle from "./MenuTitle";
+import LoadingSpinner from "components/UI/LoadingSpinner";
+const PasswordForm = dynamic(() => import("./PasswordForm"), {
+  loading: () => <LoadingSpinner />,
+});
 const DeleteAccountMenu = dynamic(() => import("./DeleteAccountMenu"), {
   ssr: false,
-});
-const PasswordForm = dynamic(() => import("./PasswordForm"), {
-  ssr: false,
+  loading: () => <LoadingSpinner />,
 });
 
 type MenuType = "settings" | "password" | "delete";
@@ -54,14 +58,6 @@ type SettingsMenuProps = {
 export default function SettingsMenu(props: SettingsMenuProps) {
   const [menuType, setMenuType] = useState<MenuType>("settings");
 
-  const selectMenuHandler = (selectedMenu: MenuType) => {
-    setMenuType(selectedMenu);
-  };
-
-  const goBackToSettingsHandler = () => {
-    setMenuType("settings");
-  };
-
   return (
     <>
       <MenuTitle title={getMenuTitle(menuType)} />
@@ -71,13 +67,13 @@ export default function SettingsMenu(props: SettingsMenuProps) {
             <section className={styles.menuSelection}>
               <button
                 name="Change Password"
-                onClick={() => selectMenuHandler("password")}
+                onClick={() => setMenuType("password")}
               >
                 Change Password
               </button>
               <button
                 name="Delete Account"
-                onClick={() => selectMenuHandler("delete")}
+                onClick={() => setMenuType("delete")}
               >
                 Delete Account
               </button>
@@ -98,7 +94,7 @@ export default function SettingsMenu(props: SettingsMenuProps) {
         <>
           {getMenuComponent(menuType, props.session)}
           <div className="globalButton">
-            <button name="Settings" onClick={goBackToSettingsHandler}>
+            <button name="Settings" onClick={() => setMenuType("settings")}>
               Back
             </button>
           </div>

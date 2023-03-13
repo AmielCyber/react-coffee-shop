@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useSession } from "next-auth/react";
@@ -11,7 +10,7 @@ import coffeeLove from "../../public/background/coffeeLove.jpg";
 import LoadingSpinner from "components/UI/LoadingSpinner";
 const AccountMenu = dynamic(
   () => import("../../components/Account/AccountMenu"),
-  { ssr: false }
+  { loading: () => <LoadingSpinner /> }
 );
 
 export default function AccountPage() {
@@ -47,9 +46,7 @@ export default function AccountPage() {
           fill
         />
       </div>
-      <Suspense fallback={<LoadingSpinner />}>
-        <AccountMenu session={session} />
-      </Suspense>
+      <AccountMenu session={session} />
     </>
   );
 }

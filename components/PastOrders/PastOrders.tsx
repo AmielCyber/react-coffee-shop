@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { Suspense } from "react";
 // My imports.
 import type Order from "../../models/Order";
 import styles from "./PastOrders.module.css";
@@ -10,6 +9,7 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 // Turn off ssr render for this component since it uses client side functions.
 const DisplayPastOrders = dynamic(() => import("./DisplayPastOrders"), {
   ssr: false,
+  loading: () => <LoadingSpinner />,
 });
 
 type fetchOrderedReturnType = {
@@ -60,9 +60,7 @@ export default function PastOrders() {
   // User has past orders
   return (
     <Card style="orderContainer">
-      <Suspense fallback={<LoadingSpinner />}>
-        <DisplayPastOrders orders={items} />
-      </Suspense>
+      <DisplayPastOrders orders={items} />
     </Card>
   );
 }

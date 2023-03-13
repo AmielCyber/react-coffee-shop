@@ -9,7 +9,7 @@ type ConfirmationProps = {
 export default function Confirmation(props: ConfirmationProps) {
   return (
     <>
-      <h2>{props.confirmationMessage}</h2>
+      <h2 className={styles.message}>{props.confirmationMessage}</h2>
       <div className={styles.selectionButtons + " globalButton"}>
         <button onClick={props.onClose}>No</button>
         <button onClick={props.onConfirm}>Yes</button>

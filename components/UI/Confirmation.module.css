@@ -1,3 +1,6 @@
+.message {
+    color: var(--error-color)
+}
 .selectionButtons {
     display: flex;
     flex-direction: row;

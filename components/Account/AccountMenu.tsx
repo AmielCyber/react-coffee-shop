@@ -1,16 +1,19 @@
 import type { Session } from "next-auth";
 import dynamic from "next/dynamic";
-import { useState, Suspense } from "react";
+import { useState } from "react";
 import { m } from "framer-motion";
 // My imports.
 import styles from "./AccountMenu.module.css";
 import { pageAnimation } from "../../utils/animations/animation";
 // My components.
 import Card from "../UI/Card";
-import SettingsMenu from "./SettingsMenu/SettingsMenu";
-import LoadingSpinner from "components/UI/LoadingSpinner";
+import LoadingSpinner from "../../components/UI/LoadingSpinner";
+const SettingsMenu = dynamic(() => import("./SettingsMenu/SettingsMenu"), {
+  loading: () => <LoadingSpinner />,
+});
 const PastOrders = dynamic(() => import("../PastOrders/PastOrders"), {
   ssr: false,
+  loading: () => <LoadingSpinner />,
 });
 
 type UserProfileProps = {
@@ -65,11 +68,7 @@ export default function UserProfile(props: UserProfileProps) {
           )}
         </section>
       </Card>
-      {showPastOrders && (
-        <Suspense fallback={<LoadingSpinner />}>
-          <PastOrders />
-        </Suspense>
-      )}
+      {showPastOrders && <PastOrders />}
     </m.div>
   );
 }

@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import { signOut } from "next-auth/react";
+// My imports.
 import styles from "./PasswordForm.module.css";
+// My component.
 import ConfirmDeletionModal from "./ConfirmDeletionModal";
 
 async function deleteAccount(password: string) {
@@ -29,10 +31,12 @@ export default function DeleteAccountMenu() {
   const [successfulDeletion, setSuccessfulDeletion] = useState(false);
   const [invalidPassword, setInvalidPassword] = useState(false);
   const [beginDeletion, setBeginDeletion] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const currentPasswordRef = useRef<HTMLInputElement>(null);
 
   const confirmDeletionHandler = async () => {
+    setIsLoading(true);
     const enteredCurrentPassword = currentPasswordRef.current
       ? currentPasswordRef.current.value
       : "";
@@ -49,6 +53,7 @@ export default function DeleteAccountMenu() {
       setInvalidPassword(true);
       formRef.current?.reset();
     }
+    setIsLoading(false);
   };
 
   const submissionHandler = (event: React.FormEvent) => {
@@ -89,8 +94,9 @@ export default function DeleteAccountMenu() {
 
       <ConfirmDeletionModal
         showModal={beginDeletion}
-        onClose={() => setBeginDeletion(false)}
+        onClose={confirmStatusHandler}
         onConfirm={confirmDeletionHandler}
+        isLoading={isLoading}
         success={successfulDeletion}
         statusMessage={statusMessage}
         onOkButton={confirmStatusHandler}
