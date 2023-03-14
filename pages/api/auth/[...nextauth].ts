@@ -1,8 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 // My imports.
-import { verifyPassword } from "../../../utils/auth/auth";
-import prisma from "../../../utils/db/prisma";
+import validateCredentials from "../../../utils/db/validate-credentials";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -17,43 +16,32 @@ export const authOptions: NextAuthOptions = {
           email: string;
           password: string;
         };
-        let user;
-        // Connect to the database and fetch credentials.
-        try {
-          user = await prisma.user.findUnique({
-            where: {
-              email: email
-            }
-          });
-        } catch (error) {
-          throw new Error("Failed to connect to the database!");
-        }
 
-        if (!user) {
-          // No user was found in our database.
+        // Get user db document and validate credentials.
+        let responseData = null;
+        try {
+          responseData = await validateCredentials(email, password);
+          if (!responseData) {
+            throw new Error();
+          }
+        } catch (error) {
           throw new Error(
-            "No user found with this email address. Please try again."
+            responseData
+              ? responseData.errorMessage
+              : "Failed to connect to the database!"
           );
         }
 
-        // Verify user's input credentials.
-        let isValid;
-        try {
-          isValid = await verifyPassword(password, user.password);
-        } catch (error) {
-          isValid = false;
-        }
-
-        if (!isValid) {
-          // User enter invalid credentials.
-          throw new Error("Incorrect password. Please try again.");
+        // No user was found in our database.
+        if (!responseData.user) {
+          throw new Error(responseData.errorMessage);
         }
 
         // Return user object.
         return {
-          id: user.id,
-          email: user.email,
-          name: `${user.firstName} ${user.lastName}`,
+          id: responseData.user.id,
+          email: responseData.user.email,
+          name: `${responseData.user.firstName} ${responseData.user.lastName}`,
           image: null,
         };
       },

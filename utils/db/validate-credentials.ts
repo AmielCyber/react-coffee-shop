@@ -32,7 +32,7 @@ export default async function validateCredentials(
   if (!user) {
     return {
       user: null,
-      errorMessage: "User not found.",
+      errorMessage: `User: ${email} not found!`,
       httpCode: 404,
     };
   }
@@ -48,7 +48,7 @@ export default async function validateCredentials(
   if (!passwordEqual) {
     return {
       user: null,
-      errorMessage: "Invalid password entered.",
+      errorMessage: "Invalid password entered. Please try again.",
       httpCode: 401,
     };
   }
