@@ -1,27 +1,34 @@
+import { Session } from "next-auth";
 // My imports.
-import styles from "./Checkout.module.css";
+import styles from "./RegisteredCheckout.module.css";
 import type User from "../../../models/User";
 // My component.
-import CartCheck from "../../Layout/Icons/CartCheck";
+import CheckoutFormButtons from "./CheckoutFormButtons";
 
 type RegisteredCheckoutProps = {
-  firstName: string;
-  lastName: string;
-  email: string;
+  session: Session;
   onCancel: () => void;
   onClose: () => void;
   onConfirm: (userData: User) => Promise<void>;
 };
 
 export default function RegisteredCheckout(props: RegisteredCheckoutProps) {
+  // If there is a register user about to checkout.
+  const fullName = props.session.user.name;
+  const nameDividerPos = fullName.indexOf(" ");
+
+  const firstName = fullName.slice(0, nameDividerPos);
+  const lastName = fullName.slice(nameDividerPos);
+  const email = props.session.user.email;
+
   const confirmHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
     // Save user info data to send to database.
     const userInfo: User = {
-      email: props.email,
-      firstName: props.firstName,
-      lastName: props.lastName,
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
     };
 
     props.onConfirm(userInfo);
@@ -32,31 +39,14 @@ export default function RegisteredCheckout(props: RegisteredCheckoutProps) {
       <section className={styles.user} title="User Information">
         <h2>
           <span>Name:</span>
-          {`${props.firstName} ${props.lastName}`}
+          {`${firstName} ${lastName}`}
         </h2>
         <h2>
           <span>Email:</span>
-          {`${props.email}`}
+          {`${email}`}
         </h2>
       </section>
-      <section className={styles.actions} title="buttons">
-        <button className={styles.close} type="button" onClick={props.onClose}>
-          Close
-        </button>
-        <button
-          className={styles.cancel}
-          type="button"
-          onClick={props.onCancel}
-        >
-          Cancel
-        </button>
-        <button className={styles.submit} type="submit">
-          <span>
-            <CartCheck />
-          </span>
-          {" Confirm"}
-        </button>
-      </section>
+      <CheckoutFormButtons onCancel={props.onCancel} onClose={props.onClose} />
     </form>
   );
 }

@@ -1,10 +1,10 @@
 import { useState, useRef } from "react";
 // My imports.
-import styles from "./Checkout.module.css";
+import styles from "./GuestCheckout.module.css";
 import type User from "../../../models/User";
 import { isValidEmail, isValidName } from "utils/validation/input_validation";
 // My component.
-import CartCheck from "../../Layout/Icons/CartCheck";
+import CheckoutFormButtons from "./CheckoutFormButtons";
 
 type GuestCheckoutProps = {
   onCancel: () => void;
@@ -98,24 +98,7 @@ export default function GuestCheckout(props: GuestCheckoutProps) {
         />
         {!formInputValid.email && <p>Please enter a valid email(@).</p>}
       </div>
-      <div className={styles.actions}>
-        <button className={styles.close} type="button" onClick={props.onClose}>
-          Close
-        </button>
-        <button
-          className={styles.cancel}
-          type="button"
-          onClick={props.onCancel}
-        >
-          Cancel
-        </button>
-        <button className={styles.submit} type="submit">
-          <span>
-            <CartCheck />
-          </span>
-          {" Confirm"}
-        </button>
-      </div>
+      <CheckoutFormButtons onClose={props.onClose} onCancel={props.onCancel} />
     </form>
   );
 }

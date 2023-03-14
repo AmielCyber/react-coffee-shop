@@ -58,7 +58,7 @@ export default async function handler(
       res.status(500).json({ message: "Failed to create new user." });
       return;
     }
-    res.status(201).json({ message: "Created new user!" });
+    res.status(201).json({ message: `Created new user: ${userInfo.email}` });
   } else {
     res.status(403).json({ message: "Forbidden" });
   }

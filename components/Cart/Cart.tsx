@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import { useState } from "react";
 // My imports.
 import styles from "./Cart.module.css";
@@ -5,8 +6,10 @@ import type Order from "../../models/Order";
 import type CartInterface from "../../models/Cart";
 // My components.
 import LoadingSpinner from "../UI/LoadingSpinner";
-import Receipt from "../Receipt/Receipt";
 import CartContent from "./CartContent";
+const Receipt = dynamic(() => import("../Receipt/Receipt"), {
+  loading: () => <LoadingSpinner />,
+});
 
 type CartProps = {
   onClose: () => void;

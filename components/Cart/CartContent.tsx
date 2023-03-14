@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { useState, useCallback, Suspense } from "react";
+import { useState, useCallback } from "react";
 // My imports.
 import styles from "./CartContent.module.css";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
@@ -9,8 +9,12 @@ import type User from "../../models/User";
 // My components.
 import ClearCart from "../Layout/Icons/ClearCart";
 import LoadingSpinner from "../UI/LoadingSpinner";
-const CartItemList = dynamic(() => import("./CartItem/CartItemList"));
-const Checkout = dynamic(() => import("./Checkout/Checkout"));
+const CartItemList = dynamic(() => import("./CartItem/CartItemList"), {
+  loading: () => <LoadingSpinner />,
+});
+const Checkout = dynamic(() => import("./Checkout/Checkout"), {
+  loading: () => <LoadingSpinner />,
+});
 
 type CartContentProps = {
   onToSignIn: () => void;
@@ -88,22 +92,18 @@ export default function CartContent(props: CartContentProps) {
   // Cart has items.
   return (
     <>
-      <Suspense fallback={<LoadingSpinner />}>
-        <CartItemList items={cart.items} />
-      </Suspense>
+      <CartItemList items={cart.items} />
       <div className={styles.total}>
         <span>Total Amount</span>
         <span className={styles.price}>{totalPriceFormatted}</span>
       </div>
       {isCheckout && (
-        <Suspense fallback={<LoadingSpinner />}>
-          <Checkout
-            onToSignIn={props.onToSignIn}
-            onClose={props.onClose}
-            onCancel={cancelHandler}
-            onConfirm={submitHandler}
-          />
-        </Suspense>
+        <Checkout
+          onToSignIn={props.onToSignIn}
+          onClose={props.onClose}
+          onCancel={cancelHandler}
+          onConfirm={submitHandler}
+        />
       )}
       {!isCheckout && (
         <div className={styles.actions}>

@@ -91,7 +91,6 @@ layout. Use the app as a registered user or a guest user. If you do not want to 
 following demo account provided for you:
 
 demo@gmail.com
-
 1234567
 
 ## Features
@@ -148,8 +147,8 @@ checkmark.
 - [x] Migrated backend to typescript
 - [x] Add Zod library to validate
 - [x] Confirm password on change
-- [ ] Close account
-- [ ] Checkmark/button acceptance that no order is actually placed
+- [x] Delete an account
+- [x] Checkmark/button acceptance that no order is actually placed
 
 ## Performance
 
@@ -157,6 +156,7 @@ checkmark.
   ![2.0 Screenshot](/assets/v2.0.png)
   ![2.1 Screenshot](/assets/v2.1.png)
   ![2.3 Screenshot](/assets/v2.3.png)
+  ![2.4 Screenshot](/assets/v2.4.png)
 
 - Increase content loading times
 

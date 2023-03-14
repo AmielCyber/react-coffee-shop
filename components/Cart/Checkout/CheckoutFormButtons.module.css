@@ -1,0 +1,53 @@
+  .actions {
+    display: flex;
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+    gap: 1rem;
+  }
+
+  .actions button{
+    font: inherit;
+    border-radius: 25px;
+    padding: 0.5rem 2rem; 
+  }
+
+  .enabledButton {
+    cursor: pointer;
+    background-color: var(--button-color);
+  }
+  .enabledButton:hover{
+    background-color: var(--button-color-active);
+  }
+  .disabledButton {
+    cursor:not-allowed;
+    background-color: gray;
+  }
+  .close {
+    color: var(--complementary-color); 
+    background-color: var(--button-opaque);
+    border: none;
+    margin-right: auto;
+    cursor: pointer;
+  }
+  .close:hover{
+    background-color: var(--button-color-active);
+    color: white;
+  }
+  .cancel, .submit {
+    color: white;
+    border: 1px solid var(--complementary-darkest);
+  }
+
+  @media only screen and (max-width: 595px) {
+    .actions {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-self: stretch;
+      margin-right: 0;
+    }
+    .close {
+      margin-right: 0;
+    }
+  }
+  

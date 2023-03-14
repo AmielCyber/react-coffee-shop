@@ -1,17 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
-import { User } from "@prisma/client";
 import { SafeParseReturnType } from "zod";
 // My imports.
 import validateCredentials from "../../../utils/db/validate-credentials";
 import { validatePassword } from "../../../utils/db/input-validation";
-import { hashPassword, verifyPassword } from "../../../utils/auth/auth";
+import { hashPassword } from "../../../utils/auth/auth";
 import prisma from "../../../utils/db/prisma";
 
 const DEMO_EMAIL = "demo@gmail.com";
+
 // Validate if a request is validated or not
-// Protects API routes.
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -31,7 +30,7 @@ export default async function handler(
     const enteredOldPassword: string = req.body.currentPassword;
     const enteredNewPassword: string = req.body.newPassword;
 
-    // If user is the demo account then do not change password.
+    // Attempt to modify demo account.
     if (userEmail === DEMO_EMAIL) {
       // Guard the demo's account password.
       res.status(423).json({
@@ -51,6 +50,7 @@ export default async function handler(
       return;
     }
 
+    // Validate the user's credentials.
     let responseData = null;
     try {
       responseData = await validateCredentials(userEmail, enteredOldPassword);
@@ -58,13 +58,15 @@ export default async function handler(
         throw new Error();
       }
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Failed to connect to the user database!" });
+      res.status(500).json({
+        message: responseData
+          ? responseData.errorMessage
+          : "Failed to connect to the user database!",
+      });
       return;
     }
 
-    // Invalid credentials.
+    // Invalid credentials entered.
     if (!responseData.user) {
       res
         .status(responseData.httpCode)
@@ -92,6 +94,7 @@ export default async function handler(
       });
       return;
     }
+    // Successful password update.
     res.status(200).json({ message: "Password updated!" });
     return;
   } else {

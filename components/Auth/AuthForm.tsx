@@ -1,10 +1,17 @@
 import dynamic from "next/dynamic";
-import { useState, Suspense } from "react";
+import { useState } from "react";
 // My imports.
 import styles from "./AuthForm.module.css";
+import LoadingSpinner from "components/UI/LoadingSpinner";
 // My dynamic imports.
-const SignIn = dynamic(() => import("./SignIn"), { ssr: false });
-const SignUp = dynamic(() => import("./SignUp"), { ssr: false });
+const SignIn = dynamic(() => import("./SignIn"), {
+  ssr: false,
+  loading: () => <LoadingSpinner />,
+});
+const SignUp = dynamic(() => import("./SignUp"), {
+  ssr: false,
+  loading: () => <LoadingSpinner />,
+});
 
 export default function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
@@ -32,13 +39,9 @@ export default function AuthForm() {
         </label>
       )}
       {isLogin ? (
-        <Suspense fallback={`Loading...`}>
-          <SignIn switchToSignUp={switchAuthModeHandler} formId={formId} />
-        </Suspense>
+        <SignIn switchToSignUp={switchAuthModeHandler} formId={formId} />
       ) : (
-        <Suspense fallback={`Loading...`}>
-          <SignUp switchToSignIn={switchAuthModeHandler} formId={formId} />
-        </Suspense>
+        <SignUp switchToSignIn={switchAuthModeHandler} formId={formId} />
       )}
     </div>
   );

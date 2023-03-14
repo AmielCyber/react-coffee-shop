@@ -36,23 +36,23 @@ export default async function handler(
       return;
     }
 
+    // Get user db document and validate credentials.
     let responseData = null;
     try {
       responseData = await validateCredentials(userEmail, enteredPassword);
+      if (!responseData) {
+        throw new Error();
+      }
     } catch (error) {
       res.status(500).json({
-        message: "Failed to connect to the user database!",
+        message: responseData
+          ? responseData.errorMessage
+          : "Failed to connect to the user database!",
       });
       return;
     }
 
-    // If validation was unsuccessful.
-    if (!responseData) {
-      res.status(500).json({
-        message: "Failed to connect to the user database!",
-      });
-      return;
-    }
+    // Invalid credentials entered.
     if (!responseData.user) {
       res
         .status(responseData.httpCode)

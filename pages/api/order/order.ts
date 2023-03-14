@@ -8,7 +8,7 @@ import type Receipt from "../../../models/Receipt";
 import { SafeParseReturnType } from "zod";
 import prisma from "../../../utils/db/prisma";
 import User from "../../../models/User";
-import {validateUserData} from "../../../utils/db/input-validation";
+import { validateUserData } from "../../../utils/db/input-validation";
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,43 +17,50 @@ export default async function handler(
   // Get session if there is one.
   const session = await getServerSession(req, res, authOptions);
 
-  if(req.method === "POST"){
+  if (req.method === "POST") {
     // req.body Expected: user:{fName, lName, email}, cart:{items, numOfItems, totalPrice}
     const { user, cart }: { user: User; cart: Cart } = req.body;
 
     // Backend Validation: Validate user input.
-    const userValidation: SafeParseReturnType<User,User> = validateUserData(user);
-    if(!userValidation.success){
+    const userValidation: SafeParseReturnType<User, User> =
+      validateUserData(user);
+    if (!userValidation.success) {
       // If userDataIsValid return a non empty string then an error message occurred.
-      res.status(422).json({ message: userValidation.error.issues.map(issue => issue.path + ": " + issue.message).join(" ") });
+      res
+        .status(422)
+        .json({
+          message: userValidation.error.issues
+            .map((issue) => issue.path + ": " + issue.message)
+            .join(" "),
+        });
       return;
     }
 
     // Get the user's data from our db if there's one
     let userDB: User | null = null;
     try {
-        userDB = await prisma.user.findUnique({
-            where: {
-                email: user.email,
-            }
-        })
-    }catch(error){
-        res.status(500).json({
-            message: "Failed to connect to the user database!"
-        })
-        return;
+      userDB = await prisma.user.findUnique({
+        where: {
+          email: user.email,
+        },
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "Failed to connect to the user database!",
+      });
+      return;
     }
 
     // If user order as a guest.
-    if(!session){
+    if (!session) {
       // If the user email already exists.
-      if(userDB !== null){
+      if (userDB !== null) {
         res.status(401).json({
           message: "Guest user already has an account. Please sign in.",
         });
         return;
       }
-    }else {
+    } else {
       // Make sure the email is from the user's session.
       user.email = session.user.email;
     }
@@ -97,9 +104,7 @@ export default async function handler(
         // If the item exists.
         if (item.amount < 1) {
           // Amount was modified below 1 in the front-end, thus we stop.
-          res
-            .status(400)
-            .json({ message: "Invalid order quantity entered." });
+          res.status(400).json({ message: "Invalid order quantity entered." });
           return;
         }
         // Enter the item purchased info.
@@ -133,9 +138,10 @@ export default async function handler(
       res.status(500).json({ message: "Inserting order data failed." });
       return;
     }
-    res.status(201).json({ message: "Your order was created!" });
 
-  }else if(req.method === "GET"){
+    res.status(201).json({ message: "Your order was created!" });
+    return;
+  } else if (req.method === "GET") {
     if (!session) {
       // Protect our API route. Only authenticated users are allowed to receive past order data.
       res.status(401).json({ message: "User is not logged in." });
@@ -146,20 +152,20 @@ export default async function handler(
     // Get past orders.
     let pastOrders;
     try {
-      pastOrders  = await prisma.order.findMany({
+      pastOrders = await prisma.order.findMany({
         orderBy: {
           orderDate: "desc",
         },
         where: {
-          email: email
-        }
+          email: email,
+        },
       });
     } catch (error) {
       res.status(500).json({ message: "Failed to get orders from this user." });
       return;
     }
     res.status(200).json(pastOrders);
-  }else{
+  } else {
     res.status(418).json({
       message: "I am a teapot and I refuse to brew coffee with teapot.",
     });
