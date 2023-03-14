@@ -1,0 +1,39 @@
+.guestPrompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.guestPrompt .actions {
+  margin-top: 0;
+}
+/* Buttons */
+.actions {
+  display: flex;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+.actions button {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 25px;
+  padding: 0.5rem 2rem; 
+}
+.actions button:hover{
+  background-color: var(--button-color-active);
+  color: white;
+}
+.guestPrompt .actions button{
+  border: 1px solid var(--complementary-darkest);
+  background-color: var(--button-color);
+  color: white;
+}
+@media only screen and (max-width: 595px) {
+  .actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-self: stretch;
+  }
+}

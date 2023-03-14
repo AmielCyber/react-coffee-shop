@@ -1,0 +1,30 @@
+/* Inputs */
+.control {
+  margin-bottom: 0.5rem;
+}
+.control label {
+  margin-bottom: 0.25rem;
+  display: block;
+  color: var(--primary-darkest);
+}
+.control input {
+  font: inherit;
+  border: 1px solid var(--complementary-color);
+  border-radius: 4px;
+  width: 20rem;
+  max-width: 100%;
+}
+/* Invalid input */
+.invalid label {
+  color: var(--error-color);
+}
+.invalid input {
+  border-color: var(--error-color);
+  background-color: var(--error-input);
+}
+
+.form {
+  margin: 1rem 0;
+  height: 19rem;
+  overflow: scroll;
+}
