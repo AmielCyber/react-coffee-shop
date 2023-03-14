@@ -1,4 +1,4 @@
-import { useState, useEffect, memo, Suspense } from "react";
+import { useState, useEffect, memo } from "react";
 import dynamic from "next/dynamic";
 import { useAnimation, m } from "framer-motion";
 // My imports.
@@ -8,9 +8,12 @@ import { fetchCartData, sendCartData } from "../../../store/cart/cart-actions";
 import { cartBumpAnimation } from "../../../utils/animations/animation";
 // My components.
 import CartIcon from "../Icons/CartIcon";
-import LoadingSpinner from "components/UI/LoadingSpinner";
+import LoadingSpinner from "../../UI/LoadingSpinner";
 // Turn off ssr render for this component since it uses client side functions.
-const CartModal = dynamic(() => import("./CartModal"), { ssr: false });
+const CartModal = dynamic(() => import("./CartModal"), {
+  ssr: false,
+  loading: () => <LoadingSpinner />,
+});
 
 type HeaderCartButtonProps = {
   onSignIn: () => void;
@@ -71,13 +74,11 @@ function HeaderCartButton(props: HeaderCartButtonProps) {
         <span>Your Cart</span>
         <span className={styles.badge}>{cart.numberOfCartItems}</span>
       </m.button>
-      <Suspense fallback={<LoadingSpinner />}>
-        <CartModal
-          cartIsShown={cartIsShown}
-          onClose={hideCartHandler}
-          onToSignIn={signInHandler}
-        />
-      </Suspense>
+      <CartModal
+        cartIsShown={cartIsShown}
+        onClose={hideCartHandler}
+        onToSignIn={signInHandler}
+      />
     </>
   );
 }

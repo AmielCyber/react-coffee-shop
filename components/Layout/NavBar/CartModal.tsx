@@ -1,11 +1,13 @@
 import dynamic from "next/dynamic";
-import { memo, Suspense } from "react";
+import { memo } from "react";
 import ReactDOM from "react-dom";
 import { AnimatePresence } from "framer-motion";
 // My component imports.
+import Modal from "../../UI/Modal";
 import LoadingSpinner from "../../UI/LoadingSpinner";
-const Modal = dynamic(() => import("../../UI/Modal"));
-const Cart = dynamic(() => import("../../Cart/Cart"));
+const Cart = dynamic(() => import("../../Cart/Cart"), {
+  loading: () => <LoadingSpinner />,
+});
 
 type CartModalProps = {
   cartIsShown: boolean;
@@ -27,11 +29,9 @@ function CartModal(props: CartModalProps) {
   return ReactDOM.createPortal(
     <AnimatePresence>
       {props.cartIsShown && (
-        <Suspense fallback={<LoadingSpinner />}>
-          <Modal onClose={props.onClose}>
-            <Cart onClose={props.onClose} onToSignIn={props.onToSignIn} />
-          </Modal>
-        </Suspense>
+        <Modal onClose={props.onClose}>
+          <Cart onClose={props.onClose} onToSignIn={props.onToSignIn} />
+        </Modal>
       )}
     </AnimatePresence>,
     OverlayElement

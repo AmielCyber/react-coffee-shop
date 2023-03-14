@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { Suspense } from "react";
 // My imports.
 import type Drink from "../../models/Drink";
 import styles from "./AvailableDrinks.module.css";
@@ -7,7 +6,9 @@ import FetchItems from "../../store/fetcher/fetch-items";
 // My components.
 import Card from "../UI/Card";
 import LoadingSpinner from "../UI/LoadingSpinner";
-const DrinkItemList = dynamic(() => import("./DrinkItem/DrinkItemList"));
+const DrinkItemList = dynamic(() => import("./DrinkItem/DrinkItemList"), {
+  loading: () => <LoadingSpinner />,
+});
 
 export default function AvailableDrinks() {
   const drinkArray: Drink[] = [];
@@ -47,9 +48,7 @@ export default function AvailableDrinks() {
     <section className={styles.drinks}>
       <Card>
         {items ? (
-          <Suspense fallback={<LoadingSpinner />}>
-            <DrinkItemList drinks={items} />
-          </Suspense>
+          <DrinkItemList drinks={items} />
         ) : (
           <section className={styles.drinksError}>
             <h3>Could not fetch menu items</h3>
