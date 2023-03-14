@@ -24,8 +24,8 @@ export default function CheckoutFormButtons(props: CheckoutFormButtonsProps) {
       <div>
         <label htmlFor="acknowledge">
           <input type="checkbox" id="acknowledge" onChange={handleChange} />I
-          understand that this is a demo application; therefore, no actual order
-          will be placed.
+          understand this is a demo application; therefore, no actual order will
+          be placed.
         </label>
       </div>
       <div className={styles.actions}>
