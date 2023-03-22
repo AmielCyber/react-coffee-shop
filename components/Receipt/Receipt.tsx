@@ -41,7 +41,9 @@ export default function Receipt(props: ReceiptProps) {
     <div className={styles.receipt}>
       <div className={styles.date}>
         <h3>Order Date</h3>
-        <span>{localDate}</span>
+        <time>
+          <span>{localDate}</span>
+        </time>
       </div>
       {props.showReceiptItems && (
         <section className={styles.receiptItems} title="Receipt Items">

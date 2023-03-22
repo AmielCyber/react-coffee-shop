@@ -1,21 +1,16 @@
 import { useState, useRef } from "react";
+import type { Session } from "next-auth";
 // My imports.
 import styles from "./PasswordForm.module.css";
 import { isValidPassword } from "../../../utils/validation/input_validation";
 
-type PasswordManager = {
-  currentPassword: string;
-  newPassword: string;
-};
-
-/**
- * Calls our change-password api to change user's password.
- * @param {string} passwordData
- */
-async function changePassword(passwordData: PasswordManager) {
-  const response = await fetch("/api/user/change-password", {
+async function changePassword(currPw: string, newPw: string, userId: string) {
+  const response = await fetch(`/api/users/${userId}`, {
     method: "PATCH",
-    body: JSON.stringify(passwordData),
+    body: JSON.stringify({
+      currentPassword: currPw,
+      newPassword: newPw,
+    }),
     headers: {
       "Content-Type": "application/json",
     },
@@ -30,7 +25,7 @@ async function changePassword(passwordData: PasswordManager) {
 }
 
 type PasswordFormProps = {
-  userEmail: string;
+  session: Session;
 };
 
 export default function PasswordForm(props: PasswordFormProps) {
@@ -69,10 +64,11 @@ export default function PasswordForm(props: PasswordFormProps) {
       formRef.current?.reset();
     } else {
       try {
-        const result = await changePassword({
-          currentPassword: enteredCurrentPassword,
-          newPassword: enteredNewPassword,
-        });
+        const result = await changePassword(
+          enteredCurrentPassword,
+          enteredNewPassword,
+          props.session.user.id
+        );
         setStatusMessage(result.message);
         formRef.current?.reset();
       } catch (error) {
@@ -103,7 +99,7 @@ export default function PasswordForm(props: PasswordFormProps) {
           <input
             type="text"
             id="username"
-            value={props.userEmail}
+            value={props.session.user.email}
             readOnly
             autoComplete="username"
           />

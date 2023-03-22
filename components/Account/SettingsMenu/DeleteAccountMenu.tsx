@@ -1,12 +1,13 @@
 import { useState, useRef } from "react";
 import { signOut } from "next-auth/react";
+import { Session } from "next-auth";
 // My imports.
 import styles from "./PasswordForm.module.css";
 // My component.
 import ConfirmDeletionModal from "./ConfirmDeletionModal";
 
-async function deleteAccount(password: string) {
-  const response = await fetch("/api/user/user", {
+async function deleteAccount(password: string, userId: string) {
+  const response = await fetch(`/api/users/${userId}`, {
     method: "DELETE",
     body: JSON.stringify({
       password: password,
@@ -26,7 +27,11 @@ async function deleteAccount(password: string) {
   return responseData;
 }
 
-export default function DeleteAccountMenu() {
+type Props = {
+  session: Session;
+};
+
+export default function DeleteAccountMenu(props: Props) {
   const [statusMessage, setStatusMessage] = useState("");
   const [successfulDeletion, setSuccessfulDeletion] = useState(false);
   const [invalidPassword, setInvalidPassword] = useState(false);
@@ -35,6 +40,9 @@ export default function DeleteAccountMenu() {
   const formRef = useRef<HTMLFormElement>(null);
   const currentPasswordRef = useRef<HTMLInputElement>(null);
 
+  const user = props.session.user;
+  console.log(user);
+
   const confirmDeletionHandler = async () => {
     setIsLoading(true);
     const enteredCurrentPassword = currentPasswordRef.current
@@ -42,7 +50,7 @@ export default function DeleteAccountMenu() {
       : "";
 
     try {
-      const result = await deleteAccount(enteredCurrentPassword);
+      const result = await deleteAccount(enteredCurrentPassword, user.id);
       setStatusMessage(result.message);
       setSuccessfulDeletion(true);
       setInvalidPassword(false);
