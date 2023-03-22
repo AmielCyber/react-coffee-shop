@@ -16,7 +16,7 @@ export const CART_STORAGE_NAME = "react-coffee-cart-session";
  */
 async function fetchCartDataFromServer() {
   // Call our api route.
-  const response = await fetch("/api/cart/cart", {
+  const response = await fetch("/api/cart-sessions", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -117,7 +117,7 @@ export const fetchCartData = () => {
  * @param {Cart Object} cart
  */
 async function sendCartDataToServer(cart: Cart) {
-  const response = await fetch("/api/cart/cart", {
+  const response = await fetch("/api/cart-sessions", {
     method: "POST",
     body: JSON.stringify(cart),
     headers: {

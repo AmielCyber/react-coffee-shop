@@ -21,7 +21,7 @@ type fetchOrderedReturnType = {
 export default function PastOrders() {
   const orderArray: Order[] = [];
   const { items, isLoading, isError }: fetchOrderedReturnType = FetchItems(
-    "/api/order/order",
+    "/api/orders",
     orderArray,
     {
       revalidateIfStale: true,
