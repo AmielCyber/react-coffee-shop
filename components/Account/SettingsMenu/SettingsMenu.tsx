@@ -63,31 +63,35 @@ export default function SettingsMenu(props: SettingsMenuProps) {
       <MenuTitle title={getMenuTitle(menuType)} />
       {menuType == "settings" && (
         <>
-          <section className={styles.menu}>
+          <menu className={styles.menu}>
             <section className={styles.menuSelection}>
-              <button
-                name="Change Password"
-                onClick={() => setMenuType("password")}
-              >
-                Change Password
-              </button>
-              <button
-                name="Delete Account"
-                onClick={() => setMenuType("delete")}
-              >
-                Delete Account
-              </button>
+              <li>
+                <button
+                  name="Change Password"
+                  onClick={() => setMenuType("password")}
+                >
+                  Change Password
+                </button>
+              </li>
+              <li>
+                <button
+                  name="Delete Account"
+                  onClick={() => setMenuType("delete")}
+                >
+                  Delete Account
+                </button>
+              </li>
             </section>
-            <div className="globalButton">
-              <button
-                name="Settings"
-                onClick={props.onToProfileMenu}
-                className="globalButton"
-              >
-                Back
-              </button>
-            </div>
-          </section>
+          </menu>
+          <div className="globalButton">
+            <button
+              name="Settings"
+              onClick={props.onToProfileMenu}
+              className="globalButton"
+            >
+              Back
+            </button>
+          </div>
         </>
       )}
       {menuType !== "settings" && (

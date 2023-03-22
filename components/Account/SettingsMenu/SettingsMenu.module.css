@@ -1,6 +1,10 @@
 .menu {
     display: flex;
     flex-direction: column;
+    list-style: none;
+    justify-content: center;
+    margin-block: 0;
+    padding-inline-start: 0;
 }
 .menuSelection {
     display: inherit;
